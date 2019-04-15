@@ -7,7 +7,7 @@ module.exports = {
     host: '0.0.0.0', // default: localhost
   },
   head: {
-    title: 'demo',
+    title: 'Home-optic',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -1,6 +1,6 @@
-# demo
+# Nuxt
 
-> demo bitrix
+> Nuxt Bitrix
 
 ## Build Setup
 

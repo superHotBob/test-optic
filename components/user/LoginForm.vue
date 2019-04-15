@@ -1,9 +1,9 @@
 <template>
     <div>
-        <form>
+        <form @submit.prevent="login">
             <div class="form-group">
                 <label>Email address</label>
-                <input v-model="login" type="email" class="form-control" placeholder="Enter email">
+                <input v-model="username" type="input" class="form-control" placeholder="Enter email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
@@ -19,8 +19,14 @@
 export default {
     data() {
         return {
-            login:'',
+            username:'',
             password:''
+        }
+    },
+    methods: {
+        async login() {
+            let response = await this.$store.dispatch('user/login',{'username':this.username, 'password':this.password});
+            console.log(response);
         }
     }
 }

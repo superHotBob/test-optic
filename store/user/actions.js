@@ -5,11 +5,12 @@ export default {
         let user = await this.$axios.post(
             getters.getEndpointLogin,
             qs.stringify({
-                'USER_LOGIN':payload.login,
+                'USER_LOGIN':payload.username,
                 'USER_PASSWORD':payload.password,
                 'AUTH_FORM':'Y',
                 'TYPE':'AUTH'
             })
         );
+        return user;
     }
 }

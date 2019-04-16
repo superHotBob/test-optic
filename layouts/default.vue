@@ -1,5 +1,6 @@
 <template>
   <div>
+    <log-out/>
     <login-form/>
     <basket></basket>
     <div>
@@ -16,12 +17,14 @@
 <script>
 
 import Basket from '~/components/basket/Basket.vue'
+import LogOut from '~/components/user/ButtonLogout.vue'
 import LoginForm from '~/components/user/LoginForm.vue'
 
 export default {
   components: {
     Basket,
-    LoginForm
+    LoginForm,
+    LogOut  
   },
   computed: {
   },

@@ -10,7 +10,7 @@ export default {
     methods: {
         async logout() {
             let response = await this.$store.dispatch('user/logout');
-            console.log(response);
+            this.$root.$emit('login/logout');
         }
     },
     computed: {

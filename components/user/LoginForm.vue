@@ -34,6 +34,7 @@ export default {
     methods: {
         async login() {
             let response = await this.$store.dispatch('user/login',{'username':this.username, 'password':this.password, 'remember':this.remember});
+            this.$root.$emit('login/logout');
         }
     },
     computed: {

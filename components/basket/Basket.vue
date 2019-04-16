@@ -48,6 +48,11 @@ export default {
             this.$store.dispatch('basket/delete',{'id':id});
         }
     },
+    mounted() {
+        this.$root.$on('login/logout', result => { 
+            this.$store.dispatch('basket/request');
+        })
+    },
     computed: {
         basket() {
             return this.$store.getters['basket/getBasket'];

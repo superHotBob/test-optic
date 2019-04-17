@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div v-for="pay in paysystem" :key="pay.ID">
+        <div v-for="deliver in delivery" :key="deliver.ID">
             <label>
-                <input type="radio" v-model="paySystemId" :value="pay.ID"/>
-                <span>{{pay.NAME}}</span>
+                <input type="radio" v-model="deliveryId" :value="deliver.ID"/>
+                <span>{{deliver.NAME}}</span>
             </label>
         </div>
     </div>
@@ -14,17 +14,17 @@
 import { mapGetters } from 'vuex';
 
 export default {
-    props: ['paysystem'],
+    props: ['delivery'],
     computed: {
         ...mapGetters({
-            getCurrent: 'order/getCurrentPaySystem',
+            getCurrent: 'order/getCurrentDelivery',
         }),
-        paySystemId: {
+        deliveryId: {
             get() {
                 return this.getCurrent;
             },
             set(value) {
-                this.$parent.$emit('paysystem', value)
+                this.$parent.$emit('delivery', value)
             }
         } 
     }

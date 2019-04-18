@@ -1,37 +1,47 @@
 <template>
-<div class="page-container">
+<div class="app-container">
     <header class="page-header">
-        <h2>Header</h2>
+        <div class="page-header__top">
+
+        </div>
+        <div class="page-header__main">
+            
+        </div>
+        <div class="page-header__bottom">
+
+        </div>
     </header>
     <main>
-        <!-- <log-out/>
-        <login-form/>
-        <basket/>
-        <order/> -->
         <p>12345</p>
         <p>12345</p>
         <p>12345</p>
         <p>12345</p>
         <p>12345</p>
-        <div class="fullscreen-overlay active">
-            <div class="modal">
-                <p>33333</p>
-                <p>33333</p>
-                <p>33333</p>
+
+        <!-- <div class="fullscreen-overlay active">
+                <div class="modal">
+                    <p>33333</p>
+                    <p>33333</p>
+                    <p>33333</p>
+                </div>
+            </div> 
+            <log-out/>
+            <login-form/>
+            <basket/>
+            <order/>
+            <div>
+                <nuxt-link active-class="active" to="/" exact>Главная</nuxt-link>
             </div>
-        </div>
-        <div>
-            <nuxt-link active-class="active" to="/" exact>Главная</nuxt-link>
-        </div>
-        <div>
-            <nuxt-link active-class="active" :to="{ name: 'section', params: { section: 'frames' }}">Оправы</nuxt-link>
-            <nuxt-link active-class="active" :to="{ name: 'section', params: { section: 'rims' }}">Линзы для очков</nuxt-link>
-        </div>
+            <div>
+                <nuxt-link active-class="active" :to="{ name: 'section', params: { section: 'frames' }}">Оправы</nuxt-link>
+                <nuxt-link active-class="active" :to="{ name: 'section', params: { section: 'rims' }}">Линзы для очков</nuxt-link>
+        </div> -->
         <nuxt/>
     </main>
     <footer class="page-footer">
         <h2>Footer</h2>
     </footer>
+    <!-- <div class="fullscreen-overlay active"></div> -->
 </div>
 </template>
 
@@ -55,11 +65,36 @@ export default {
 </script>
 
 <style lang="scss">
+$grey: #999;
+
+/* open-sans-300 - latin_cyrillic */
+// @font-face {
+//     font-family: 'Open Sans';
+//     font-style: normal;
+//     font-weight: 300;
+//     src: url('/static/fonts/OpenSans/open-sans-v16-latin_cyrillic-300.eot'); /* IE9 Compat Modes */
+//     src: local('Open Sans Light'), local('OpenSans-Light'),
+//         url('/static/fonts/OpenSans/open-sans-v16-latin_cyrillic-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+//         url('/static/fonts/OpenSans/open-sans-v16-latin_cyrillic-300.woff2') format('woff2'), /* Super Modern Browsers */
+//         url('/static/fonts/OpenSans/open-sans-v16-latin_cyrillic-300.woff') format('woff'), /* Modern Browsers */
+//         url('/static/fonts/OpenSans/open-sans-v16-latin_cyrillic-300.ttf') format('truetype'), /* Safari, Android, iOS */
+//         url('/static/fonts/OpenSans/open-sans-v16-latin_cyrillic-300.svg#OpenSans') format('svg'); /* Legacy iOS */
+// }
 html {
     height: 100%;
 }
 body {
     height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    line-height: normal;
+    font-weight: 400;
+    color: #000;
     > div {
         height: 100%;
         > div {
@@ -67,12 +102,24 @@ body {
         }
     }
 }
-.page-container {
+main {
+    position: relative;
+}
+.app-container {
     position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+}
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.page-header {
+    &__top {
+
+    }
 }
 .page-footer {
     margin-top: auto;
@@ -95,7 +142,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateY(-50%);
+    // transform: translateY(-50%);
+    top: 0;
     width: auto;
     height: auto;
     background-color: lightgreen;

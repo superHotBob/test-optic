@@ -51,7 +51,7 @@ module.exports = {
     credentials: true
   },
   proxy: {
-    '/api/': 'http://home-optic.proj',
+    '/api/': 'http://14.esobolev.ru/',
   },
   cache: false,
   css: ['~/assets/css/main.css'],

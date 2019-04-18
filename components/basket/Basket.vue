@@ -52,6 +52,9 @@ export default {
         this.$root.$on('login/logout', result => { 
             this.$store.dispatch('basket/request');
         })
+        this.$root.$on('order', result => { 
+            this.$store.dispatch('basket/request');
+        })
     },
     computed: {
         basket() {

@@ -10,10 +10,15 @@
             </div>
             <div v-if="prop.TYPE === 'LOCATION'">
                 <input type="hidden" name="location_type" value="code">
-                <input 
-                    :name="'ORDER_PROP_' + prop.ID"  
-                    v-for="(value, index) in prop.VALUE" :key="index" 
-                    :value="value">
+                <div v-for="(value, index) in prop.VALUE" :key="index" >
+                    <input type="hidden" :name="'ORDER_PROP_' + prop.ID" :value="value">
+                    <input @input="locations($event.target.value)" :value="getLocationName({'id':prop.ID,'code':value})"/>
+                </div>
+                <div>
+                    <div v-for="location in locationsList" :key="location.CODE">
+                        <span>{{location.DISPLAY}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -22,37 +27,31 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import qs from 'qs';
 
 export default {
     computed: {
         ...mapGetters({
             getProps: 'order/getProperties',
+            getLocationName: 'order/getLocationName' 
         }),
     },
     data() {
         return {
-            props: {},
+            locationsList: false
         }
     },
     methods: {
-        // string(value, id) {
-        //     console.log(value);
-        //     this.props['ORDER_PROP_' + id] = value;
-        //     this.event();
-        // },
-        // location(value, id) {
-        //     console.log(value);
-        //     this.props['ORDER_PROP_' + id] = value;
-        //     this.event();
-        // },
-        // event() {
-        //     this.$parent.$emit('properties', this.props);
-        //     console.log(this.props);
-        // }
+        async locations(search) {
+            let result = await this.$store.dispatch(
+                'order/locations', 
+                search
+            );
+            console.log(result.data.ITEMS)
+            this.locationsList = result.data.ITEMS;
+            // console.log(this.locationsList)
+        },
     },
-    mounted() {
-        var properties = this.getProps;
-    }
 }
 </script>
 

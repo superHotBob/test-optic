@@ -25,8 +25,10 @@ export default {
   getProperties: (state) => {
     return state.order.ORDER_PROP.properties;
   },
+  getLocationItems: (state) => {
+    return state.locationItem;
+  },
   getLocationName: (state) => (payload) => {
-    
     var locations = state.locations[payload.id].output;
 
     for (let key in locations) {

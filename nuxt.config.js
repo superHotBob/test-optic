@@ -29,7 +29,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extractCSS: true,
+    extractCSS: false,
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -53,7 +53,7 @@ module.exports = {
   proxy: {
     '/api/': 'http://home-optic.proj',
   },
-  cache: true,
+  cache: false,
   css: ['~/assets/css/main.css'],
   plugins: [
     '~/plugins/axios',

@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <form ref="form">
+        <input type="hidden" name="sessid" :value="this.getSessid">
+        <input type="hidden" name="BUYER_STORE" value="0">
         <div v-if="orderId">
             Заказ №{{orderId}} оформлен
         </div>
@@ -7,10 +9,11 @@
             <person v-bind:personType="order.PERSON_TYPE"/>
             <delivery v-bind:delivery="order.DELIVERY"/>
             <pay-system v-bind:paysystem="order.PAY_SYSTEM"/>
+            <properties/>
             <comment/>
-            <button class="btn btn-primary" v-on:click="save">to issue</button>
+            <button type="button" class="btn btn-primary" v-on:click="save">to issue</button>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -19,6 +22,7 @@ import { mapGetters } from 'vuex';
 import PaySystem from '~/components/order/PaySystem.vue'
 import Delivery from '~/components/order/Delivery.vue'
 import Person from '~/components/order/PersonType.vue'
+import Properties from '~/components/order/Properties.vue'
 import Comment from '~/components/order/Comment.vue'
 
 export default {
@@ -26,28 +30,42 @@ export default {
         PaySystem,
         Delivery,
         Person,
+        Properties,
         Comment
     },
     data() {
         return {
-            orderId:false
+            orderId:false,
         }
     },
     methods: {
-        async save() {
+        getFormData() {
+            let form = new FormData(this.$refs.form), 
+                formData = {};
 
-            var payload, order = {
-                'ORDER_DESCRIPTION':'', 
-                'soa-action':'saveOrderAjax',
-                'sessid':this.getSessid,
+            for (let [key, value] of form.entries()) { 
+                formData[key] = value;
             }
 
-            payload = Object.assign(this.request,order);
+            return formData;
+        },
+        async save() {
+            var payload, order = {
+                'soa-action':'saveOrderAjax',
+            }
+
+            payload = Object.assign(this.getFormData(),order);
 
             let result = await this.$store.dispatch(
                 'order/request', 
                 payload
             )
+            
+            if (result.hasOwnProperty('ERROR')) {
+                console.log(result);
+                return;
+            }
+
             this.$root.$emit('order'); 
             this.orderId = result.order.ID;
         },
@@ -55,7 +73,7 @@ export default {
             this.$store.dispatch(
                 'order/request', 
                 {
-                    'order':this.request,
+                    'order':this.getFormData(),
                     'soa-action':'refreshOrderAjax',
                     'sessid':this.getSessid,
                     'via_ajax':'Y',
@@ -64,42 +82,18 @@ export default {
         }
     },
     mounted() {
-        this.$on('paysystem', value => { 
-            this.request.PAY_SYSTEM_ID = value;
+        this.$on('refresh', value => { 
             this.refresh();
-        })
-        this.$on('delivery', value => { 
-            this.request.DELIVERY_ID = value;
-            this.refresh();
-        })
-        this.$on('person', value => { 
-            this.request.PERSON_TYPE = value;
-            this.refresh();
-        })
-        this.$on('comment', value => { 
-            this.request.ORDER_DESCRIPTION = value;
         })
     },
     computed: {
         ...mapGetters({
             getSessid: 'order/getSessid',
-            getDelivery: 'order/getCurrentDelivery',
-            getPayment: 'order/getCurrentPaySystem',
-            getPerson: 'order/getCurrentPerson',
-            getDescription: 'order/getDescription'
+            getOrder: 'order/getOrder'
         }),
         order() {
-            return this.$store.getters['order/getOrder'];
+            return this.getOrder;
         },
-        request(){
-            return {
-                'DELIVERY_ID':this.getDelivery,
-                'PAY_SYSTEM_ID':this.getPayment,
-                'BUYER_STORE':0,
-                'PERSON_TYPE':this.getPerson, 
-                'ORDER_DESCRIPTION':this.getDescription
-            }      
-        }
     },
 }
 </script>

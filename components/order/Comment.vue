@@ -1,6 +1,6 @@
 <template>
     <div>
-        <textarea v-model="comment"></textarea>
+        <textarea name="ORDER_DESCRIPTION" v-model="comment"></textarea>
     </div>
 </template>
 
@@ -11,17 +11,11 @@ import { mapGetters } from 'vuex';
 export default {
     computed: {
         ...mapGetters({
-            message: 'order/getDescription',
+            message: 'order/getComment',
         }),
         comment: {
             get() {
-                var message;
-                
-                if (this.message)
-                    message = this.message;
-                else 
-                    message = '';
-                return message;
+                return this.message;
             },
             set(value) {
                 this.$parent.$emit('comment', value)

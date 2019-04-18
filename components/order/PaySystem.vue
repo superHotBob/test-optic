@@ -2,7 +2,7 @@
     <div>
         <div v-for="pay in paysystem" :key="pay.ID">
             <label>
-                <input type="radio" v-model="paySystemId" :value="pay.ID"/>
+                <input @change="change" name="PAY_SYSTEM_ID" :checked="pay.CHECKED" type="radio" :value="pay.ID"/>
                 <span>{{pay.NAME}}</span>
             </label>
         </div>
@@ -11,22 +11,12 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
-
 export default {
     props: ['paysystem'],
-    computed: {
-        ...mapGetters({
-            getCurrent: 'order/getCurrentPaySystem',
-        }),
-        paySystemId: {
-            get() {
-                return this.getCurrent;
-            },
-            set(value) {
-                this.$parent.$emit('paysystem', value)
-            }
-        } 
-    }
+    methods: {
+        change() {
+            this.$parent.$emit('refresh')
+        }
+    },
 }
 </script>

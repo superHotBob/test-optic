@@ -2,31 +2,22 @@
     <div>
         <div v-for="person in personType" :key="person.ID">
             <label>
-                <input type="radio" v-model="personTypeId" :value="person.ID"/>
+                <input @change="change" name="PERSON_TYPE" :checked="person.CHECKED" type="radio" :value="person.ID"/>
                 <span>{{person.NAME}}</span>
             </label>
+            <input v-if="person.CHECKED" type="hidden" name="PERSON_TYPE_OLD" :value="person.ID">
         </div>
     </div>
 </template>
 
 <script>
 
-import { mapGetters } from 'vuex';
-
 export default {
     props: ['personType'],
-    computed: {
-        ...mapGetters({
-            getCurrent: 'order/getCurrentPerson',
-        }),
-        personTypeId: {
-            get() {
-                return this.getCurrent;
-            },
-            set(value) {
-                this.$parent.$emit('person', value)
-            }
-        } 
+    methods: {
+        change() {
+            this.$parent.$emit('refresh')
+        }
     }
 }
 </script>

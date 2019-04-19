@@ -1,27 +1,30 @@
 <template>
     <div class="form-group">
+        <error v-bind:id="property.ID"/>
         <input type="hidden" name="location_type" value="code">
         <div v-for="(value, index) in property.VALUE" :key="index" >
             <input type="hidden" :name="'ORDER_PROP_' + property.ID" :value="value">
             <input 
-                @input="locations($event.target.value)" 
+                @input="locations($event.target.value, property.ID)" 
                 class="form-control" 
                 :value="getLocationName({'id':property.ID,'code':value})" 
                 placeholder="Выберите местоположение..."/>
         </div>
-        <test v-bind:location="locationsList"/>
+        <search v-bind:id="property.ID"/>
     </div>
 </template>
 
 <script>
 
 import { mapGetters } from 'vuex';
-import Test from '~/components/order/Test.vue'
+import Search from '~/components/order/property/Search.vue'
+import Error from '~/components/order/property/Error.vue'
 
 export default {
     props: ['property'],
     components: {
-        Test
+        Search,
+        Error
     },
     computed: {
         ...mapGetters({
@@ -30,18 +33,28 @@ export default {
     },
     data() {
         return {
-            locationsList:false
+            timer:false
         }
     },
     methods: {
-        async locations(search) {
-            let result = await this.$store.dispatch(
-                'order/locations', 
-                search
-            );
-            console.log(result.data.ITEMS)
-            this.locationsList = result.data.ITEMS;
-            // console.log(this.locationsList)
+        locations(search, id) {
+
+            if(!!this.timer)
+            {
+                clearTimeout(this.timer);
+            }
+            this.timer = setTimeout(() => { 
+                
+                let input = document.querySelector('input[name="ORDER_PROP_' + id + '"]');
+                input.value = '';
+                
+                this.$store.dispatch(
+                    'order/locations', 
+                    search
+                )
+            }, 300);
+
+           
         },
     },
 }

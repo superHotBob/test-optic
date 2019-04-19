@@ -10,17 +10,24 @@ export default {
     async request({commit, getters}, payload) {
         let result = await this.$axios.$post(getters.getEndpointOrder, qs.stringify(payload));
         
-        if (result.order.hasOwnProperty('ERROR') && payload['soa-action'] === 'saveOrderAjax')
-            return result.order;
-
         if (result.success === 'N')
             return
+
+        if (result.order.hasOwnProperty('ERROR') && payload['soa-action'] === 'saveOrderAjax') {
+            commit('setError', result.order.ERROR);
+            return result.order;
+        }
 
         if (result.order.hasOwnProperty('ID'))
             return result;
 
         commit('setOrder', result);
     },
+
+    locationShow({commit}, bool) {
+        commit('setLocationShow', bool);
+    },
+
     async locations({commit, getters}, search) {
         let payload = {
             'select': {
@@ -41,7 +48,8 @@ export default {
         }
         
         let result = await this.$axios.$post(getters.getEndpointLocation, qs.stringify(payload));
-        console.log(result);
+        commit('setLocationList', result);
+        commit('setLocationShow', true);
         return result;
     }
 }

@@ -13,8 +13,8 @@
 <script>
 
 import { mapGetters } from 'vuex';
-import String from '~/components/order/String.vue'
-import Location from '~/components/order/Location.vue'
+import String from '~/components/order/property/String.vue'
+import Location from '~/components/order/property/Location.vue'
 
 export default {
     components: {

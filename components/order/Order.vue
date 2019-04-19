@@ -12,6 +12,7 @@
             <properties/>
             <comment/>
             <button type="button" class="btn btn-primary" v-on:click="save">to issue</button>
+            <p>Итого: {{getPrice}}</p>
         </div>
     </form>
 </template>
@@ -23,7 +24,7 @@ import PaySystem from '~/components/order/PaySystem.vue'
 import Delivery from '~/components/order/Delivery.vue'
 import Person from '~/components/order/PersonType.vue'
 import Properties from '~/components/order/Properties.vue'
-import Comment from '~/components/order/Comment.vue'
+import Comment from '~/components/order/property/Comment.vue'
 
 export default {
     components: {
@@ -50,24 +51,28 @@ export default {
             return formData;
         },
         async save() {
-            var payload, order = {
-                'soa-action':'saveOrderAjax',
-            }
+            if (!this.isEmptyBasket) {
+                var payload, order = {
+                    'soa-action':'saveOrderAjax',
+                }
 
-            payload = Object.assign(this.getFormData(),order);
+                payload = Object.assign(this.getFormData(),order);
 
-            let result = await this.$store.dispatch(
-                'order/request', 
-                payload
-            )
-            
-            if (result.hasOwnProperty('ERROR')) {
-                console.log(result);
-                return;
-            }
+                let result = await this.$store.dispatch(
+                    'order/request', 
+                    payload
+                );
+                
+                if (result.hasOwnProperty('ERROR'))
+                    return;
+                
+                this.$root.$emit('order'); 
+                
+                if (!this.isLogged)
+                    this.$store.dispatch('user/state');
 
-            this.$root.$emit('order'); 
-            this.orderId = result.order.ID;
+                this.orderId = result.order.ID;
+            } 
         },
         async refresh() {
             this.$store.dispatch(
@@ -82,14 +87,21 @@ export default {
         }
     },
     mounted() {
-        this.$on('refresh', value => { 
+        this.$root.$on('refresh', value => { 
             this.refresh();
+        })
+        this.$root.$on('basket', result => { 
+            this.orderId = false;
+            this.$store.dispatch('order/state'); 
         })
     },
     computed: {
         ...mapGetters({
             getSessid: 'order/getSessid',
-            getOrder: 'order/getOrder'
+            getOrder: 'order/getOrder',
+            getPrice: 'order/getTotalPrice',
+            isEmptyBasket: 'order/isEmptyBasket',
+            isLogged: 'user/isLogged'
         }),
         order() {
             return this.getOrder;

@@ -45,7 +45,7 @@ export default {
             this.$store.dispatch('basket/change',{'id':id, 'code':code, 'value':value,});
         },
         deleteItem(id) {
-            this.$store.dispatch('basket/delete',{'id':id});
+            this.$store.dispatch('basket/delete',{'id':id});   
         }
     },
     mounted() {
@@ -58,6 +58,7 @@ export default {
     },
     computed: {
         basket() {
+            this.$root.$emit('basket');
             return this.$store.getters['basket/getBasket'];
         },
     },

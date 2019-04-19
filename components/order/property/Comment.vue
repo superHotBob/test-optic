@@ -1,6 +1,11 @@
 <template>
-    <div>
-        <textarea name="ORDER_DESCRIPTION" v-model="comment"></textarea>
+    <div class="form-group">
+        <textarea 
+        class="form-control" 
+        rows="3" 
+        name="ORDER_DESCRIPTION" 
+        placeholder="Коментарий"
+        v-model="comment"/>
     </div>
 </template>
 

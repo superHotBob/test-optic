@@ -11,7 +11,7 @@
                 <input v-model="password" type="password" class="form-control" placeholder="Password">
             </div>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" v-model="remember" id="exampleCheck1">
+                <input type="checkbox" value="Y" class="form-check-input" v-model="remember" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Remember</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -28,7 +28,7 @@ export default {
         return {
             username:'',
             password:'',
-            remember:''
+            remember:false
         }
     },
     methods: {

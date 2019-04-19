@@ -1,20 +1,11 @@
 <template>
     <div>
         <div v-for="prop in getProps" :key="prop.ID">
-            <div v-if="prop.TYPE === 'STRING'">
-                
-                <input 
-                    :name="'ORDER_PROP_' + prop.ID"  
-                    v-for="(value, index) in prop.VALUE" :key="index" 
-                    :value="value">
-            </div>
-            <div v-if="prop.TYPE === 'LOCATION'">
-                <input type="hidden" name="location_type" value="code">
-                <input 
-                    :name="'ORDER_PROP_' + prop.ID"  
-                    v-for="(value, index) in prop.VALUE" :key="index" 
-                    :value="value">
-            </div>
+
+            <string v-if="prop.TYPE === 'STRING'" v-bind:property="prop"/>
+            <location v-if="prop.TYPE === 'LOCATION'" v-bind:property="prop"/>
+
+            
         </div>
     </div>
 </template>
@@ -22,37 +13,19 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import String from '~/components/order/property/String.vue'
+import Location from '~/components/order/property/Location.vue'
 
 export default {
+    components: {
+        String,
+        Location
+    },
     computed: {
         ...mapGetters({
             getProps: 'order/getProperties',
         }),
     },
-    data() {
-        return {
-            props: {},
-        }
-    },
-    methods: {
-        // string(value, id) {
-        //     console.log(value);
-        //     this.props['ORDER_PROP_' + id] = value;
-        //     this.event();
-        // },
-        // location(value, id) {
-        //     console.log(value);
-        //     this.props['ORDER_PROP_' + id] = value;
-        //     this.event();
-        // },
-        // event() {
-        //     this.$parent.$emit('properties', this.props);
-        //     console.log(this.props);
-        // }
-    },
-    mounted() {
-        var properties = this.getProps;
-    }
 }
 </script>
 

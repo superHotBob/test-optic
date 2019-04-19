@@ -16,7 +16,7 @@ export default {
     props: ['personType'],
     methods: {
         change() {
-            this.$parent.$emit('refresh')
+            this.$root.$emit('refresh')
         }
     }
 }

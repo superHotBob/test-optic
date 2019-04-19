@@ -58,6 +58,7 @@ export default {
     },
     computed: {
         basket() {
+            this.$root.$emit('basket');
             return this.$store.getters['basket/getBasket'];
         },
     },

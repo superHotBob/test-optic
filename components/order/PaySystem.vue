@@ -15,7 +15,7 @@ export default {
     props: ['paysystem'],
     methods: {
         change() {
-            this.$parent.$emit('refresh')
+            this.$root.$emit('refresh')
         }
     },
 }

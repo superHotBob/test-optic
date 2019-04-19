@@ -14,8 +14,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'demo bitrix' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'}
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   /*
@@ -54,7 +53,7 @@ module.exports = {
     '/api/': 'http://14.esobolev.ru/',
   },
   cache: false,
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/styles/styles.scss'],
   plugins: [
     '~/plugins/axios',
     '~/plugins/array',

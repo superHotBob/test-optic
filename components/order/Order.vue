@@ -1,6 +1,6 @@
 <template>
     <form ref="form">
-        <input type="hidden" name="sessid" :value="this.getSessid">
+        <input type="hidden" name="sessid" :value="getSessid">
         <input type="hidden" name="BUYER_STORE" value="0">
         <div v-if="orderId">
             Заказ №{{orderId}} оформлен
@@ -66,12 +66,13 @@ export default {
                 if (result.hasOwnProperty('ERROR'))
                     return;
                 
-                this.$root.$emit('order'); 
-                
                 if (!this.isLogged)
                     this.$store.dispatch('user/state');
 
                 this.orderId = result.order.ID;
+
+                if (this.orderId) 
+                    this.$root.$emit('order'); 
             } 
         },
         async refresh() {
@@ -89,10 +90,6 @@ export default {
     mounted() {
         this.$root.$on('refresh', value => { 
             this.refresh();
-        })
-        this.$root.$on('basket', result => { 
-            this.orderId = false;
-            this.$store.dispatch('order/state'); 
         })
     },
     computed: {

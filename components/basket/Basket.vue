@@ -50,10 +50,10 @@ export default {
     },
     mounted() {
         this.$root.$on('login/logout', result => { 
-            this.$store.dispatch('basket/request');
+            this.$store.dispatch('basket/state');
         })
         this.$root.$on('order', result => { 
-            this.$store.dispatch('basket/request');
+            this.$store.dispatch('basket/state');
         })
     },
     watch: {

@@ -1,7 +1,7 @@
 import qs from 'qs';
 
 export default {
-    async request({commit, getters}) {
+    async state({commit, getters}) {
         // let auth = await this.$axios.post(`/api/v1/auth/`,qs.stringify({'USER_LOGIN':'admin','USER_PASSWORD':'123456','AUTH_FORM':'Y','TYPE':'AUTH'}));
         let response = await this.$axios.get(getters.getEndpoint);
         commit('setBasket', response.data.basket);

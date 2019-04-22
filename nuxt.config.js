@@ -42,8 +42,13 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
-    '~/modules/routers'
+    '~/modules/routers',
+    'bootstrap-vue/nuxt'
   ],
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
+  },
   axios: {
     proxy: true,
     baseURL: 'http://localhost:3000/',
@@ -57,6 +62,7 @@ module.exports = {
   plugins: [
     '~/plugins/axios',
     '~/plugins/array',
+    // '~/plugins/bootstrap-vue',
     { src: '~/plugins/vue-masonry-css', ssr: true }
   ]
 }

@@ -24,6 +24,7 @@ body {
     line-height: normal;
     font-weight: 400;
     color: #000;
+    // sticky footer
     > div {
         height: 100%;
         > div {
@@ -53,22 +54,6 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,.4);
     z-index: 50;
-}
-.modal {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%);
-    width: auto;
-    height: auto;
-    background-color: lightgreen;
-    overflow: unset;
-    z-index: 100;
-    &.flex {
-        display: flex;
-        flex-wrap: wrap;
-    }
 }
 
 // only desktop hover, focus

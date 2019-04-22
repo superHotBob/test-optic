@@ -61,6 +61,21 @@
         background: url('~assets/images/placeholders/yandex-rating-5.jpg') no-repeat center;
         flex-shrink: 0;
     }
+    &__tels {
+        text-align: right;
+        p {
+            display: inline-block;
+            margin: 0;
+            font-size: 16px;
+            color: $grey;
+            &:not(:first-of-type) {
+                margin-left: 40px;
+            }
+        }
+        b {
+            color: #000;
+        }
+    }
 }
 
 @media (max-width: 1180px) {
@@ -123,6 +138,25 @@
         }
         &__features-toggle {
             display: block;
+        }
+    }
+}
+@media (max-width: 450px) {
+    .page-header {
+        &__stat-counter {
+            display: none;
+        }
+        &__features-toggle {
+            margin-left: auto;
+        }
+    }
+}
+@media (max-width: 350px) {
+    .page-header {
+        &__region {
+            p {
+                width: 270px;
+            }
         }
     }
 }

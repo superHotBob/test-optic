@@ -3,8 +3,16 @@
 
 @import "misc/fonts.scss";
 @import "misc/mixins.scss";
+@import "misc/buttons.scss";
 @import "misc/scaffolding.scss";
+@import "misc/inputs.scss";
+
+//modals
+@import "modals/modals.scss";
 
 //blocks
 @import "blocks/page-header.scss";
 @import "blocks/header-feature.scss";
+
+//overwrites display
+@import "misc/display.scss"

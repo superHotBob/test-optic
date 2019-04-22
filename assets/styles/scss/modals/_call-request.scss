@@ -1,0 +1,72 @@
+.call-request {
+    .modal-dialog {
+        max-width: 970px;
+    }
+    .modal-wrap {
+        display: flex;
+        padding: 60px 0;
+    }
+    h3 {
+        margin: 30px 0;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+    label {
+        margin-bottom: 13px;
+    }
+    &__text {
+        width: 52%;
+        text-align: center;
+    }
+    &__form {
+        width: 48%;
+        max-width: 370px;
+        padding-right: 20px;
+        input {
+            height: 40px;
+        }
+    }
+    &__submit {
+        width: 170px;
+        margin-top: 7px;
+        font-weight: 700;
+    }
+}
+
+@media (max-width: 768px) {
+    .call-request {
+        .modal-body {
+            padding: 0;
+        }
+        .modal-wrap {
+            flex-direction: column;
+            align-items: stretch;
+            margin: 0;
+            padding: 30px;
+            border: none;
+        }
+        &__text,
+        &__form {
+            width: auto;
+        }
+        &__form {
+            max-width: unset;
+            padding: 0 60px;
+        }
+        &__submit {
+            font-weight: 600;
+        }
+    }
+}
+@media (max-width: 500px) {
+    .call-request {
+        &__form {
+            padding: 0;
+        }
+    }
+}

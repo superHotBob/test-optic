@@ -1,0 +1,79 @@
+.button {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+    transition: background-color 150ms, color 150ms;
+    &:hover {
+        outline: none;
+    }
+    &:active {
+        outline: none;
+        color: #fff;
+        background-color: #000;
+    }
+    &.black {
+        color: #fff;
+        background-color: #000;
+        &:active {
+            color: #000;
+            background-color: #fff;
+        }
+    }
+    &.fs0 {
+        font-size: 0;
+    }
+    &.bold {
+        font-weight: 700;
+    }
+    &.square {
+        width: 40px;
+    }
+    &.full {
+        width: 100%;
+    }
+    &.card {
+        min-width: 110px;
+    }
+}
+
+
+@media (min-width: 769px) {
+    .button {
+        &:hover,
+        &:focus {
+            outline: none;
+            color: #fff;
+            background-color: #000;
+        }
+        &.black {
+            color: #fff;
+            background-color: #000;
+            &:hover,
+            &:focus {
+                outline: none;
+                color: #000;
+                background-color: #fff;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .button {
+        height: 30px;
+        font-size: 12px;
+        &.square {
+            width: 30px;
+        }
+        &.card {
+            min-width: 96px;
+            font-weight: 400;
+        }
+    }
+
+}

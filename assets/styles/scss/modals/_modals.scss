@@ -1,0 +1,64 @@
+.modal-wrap {
+    position: relative;
+    margin: 4px;
+    border: 1px solid #e6e6e6;
+}
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 18px;
+        width: 1px;
+        height: 20px;
+        background-color: #ddd;
+        transition: background-color 150ms;
+    }
+    &::before {
+        transform: rotate(-45deg);
+    }
+    &::after {
+        transform: rotate(45deg);
+    }
+    &:hover,
+    &:focus {
+        outline: none;
+    }
+    &:active {
+        &::before,
+        &::after {
+            background-color: #000;
+        }
+    }
+}
+.modal-content {
+    border: none;
+}
+.modal-dialog {
+    margin: 1.75rem auto;
+}
+
+@media (min-width: 769px) {
+    .modal-close {
+        &:hover,
+        &:focus {
+            &::before,
+            &::after {
+                background-color: #000;
+            }
+        }
+    }
+}
+
+@import 'call-request.scss';

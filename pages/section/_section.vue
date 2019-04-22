@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         onChangePagen: function () {
-            console.log(this.$route);
             this.$router.push({ name: this.$route.name, params:{filter:this.$route.params.filter, pagen:this.pagen}});
         },
     },
@@ -65,7 +64,6 @@ export default {
                 seometa: res.data.seometa,
             }
         }).catch((e) => {
-            console.log()
             if (e.response.status === 404) {
                 error({ statusCode: 404, message: e.message })
             }

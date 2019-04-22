@@ -10,5 +10,5 @@ export default {
     },
     getItem: (state) => (id) => {
       return state.basket.GRID.ROWS[id]
-    }
+    },
 }

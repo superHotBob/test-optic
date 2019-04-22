@@ -1,7 +1,7 @@
 <template>
   <div>
-      {{basket.BASKET_ITEMS_COUNT}}
-      <div class="basket-item" v-for="arItem in basket.GRID.ROWS" :key="arItem.ID">
+      {{getBasket.BASKET_ITEMS_COUNT}}
+      <div class="basket-item" v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID">
             <img v-if="arItem.PREVIEW_PICTURE_SRC" :src="'http://home-optic.proj' + arItem.PREVIEW_PICTURE_SRC"/>
             <div>
                 <span>{{arItem.NAME}}</span>
@@ -25,14 +25,14 @@
             </button>
       </div>
       <div>
-          Итого: {{basket.allSum_FORMATED}}
+          Итого: {{getBasket.allSum_FORMATED}}
       </div>
   </div>
 </template>
 
 <script>
 
-import axios from 'axios';
+import { mapGetters } from 'vuex';
 import Quantity from '~/components/basket/Quantity.vue'
 
 export default {
@@ -48,10 +48,23 @@ export default {
             this.$store.dispatch('basket/delete',{'id':id});
         }
     },
+    mounted() {
+        this.$root.$on('login/logout', result => { 
+            this.$store.dispatch('basket/request');
+        })
+        this.$root.$on('order', result => { 
+            this.$store.dispatch('basket/request');
+        })
+    },
+    watch: {
+        'getBasket': function() {
+            this.$store.dispatch('order/state'); 
+        }
+    },
     computed: {
-        basket() {
-            return this.$store.getters['basket/getBasket'];
-        },
+        ...mapGetters({
+            getBasket: 'basket/getBasket'
+        }),
     },
 
 }

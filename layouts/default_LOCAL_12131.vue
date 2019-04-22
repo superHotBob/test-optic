@@ -20,6 +20,7 @@
 import LogOut from '~/components/user/ButtonLogout.vue'
 import LoginForm from '~/components/user/LoginForm.vue'
 
+
 export default {
   components: {
     LoginForm,

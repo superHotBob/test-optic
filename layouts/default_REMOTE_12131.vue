@@ -2,9 +2,11 @@
   <div>
     <log-out/>
     <login-form/>
+    <!-- <basket/> -->
+    <!-- <order/> -->
     <div>
       <nuxt-link active-class="active" to="/" exact>Главная</nuxt-link>
-      <nuxt-link active-class="active" :to="{ name: 'basket'}">Корзина</nuxt-link>
+      <nuxt-link active-class="active" to="/basket" exact>Корзина</nuxt-link>
     </div>
     <div>
       <nuxt-link active-class="active" :to="{ name: 'section', params: { section: 'frames' }}">Оправы</nuxt-link>

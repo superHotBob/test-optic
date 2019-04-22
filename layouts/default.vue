@@ -83,10 +83,9 @@
 
 <script>
 
-import Basket from '~/components/basket/Basket.vue'
+
 import LogOut from '~/components/user/ButtonLogout.vue'
 import LoginForm from '~/components/user/LoginForm.vue'
-import Order from '~/components/order/Order.vue'
 
 export default {
     data() {
@@ -96,12 +95,8 @@ export default {
         }
     },
     components: {
-        Basket,
         LoginForm,
         LogOut,
-        Order
-    },
-    computed: {
     },
 }
 </script>

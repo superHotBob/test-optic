@@ -14,8 +14,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'demo bitrix' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'}
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   /*
@@ -29,7 +28,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extractCSS: true,
+    extractCSS: false,
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -51,10 +50,10 @@ module.exports = {
     credentials: true
   },
   proxy: {
-    '/api/': 'http://home-optic.proj',
+    '/api/': 'http://14.esobolev.ru/',
   },
-  cache: true,
-  css: ['~/assets/css/main.css'],
+  cache: false,
+  css: ['~/assets/styles/styles.scss'],
   plugins: [
     '~/plugins/axios',
     '~/plugins/array',

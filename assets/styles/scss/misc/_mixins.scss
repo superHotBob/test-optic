@@ -1,0 +1,30 @@
+// Создать отдельный миксин для text-decoration?
+@mixin b-hover($colorDef: #000, $colorAlt: $grey, $textDec: none) {
+    color: $colorDef;
+    transition: color 150ms;
+    &:not([href]):not([tabindex]) {
+        color: $colorDef;
+    }
+    &:hover,
+    &:not([href]):not([tabindex]):hover {
+        // td & color для сброса стилей ссылок;
+        text-decoration: none;
+        color: $colorDef;
+        outline: none;
+    }
+    &:active,
+    &:not([href]):not([tabindex]):active {
+        text-decoration: $textDec;
+        color: $colorAlt;
+    }
+    @media (min-width: 769px) {
+        &:hover,
+        &:focus,
+        &:not([href]):not([tabindex]):hover,
+        &:not([href]):not([tabindex]):focus {
+            text-decoration: $textDec;
+            color: $colorAlt;
+            outline: none;
+        }
+    }
+}

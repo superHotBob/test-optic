@@ -1,0 +1,196 @@
+.btn-submit {
+    display: inline-block;
+    height: 45px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 45px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: $red;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover {
+        text-decoration: none;
+        color: #fff;
+        outline: none;
+    }
+}
+
+.btn-small {
+    padding: 0 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $light-blue;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.button {
+    min-width: 240px;
+    height: 50px;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #111c85;
+    border: none;
+    border-radius: 0;
+    transition: background-color 150ms;
+    &:hover {
+        outline: none;
+    }
+    &:active {
+        outline: none;
+        background-color: $blue-hover;
+    }
+    &.caps {
+        text-transform: uppercase;
+    }
+    &.big {
+        height: 60px;
+    }
+}
+
+.btn {
+    &-back,
+    &-clear {
+        position: relative;
+        display: inline-block;
+        padding: 0;
+        font: inherit;
+        text-decoration: none;
+        color: $grey;
+        border: none;
+        background-color: transparent;
+        transition: color 150ms;
+        &:hover {
+            text-decoration: none;
+            color: $grey;
+            outline: none;
+        }
+        &:active {
+            text-decoration: none;
+            color: $black;
+            &.back {
+                &::before {
+                    border-color: $black
+                }
+            }
+            &.clear {
+                &::before,
+                &::after {
+                    background-color: $black;
+                }
+            }
+        }
+    }
+    &-back {
+        padding-left: 18px;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 3px;
+            width: 11px;
+            height: 11px;
+            background-color: transparent;
+            border-left: 1px solid $grey;
+            border-bottom: 1px solid $grey;
+            transform: translateY(-50%) rotate(45deg);
+            transition: border-color 150ms;
+        }
+    }
+    &-clear {
+        padding-left: 20px;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 7px;
+            width: 1px;
+            height: 18px;
+            background-color: $grey;
+            transition: background-color 150ms;
+        }
+        &::before {
+            transform: translateY(-50%) rotate(-45deg);
+        }
+        &::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+    }
+}
+
+
+@media (min-width: 769px) {
+    .button {
+        &:hover,
+        &:focus {
+            outline: none;
+            background-color: $blue-hover;
+        }
+    }
+    .btn {
+        &-back {
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: $black;
+                outline: none;
+                &::before {
+                    border-color: $black
+                }
+            }
+        }
+        &-clear {
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: $black;
+                outline: none;
+                &::before,
+                &::after {
+                    background-color: $black;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .btn-submit {
+        height: 40px;
+        font-size: 14px;
+        line-height: 40px;
+    }
+    .btn-light {
+        font-size: 12px;
+    }
+}
+@media (max-width: 500px) {
+    .btn {
+        &-back {
+            padding-left: 15px;
+            font-size: 14px;
+            &::before {
+                left: 2px;
+                width: 8px;
+                height: 8px;
+            }
+        }
+        &-clear {
+            padding-left: 17px;
+            font-size: 14px;
+            &::before,
+            &::after {
+                height: 14px;
+            }
+        }
+    }
+}

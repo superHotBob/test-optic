@@ -54,10 +54,14 @@ module.exports = {
     '/api/': 'http://home-optic.proj',
   },
   cache: true,
-  css: ['~/assets/css/main.css'],
+  css: [
+    '~/assets/css/main.css',
+    'swiper/dist/css/swiper.css'
+  ],
   plugins: [
     '~/plugins/axios',
     '~/plugins/array',
+    { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-masonry-css', ssr: true }
   ]
 }

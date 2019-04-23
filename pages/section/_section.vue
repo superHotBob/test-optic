@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{seometa.title}}</h1>
+        <h1>{{result.seometa.title}}</h1>
         <smart-filter v-bind:items="result.filter.items"></smart-filter>
         <section-elements v-bind:arResult="result.section.arResult"></section-elements>
         <pagination v-model="pagen"
@@ -57,22 +57,26 @@ export default {
             pagen = Number(params.pagen);
         
         return $axios.get(`/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`)
-        .then((res) => {
+        .then((response) => {
             return { 
-                result: res.data,
+                result: response.data,
                 pagen: pagen,
-                seometa: res.data.seometa,
             }
-            console.log(res.data.filter);
         }).catch((e) => {
             if (e.response.status === 404) {
                 error({ statusCode: 404, message: e.message })
             }
         })
     },
+    validate ({ params }) {
+        if (params.pagen)
+            return /^\d+$/.test(params.pagen)
+        
+        return true;
+    },
     head() {
         return {
-            title: this.seometa.title
+            title: this.result.seometa.title
         }
     }
 }

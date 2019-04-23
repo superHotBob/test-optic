@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{seometa.title}}</h1>
-        <smart-filter v-bind:arResult="result.smartFilter.arResult"></smart-filter>
+        <smart-filter v-bind:items="result.filter.items"></smart-filter>
         <section-elements v-bind:arResult="result.section.arResult"></section-elements>
         <pagination v-model="pagen"
             :page-count="result.section.arResult.PAGEN.NavPageCount"
@@ -55,7 +55,7 @@ export default {
 
         if (params.pagen)  
             pagen = Number(params.pagen);
-
+        
         return $axios.get(`/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`)
         .then((res) => {
             return { 
@@ -63,6 +63,7 @@ export default {
                 pagen: pagen,
                 seometa: res.data.seometa,
             }
+            console.log(res.data.filter);
         }).catch((e) => {
             if (e.response.status === 404) {
                 error({ statusCode: 404, message: e.message })

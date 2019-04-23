@@ -1,21 +1,30 @@
 <template>
     <div>
         <form>
-            <input v-for="arItem in arResult.HIDDEN" :key="arItem.ID" type="hidden"/>
-            <div v-for="arItem in arResult.ITEMS" :key="arItem.CODE">
-                <div v-if="arItem.DISPLAY_TYPE === 'F'">
-                    <ul>
-                        <li v-for="ar in arItem.VALUES" :key="ar.ID">
-                            <label>
-                                <input v-on:click="change(ar.URL_ID,arItem.ID)"
-                                    type="checkbox"
-                                    :value="ar.URL_ID"
-                                    :checked="ar.CHECKED"
-                                />
-                                {{ar.VALUE}}
-                            </label>
-                        </li>
-                    </ul>
+            <div v-for="item in items" :key="item.CODE">
+                <div class='price' v-if="item.price">
+                    <vue-slider 
+                        :min="item.values.min" 
+                        :max="item.values.max" 
+                        v-model="item.values.array"
+                        @change="range()">
+                    </vue-slider>
+                </div>
+                <div v-else>
+                    <div v-if="item.display_type === 'F'">
+                        <ul>
+                            <li v-for="(value, index) in item.values" :key="index">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        v-model="value.checked"
+                                        v-on:click="change()"
+                                    />
+                                    {{value.name}}
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </form>
@@ -24,61 +33,70 @@
 </template>
 
 <script>
+
+import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
+import 'vue-slider-component/dist-css/vue-slider-component.css'
+import 'vue-slider-component/theme/default.css'
+
 export default {
     name: 'SmartFilter',
+    components: {
+        VueSlider
+    },
     props: {
-      arResult: Object,
+      items: Object,
     },
     data() {
         return {
             timer:null,
-            prop: {},
         }
     },
     methods: {
+        range() {
+            
+            if (!!this.timer)
+            {
+                clearTimeout(this.timer);
+            }
+            this.timer = setTimeout(() => { 
+                this.reload();
+            }, 500);
+        },
         clear() {
             this.$router.push({ name: 'filter', params: {filter: ['clear']}})
         },
         reload() {
-            var allValues, url_params = [];
-            
-            for (let property in this.arResult.ITEMS) {
-                if (!this.arResult.ITEMS[property].PRICE) {
-                    allValues = [];
-                    for (let value in this.arResult.ITEMS[property].VALUES) {
-                        if(this.arResult.ITEMS[property].VALUES[value].CHECKED) {
-                            allValues.push(this.arResult.ITEMS[property].VALUES[value].URL_ID);
+            var properties = {}, values, url_params = [];
+
+            for (let item in this.items) {
+                if (this.items[item].price) 
+                {
+                    url_params.push('price-' + this.items[item].code + '-from-' + this.items[item].values.array.join('-to-'));
+                } 
+                else 
+                {
+                    values = [];
+
+                    for (let value in this.items[item].values) {
+                        if(this.items[item].values[value].checked) {
+                            values.push(this.items[item].values[value].value);
                         }
                     }
-                    this.prop[this.arResult.ITEMS[property].CODE] = allValues;
+
+                    properties[this.items[item].code] = values;
                 }
             }
-            
-            for (let key in this.prop) {
-                if (this.prop[key].length > 0)
-                    url_params.push(key + '-is-' + this.prop[key].join('-or-'));
+
+            for (let key in properties) {
+                if (properties[key].length > 0)
+                    url_params.push(key + '-is-' + properties[key].join('-or-'));
             }
-
-            if (url_params.length == 0) 
-                url_params.push('clear');
-
 
             this.$router.push({ name: 'filter', params: {filter: url_params}})
         },
-        change(value, id) {
-
-            for(let prop in this.arResult.ITEMS[id].VALUES) {
+        change() {
                 
-                if (this.arResult.ITEMS[id].VALUES[prop].URL_ID !== value)
-                    continue;
-                
-                if (this.arResult.ITEMS[id].VALUES[prop].CHECKED) 
-                    this.arResult.ITEMS[id].VALUES[prop]['CHECKED'] = false;
-                else
-                    this.arResult.ITEMS[id].VALUES[prop]['CHECKED'] = true;
-            }
-
-            if(!!this.timer)
+            if (!!this.timer)
             {
                 clearTimeout(this.timer);
             }
@@ -89,3 +107,10 @@ export default {
     },
 }
 </script>
+
+<style>
+    .price {
+        margin-left: 20px;
+        max-width: 300px;
+    }
+</style>

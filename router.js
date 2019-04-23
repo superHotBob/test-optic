@@ -40,17 +40,17 @@ export function createRouter () {
                         component: section,   
                     },
                     {
+                        path: 'detail/:element',
+                        name: 'element',
+                        component: element,
+                    },
+                    {
                         path: 'filter/:filter(.*)*/apply/:pagen?',
                         name: 'filter',
                         component: section,
                     },
-                    {
-                        path: ':element',
-                        name: 'element',
-                        component: element,
-                    },
                 ]
-            }
+            },   
         ]
     })
 }

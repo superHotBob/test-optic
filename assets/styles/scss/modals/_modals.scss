@@ -1,7 +1,9 @@
 .modal-wrap {
     position: relative;
-    margin: 4px;
     border: 1px solid #e6e6e6;
+}
+.modal-body {
+    padding: 20px;
 }
 .modal-close {
     position: absolute;
@@ -22,7 +24,7 @@
         left: 18px;
         width: 1px;
         height: 20px;
-        background-color: #ddd;
+        background-color: #ccc;
         transition: background-color 150ms;
     }
     &::before {
@@ -44,6 +46,7 @@
 }
 .modal-content {
     border: none;
+    border-radius: 0;
 }
 .modal-dialog {
     margin: 1.75rem auto;
@@ -60,5 +63,23 @@
         }
     }
 }
+@media (max-width: 768px) {
+    .modal-body {
+        background-color: $modal-bg;
+        input {
+            background-color: $modal-bg;
+        }
+    }
+    .modal-close {
+        top: 20px;
+        right: 12px;
+        &::before,
+        &::after {
+            top: 4px;
+            height: 28px;
+        }
+    }
+}
 
+@import 'delivery-region.scss';
 @import 'call-request.scss';

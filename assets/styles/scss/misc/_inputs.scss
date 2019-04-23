@@ -15,7 +15,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 0;
+        right: 7px;
         width: 15px;
         height: 15px;
         margin: 0;
@@ -37,7 +37,7 @@
     }
     input,
     textarea {
-        height: 36px;
+        height: 30px;
         margin-top: auto;
         padding-left: 10px;
         padding-right: 18px;
@@ -46,7 +46,6 @@
         border: none;
         outline: none;
         resize: none;
-        // border: 1px solid $grey;
         border: 1px solid #d9d9d9;
         transition: border-color 150ms;
         &:focus {
@@ -62,12 +61,15 @@
         }
     }
     &.light {
+        .textfield__icon {
+            right: 0;
+        }
         input,
         textarea {
             padding: 0;
+            padding-bottom: 4px;
             padding-right: 18px;
             border: none;
-            // border-bottom: 1px solid $grey;
             border-bottom: 1px solid #d9d9d9;
             &:focus {
                 border-color: #000;
@@ -81,6 +83,20 @@
         }
         span {
             color: #f00;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .textfield {
+        font-size: 14px;
+        span {
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        input,
+        textarea {
+            height: 30px;
         }
     }
 }

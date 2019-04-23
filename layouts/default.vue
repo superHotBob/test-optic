@@ -6,39 +6,33 @@
                 <div class="page-header__region" @click="regionModal = !regionModal">
                     <p v-b-modal.delivery-region>Ваш регион доставки: Санкт-Петербург</p>
                 </div>
-                <b-modal id="delivery-region" title="Overflowing Content" style="color: black;" hide-footer>
-                    <p class="my-4" v-for="i in 4" :key="i">
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                    </p>
-                </b-modal>
                 <div class="page-header__features" :class="{'hidden': featuresHidden}">
                     <div class="header-feature">
-                        <a href="#0">Быстрая доставка</a>
+                        <nuxt-link to="#0">Быстрая доставка</nuxt-link>
                         <div class="header-feature__popup">
                             <p>Мгновенно доставим любой товар в любую точку России.</p>
-                            <a href="">Подробнее ...</a>
+                            <nuxt-link to="#0">Подробнее ...</nuxt-link>
                         </div>
                     </div>
                     <div class="header-feature">
-                        <a href="#0">Гарантия лучшей цены</a>
+                        <nuxt-link to="#0">Гарантия лучшей цены</nuxt-link>
                         <div class="header-feature__popup">
                             <p>Гарантируем лучшие цены на все товары. Мы заботимся о Вас и хотим, чтобы вы приобретали хорошие товары по лучшим ценам.</p>
-                            <a href="">Подробнее ...</a>
+                            <nuxt-link to="#0">Подробнее ...</nuxt-link>
                         </div>
                     </div>
                     <div class="header-feature">
-                        <a href="#0">Изготовление очков</a>
+                        <nuxt-link to="#0">Изготовление очков</nuxt-link>
                         <div class="header-feature__popup">
                             <p>Профессионально установим линзы любой сложности в любую оправу.</p>
-                            <a href="">Подробнее ...</a>
+                            <nuxt-link to="#0">Подробнее ...</nuxt-link>
                         </div>
                     </div>
                     <div class="header-feature">
-                        <a href="#0">Оригинальная продукция</a>
+                        <nuxt-link to="#0">Оригинальная продукция</nuxt-link>
                         <div class="header-feature__popup">
                             <p>Мы занимаемся только оригинальной продукцией. С радостью подтвердим все товары сертификатами производителей.</p>
-                            <a href="">Подробнее ...</a>
+                            <nuxt-link to="#0">Подробнее ...</nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -46,70 +40,179 @@
                 <div class="page-header__features-toggle" @click="featuresHidden =! featuresHidden">Показать</div>
             </div>
         </div>
+        <b-modal class="delivery-region" id="delivery-region" style="color: black;" hide-header hide-footer>
+            <button class="modal-close" @click="$bvModal.hide('delivery-region')"></button>
+            <h3>Укажите ваш регион </h3>
+            <form>
+                <label class="textfield">
+                    <input type="text" placeholder="Москва">
+                    <button class="textfield__icon" type="button">
+                        <svg width="15" height="15"><use href="#svg-search"/></svg>
+                        Поиск
+                    </button>
+                </label>
+            </form>
+            <ul>
+                <li><a href="#0"><span>Астрахань</span></a></li>
+                <li><a href="#0"><span>Балашиха</span></a></li>
+                <li><a href="#0"><span>Барнаул</span></a></li>
+                <li><a href="#0"><span>Брянск</span></a></li>
+                <li><a href="#0"><span>Владивосток</span></a></li>
+                <li><a href="#0"><span>Волгоград</span></a></li>
+                <li><a href="#0"><span>Воронеж</span></a></li>
+                <li><a href="#0"><span>Екатеринбург</span></a></li>
+                <li><a href="#0"><span>Иваново</span></a></li>
+                <li><a href="#0"><span>Ижевск</span></a></li>
+                <li><a href="#0"><span>Иркутск</span></a></li>
+                <li><a href="#0"><span>Казань</span></a></li>
+                <li><a href="#0"><span>Калининград</span></a></li>
+                <li><a href="#0"><span>Кемерово</span></a></li>
+                <li><a href="#0"><span>Киров</span></a></li>
+                <li><a href="#0"><span>Краснодар</span></a></li>
+                <li><a href="#0"><span>Красноярск</span></a></li>
+                <li><a href="#0"><span>Курск</span></a></li>
+                <li><a href="#0"><span>Липецк</span></a></li>
+                <li><a href="#0"><span>Магнитогорск</span></a></li>
+                <li><a href="#0"><span>Махачкала</span></a></li>
+                <li><a href="#0"><span>Москва</span></a></li>
+                <li><a href="#0"><span>Набережные Челны</span></a></li>
+                <li><a href="#0"><span>Нижний Новгород</span></a></li>
+                <li><a href="#0"><span>Новокузнецк</span></a></li>
+                <li><a href="#0"><span>Новосибирск</span></a></li>
+                <li><a href="#0"><span>Омск</span></a></li>
+                <li><a href="#0"><span>Оренбург</span></a></li>
+                <li><a href="#0"><span>Пенза</span></a></li>
+                <li><a href="#0"><span>Перьм</span></a></li>
+                <li><a href="#0"><span>Ростов-на-Дону</span></a></li>
+                <li><a href="#0"><span>Рязань</span></a></li>
+                <li><a href="#0"><span>Самара</span></a></li>
+                <li><a href="#0"><span>Санкт-Петербург</span></a></li>
+                <li><a href="#0"><span>Саратов</span></a></li>
+                <li><a href="#0"><span>Севастополь</span></a></li>
+                <li><a href="#0"><span>Сочи</span></a></li>
+                <li><a href="#0"><span>Ставрополь</span></a></li>
+                <li><a href="#0"><span>Тверь</span></a></li>
+                <li><a href="#0"><span>Тольятти</span></a></li>
+                <li><a href="#0"><span>Томск</span></a></li>
+                <li><a href="#0"><span>Тула</span></a></li>
+                <li><a href="#0"><span>Тюмень</span></a></li>
+                <li><a href="#0"><span>Улан-Удэ</span></a></li>
+                <li><a href="#0"><span>Ульяновск</span></a></li>
+                <li><a href="#0"><span>Уфа</span></a></li>
+                <li><a href="#0"><span>Хабаровск</span></a></li>
+                <li><a href="#0"><span>Чебоксары</span></a></li>
+                <li><a href="#0"><span>Челябинск</span></a></li>
+                <li><a href="#0"><span>Ярославль</span></a></li>
+            </ul>
+        </b-modal>
         <div class="page-header__tels main-container hidden-mobile">
             <p>Контактные номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
             <p>Режим работы Пн-Сб: <b>с 10:00 до 20:00</b></p>
         </div>
         <div class="page-header__main main-container">
-            <a href="/">
+            <button class="page-header__menu-btn hidden-desktop">Меню</button>
+            <nuxt-link class="page-header__logo" to="/" exact>
                 <svg width="269" height="48"><use href="#svg-logo"/></svg>
-            </a>
-            <form class="header__search" aria-label="Поиск">
-                <label class="textfield light">
+                Главная
+            </nuxt-link>
+
+            <form class="page-header__search" aria-label="Поиск">
+                <button class="btn-icon hidden-desktop" type="button" @click="headerSearch = !headerSearch">
+                    <svg width="15" height="15"><use href="#svg-search"/></svg>
+                    Поиск
+                </button>
+                <label class="textfield light" :class="{'active': headerSearch}">
                     <input type="text" placeholder="Поиск...">
-                    <button class="textfield__icon" type="button"><svg width="15" height="15"><use href="#svg-search"/></svg>Поиск</button>
+                    <button class="textfield__icon" type="button">
+                        <svg width="15" height="15"><use href="#svg-search"/></svg>
+                        Поиск
+                    </button>
                 </label>
             </form>
-            <button class="header__call-request" v-b-modal.call-request>
+
+            <button class="page-header__call-request btn-icon" v-b-modal.call-request>
                 <svg width="25" height="25" fill="#fff" stroke="#000"><use href="#svg-phone" stroke-width="25px"/></svg>
                 Обратный звонок
             </button>
-            <b-modal class="call-request" id="call-request" hide-footer hide-header>
+            <b-modal class="call-request" id="call-request" hide-header hide-footer>
                 <div class="modal-wrap">
                     <button class="modal-close" @click="$bvModal.hide('call-request')"></button>
-                    <div class="call-request__text">
+                    <div class="call-request__text" v-if="!callRequestOk">
                         <h3>Обратный звонок</h3>
                         <p>Вышлите нам свой номер телефона, <br> и наш менеджер перезвонит вам <br> в близжайшие 20 минут.</p>
                     </div>
-                    <form class="call-request__form" aria-label="Заказать обратный звонок">
+                    <form class="call-request__form" aria-label="Заказать обратный звонок" v-if="!callRequestOk" @submit.prevent="callRequestOk = !callRequestOk">
                         <label class="textfield">
                             <span>Ваше имя</span>
-                            <input type="text">
+                            <input name="name" type="text">
                         </label>
                         <label class="textfield">
                             <span>Ваш телефон</span>
-                            <input type="text">
+                            <input name="phone" type="text">
                         </label>
                         <button class="call-request__submit button black" type="submit">Заказать звонок</button>
                     </form>
+                    <div class="call-request__ok" v-if="callRequestOk">
+                        <p>Ваша заявка принята.</p>
+                        <p>Наш менеджер перезвонит вам <br> в ближайшие 20 минут.</p>
+                    </div>
                 </div>
             </b-modal>
-            <no-ssr>
-                <swiper>
-                    <swiper-slide>Slide 1</swiper-slide>
-                    <swiper-slide>Slide 2</swiper-slide>
-                    <swiper-slide>Slide 3</swiper-slide>
-                    <swiper-slide>Slide 4</swiper-slide>
-                    <swiper-slide>Slide 5</swiper-slide>
-                    <swiper-slide>Slide 6</swiper-slide>
-                    <swiper-slide>Slide 7</swiper-slide>
-                    <swiper-slide>Slide 8</swiper-slide>
-                    <swiper-slide>Slide 9</swiper-slide>
-                    <swiper-slide>Slide 10</swiper-slide>
-                </swiper>
-            </no-ssr>
 
-            <div class="header__basket">
-                <button>
-                    <svg style="margin-left: 20px;" width="20" height="27"><use href="#svg-bag"/></svg>
-                    Корзина
-                </button>
-                <p>5 шт. - <b>10 589.45 руб</b></p>
+            <div class="basket page-header__basket">
+                <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn">
+                    <button class="btn-icon">
+                        <svg width="20" height="27"><use href="#svg-bag"/></svg>
+                        Корзина
+                    </button>
+                    <p class="hidden-mobile">5 шт. - <b>10 589.45 руб.</b></p>
+                </div>
+                <div class="basket__popup" :class="{'active': basketPopup}" ref="dropdownMenu">
+                    <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
+                        <div class="basket__image">
+                            <img src="" alt="">
+                            <span>Sale</span>
+                            <span>New</span>
+                        </div>
+                        <div class="basket__props">
+                            <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
+                            <div class="basket__prop">
+                                Ширина линзы
+                                <span class="basket__square">59</span>
+                            </div>
+                            <div class="basket__prop">
+                                Диагональ линзы
+                                <span class="basket__square">62</span>
+                            </div>
+                            <div class="basket__prop">
+                                Высота линзы
+                                <span class="basket__square">37</span>
+                            </div>
+                            <div class="basket__prop">
+                                Ширина наносника
+                                <span class="basket__square">17</span>
+                            </div>
+                            <div class="basket__prop">
+                                Длина дужки
+                                <span class="basket__square">145</span>
+                            </div>
+                            <div class="basket__prop">
+                                Цвет
+                                <span class="basket__square"><img src="#" alt=""></span>
+                            </div>
+                            <div class="basket__prop">
+                                Размер
+                                <span class="basket__square">59/37/17/145</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="basket__footer"></div>
+                </div>
             </div>
         </div>
         <div class="page-header__bottom hidden-mobile">
             <div class="main-container">
-
+                Категории
             </div>
         </div>
         <button type="button" class="btn btn-primary">Primary</button>
@@ -170,7 +273,10 @@ import Order from '~/components/order/Order.vue'
 export default {
     data() {
         return {
-            featuresHidden: true
+            featuresHidden: true,
+            headerSearch: false,
+            callRequestOk: false,
+            basketPopup: false,
         }
     },
     components: {
@@ -179,8 +285,27 @@ export default {
         LogOut,
         Order
     },
+    methods: {
+        documentClick(e) {
+            let el = this.$refs.dropdownMenu
+            let target = e.target
+            let basketBtn = this.$refs.basketBtn
+            if ((el !== target) && !el.contains(target) && (basketBtn !== target) && !basketBtn.contains(target)) {
+                this.basketPopup=false;
+            }
+        }
+    },
     computed: {
     },
+    mounted() {
+        window.addEventListener('click', this.documentClick)
+    },
+    // created () {
+        
+    // },
+    beforeDestroy () {
+        window.removeEventListener('click', this.documentClick)
+    }
 }
 </script>
 

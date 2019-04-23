@@ -7,7 +7,7 @@
                         :min="item.values.min" 
                         :max="item.values.max" 
                         v-model="item.values.array"
-                        @change="range()">
+                        @change="change()">
                     </vue-slider>
                 </div>
                 <div v-else>
@@ -52,16 +52,6 @@ export default {
         }
     },
     methods: {
-        range() {
-            
-            if (!!this.timer)
-            {
-                clearTimeout(this.timer);
-            }
-            this.timer = setTimeout(() => { 
-                this.reload();
-            }, 500);
-        },
         clear() {
             this.$router.push({ name: 'filter', params: {filter: ['clear']}})
         },

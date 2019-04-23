@@ -58,11 +58,14 @@ module.exports = {
     '/api/': 'http://14.esobolev.ru/',
   },
   cache: false,
-  css: ['~/assets/styles/styles.scss'],
+  css: [
+    '~/assets/styles/styles.scss',
+    'swiper/dist/css/swiper.css'
+  ],
   plugins: [
     '~/plugins/axios',
     '~/plugins/array',
-    // '~/plugins/bootstrap-vue',
+    { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-masonry-css', ssr: true }
   ]
 }

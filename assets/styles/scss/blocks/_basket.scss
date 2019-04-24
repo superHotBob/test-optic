@@ -42,7 +42,9 @@
         transform: translateY(100%);
         display: none;
         width: 400px;
+        background-color: #fff;
         border: 1px solid black;
+        z-index: 5;
         &.active {
             display: block;
         }

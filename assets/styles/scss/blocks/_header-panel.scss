@@ -1,0 +1,48 @@
+.header-panel {
+    display: flex;
+    color: $grey;
+    p {
+        position: relative;
+        align-items: center;
+        display: flex;
+        margin: 0;
+        &:not(:first-of-type) {
+            margin-left: 15px;
+            &::before {
+                content: "/";
+                position: absolute;
+                left: -17px;
+            }
+        }
+        &:not(:last-of-type) {
+            margin-right: 15px;
+        }
+    }
+    a {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .header-panel {
+        a {
+            &:hover,
+            &:focus {
+                color: #000;
+                outline: none;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .header-panel {
+        &__login {
+            font-weight: 700;
+        }
+    }
+}

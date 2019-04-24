@@ -44,6 +44,37 @@
         }
     }
 }
+.modal-back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background-color: transparent;
+    // background-color: lightgreen;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 8px;
+        width: 14px;
+        height: 14px;
+        border-bottom: 1px solid #fff;
+        border-left: 1px solid #fff;
+    }
+    &::before {
+        transform: rotate(45deg);
+    }
+    &.black {
+        &::before {
+            border-color: #000;
+        }
+    }
+}
 .modal-content {
     border: none;
     border-radius: 0;
@@ -83,3 +114,4 @@
 
 @import 'delivery-region.scss';
 @import 'call-request.scss';
+@import 'header-category.scss';

@@ -37,85 +37,19 @@
                     </div>
                 </div>
                 <div class="page-header__stat-counter"></div>
-                <div class="page-header__features-toggle" @click="featuresHidden =! featuresHidden">Показать</div>
+                <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden">Показать</button>
             </div>
         </div>
-        <b-modal class="delivery-region" id="delivery-region" style="color: black;" hide-header hide-footer>
-            <button class="modal-close" @click="$bvModal.hide('delivery-region')"></button>
-            <h3>Укажите ваш регион </h3>
-            <form>
-                <label class="textfield">
-                    <input type="text" placeholder="Москва">
-                    <button class="textfield__icon" type="button">
-                        <svg width="15" height="15"><use href="#svg-search"/></svg>
-                        Поиск
-                    </button>
-                </label>
-            </form>
-            <ul>
-                <li><a href="#0"><span>Астрахань</span></a></li>
-                <li><a href="#0"><span>Балашиха</span></a></li>
-                <li><a href="#0"><span>Барнаул</span></a></li>
-                <li><a href="#0"><span>Брянск</span></a></li>
-                <li><a href="#0"><span>Владивосток</span></a></li>
-                <li><a href="#0"><span>Волгоград</span></a></li>
-                <li><a href="#0"><span>Воронеж</span></a></li>
-                <li><a href="#0"><span>Екатеринбург</span></a></li>
-                <li><a href="#0"><span>Иваново</span></a></li>
-                <li><a href="#0"><span>Ижевск</span></a></li>
-                <li><a href="#0"><span>Иркутск</span></a></li>
-                <li><a href="#0"><span>Казань</span></a></li>
-                <li><a href="#0"><span>Калининград</span></a></li>
-                <li><a href="#0"><span>Кемерово</span></a></li>
-                <li><a href="#0"><span>Киров</span></a></li>
-                <li><a href="#0"><span>Краснодар</span></a></li>
-                <li><a href="#0"><span>Красноярск</span></a></li>
-                <li><a href="#0"><span>Курск</span></a></li>
-                <li><a href="#0"><span>Липецк</span></a></li>
-                <li><a href="#0"><span>Магнитогорск</span></a></li>
-                <li><a href="#0"><span>Махачкала</span></a></li>
-                <li><a href="#0"><span>Москва</span></a></li>
-                <li><a href="#0"><span>Набережные Челны</span></a></li>
-                <li><a href="#0"><span>Нижний Новгород</span></a></li>
-                <li><a href="#0"><span>Новокузнецк</span></a></li>
-                <li><a href="#0"><span>Новосибирск</span></a></li>
-                <li><a href="#0"><span>Омск</span></a></li>
-                <li><a href="#0"><span>Оренбург</span></a></li>
-                <li><a href="#0"><span>Пенза</span></a></li>
-                <li><a href="#0"><span>Перьм</span></a></li>
-                <li><a href="#0"><span>Ростов-на-Дону</span></a></li>
-                <li><a href="#0"><span>Рязань</span></a></li>
-                <li><a href="#0"><span>Самара</span></a></li>
-                <li><a href="#0"><span>Санкт-Петербург</span></a></li>
-                <li><a href="#0"><span>Саратов</span></a></li>
-                <li><a href="#0"><span>Севастополь</span></a></li>
-                <li><a href="#0"><span>Сочи</span></a></li>
-                <li><a href="#0"><span>Ставрополь</span></a></li>
-                <li><a href="#0"><span>Тверь</span></a></li>
-                <li><a href="#0"><span>Тольятти</span></a></li>
-                <li><a href="#0"><span>Томск</span></a></li>
-                <li><a href="#0"><span>Тула</span></a></li>
-                <li><a href="#0"><span>Тюмень</span></a></li>
-                <li><a href="#0"><span>Улан-Удэ</span></a></li>
-                <li><a href="#0"><span>Ульяновск</span></a></li>
-                <li><a href="#0"><span>Уфа</span></a></li>
-                <li><a href="#0"><span>Хабаровск</span></a></li>
-                <li><a href="#0"><span>Чебоксары</span></a></li>
-                <li><a href="#0"><span>Челябинск</span></a></li>
-                <li><a href="#0"><span>Ярославль</span></a></li>
-            </ul>
-        </b-modal>
         <div class="page-header__tels main-container hidden-mobile">
             <p>Контактные номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
             <p>Режим работы Пн-Сб: <b>с 10:00 до 20:00</b></p>
         </div>
         <div class="page-header__main main-container">
-            <button class="page-header__menu-btn hidden-desktop">Меню</button>
+            <button class="page-header__menu-btn hidden-desktop" v-b-modal.header-menu>Меню</button>
             <nuxt-link class="page-header__logo" to="/" exact>
                 <svg width="269" height="48"><use href="#svg-logo"/></svg>
                 Главная
             </nuxt-link>
-
             <form class="page-header__search" aria-label="Поиск">
                 <button class="btn-icon hidden-desktop" type="button" @click="headerSearch = !headerSearch">
                     <svg width="15" height="15"><use href="#svg-search"/></svg>
@@ -212,16 +146,354 @@
         </div>
         <div class="page-header__bottom hidden-mobile">
             <div class="main-container">
-                Категории
+                <div class="header-categories">
+                    <nuxt-link class="header-categories__button" to="#0">Оправы</nuxt-link>
+                    <div class="header-categories__popup">
+                        <div class="header-categories__col">
+                            <p>Категории</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Фотохромные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Бифокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Полимерные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Монофокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Поликарбонатные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Офисные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Стеклянные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Прогрессивные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Минеральные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Tribird (ударопрочный)</nuxt-link></li>
+                                <li><nuxt-link to="#0">Трифокальные</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все категории</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <div class="header-categories__col col2">
+                            <p>Бренды</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Selko</nuxt-link></li>
+                                <li><nuxt-link to="#0">Intra Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rupp+Hubrach</nuxt-link></li>
+                                <li><nuxt-link to="#0">Younger Optics</nuxt-link></li>
+                                <li><nuxt-link to="#0">Perifocal</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rodenstock</nuxt-link></li>
+
+                                <li><nuxt-link to="#0">Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Essilor</nuxt-link></li>
+                                <li><nuxt-link to="#0">HOYA</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все бренды</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <nuxt-link class="header-categories__img" to="#0">
+                            <img src="~assets/images/placeholders/girl-header.jpg" alt="">
+                            <p>Линзы для очков</p>
+                            <p>Самые лучшие мировы бренды</p>
+                        </nuxt-link>
+                    </div>
+                    <nuxt-link class="header-categories__button" to="#0">Линзы для очков</nuxt-link>
+                    <div class="header-categories__popup">
+                        <div class="header-categories__col">
+                            <p>Категории</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Фотохромные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Бифокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Полимерные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Монофокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Поликарбонатные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Офисные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Стеклянные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Прогрессивные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Минеральные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Tribird (ударопрочный)</nuxt-link></li>
+                                <li><nuxt-link to="#0">Трифокальные</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все категории</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <div class="header-categories__col col2">
+                            <p>Бренды</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Selko</nuxt-link></li>
+                                <li><nuxt-link to="#0">Intra Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rupp+Hubrach</nuxt-link></li>
+                                <li><nuxt-link to="#0">Younger Optics</nuxt-link></li>
+                                <li><nuxt-link to="#0">Perifocal</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rodenstock</nuxt-link></li>
+
+                                <li><nuxt-link to="#0">Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Essilor</nuxt-link></li>
+                                <li><nuxt-link to="#0">HOYA</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все бренды</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <nuxt-link class="header-categories__img" to="#0">
+                            <img src="~assets/images/placeholders/girl-header.jpg" alt="">
+                            <p>Линзы для очков</p>
+                            <p>Самые лучшие мировы бренды</p>
+                        </nuxt-link>
+                    </div>
+                    <nuxt-link class="header-categories__button" to="#0">Солнцезащитные очки</nuxt-link>
+                    <div class="header-categories__popup">
+                        <div class="header-categories__col">
+                            <p>Категории</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Фотохромные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Бифокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Полимерные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Монофокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Поликарбонатные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Офисные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Стеклянные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Прогрессивные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Минеральные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Tribird (ударопрочный)</nuxt-link></li>
+                                <li><nuxt-link to="#0">Трифокальные</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все категории</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <div class="header-categories__col col2">
+                            <p>Бренды</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Selko</nuxt-link></li>
+                                <li><nuxt-link to="#0">Intra Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rupp+Hubrach</nuxt-link></li>
+                                <li><nuxt-link to="#0">Younger Optics</nuxt-link></li>
+                                <li><nuxt-link to="#0">Perifocal</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rodenstock</nuxt-link></li>
+
+                                <li><nuxt-link to="#0">Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Essilor</nuxt-link></li>
+                                <li><nuxt-link to="#0">HOYA</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все бренды</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <nuxt-link class="header-categories__img" to="#0">
+                            <img src="~assets/images/placeholders/girl-header.jpg" alt="">
+                            <p>Линзы для очков</p>
+                            <p>Самые лучшие мировы бренды</p>
+                        </nuxt-link>
+                    </div>
+                    <nuxt-link class="header-categories__button" to="#0">Контактные линзы</nuxt-link>
+                    <div class="header-categories__popup">
+                        <div class="header-categories__col">
+                            <p>Категории</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Фотохромные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Бифокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Полимерные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Монофокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Поликарбонатные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Офисные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Стеклянные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Прогрессивные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Минеральные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Tribird (ударопрочный)</nuxt-link></li>
+                                <li><nuxt-link to="#0">Трифокальные</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все категории</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <div class="header-categories__col col2">
+                            <p>Бренды</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Selko</nuxt-link></li>
+                                <li><nuxt-link to="#0">Intra Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rupp+Hubrach</nuxt-link></li>
+                                <li><nuxt-link to="#0">Younger Optics</nuxt-link></li>
+                                <li><nuxt-link to="#0">Perifocal</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rodenstock</nuxt-link></li>
+
+                                <li><nuxt-link to="#0">Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Essilor</nuxt-link></li>
+                                <li><nuxt-link to="#0">HOYA</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все бренды</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <nuxt-link class="header-categories__img" to="#0">
+                            <img src="~assets/images/placeholders/girl-header.jpg" alt="">
+                            <p>Линзы для очков</p>
+                            <p>Самые лучшие мировы бренды</p>
+                        </nuxt-link>
+                    </div>
+                    <nuxt-link class="header-categories__button" to="#0">Аксессуары</nuxt-link>
+                    <div class="header-categories__popup">
+                        <div class="header-categories__col">
+                            <p>Категории</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Фотохромные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Бифокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Полимерные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Монофокальные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Поликарбонатные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Офисные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Стеклянные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Прогрессивные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Минеральные</nuxt-link></li>
+                                <li><nuxt-link to="#0">Tribird (ударопрочный)</nuxt-link></li>
+                                <li><nuxt-link to="#0">Трифокальные</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все категории</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <div class="header-categories__col col2">
+                            <p>Бренды</p>
+                            <ul>
+                                <li><nuxt-link to="#0">Selko</nuxt-link></li>
+                                <li><nuxt-link to="#0">Intra Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rupp+Hubrach</nuxt-link></li>
+                                <li><nuxt-link to="#0">Younger Optics</nuxt-link></li>
+                                <li><nuxt-link to="#0">Perifocal</nuxt-link></li>
+                                <li><nuxt-link to="#0">Rodenstock</nuxt-link></li>
+
+                                <li><nuxt-link to="#0">Mekk</nuxt-link></li>
+                                <li><nuxt-link to="#0">Essilor</nuxt-link></li>
+                                <li><nuxt-link to="#0">HOYA</nuxt-link></li>
+                                <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все бренды</nuxt-link></li>
+                            </ul>
+                        </div>
+                        <nuxt-link class="header-categories__img" to="#0">
+                            <img src="~assets/images/placeholders/girl-header.jpg" alt="">
+                            <p>Линзы для очков</p>
+                            <p>Самые лучшие мировы бренды</p>
+                        </nuxt-link>
+                    </div>
+                </div>
+                <div class="header-panel">
+                    <p>
+                        <nuxt-link to="#0">
+                            <span>Сравнение</span>
+                            <!-- <span>13</span> -->
+                        </nuxt-link>
+                    </p>
+                    <p>
+                        <nuxt-link to="#0">
+                            <span>Список желаемого</span>
+                            <!-- <span>26</span> -->
+                        </nuxt-link>
+                    </p>
+                    <p>
+                        <nuxt-link class="header-panel__login" to="#0"><span>Вход</span></nuxt-link>
+                    </p>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary">Primary</button>
+        
+        <b-modal class="delivery-region" id="delivery-region" style="color: black;" hide-header hide-footer>
+            <button class="modal-close hidden-mobile" @click="$bvModal.hide('delivery-region')"></button>
+            <button class="modal-back hidden-desktop" @click="$bvModal.hide('delivery-region'); $bvModal.show('header-menu')"></button>
+            <h3>Укажите ваш регион </h3>
+            <form>
+                <label class="textfield">
+                    <input type="text" placeholder="Москва">
+                    <button class="textfield__icon" type="button">
+                        <svg width="15" height="15"><use href="#svg-search"/></svg>
+                        Поиск
+                    </button>
+                </label>
+            </form>
+            <ul>
+                <li><a href="#0"><span>Астрахань</span></a></li>
+                <li><a href="#0"><span>Балашиха</span></a></li>
+                <li><a href="#0"><span>Барнаул</span></a></li>
+                <li><a href="#0"><span>Брянск</span></a></li>
+                <li><a href="#0"><span>Владивосток</span></a></li>
+                <li><a href="#0"><span>Волгоград</span></a></li>
+                <li><a href="#0"><span>Воронеж</span></a></li>
+                <li><a href="#0"><span>Екатеринбург</span></a></li>
+                <li><a href="#0"><span>Иваново</span></a></li>
+                <li><a href="#0"><span>Ижевск</span></a></li>
+                <li><a href="#0"><span>Иркутск</span></a></li>
+                <li><a href="#0"><span>Казань</span></a></li>
+                <li><a href="#0"><span>Калининград</span></a></li>
+                <li><a href="#0"><span>Кемерово</span></a></li>
+                <li><a href="#0"><span>Киров</span></a></li>
+                <li><a href="#0"><span>Краснодар</span></a></li>
+                <li><a href="#0"><span>Красноярск</span></a></li>
+                <li><a href="#0"><span>Курск</span></a></li>
+                <li><a href="#0"><span>Липецк</span></a></li>
+                <li><a href="#0"><span>Магнитогорск</span></a></li>
+                <li><a href="#0"><span>Махачкала</span></a></li>
+                <li><a href="#0"><span>Москва</span></a></li>
+                <li><a href="#0"><span>Набережные Челны</span></a></li>
+                <li><a href="#0"><span>Нижний Новгород</span></a></li>
+                <li><a href="#0"><span>Новокузнецк</span></a></li>
+                <li><a href="#0"><span>Новосибирск</span></a></li>
+                <li><a href="#0"><span>Омск</span></a></li>
+                <li><a href="#0"><span>Оренбург</span></a></li>
+                <li><a href="#0"><span>Пенза</span></a></li>
+                <li><a href="#0"><span>Перьм</span></a></li>
+                <li><a href="#0"><span>Ростов-на-Дону</span></a></li>
+                <li><a href="#0"><span>Рязань</span></a></li>
+                <li><a href="#0"><span>Самара</span></a></li>
+                <li><a href="#0"><span>Санкт-Петербург</span></a></li>
+                <li><a href="#0"><span>Саратов</span></a></li>
+                <li><a href="#0"><span>Севастополь</span></a></li>
+                <li><a href="#0"><span>Сочи</span></a></li>
+                <li><a href="#0"><span>Ставрополь</span></a></li>
+                <li><a href="#0"><span>Тверь</span></a></li>
+                <li><a href="#0"><span>Тольятти</span></a></li>
+                <li><a href="#0"><span>Томск</span></a></li>
+                <li><a href="#0"><span>Тула</span></a></li>
+                <li><a href="#0"><span>Тюмень</span></a></li>
+                <li><a href="#0"><span>Улан-Удэ</span></a></li>
+                <li><a href="#0"><span>Ульяновск</span></a></li>
+                <li><a href="#0"><span>Уфа</span></a></li>
+                <li><a href="#0"><span>Хабаровск</span></a></li>
+                <li><a href="#0"><span>Чебоксары</span></a></li>
+                <li><a href="#0"><span>Челябинск</span></a></li>
+                <li><a href="#0"><span>Ярославль</span></a></li>
+            </ul>
+        </b-modal>
+        <b-modal class="header-menu hidden-desktop" id="header-menu" hide-header hide-footer>
+            <div class="header-menu__top">
+                <nuxt-link class="header-menu__logo" to="/" exact>
+                    <svg width="163" height="29"><use href="#svg-logo"/></svg>
+                    Главная
+                </nuxt-link>
+                <p class="header-menu__delivery-btn" @click="$bvModal.hide('header-menu'); $bvModal.show('delivery-region')">Ваш регоин доставки: <span>Санкт-Петербург</span></p>
+            </div>
+            <button class="header-menu__auth">Вход / Регистрация</button>
+            <button class="header-menu__btn" @click="$bvModal.hide('header-menu'); $bvModal.show('header-category')">Оправы</button>
+            <button class="header-menu__btn" @click="$bvModal.hide('header-menu'); $bvModal.show('header-category')">Линзы для очков</button>
+            <button class="header-menu__btn" @click="$bvModal.hide('header-menu'); $bvModal.show('header-category')">Солнцезащитные очки</button>
+            <button class="header-menu__btn" @click="$bvModal.hide('header-menu'); $bvModal.show('header-category')">Контактные линзы</button>
+            <button class="header-menu__btn" @click="$bvModal.hide('header-menu'); $bvModal.show('header-category')">Пуленепробиваемые очки великого Арнольда Шварценеггера</button>
+            <button class="header-menu__btn" @click="$bvModal.hide('header-menu'); $bvModal.show('header-category')">Аксессуары</button>
+        </b-modal>
+
+        <b-modal class="header-category hidden-desktop" id="header-category" hide-header hide-footer>
+            <div class="header-category__top">
+                <button class="modal-back black hidden-desktop" @click="$bvModal.hide('header-category'); $bvModal.show('header-menu')"></button>
+                <p>
+                    <span :class="{'active': showCategories}" @click="showCategories = !showCategories">Категории</span>
+                    /
+                    <span :class="{'active': !showCategories}" @click="showCategories = !showCategories">Бренды</span>
+                </p>
+            </div>
+            <ul class="header-category__list" v-if="showCategories">
+                <li><nuxt-link to="#0">Фотохромные</nuxt-link></li>
+                <li><nuxt-link to="#0">Полимерные</nuxt-link></li>
+                <li><nuxt-link to="#0">Поликарбонатные</nuxt-link></li>
+                <li><nuxt-link to="#0">Стеклянные</nuxt-link></li>
+                <li><nuxt-link to="#0">Минеральные</nuxt-link></li>
+                <li><nuxt-link to="#0">Трифокальные</nuxt-link></li>
+                <li><nuxt-link to="#0">Бифокальные</nuxt-link></li>
+                <li><nuxt-link to="#0">Монофокальные</nuxt-link></li>
+                <li><nuxt-link to="#0">Офисные</nuxt-link></li>
+                <li><nuxt-link to="#0">Прогрессивные</nuxt-link></li>
+                <li><nuxt-link to="#0">Tribrid (ударопрочный)</nuxt-link></li>
+                <li class="header-category__all"><nuxt-link to="#0">... смотреть все категории</nuxt-link></li>
+            </ul>
+            <ul class="header-category__list" v-if="!showCategories">
+                <li><nuxt-link to="#0">Selko</nuxt-link></li>
+                <li><nuxt-link to="#0">Rupp+Hybrach</nuxt-link></li>
+                <li><nuxt-link to="#0">Perifocal</nuxt-link></li>
+                <li><nuxt-link to="#0">Mekk</nuxt-link></li>
+                <li><nuxt-link to="#0">Essilor</nuxt-link></li>
+                <li><nuxt-link to="#0">HOYA</nuxt-link></li>
+                <li><nuxt-link to="#0">Intra Mekk</nuxt-link></li>
+                <li><nuxt-link to="#0">Younger Optics</nuxt-link></li>
+                <li><nuxt-link to="#0">Rodenstock</nuxt-link></li>
+                <li class="header-category__all"><nuxt-link to="#0">... смотреть все бренды</nuxt-link></li>
+            </ul>
+        </b-modal>
     </header>
     <main>
-        <p>12345</p>
-        <p>12345</p>
-        <p>12345</p>
-
         <!-- <log-out/>
             <login-form/>
             <basket/>
@@ -276,6 +548,7 @@ export default {
             headerSearch: false,
             callRequestOk: false,
             basketPopup: false,
+            showCategories: true
         }
     },
     components: {

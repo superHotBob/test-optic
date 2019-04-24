@@ -1,0 +1,50 @@
+.header-category {
+    .modal-dialog {
+        width: 260px;
+        margin: 0;
+    }
+    .modal-body {
+        min-height: 100vh;
+        padding: 5px;
+    }
+    ul {
+        margin-top: 25px;
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 16px;
+    }
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+    &__all {
+        a {
+            color: $grey;
+        }
+    }
+    &__top {
+        min-height: 111px;
+        padding-top: 25px;
+        padding-right: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $grey;
+        border-bottom: 1px solid #d9d9d9;
+        transition: color 150ms;
+        p {
+            margin: 0;
+        }
+        span {
+            &.active {
+                color: #000;
+            }
+        }
+    }
+    .modal-back {
+        top: 30px;
+        right: 12px;
+    }
+}

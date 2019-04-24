@@ -16,7 +16,10 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'}
-    ]
+    ],
+    script: [
+      { src: 'https://vk.com/js/api/openapi.js?160' }
+    ],
   },
   /*
   ** Customize the progress bar color

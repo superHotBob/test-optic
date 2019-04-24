@@ -24,5 +24,8 @@ export default {
         let user = await this.$axios.get(getters.getEndpointLogout);
         commit('setUser', user);
         return user;
+    },
+    socservices ({commit}, payload) {
+        commit('setUser', payload);
     }
 }

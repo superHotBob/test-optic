@@ -1,0 +1,66 @@
+.basket {
+    position: relative;
+    &__button {
+        position: relative;
+        display: flex;
+        cursor: pointer;
+        p {
+            position: relative;
+            align-self: flex-end;
+            margin: 0;
+            padding-right: 15px;
+            margin-left: 10px;
+            color: #4a4a4a;
+            &::after {
+                content: "";
+                position: absolute; 
+                top: calc(50% - 2px);
+                right: 0;
+                transform: translateY(-50%) rotate(45deg);
+                width: 7px;
+                height: 7px;
+                border-right: 1px solid #000;
+                border-bottom: 1px solid #000;
+            }
+            b {
+                font-weight: 700;
+            }
+        }
+        &.active {
+            p {
+                &::after {
+                    top: calc(50% + 2px);
+                    transform: translateY(-50%) rotate(225deg);
+                }
+            }
+        }
+    }
+    &__popup {
+        position: absolute;
+        bottom: -20px;
+        right: 0;
+        transform: translateY(100%);
+        display: none;
+        width: 400px;
+        background-color: #fff;
+        border: 1px solid black;
+        z-index: 5;
+        &.active {
+            display: block;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .basket {
+        &__button {
+            p {
+                padding-right: 0;
+                &::after {
+                    display: none;
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,102 @@
+.textfield {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 10px;
+    &.half {
+        width: 48%;
+    }
+    &.quarter {
+        width: 23%;
+    }
+    &__icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 7px;
+        width: 15px;
+        height: 15px;
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        pointer-events: none;
+        svg {
+            fill: $grey;
+            transition: fill 150ms;
+        }
+    }
+    span {
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #4d4d4d;
+    }
+    input,
+    textarea {
+        height: 30px;
+        margin-top: auto;
+        padding-left: 10px;
+        padding-right: 18px;
+        color: $black;
+        background-color: #fff;
+        border: none;
+        outline: none;
+        resize: none;
+        border: 1px solid #d9d9d9;
+        transition: border-color 150ms;
+        &:focus {
+            border-color: #000;
+            + .textfield__icon {
+                svg {
+                    fill: #000;
+                }
+            }
+        }
+        &::placeholder {
+            color: $grey;
+        }
+    }
+    &.light {
+        .textfield__icon {
+            right: 0;
+        }
+        input,
+        textarea {
+            padding: 0;
+            padding-bottom: 4px;
+            padding-right: 18px;
+            border: none;
+            border-bottom: 1px solid #d9d9d9;
+            &:focus {
+                border-color: #000;
+            }
+        }
+    }
+    &.error {
+        input,
+        textarea {
+            border-color: #f00;
+        }
+        span {
+            color: #f00;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .textfield {
+        font-size: 14px;
+        span {
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        input,
+        textarea {
+            height: 30px;
+        }
+    }
+}

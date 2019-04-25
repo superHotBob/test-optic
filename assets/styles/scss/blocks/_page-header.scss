@@ -1,4 +1,5 @@
 .page-header {
+
     &__top {
         color: #fff;
         background-color: #000;
@@ -26,21 +27,22 @@
         margin-left: auto;
         display: flex;
         flex-wrap: wrap;
+        z-index: 1;
     }
     &__features-toggle {
         position: relative;
         display: none;
         align-self: center;
-        margin-left: 15px;
+        flex-shrink: 0;
         width: 24px;
         height: 14px;
+        margin-left: 15px;
         font-size: 0;
+        background: transparent;
         border: none;
-        z-index: 9;
-        background: 0 0;
+        // z-index: 9;
         cursor: pointer;
         outline: none;
-        flex-shrink: 0;
         &::before {
             content: '';
             position: absolute;
@@ -55,11 +57,99 @@
     }
     &__stat-counter {
         align-self: center;
+        flex-shrink: 0;
         width: 89px;
         height: 32px;
         margin-left: 20px;
         background: url('~assets/images/placeholders/yandex-rating-5.jpg') no-repeat center;
+    }
+    &__tels {
+        padding-top: 25px;
+        padding-bottom: 10px;
+        text-align: right;
+        p {
+            display: inline-block;
+            margin: 0;
+            font-size: 16px;
+            color: $grey;
+            &:not(:first-of-type) {
+                margin-left: 40px;
+            }
+        }
+        b {
+            color: #000;
+        }
+    }
+    &__main {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #fff;
+    }
+    .btn-icon {
+        align-self: center;
+    }
+    &__menu-btn {
+        position: relative;
+        align-self: center;
         flex-shrink: 0;
+        width: 21px;
+        height: 18px;
+        font-size: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #000;
+            box-shadow: 0 9px 0 0 #000, 0 17px 0 0 #000;
+            border-radius: 3px;
+        }
+    }
+    &__logo {
+        flex-shrink: 0;
+        margin-right: 15px;
+        font-size: 0;
+    }
+    &__search {
+        flex-shrink: 0;
+        margin: 0 auto;
+        width: 370px;
+    }
+    &__call-request {
+        flex-shrink: 0;
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+    &__basket {
+        position: relative;
+        flex-shrink: 0;
+        margin: 0;
+    }
+    &__bottom {
+        background-color: #f2f2f2;
+        border-top: 1px solid #dbdbdb;
+        border-bottom: 1px solid #dbdbdb;
+        .main-container {
+            position: relative;
+            display: flex;
+            min-height: 56px;
+            padding-left: 0;
+        }
+        .header-categories {
+            margin-right: 20px;
+        }
+        .header-panel {
+            margin-left: auto;
+        }
     }
 }
 
@@ -123,6 +213,155 @@
         }
         &__features-toggle {
             display: block;
+        }
+    }
+}
+@media (max-width: 1150px) {
+    .page-header {
+        .header-categories {
+            &__button {
+                padding: 0 10px;
+                font-size: 12px;
+            }
+        }
+        .header-panel {
+            font-size: 13px;
+            p {
+                &:not(:first-of-type) {
+                    margin-left: 10px;
+                    &::before {
+                        left: -12px;
+                    }
+                }
+                &:not(:last-of-type) {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .page-header {
+        &__search {
+            width: 300px;
+        }
+    }
+}
+@media (max-width: 900px) {
+    .page-header {
+        &__logo {
+            svg {
+                width: 200px;
+                height: 40px;
+            }
+        }
+        &__search {
+            flex-shrink: 1;
+        }
+        .header-categories {
+            &__button {
+                padding: 0 5px;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .page-header {
+        &__main {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding-top: 8px;
+            padding-bottom: 9px;
+        }
+        &__logo {
+            margin-top: 5px;
+            margin-left: 22px;
+            svg {
+                width: 127px;
+                height: 23px;
+            }
+        }
+        &__search {
+            width: auto;
+            margin-right: 0;
+            line-height: 0;
+            .btn-icon {
+                width: 24px;
+                height: 24px;
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            .textfield {
+                position: absolute;
+                display: none;
+                width: 100%;
+                margin: 0;
+                bottom: 0;
+                left: 0;
+                transform: translateY(100%);
+                line-height: normal;
+                &.active {
+                    display: flex;
+                }
+                input {
+                    height: 40px;
+                    border-top: 1px solid #d9d9d9;
+                }
+                &__icon {
+                    width: 20px;
+                    height: 20px;
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                &.light {
+                    .textfield__icon {
+                        right: 5px;
+                    }
+                }
+            }
+        }
+        &__call-request {
+            width: 24px;
+            height: 24px;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        &__basket {
+            .btn-icon {
+                width: 24px;
+                height: 24px;
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 450px) {
+    .page-header {
+        &__stat-counter {
+            display: none;
+        }
+        &__features-toggle {
+            margin-left: auto;
+        }
+    }
+}
+@media (max-width: 350px) {
+    .page-header {
+        &__region {
+            p {
+                width: 270px;
+            }
         }
     }
 }

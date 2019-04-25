@@ -45,15 +45,21 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
-    '~/modules/routers'
+    '~/modules/routers',
+    'bootstrap-vue/nuxt'
   ],
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
+  },
   axios: {
     proxy: true,
     baseURL: 'http://localhost:3000/',
     credentials: true
   },
   proxy: {
-    '/api/': 'http://14.esobolev.ru/',
+    // '/api/': 'http://14.esobolev.ru/',
+    '/api/': 'http://home-optic.proj/',
   },
   cache: false,
   css: [

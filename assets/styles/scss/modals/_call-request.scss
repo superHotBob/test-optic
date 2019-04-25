@@ -1,0 +1,132 @@
+.call-request {
+    .modal-dialog {
+        max-width: 970px;
+    }
+    .modal-wrap {
+        display: flex;
+        padding: 60px 0;
+        min-height: 330px;
+    }
+    h3 {
+        margin: 30px 0;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+    label {
+        margin-bottom: 13px;
+    }
+    &__text {
+        width: 52%;
+        text-align: center;
+    }
+    &__form {
+        width: 48%;
+        max-width: 370px;
+        padding-right: 20px;
+        input {
+            height: 40px;
+            background-color: $modal-bg
+        }
+    }
+    &__submit {
+        width: 170px;
+        margin-top: 7px;
+        font-weight: 700;
+    }
+    &__ok {
+        margin: auto;
+        text-align: center;
+        p {
+            &:first-of-type {
+                margin-bottom: 30px;
+                font-size: 22px;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+            &:not(:first-of-type) {
+                font-size: 13px;
+                line-height: 20px;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .call-request {
+        .modal-dialog {
+            margin: 0;
+        }
+        .modal-body {
+            padding: 0;
+        }
+        .modal-wrap {
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 60px 30px;
+            border: none;
+        }
+        h3 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        p {
+            font-size: 14px;
+        }
+        label {
+            margin-bottom: 9px;
+        }
+        &__text,
+        &__form {
+            width: auto;
+        }
+        &__form {
+            max-width: unset;
+            margin-top: 25px;
+            padding: 0 60px;
+            input {
+                height: 30px;
+            }
+        }
+        &__submit {
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        &__ok {
+            margin-top: 50px;
+            p {
+                &:first-of-type {
+                    margin-bottom: 30px;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #000;
+                }
+                &:not(:first-of-type) {
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #4a4a4a;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 500px) {
+    .call-request {
+        &__form {
+            padding: 0;
+        }
+        &__submit {
+            width: 100%;
+        }
+    }
+}

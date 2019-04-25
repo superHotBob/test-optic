@@ -1,6 +1,7 @@
 .basket {
     position: relative;
-    &__button {
+    &__button,
+    &__top {
         position: relative;
         display: flex;
         cursor: pointer;
@@ -35,6 +36,12 @@
             }
         }
     }
+    &__top {
+        flex-direction: column;
+        p {
+            align-self: flex-start
+        }
+    }
     &__popup {
         position: absolute;
         bottom: -20px;
@@ -53,14 +60,14 @@
 
 @media (max-width: 768px) {
     .basket {
-        &__button {
+        &__button,
+        &__top {
             p {
                 padding-right: 0;
                 &::after {
                     display: none;
                 }
             }
-
         }
     }
 }

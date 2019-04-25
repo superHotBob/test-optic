@@ -120,9 +120,38 @@
         font-size: 0;
     }
     &__search {
+        position: relative;
         flex-shrink: 0;
         margin: 0 auto;
         width: 370px;
+    }
+    &__search-list {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: normal;
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        z-index: 5;
+        a {
+            display: block;
+            width: 100%;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #4a4a4a;
+        }
+        span {
+            color: #cf0000;
+        }
+    }
+    &__all-results {
+        a {
+            color: $grey;
+        }
     }
     &__call-request {
         flex-shrink: 0;
@@ -149,6 +178,19 @@
         }
         .header-panel {
             margin-left: auto;
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .page-header {
+        &__search-list {
+            a {
+                &:hover,
+                &:focus {
+                    background-color: #f7f7f7;
+                }
+            }
         }
     }
 }
@@ -284,6 +326,7 @@
             }
         }
         &__search {
+            position: static;
             width: auto;
             margin-right: 0;
             line-height: 0;
@@ -297,18 +340,19 @@
             }
             .textfield {
                 position: absolute;
-                display: none;
-                width: 100%;
-                margin: 0;
                 bottom: 0;
                 left: 0;
                 transform: translateY(100%);
+                display: none;
+                width: 100%;
+                margin: 0;
                 line-height: normal;
                 &.active {
                     display: flex;
                 }
                 input {
                     height: 40px;
+                    padding-left: 7px;
                     border-top: 1px solid #d9d9d9;
                 }
                 &__icon {
@@ -325,6 +369,11 @@
                     }
                 }
             }
+        }
+        &__search-list {
+            top: 80px;
+            border-right: none;
+            border-left: none;
         }
         &__call-request {
             width: 24px;

@@ -3,7 +3,7 @@
     <header class="page-header">
         <div class="page-header__top hidden-mobile">
             <div class="main-container">
-                <div class="page-header__region" @click="regionModal = !regionModal">
+                <div class="page-header__region">
                     <p v-b-modal.delivery-region>Ваш регион доставки: Санкт-Петербург</p>
                 </div>
                 <div class="page-header__features" :class="{'hidden': featuresHidden}">
@@ -62,10 +62,25 @@
                         Поиск
                     </button>
                 </label>
+                <ul class="page-header__search-list">
+                    <li>
+                        <nuxt-link to="#0"><span>Ли</span>нза Essilor 1,5 Anti-Fatique Orma Crizal Alize + UV</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="#0">Установка <span>ли</span>нз "Безободковая"</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link to="#0">Установка <span>ли</span>нз "Ободковая"</nuxt-link>
+                    </li>
+                    <li class="page-header__all-results">
+                        <nuxt-link to="#0">Все результаты</nuxt-link>
+                    </li>
+                </ul>
             </form>
 
+
             <button class="page-header__call-request btn-icon" v-b-modal.call-request>
-                <svg width="25" height="25" fill="#fff" stroke="#000"><use href="#svg-phone" stroke-width="25px"/></svg>
+                <svg width="25" height="25" fill="#000"><use href="#svg-phone"/></svg>
                 Обратный звонок
             </button>
             <b-modal class="call-request" id="call-request" hide-header hide-footer>
@@ -101,46 +116,56 @@
                     </button>
                     <p class="hidden-mobile">5 шт. - <b>10 589.45 руб.</b></p>
                 </div>
+
                 <div class="basket__popup" :class="{'active': basketPopup}" ref="dropdownMenu">
-                    <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
-                        <div class="basket__image">
-                            <img src="" alt="">
-                            <span>Sale</span>
-                            <span>New</span>
-                        </div>
-                        <div class="basket__props">
-                            <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
-                            <div class="basket__prop">
-                                Ширина линзы
-                                <span class="basket__square">59</span>
+                    <div class="hidden-mobile">
+                        <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
+                            <div class="basket__image">
+                                <img src="" alt="">
+                                <span>Sale</span>
+                                <span>New</span>
                             </div>
-                            <div class="basket__prop">
-                                Диагональ линзы
-                                <span class="basket__square">62</span>
-                            </div>
-                            <div class="basket__prop">
-                                Высота линзы
-                                <span class="basket__square">37</span>
-                            </div>
-                            <div class="basket__prop">
-                                Ширина наносника
-                                <span class="basket__square">17</span>
-                            </div>
-                            <div class="basket__prop">
-                                Длина дужки
-                                <span class="basket__square">145</span>
-                            </div>
-                            <div class="basket__prop">
-                                Цвет
-                                <span class="basket__square"><img src="#" alt=""></span>
-                            </div>
-                            <div class="basket__prop">
-                                Размер
-                                <span class="basket__square">59/37/17/145</span>
+                            <div class="basket__props">
+                                <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
+                                <div class="basket__prop">
+                                    Ширина линзы
+                                    <span class="basket__square">59</span>
+                                </div>
+                                <div class="basket__prop">
+                                    Диагональ линзы
+                                    <span class="basket__square">62</span>
+                                </div>
+                                <div class="basket__prop">
+                                    Высота линзы
+                                    <span class="basket__square">37</span>
+                                </div>
+                                <div class="basket__prop">
+                                    Ширина наносника
+                                    <span class="basket__square">17</span>
+                                </div>
+                                <div class="basket__prop">
+                                    Длина дужки
+                                    <span class="basket__square">145</span>
+                                </div>
+                                <div class="basket__prop">
+                                    Цвет
+                                    <span class="basket__square"><img src="#" alt=""></span>
+                                </div>
+                                <div class="basket__prop">
+                                    Размер
+                                    <span class="basket__square">59/37/17/145</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="basket__footer"></div>
+
+                    <div class="hidden-desktop">
+                        <div class="basket__top">
+                            <p>В вашей корзине:</p>
+                            <p>5 шт. - <b>10 589.45 руб.</b></p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -251,28 +276,20 @@
             version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 451 451" xml:space="preserve">
             <path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3 s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4 C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3 s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"/>
         </svg>
-        <svg id="svg-phone" 
-            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-15 -15 378.077 378.077" xml:space="preserve">
-            <path d="M340.273,275.083l-53.755-53.761c-10.707-10.664-28.438-10.34-39.518,0.744l-27.082,27.076 c-1.711-0.943-3.482-1.928-5.344-2.973c-17.102-9.476-40.509-22.464-65.14-47.113c-24.704-24.701-37.704-48.144-47.209-65.257 c-1.003-1.813-1.964-3.561-2.913-5.221l18.176-18.149l8.936-8.947c11.097-11.1,11.403-28.826,0.721-39.521L73.39,8.194 C62.708-2.486,44.969-2.162,33.872,8.938l-15.15,15.237l0.414,0.411c-5.08,6.482-9.325,13.958-12.484,22.02 C3.74,54.28,1.927,61.603,1.098,68.941C-6,127.785,20.89,181.564,93.866,254.541c100.875,100.868,182.167,93.248,185.674,92.876 c7.638-0.913,14.958-2.738,22.397-5.627c7.992-3.122,15.463-7.361,21.941-12.43l0.331,0.294l15.348-15.029 C350.631,303.527,350.95,285.795,340.273,275.083z"/>
+        <svg id="svg-phone"
+            version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="187 -161.8 448.8 448.8" xml:space="preserve">
+            <path d="M561.5,106.7c-9.7-10.1-21.4-15.5-33.8-15.5c-12.3,0-24.1,5.3-34.2,15.4l-31.6,31.5c-2.6-1.4-5.2-2.7-7.7-4 c-3.6-1.8-7-3.5-9.9-5.3c-29.6-18.8-56.5-43.3-82.3-75c-12.5-15.8-20.9-29.1-27-42.6c8.2-7.5,15.8-15.3,23.2-22.8 c2.8-2.8,5.6-5.7,8.4-8.5c21-21,21-48.2,0-69.2l-27.3-27.3c-3.1-3.1-6.3-6.3-9.3-9.5c-6-6.2-12.3-12.6-18.8-18.6 c-9.7-9.6-21.3-14.7-33.5-14.7c-12.2,0-24,5.1-34,14.7c-0.1,0.1-0.1,0.1-0.2,0.2l-34,34.3c-12.8,12.8-20.1,28.4-21.7,46.5 c-2.4,29.2,6.2,56.4,12.8,74.2c16.2,43.7,40.4,84.2,76.5,127.6c43.8,52.3,96.5,93.6,156.7,122.7c23,10.9,53.7,23.8,88,26 c2.1,0.1,4.3,0.2,6.3,0.2c23.1,0,42.5-8.3,57.7-24.8c0.1-0.2,0.3-0.3,0.4-0.5c5.2-6.3,11.2-12,17.5-18.1c4.3-4.1,8.7-8.4,13-12.9 c9.9-10.3,15.1-22.3,15.1-34.6c0-12.4-5.3-24.3-15.4-34.3L561.5,106.7z M597.3,212C597.2,212,597.2,212.1,597.3,212 c-3.9,4.2-7.9,8-12.2,12.2c-6.5,6.2-13.1,12.7-19.3,20c-10.1,10.8-22,15.9-37.6,15.9c-1.5,0-3.1,0-4.6-0.1 c-29.7-1.9-57.3-13.5-78-23.4C389,209.2,339.3,170.3,298,121c-34.1-41.1-56.9-79.1-72-119.9c-9.3-24.9-12.7-44.3-11.2-62.6 c1-11.7,5.5-21.4,13.8-29.7l34.1-34.1c4.9-4.6,10.1-7.1,15.2-7.1c6.3,0,11.4,3.8,14.6,7c0.1,0.1,0.2,0.2,0.3,0.3 c6.1,5.7,11.9,11.6,18,17.9c3.1,3.2,6.3,6.4,9.5,9.7l27.3,27.3c10.6,10.6,10.6,20.4,0,31c-2.9,2.9-5.7,5.8-8.6,8.6 C330.6-22,322.6-14,313.9-6.2c-0.2,0.2-0.4,0.3-0.5,0.5c-8.6,8.6-7,17-5.2,22.7c0.1,0.3,0.2,0.6,0.3,0.9 c7.1,17.2,17.1,33.4,32.3,52.7l0.1,0.1c27.6,34,56.7,60.5,88.8,80.8c4.1,2.6,8.3,4.7,12.3,6.7c3.6,1.8,7,3.5,9.9,5.3 c0.4,0.2,0.8,0.5,1.2,0.7c3.4,1.7,6.6,2.5,9.9,2.5c8.3,0,13.5-5.2,15.2-6.9l34.2-34.2c3.4-3.4,8.8-7.5,15.1-7.5 c6.2,0,11.3,3.9,14.4,7.3c0.1,0.1,0.1,0.1,0.2,0.2l55.1,55.1C607.5,190.9,607.5,201.4,597.3,212z"/>
         </svg>
-
         <svg id="svg-bag" 
             version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-66 67.5 33 34" xml:space="preserve">
             <path d="M-37.7,101h-23.6c-0.1, 0-0.3-0.1-0.4-0.2c-0.1-0.1-0.1-0.2-0.1-0.4l1.1-23.6c0-0.3,0.2-0.5,0.5-0.5h21.4 c0.3,0,0.5,0.2,0.5,0.5l1.1,23.6c0,0.1,0,0.3-0.1,0.4C-37.4,100.9-37.6,101-37.7,101z M-60.8, 100h22.6l-1.1-22.6h-20.4L-60.8,100z"/>
             <path d="M-44.6,77v-3.1c0-2.7-2.2-4.9-4.9-4.9s-4.9,2.2-4.9, 4.9v2.8h-1v-2.8c0-3.3,2.6-5.9,5.9-5.9s5.9,2.6,5.9,5.9V77 C-43.6,77.3-44.6,77.3-44.6,77z"/>
         </svg>
-        <!-- <svg id="svg-bag" 
-            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" viewBox="0 0 19.256 25.249">
-            <path d="M18.008 5.242h-2.751c-.009-6.989-10.99-6.989-10.999 0H1.25L0 25.249h19.256L18.008 5.242zm-4.751 0H6.258c.009-4.444 6.99-4.444 6.999 0zm-11 18.008l1-16h13l1 16h-15z"></path>
-        </svg> -->
-
-
     </div>
 </div>
 </template>
 
 <script>
-
 
 import LogOut from '~/components/user/ButtonLogout.vue'
 import LoginForm from '~/components/user/LoginForm.vue'
@@ -322,10 +339,5 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-}
-.modal-region {
-    padding: 20px;
-    color: #000;
-    background-color: #fff;
 }
 </style>

@@ -4,5 +4,8 @@ export default {
     },
     getSections: (state) => {
         return state.sections.SECTIONS;
-    }
+    },
+    getSectionsIndex: (state) => (index) => {
+      return state.sections.SECTIONS[index];
+  }
 }

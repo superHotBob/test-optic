@@ -1,16 +1,16 @@
 <template>
     <div>
-        <item v-bind:item="element"/>
+        <detail v-bind:item="element"/>
     </div>
 </template>
 
 <script>
 
-import item from '~/components/catalog/element/element.vue'
+import Detail from '~/components/catalog/element/Element.vue'
 
 export default {
     components: {
-        item
+        Detail
     },
     asyncData({ params, $axios, error }) {
         return $axios.get(`/api/v1/catalog/detail/${params.element}/`).then((response) => {

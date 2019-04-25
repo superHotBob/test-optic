@@ -8,5 +8,5 @@ export default () => ({
         logout:'/api/v1/user/?logout=yes'
     },
     logged: false,
-    user: {}
+    user: {},
 })

@@ -35,12 +35,12 @@ export function createRouter () {
                 component: index,
                 children: [
                     {
-                        path: ':pagen?',
+                        path: ':pagen(\\d+)?',
                         name: 'section',
                         component: section,   
                     },
                     {
-                        path: 'detail/:element',
+                        path: ':element',
                         name: 'element',
                         component: element,
                     },

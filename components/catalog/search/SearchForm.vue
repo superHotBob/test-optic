@@ -4,7 +4,7 @@
             <svg width="15" height="15"><use href="#svg-search"/></svg>
             Поиск
         </button>
-        <label @click="showSearch = true" ref="input" class="textfield light" :class="{'active': headerSearch}">
+        <label @fokus="showSearch = true" ref="input" class="textfield light" :class="{'active': headerSearch}">
             <input @input="search($event.target.value)" type="text" placeholder="Поиск...">
             <button class="textfield__icon" type="button">
                 <svg width="15" height="15"><use href="#svg-search"/></svg>
@@ -42,10 +42,10 @@ export default {
             }, 500);
        },
        async load(search) {
-            let response = await this.$axios.$get(`/api/v1/catalog/?count=5&q=${search}`);
+            let response = await this.$axios.$get(`/api/v1/catalog/?count=6&q=${search}`);
             this.items = response.section.items;
             this.showSearch = true;
-            console.log(this.items);
+            console.log(response);
        },
        documentClick(e) {
             let el = this.$refs.result,

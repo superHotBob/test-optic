@@ -3,7 +3,7 @@
     <header class="page-header">
         <div class="page-header__top hidden-mobile">
             <div class="main-container">
-                <div class="page-header__region" @click="regionModal = !regionModal">
+                <div class="page-header__region">
                     <p v-b-modal.delivery-region>Ваш регион доставки: Санкт-Петербург</p>
                 </div>
                 <div class="page-header__features" :class="{'hidden': featuresHidden}">
@@ -50,19 +50,8 @@
                 <svg width="269" height="48"><use href="#svg-logo"/></svg>
                 Главная
             </nuxt-link>
-            <form class="page-header__search" aria-label="Поиск">
-                <button class="btn-icon hidden-desktop" type="button" @click="headerSearch = !headerSearch">
-                    <svg width="15" height="15"><use href="#svg-search"/></svg>
-                    Поиск
-                </button>
-                <label class="textfield light" :class="{'active': headerSearch}">
-                    <input type="text" placeholder="Поиск...">
-                    <button class="textfield__icon" type="button">
-                        <svg width="15" height="15"><use href="#svg-search"/></svg>
-                        Поиск
-                    </button>
-                </label>
-            </form>
+            
+            <search-form/>
 
             <button class="page-header__call-request btn-icon" v-b-modal.call-request>
                 <svg width="25" height="25" fill="#fff" stroke="#000"><use href="#svg-phone" stroke-width="25px"/></svg>
@@ -272,13 +261,13 @@ import LogOut from '~/components/user/ButtonLogout.vue'
 import LoginForm from '~/components/user/LoginForm.vue'
 import Sections from '~/components/catalog/Sections.vue'
 import MobileMenu from '~/components/catalog/MobileMenu.vue'
+import SearchForm from '~/components/catalog/search/SearchForm.vue'
 import { mapGetters } from 'vuex'
 
 export default {
     data() {
         return {
             featuresHidden: true,
-            headerSearch: false,
             callRequestOk: false,
             basketPopup: false,
         }
@@ -286,6 +275,7 @@ export default {
     components: {
         Sections,
         MobileMenu,
+        SearchForm,
         LoginForm,
         LogOut,
     },

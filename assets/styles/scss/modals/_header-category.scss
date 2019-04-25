@@ -1,4 +1,5 @@
 .header-category {
+    @include modal-slide-mobile;
     .modal-dialog {
         width: 260px;
         margin: 0;

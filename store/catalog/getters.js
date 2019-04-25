@@ -3,6 +3,6 @@ export default {
       return state.endpoint.sections;
     },
     getSections: (state) => {
-        return state.sections;
+        return state.sections.SECTIONS;
     }
 }

@@ -28,3 +28,18 @@
         }
     }
 }
+
+@mixin modal-slide-mobile($translate: translate(-50px, 0)) {
+    @media (max-width: 768px) {
+        .fade  {
+            .modal-dialog {
+                transform: $translate;
+            }
+        }
+        .show {
+            .modal-dialog {
+                transform: none;
+                }
+        }
+    }
+}

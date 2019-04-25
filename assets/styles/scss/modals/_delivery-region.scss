@@ -1,4 +1,5 @@
 .delivery-region {
+    @include modal-slide-mobile;
     .modal-dialog {
         max-width: 970px;
     }

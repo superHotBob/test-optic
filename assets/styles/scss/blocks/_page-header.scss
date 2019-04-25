@@ -136,7 +136,7 @@
         line-height: normal;
         background-color: #fff;
         border: 1px solid #dbdbdb;
-        z-index: 5;
+        z-index: 15;
         a {
             display: block;
             width: 100%;
@@ -371,7 +371,7 @@
             }
         }
         &__search-list {
-            top: 80px;
+            top: 85px;
             border-right: none;
             border-left: none;
         }

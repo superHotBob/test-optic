@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="page-header__stat-counter"></div>
-                <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden">Показать</button>
+                <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden" ref="featuresToggle">Показать</button>
             </div>
         </div>
         <div class="page-header__tels main-container hidden-mobile">
@@ -50,34 +50,8 @@
                 <svg width="269" height="48"><use href="#svg-logo"/></svg>
                 Главная
             </nuxt-link>
-            <form class="page-header__search" aria-label="Поиск">
-                <button class="btn-icon hidden-desktop" type="button" @click="headerSearch = !headerSearch">
-                    <svg width="15" height="15"><use href="#svg-search"/></svg>
-                    Поиск
-                </button>
-                <label class="textfield light" :class="{'active': headerSearch}">
-                    <input type="text" placeholder="Поиск...">
-                    <button class="textfield__icon" type="button">
-                        <svg width="15" height="15"><use href="#svg-search"/></svg>
-                        Поиск
-                    </button>
-                </label>
-                <ul class="page-header__search-list">
-                    <li>
-                        <nuxt-link to="#0"><span>Ли</span>нза Essilor 1,5 Anti-Fatique Orma Crizal Alize + UV</nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="#0">Установка <span>ли</span>нз "Безободковая"</nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="#0">Установка <span>ли</span>нз "Ободковая"</nuxt-link>
-                    </li>
-                    <li class="page-header__all-results">
-                        <nuxt-link to="#0">Все результаты</nuxt-link>
-                    </li>
-                </ul>
-            </form>
-
+            
+            <search-form/>
 
             <button class="page-header__call-request btn-icon" v-b-modal.call-request>
                 <svg width="25" height="25" fill="#000"><use href="#svg-phone"/></svg>
@@ -163,6 +137,9 @@
                         <div class="basket__top">
                             <p>В вашей корзине:</p>
                             <p>5 шт. - <b>10 589.45 руб.</b></p>
+                        </div>
+                        <div class="basket__header-panel header-panel">
+
                         </div>
                     </div>
 
@@ -295,13 +272,13 @@ import LogOut from '~/components/user/ButtonLogout.vue'
 import LoginForm from '~/components/user/LoginForm.vue'
 import Sections from '~/components/catalog/Sections.vue'
 import MobileMenu from '~/components/catalog/MobileMenu.vue'
+import SearchForm from '~/components/catalog/search/SearchForm.vue'
 import { mapGetters } from 'vuex'
 
 export default {
     data() {
         return {
             featuresHidden: true,
-            headerSearch: false,
             callRequestOk: false,
             basketPopup: false,
         }
@@ -309,6 +286,7 @@ export default {
     components: {
         Sections,
         MobileMenu,
+        SearchForm,
         LoginForm,
         LogOut,
     },
@@ -319,6 +297,11 @@ export default {
             let basketBtn = this.$refs.basketBtn
             if ((el !== target) && !el.contains(target) && (basketBtn !== target) && !basketBtn.contains(target)) {
                 this.basketPopup=false;
+            }
+
+            let features = this.$refs.featuresToggle
+            if ((features !== target) && !features.contains(target)) {
+                this.featuresHidden=true;
             }
         }
     },

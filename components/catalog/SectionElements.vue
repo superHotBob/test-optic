@@ -2,9 +2,9 @@
   <masonry :cols="{default: 6, 1300: 5, 1000: 4, 700: 2, 400: 1}" :gutter="15">
     <div 
       class="catalog-item" 
-      v-for="arItem in arResult.ITEMS" :key="arItem.ID" 
+      v-for="(item, index) in items" :key="index" 
     >
-      <item v-bind:item="arItem"></item>
+      <item v-bind:item="item"></item>
     </div>
   </masonry>
 </template>
@@ -19,7 +19,7 @@ export default {
       Item
     },
     props: {
-      arResult: Object,
+      items: Array,
     },
 }
 </script>

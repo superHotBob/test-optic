@@ -2,9 +2,9 @@
     <div>
         <h1>{{result.seometa.title}}</h1>
         <smart-filter v-bind:items="result.filter.items"></smart-filter>
-        <section-elements v-bind:arResult="result.section.arResult"></section-elements>
+        <section-elements v-bind:items="result.section.items"></section-elements>
         <pagination v-model="pagen"
-            :page-count="result.section.arResult.PAGEN.NavPageCount"
+            :page-count="result.section.pagen.count"
             :classes="bootstrapPaginationClasses"
             :labels="customLabels"
             @change="onChangePagen"></pagination>

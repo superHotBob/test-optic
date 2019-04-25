@@ -23,10 +23,10 @@
                   <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все бренды</nuxt-link></li>
               </ul>
           </div>
-          <nuxt-link class="header-categories__img" to="#0">
-              <img src="~assets/images/placeholders/girl-header.jpg" alt="">
-              <p>Линзы для очков</p>
-              <p>Самые лучшие мировы бренды</p>
+          <nuxt-link class="header-categories__img" :to="{ name: 'section', params: {section: section.CODE }}">
+              <img v-if="section.PICTURE" :src="section.PICTURE" alt="">
+              <p>{{section.NAME}}</p>
+              <p>{{section.DESCRIPTION}}</p>
           </nuxt-link>
       </div>
     </template>

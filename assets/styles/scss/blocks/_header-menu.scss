@@ -1,4 +1,5 @@
 .header-menu {
+    @include modal-slide-mobile;
     .modal-dialog {
         max-width: unset;
         width: 260px;

@@ -5,7 +5,7 @@
                 <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
                 Корзина
             </button>
-            <p class="hidden-mobile">{{getBasket.BASKET_ITEMS_COUNT}} шт. - <b>{{getBasket.allSum_FORMATED}}</b></p>
+            <p>{{getBasket.BASKET_ITEMS_COUNT}} шт. - <b>{{getBasket.allSum_FORMATED}}</b></p>
         </div>
 
         <div class="basket__button hidden-desktop" v-b-modal.basket__mobile>

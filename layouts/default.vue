@@ -84,7 +84,7 @@
                 </div>
             </b-modal>
 
-            <basket-small/>
+            <basket-small :isLogged="isLogged" />
         </div>
         <div class="page-header__bottom hidden-mobile">
             <div class="main-container">
@@ -185,7 +185,7 @@
             </ul>
         </b-modal>
         
-        <header-menu :isLogged="isLogged"/>
+        <header-menu :isLogged="isLogged" />
         <auth-modal v-if="!isLogged" />
     </header>
     <main>
@@ -235,6 +235,8 @@ import Sections from '~/components/catalog/Sections.vue'
 import HeaderMenu from '~/components/HeaderMenu.vue'
 import SearchForm from '~/components/catalog/search/SearchForm.vue'
 import BasketSmall from '~/components/header/basket.small/Basket.vue'
+
+import { mapGetters } from 'vuex'
 
 export default {
     data() {

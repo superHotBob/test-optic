@@ -1,7 +1,7 @@
 <template>
 
     <div class="basket page-header__basket">
-        <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn">
+        <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn"  v-b-modal.basket__mobile>
             <button class="btn-icon">
                 <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
                 Корзина
@@ -96,6 +96,7 @@ import basket from '~/mixins/basket/basket.js'
 import Quantity from '~/components/header/basket.small/Quantity.vue'
 
 export default {
+    props: ['isLogged'],
     mixins: [basket],
     components: {
         Quantity

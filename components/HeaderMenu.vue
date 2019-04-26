@@ -6,9 +6,20 @@
                     <svg width="163" height="29"><use href="#svg-logo"/></svg>
                     Главная
                 </nuxt-link>
-                <p class="header-menu__delivery-btn" @click="$bvModal.hide('header-menu'); $bvModal.show('delivery-region')">Ваш регоин доставки: <span>Санкт-Петербург</span></p>
+                <p
+                    class="header-menu__delivery-btn"
+                    @click="$bvModal.hide('header-menu'); $bvModal.show('delivery-region')"
+                >
+                    Ваш регоин доставки: <span>Санкт-Петербург</span>
+                </p>
             </div>
-            <button class="header-menu__auth">Вход / Регистрация</button>
+            <button
+                v-if="!isLogged"
+                class="header-menu__auth" @click="$bvModal.hide('header-menu');
+                $bvModal.show('auth-modal')"
+            >
+                Вход / Регистрация
+            </button>
             <button 
                 v-for="(section, index) in sections" :key="index"
                 class="header-menu__btn" 
@@ -43,6 +54,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
+    props: ['isLogged'],
     data() {
         return {
             showCategories: true,

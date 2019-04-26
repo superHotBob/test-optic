@@ -11,9 +11,9 @@
                 Поиск
             </button>
         </label>
-        <ul ref="result" v-show="(showSearch && items.length)" class="page-header__search-list">
+        <ul ref="result" v-show="(showSearch && count)" class="page-header__search-list">
             <li v-for="(item, index) in items" :key="index">
-                <nuxt-link to="#0">{{item.CURRENT.NAME}}</nuxt-link>
+                <nuxt-link :to="{ name: 'element', params: {section: item.SECTION_CODE, element: item.CODE }}">{{item.CURRENT.NAME}}</nuxt-link>
             </li>
             <li v-if="count > 5" class="page-header__all-results">
                 <nuxt-link to="#0">Все результаты</nuxt-link>

@@ -30,7 +30,6 @@
         padding-right: 20px;
         input {
             height: 40px;
-            background-color: $modal-bg
         }
     }
     &__submit {
@@ -96,6 +95,7 @@
             padding: 0 60px;
             input {
                 height: 30px;
+                background-color: $modal-bg
             }
         }
         &__submit {

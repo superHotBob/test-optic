@@ -46,6 +46,7 @@
         </div>
         <div class="page-header__main main-container">
             <button class="page-header__menu-btn hidden-desktop" v-b-modal.header-menu>Меню</button>
+
             <nuxt-link class="page-header__logo" to="/" exact>
                 <svg width="269" height="48"><use href="#svg-logo"/></svg>
                 Главная
@@ -57,6 +58,7 @@
                 <svg width="25" height="25" fill="#000"><use href="#svg-phone"/></svg>
                 Обратный звонок
             </button>
+
             <b-modal class="call-request" id="call-request" hide-header hide-footer>
                 <div class="modal-wrap">
                     <button class="modal-close" @click="$bvModal.hide('call-request')"></button>
@@ -84,66 +86,84 @@
 
             <div class="basket page-header__basket">
                 <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn">
-                    <button class="btn-icon">
+                    <button class="btn-icon" v-b-modal.basket__mobile>
                         <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
                         Корзина
                     </button>
                     <p class="hidden-mobile">5 шт. - <b>10 589.45 руб.</b></p>
                 </div>
-
-                <div class="basket__popup" :class="{'active': basketPopup}" ref="dropdownMenu">
-                    <div class="hidden-mobile">
-                        <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
-                            <div class="basket__image">
-                                <img src="" alt="">
-                                <span>Sale</span>
-                                <span>New</span>
+                <div class="basket__popup hidden-mobile" :class="{'active': basketPopup}" ref="dropdownMenu">
+                    <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
+                        <div class="basket__image">
+                            <img src="" alt="">
+                            <span>Sale</span>
+                            <span>New</span>
+                        </div>
+                        <div class="basket__props">
+                            <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
+                            <div class="basket__prop">
+                                Ширина линзы
+                                <span class="basket__square">59</span>
                             </div>
-                            <div class="basket__props">
-                                <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
-                                <div class="basket__prop">
-                                    Ширина линзы
-                                    <span class="basket__square">59</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Диагональ линзы
-                                    <span class="basket__square">62</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Высота линзы
-                                    <span class="basket__square">37</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Ширина наносника
-                                    <span class="basket__square">17</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Длина дужки
-                                    <span class="basket__square">145</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Цвет
-                                    <span class="basket__square"><img src="#" alt=""></span>
-                                </div>
-                                <div class="basket__prop">
-                                    Размер
-                                    <span class="basket__square">59/37/17/145</span>
-                                </div>
+                            <div class="basket__prop">
+                                Диагональ линзы
+                                <span class="basket__square">62</span>
+                            </div>
+                            <div class="basket__prop">
+                                Высота линзы
+                                <span class="basket__square">37</span>
+                            </div>
+                            <div class="basket__prop">
+                                Ширина наносника
+                                <span class="basket__square">17</span>
+                            </div>
+                            <div class="basket__prop">
+                                Длина дужки
+                                <span class="basket__square">145</span>
+                            </div>
+                            <div class="basket__prop">
+                                Цвет
+                                <span class="basket__square"><img src="#" alt=""></span>
+                            </div>
+                            <div class="basket__prop">
+                                Размер
+                                <span class="basket__square">59/37/17/145</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="hidden-desktop">
-                        <div class="basket__top">
-                            <p>В вашей корзине:</p>
-                            <p>5 шт. - <b>10 589.45 руб.</b></p>
-                        </div>
-                        <div class="basket__header-panel header-panel">
-
-                        </div>
-                    </div>
-
                 </div>
+                <b-modal class="basket__mobile hidden-desktop" id="basket__mobile" hide-header hide-footer>
+                    <button class="modal-close" @click="$bvModal.hide('basket__mobile')"></button>
+                    <div class="basket__top">
+                        <p>В вашей корзине:</p>
+                        <p>5 шт. - <b>10 589.45 руб.</b></p>
+                    </div>
+                    <div class="basket__header-panel header-panel">
+                        <p>
+                            <nuxt-link to="#0">
+                                <span>Корзина</span>
+                                <span>5</span>
+                            </nuxt-link>
+                        </p>
+                        <p>
+                            <nuxt-link to="#0">
+                                <span>Сравнение</span>
+                                <span>13</span>
+                            </nuxt-link>
+                        </p>
+                        <p>
+                            <nuxt-link to="#0">
+                                <span>Список желаемого</span>
+                                <span>26</span>
+                            </nuxt-link>
+                        </p>
+                        <p v-if="!isLogged">
+                            <a class="header-panel__login" @click="$bvModal.hide('basket__mobile'); $bvModal.show('auth-modal')">
+                                <span>Вход</span>
+                            </a>
+                        </p>
+                    </div>
+                </b-modal>
             </div>
         </div>
         <div class="page-header__bottom hidden-mobile">
@@ -153,17 +173,26 @@
                     <p>
                         <nuxt-link to="#0">
                             <span>Сравнение</span>
-                            <!-- <span>13</span> -->
                         </nuxt-link>
                     </p>
                     <p>
                         <nuxt-link to="#0">
                             <span>Список желаемого</span>
-                            <!-- <span>26</span> -->
                         </nuxt-link>
                     </p>
-                    <p>
-                        <nuxt-link class="header-panel__login" to="#0"><span>Вход</span></nuxt-link>
+                    <p v-if="!isLogged">
+                        <a class="header-panel__login" @click="$bvModal.show('auth-modal')">
+                            <span>Вход</span>
+                        </a>
+                    </p>
+                    <p v-if="isLogged">
+                        <logout-button />
+                    </p>
+                    <p v-if="isLogged">
+                        <nuxt-link class="header-panel__icon" to="#0">
+                            <svg width="15" height="15" fill="#999"><use href="#svg-user"/></svg>
+                            Профиль
+                        </nuxt-link>
                     </p>
                 </div>
             </div>
@@ -235,7 +264,9 @@
                 <li><a href="#0"><span>Ярославль</span></a></li>
             </ul>
         </b-modal>
-        <mobile-menu/>
+        
+        <header-menu :isLogged="isLogged"/>
+        <auth-modal v-if="!isLogged" />
     </header>
     <main>
         <nuxt/>
@@ -262,16 +293,26 @@
             <path d="M-37.7,101h-23.6c-0.1, 0-0.3-0.1-0.4-0.2c-0.1-0.1-0.1-0.2-0.1-0.4l1.1-23.6c0-0.3,0.2-0.5,0.5-0.5h21.4 c0.3,0,0.5,0.2,0.5,0.5l1.1,23.6c0,0.1,0,0.3-0.1,0.4C-37.4,100.9-37.6,101-37.7,101z M-60.8, 100h22.6l-1.1-22.6h-20.4L-60.8,100z"/>
             <path d="M-44.6,77v-3.1c0-2.7-2.2-4.9-4.9-4.9s-4.9,2.2-4.9, 4.9v2.8h-1v-2.8c0-3.3,2.6-5.9,5.9-5.9s5.9,2.6,5.9,5.9V77 C-43.6,77.3-44.6,77.3-44.6,77z"/>
         </svg>
+        <svg id="svg-logout"
+            viewBox="0 0 330 330">
+            <path d="M245.608 84.392c-5.856-5.857-15.355-5.858-21.213-.001-5.857 5.858-5.858 15.355 0 21.213L268.789 150H85.002c-8.284 0-15 6.716-15 15s6.716 15 15 15h183.785l-44.392 44.392c-5.858 5.858-5.858 15.355 0 21.213a14.953 14.953 0 0 0 10.607 4.393 14.95 14.95 0 0 0 10.606-4.393l69.998-69.998c5.858-5.857 5.858-15.355 0-21.213l-69.998-70.002z"></path>
+            <path d="M155 330c8.284 0 15-6.716 15-15s-6.716-15-15-15H40V30h115c8.284 0 15-6.716 15-15s-6.716-15-15-15H25c-8.284 0-15 6.716-15 15v300c0 8.284 6.716 15 15 15h130z"></path>
+        </svg>
+        <svg id="svg-user"
+            viewBox="0 0 488.9 488.9">
+            <path d="M477.7 454.8v-26c0-26.5-12.4-52-33.1-68.1-48.2-37.4-97.3-63.5-114.5-72.2v-29.7c3.5-7.8 6.4-16.3 8.6-25.5 12.8-4.6 19.8-23.4 24.5-40 6.3-22.1 5.6-37.6-1.8-46.2 7.8-42.5 4.3-73.8-10.3-93.1-7.7-10.1-16.7-14.4-22.7-16.3-4.3-6-13-16.1-27.7-24.2C285.5 4.5 268.4 0 249.6 0c-3.4 0-6.8.2-9.8.4-8.4.4-16.7 2-24.9 4.7-.1 0-.2.1-.3.1-9 3.1-17.8 7.6-26.3 13.4-9.7 6.2-18.6 13.6-26.3 21.8-15.1 15.5-25.1 33-29.4 51.7-4.1 15.5-4.4 31.1-1 46.4-1.8 1.3-3.4 2.8-4.8 4.6-6.9 9.1-7.2 23.4-1.1 45.1 4.2 15 9.8 30.3 19.3 37.2 2.8 14.4 7.5 27.5 13.8 39.1v24.1c-17.2 8.7-66.3 34.7-114.5 72.2-20.7 16.1-33.1 41.5-33.1 68.1v26c0 18.8 15.3 34 34 34h398.5c18.7 0 34-15.3 34-34.1zm-442.1 0v-26c0-19 8.8-37.2 23.6-48.7 52-40.3 104.9-66.9 115-71.8 5.6-2.7 9.1-8.3 9.1-14.6v-32.5c0-2.2-.6-4.3-1.7-6.2-6.6-11.2-11.2-24.6-13.5-39.9-.8-4.9-4.4-8.8-9.1-10-1.3-1.5-5-6.9-9.7-23.6-3.9-13.8-3.6-20.2-3.2-22.5 3.9.2 7.8-1.6 10.3-4.7 2.6-3.3 3.3-7.7 1.9-11.6-5.2-14.5-5.8-29.4-1.8-44.6 3.4-14.6 11.2-28.2 23.3-40.6 6.5-7 14-13.1 22-18.2.1-.1.3-.2.4-.3 6.7-4.7 13.7-8.2 20.6-10.6.1 0 .2-.1.2-.1 5.9-2 12-3.1 18.4-3.4 17.5-1.5 33.2 1.8 47.1 9.9 15.2 8.4 21.4 19.4 21.4 19.4 1.9 3.9 5.3 6.2 9.7 6.5.3 0 6.8 1 12.4 8.9 5.9 8.4 14.3 30 3.8 80.4-1.2 5.6 1.7 11.2 6.8 13.6.5 1.8 1.3 7.9-3 23.1-3.8 13.4-6.9 19.5-8.7 22.2-2.3-.4-4.7-.2-6.9.8-3.8 1.6-6.6 5.1-7.3 9.1-2.1 12-5.5 22.8-9.9 32-.8 1.7-1.2 3.5-1.2 5.3v37.6c0 6.3 3.5 11.8 9.1 14.6 10.1 4.9 63 31.6 114.9 71.8 14.8 11.5 23.6 29.7 23.6 48.7v26c0 5.2-4.3 9.5-9.5 9.5H45.2c-5.3.1-9.6-4.2-9.6-9.5z"></path>
+        </svg>
     </div>
+    
 </div>
 </template>
 
 <script>
 
-import LogOut from '~/components/user/ButtonLogout.vue'
-import LoginForm from '~/components/user/LoginForm.vue'
+import AuthModal from '~/components/user/AuthModal.vue'
+import LogoutButton from '~/components/user/LogoutButton.vue'
 import Sections from '~/components/catalog/Sections.vue'
-import MobileMenu from '~/components/catalog/MobileMenu.vue'
+import HeaderMenu from '~/components/HeaderMenu.vue'
 import SearchForm from '~/components/catalog/search/SearchForm.vue'
 import { mapGetters } from 'vuex'
 
@@ -284,11 +325,11 @@ export default {
         }
     },
     components: {
+        AuthModal,
         Sections,
-        MobileMenu,
+        HeaderMenu,
         SearchForm,
-        LoginForm,
-        LogOut,
+        LogoutButton,
     },
     methods: {
         documentClick(e) {
@@ -306,6 +347,9 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            isLogged: 'user/isLogged'
+        })
     },
     mounted() {
         window.addEventListener('click', this.documentClick)

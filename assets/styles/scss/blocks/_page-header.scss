@@ -1,5 +1,4 @@
 .page-header {
-
     &__top {
         color: #fff;
         background-color: #000;
@@ -40,7 +39,6 @@
         font-size: 0;
         background: transparent;
         border: none;
-        // z-index: 9;
         cursor: pointer;
         outline: none;
         &::before {
@@ -178,6 +176,18 @@
         }
         .header-panel {
             margin-left: auto;
+            &__icon,
+            .btn-logout {
+                margin-left: -5px;
+                margin-right: -5px;
+            }
+            p {
+                &:last-of-type {
+                    .header-panel__icon {
+                        margin-right: 0;
+                    }
+                }
+            }
         }
     }
 }
@@ -271,6 +281,9 @@
             p {
                 &:not(:first-of-type) {
                     margin-left: 10px;
+                    &.header-panel__icon {
+                        margin-left: 5px;
+                    }
                     &::before {
                         left: -12px;
                     }
@@ -390,6 +403,16 @@
                 svg {
                     width: 20px;
                     height: 20px;
+                }
+            }
+        }
+        .header-panel {
+            p {
+                font-size: 14px;
+                &:nth-of-type(n) {
+                    margin-left: 20px;
+                    // margin-right: 25px;
+                    margin-right: 20px;
                 }
             }
         }

@@ -22,8 +22,18 @@
         display: flex;
         justify-content: space-between;
         text-align: center;
+        transition: color 150ms;
+        cursor: pointer;
         &:hover {
             text-decoration: none;
+        }
+    }
+    &__icon,
+    .btn-logout {
+        padding: 10px;
+        font-size: 0;
+        svg {
+            transition: fill 150ms;
         }
     }
 }
@@ -35,12 +45,29 @@
             &:focus {
                 color: #000;
                 outline: none;
+                svg {
+                    fill: #000;
+                }
             }
         }
     }
 }
 @media (max-width: 768px) {
     .header-panel {
+        flex-direction: column;
+        p {
+            &:not(:first-of-type) {
+                border-top: 1px solid #d9d9d9;
+                &::before {
+                    display: none;
+                }
+            }
+        }
+        a {
+            width: 100%;
+            padding: 15px 0;
+            color: #000;
+        }
         &__login {
             font-weight: 700;
         }

@@ -51,7 +51,7 @@
                 <svg width="269" height="48"><use href="#svg-logo"/></svg>
                 Главная
             </nuxt-link>
-            
+
             <search-form/>
 
             <button class="page-header__call-request btn-icon" v-b-modal.call-request>
@@ -117,74 +117,8 @@
                 </div>
             </div>
         </div>
-        
-        <b-modal class="delivery-region" id="delivery-region" style="color: black;" hide-header hide-footer>
-            <button class="modal-close hidden-mobile" @click="$bvModal.hide('delivery-region')"></button>
-            <button class="modal-back hidden-desktop" @click="$bvModal.hide('delivery-region'); $bvModal.show('header-menu')"></button>
-            <h3>Укажите ваш регион </h3>
-            <form>
-                <label class="textfield">
-                    <input type="text" placeholder="Москва">
-                    <button class="textfield__icon" type="button">
-                        <svg width="15" height="15"><use href="#svg-search"/></svg>
-                        Поиск
-                    </button>
-                </label>
-            </form>
-            <ul>
-                <li><a href="#0"><span>Астрахань</span></a></li>
-                <li><a href="#0"><span>Балашиха</span></a></li>
-                <li><a href="#0"><span>Барнаул</span></a></li>
-                <li><a href="#0"><span>Брянск</span></a></li>
-                <li><a href="#0"><span>Владивосток</span></a></li>
-                <li><a href="#0"><span>Волгоград</span></a></li>
-                <li><a href="#0"><span>Воронеж</span></a></li>
-                <li><a href="#0"><span>Екатеринбург</span></a></li>
-                <li><a href="#0"><span>Иваново</span></a></li>
-                <li><a href="#0"><span>Ижевск</span></a></li>
-                <li><a href="#0"><span>Иркутск</span></a></li>
-                <li><a href="#0"><span>Казань</span></a></li>
-                <li><a href="#0"><span>Калининград</span></a></li>
-                <li><a href="#0"><span>Кемерово</span></a></li>
-                <li><a href="#0"><span>Киров</span></a></li>
-                <li><a href="#0"><span>Краснодар</span></a></li>
-                <li><a href="#0"><span>Красноярск</span></a></li>
-                <li><a href="#0"><span>Курск</span></a></li>
-                <li><a href="#0"><span>Липецк</span></a></li>
-                <li><a href="#0"><span>Магнитогорск</span></a></li>
-                <li><a href="#0"><span>Махачкала</span></a></li>
-                <li><a href="#0"><span>Москва</span></a></li>
-                <li><a href="#0"><span>Набережные Челны</span></a></li>
-                <li><a href="#0"><span>Нижний Новгород</span></a></li>
-                <li><a href="#0"><span>Новокузнецк</span></a></li>
-                <li><a href="#0"><span>Новосибирск</span></a></li>
-                <li><a href="#0"><span>Омск</span></a></li>
-                <li><a href="#0"><span>Оренбург</span></a></li>
-                <li><a href="#0"><span>Пенза</span></a></li>
-                <li><a href="#0"><span>Перьм</span></a></li>
-                <li><a href="#0"><span>Ростов-на-Дону</span></a></li>
-                <li><a href="#0"><span>Рязань</span></a></li>
-                <li><a href="#0"><span>Самара</span></a></li>
-                <li><a href="#0"><span>Санкт-Петербург</span></a></li>
-                <li><a href="#0"><span>Саратов</span></a></li>
-                <li><a href="#0"><span>Севастополь</span></a></li>
-                <li><a href="#0"><span>Сочи</span></a></li>
-                <li><a href="#0"><span>Ставрополь</span></a></li>
-                <li><a href="#0"><span>Тверь</span></a></li>
-                <li><a href="#0"><span>Тольятти</span></a></li>
-                <li><a href="#0"><span>Томск</span></a></li>
-                <li><a href="#0"><span>Тула</span></a></li>
-                <li><a href="#0"><span>Тюмень</span></a></li>
-                <li><a href="#0"><span>Улан-Удэ</span></a></li>
-                <li><a href="#0"><span>Ульяновск</span></a></li>
-                <li><a href="#0"><span>Уфа</span></a></li>
-                <li><a href="#0"><span>Хабаровск</span></a></li>
-                <li><a href="#0"><span>Чебоксары</span></a></li>
-                <li><a href="#0"><span>Челябинск</span></a></li>
-                <li><a href="#0"><span>Ярославль</span></a></li>
-            </ul>
-        </b-modal>
-        
+
+        <delivery-region />
         <header-menu :isLogged="isLogged" />
         <auth-modal v-if="!isLogged" />
     </header>
@@ -232,7 +166,6 @@
         </svg>
 
     </div>
-    
 </div>
 </template>
 
@@ -241,9 +174,10 @@
 import AuthModal from '~/components/user/AuthModal.vue'
 import LogoutButton from '~/components/user/LogoutButton.vue'
 import Sections from '~/components/catalog/Sections.vue'
-import HeaderMenu from '~/components/HeaderMenu.vue'
 import SearchForm from '~/components/catalog/search/SearchForm.vue'
+import HeaderMenu from '~/components/header/HeaderMenu.vue'
 import BasketSmall from '~/components/header/basket.small/Basket.vue'
+import DeliveryRegion from '~/components/header/DeliveryRegion.vue'
 
 import { mapGetters } from 'vuex'
 
@@ -261,6 +195,7 @@ export default {
         BasketSmall,
         SearchForm,
         LogoutButton,
+        DeliveryRegion,
     },
     methods: {
         documentClick(e) {

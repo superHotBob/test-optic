@@ -1,5 +1,4 @@
 <template>
-
     <div class="basket page-header__basket">
         <div class="basket__button" :class="{'active': showPopup}" @click="basketPopup = !basketPopup" ref="basketBtn"  v-b-modal.basket__mobile>
             <button class="btn-icon">

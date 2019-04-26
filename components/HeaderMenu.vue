@@ -27,6 +27,24 @@
             >
                     {{section.NAME}}
             </button>
+            <div class="header-menu__features">
+                <nuxt-link to="#0">Быстрая доставка</nuxt-link>
+                <nuxt-link to="#0">Гарантия лучшей цены</nuxt-link>
+                <nuxt-link to="#0">Изготовление очков</nuxt-link>
+                <nuxt-link to="#0">Оригинальная продукция</nuxt-link>
+            </div>
+            <p class="header-menu__info">
+                <svg width="15" height="15" fill="#4a4a4a"><use href="#svg-mobile"/></svg>
+                8 (800) 444-34-88
+            </p>
+            <p class="header-menu__info">
+                <svg width="15" height="15" fill="#4a4a4a"><use href="#svg-mobile"/></svg>
+                8 (499) 391-19-41
+            </p>
+            <p class="header-menu__info">
+                <svg width="10" height="10" fill="#4a4a4a" style="left: 3px;"><use href="#svg-clock"/></svg>
+                Пн - Сб: с 10:00 до 20:00
+            </p>
         </b-modal>
         <b-modal class="header-category hidden-desktop" id="header-category" hide-header hide-footer>
             <div class="header-category__top">

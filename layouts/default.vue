@@ -84,87 +84,7 @@
                 </div>
             </b-modal>
 
-            <div class="basket page-header__basket">
-                <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn">
-                    <button class="btn-icon" v-b-modal.basket__mobile>
-                        <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
-                        Корзина
-                    </button>
-                    <p class="hidden-mobile">5 шт. - <b>10 589.45 руб.</b></p>
-                </div>
-                <div class="basket__popup hidden-mobile" :class="{'active': basketPopup}" ref="dropdownMenu">
-                    <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
-                        <div class="basket__image">
-                            <img src="" alt="">
-                            <span>Sale</span>
-                            <span>New</span>
-                        </div>
-                        <div class="basket__props">
-                            <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
-                            <div class="basket__prop">
-                                Ширина линзы
-                                <span class="basket__square">59</span>
-                            </div>
-                            <div class="basket__prop">
-                                Диагональ линзы
-                                <span class="basket__square">62</span>
-                            </div>
-                            <div class="basket__prop">
-                                Высота линзы
-                                <span class="basket__square">37</span>
-                            </div>
-                            <div class="basket__prop">
-                                Ширина наносника
-                                <span class="basket__square">17</span>
-                            </div>
-                            <div class="basket__prop">
-                                Длина дужки
-                                <span class="basket__square">145</span>
-                            </div>
-                            <div class="basket__prop">
-                                Цвет
-                                <span class="basket__square"><img src="#" alt=""></span>
-                            </div>
-                            <div class="basket__prop">
-                                Размер
-                                <span class="basket__square">59/37/17/145</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <b-modal class="basket__mobile hidden-desktop" id="basket__mobile" hide-header hide-footer>
-                    <button class="modal-close" @click="$bvModal.hide('basket__mobile')"></button>
-                    <div class="basket__top">
-                        <p>В вашей корзине:</p>
-                        <p>5 шт. - <b>10 589.45 руб.</b></p>
-                    </div>
-                    <div class="basket__header-panel header-panel">
-                        <p>
-                            <nuxt-link to="#0">
-                                <span>Корзина</span>
-                                <span>5</span>
-                            </nuxt-link>
-                        </p>
-                        <p>
-                            <nuxt-link to="#0">
-                                <span>Сравнение</span>
-                                <span>13</span>
-                            </nuxt-link>
-                        </p>
-                        <p>
-                            <nuxt-link to="#0">
-                                <span>Список желаемого</span>
-                                <span>26</span>
-                            </nuxt-link>
-                        </p>
-                        <p v-if="!isLogged">
-                            <a class="header-panel__login" @click="$bvModal.hide('basket__mobile'); $bvModal.show('auth-modal')">
-                                <span>Вход</span>
-                            </a>
-                        </p>
-                    </div>
-                </b-modal>
-            </div>
+            <basket-small/>
         </div>
         <div class="page-header__bottom hidden-mobile">
             <div class="main-container">
@@ -314,33 +234,28 @@ import LogoutButton from '~/components/user/LogoutButton.vue'
 import Sections from '~/components/catalog/Sections.vue'
 import HeaderMenu from '~/components/HeaderMenu.vue'
 import SearchForm from '~/components/catalog/search/SearchForm.vue'
-import { mapGetters } from 'vuex'
+import BasketSmall from '~/components/header/basket.small/Basket.vue'
 
 export default {
     data() {
         return {
             featuresHidden: true,
             callRequestOk: false,
-            basketPopup: false,
         }
     },
     components: {
         AuthModal,
         Sections,
         HeaderMenu,
+        BasketSmall,
         SearchForm,
         LogoutButton,
     },
     methods: {
         documentClick(e) {
-            let el = this.$refs.dropdownMenu
-            let target = e.target
-            let basketBtn = this.$refs.basketBtn
-            if ((el !== target) && !el.contains(target) && (basketBtn !== target) && !basketBtn.contains(target)) {
-                this.basketPopup=false;
-            }
-
-            let features = this.$refs.featuresToggle
+            let target = e.target,
+                features = this.$refs.featuresToggle;
+                
             if ((features !== target) && !features.contains(target)) {
                 this.featuresHidden=true;
             }

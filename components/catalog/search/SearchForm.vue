@@ -50,7 +50,6 @@ export default {
                 this.count = response.section.count;
                 this.items = response.section.items;
                 this.showSearch = true;
-                console.log(response);
         },
         documentClick(e) {
             let el = this.$refs.result,
@@ -60,6 +59,7 @@ export default {
             
             if ((el !== target) && !el.contains(target) && (input !== target) && !input.contains(target) && (btn !== target) && !btn.contains(target)) {
                 this.showSearch=false;
+                console.log('ok');
             }
         },
         btnClick() {

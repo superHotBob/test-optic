@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>{{result.seometa.title}}</h1>
+        <tags v-bind:tags="result.tags"/>
         <smart-filter v-bind:items="result.filter.items"></smart-filter>
         <section-elements v-bind:items="result.section.items"></section-elements>
         <pagination v-model="pagen"
@@ -15,13 +16,15 @@
 
 import SectionElements from '~/components/catalog/SectionElements.vue'
 import SmartFilter from '~/components/catalog/SmartFilter.vue'
+import Tags from '~/components/catalog/Tags.vue'
 import Pagination from '~/components/Pagination.vue'
 
 export default {
     components: {
         SectionElements,
         SmartFilter,
-        Pagination
+        Pagination,
+        Tags
     },
     methods: {
         onChangePagen: function () {

@@ -79,10 +79,10 @@ export default {
             for (let i = 0; i < li.length; i++) {
                 let a = li[i].querySelector("a");
                 let txtValue = a.textContent || a.innerText;
-                    if (txtValue.toLowerCase().indexOf(inputVal) > -1) {
-                li[i].style.display = "";
-                    } else {
-                li[i].style.display = "none";
+                if (txtValue.toLowerCase().indexOf(inputVal) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
                 }
             }
         }

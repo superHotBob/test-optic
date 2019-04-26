@@ -1,11 +1,18 @@
 <template>
     <div class="basket page-header__basket">
-        <div class="basket__button" :class="{'active': showPopup}" @click="basketPopup = !basketPopup" ref="basketBtn"  v-b-modal.basket__mobile>
+        <div class="basket__button hidden-mobile" :class="{'active': showPopup}" @click="basketPopup = !basketPopup" ref="basketBtn">
             <button class="btn-icon">
                 <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
                 Корзина
             </button>
             <p class="hidden-mobile">{{getBasket.BASKET_ITEMS_COUNT}} шт. - <b>{{getBasket.allSum_FORMATED}}</b></p>
+        </div>
+
+        <div class="basket__button hidden-desktop" v-b-modal.basket__mobile>
+            <button class="btn-icon">
+                <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
+                Корзина
+            </button>
         </div>
 
         <div class="basket__popup" :class="{'active': showPopup}" ref="dropdownMenu">

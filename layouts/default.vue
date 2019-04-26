@@ -82,69 +82,8 @@
                 </div>
             </b-modal>
 
-            <div class="basket page-header__basket">
-                <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn">
-                    <button class="btn-icon">
-                        <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
-                        Корзина
-                    </button>
-                    <p class="hidden-mobile">5 шт. - <b>10 589.45 руб.</b></p>
-                </div>
+            <basket-small/>
 
-                <div class="basket__popup" :class="{'active': basketPopup}" ref="dropdownMenu">
-                    <div class="hidden-mobile">
-                        <div class="basket__item" v-for="(item) in [1, 2]" :key="item">
-                            <div class="basket__image">
-                                <img src="" alt="">
-                                <span>Sale</span>
-                                <span>New</span>
-                            </div>
-                            <div class="basket__props">
-                                <b class="basket__name">Оправа Freigeist 861005-10 8800 2500</b>
-                                <div class="basket__prop">
-                                    Ширина линзы
-                                    <span class="basket__square">59</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Диагональ линзы
-                                    <span class="basket__square">62</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Высота линзы
-                                    <span class="basket__square">37</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Ширина наносника
-                                    <span class="basket__square">17</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Длина дужки
-                                    <span class="basket__square">145</span>
-                                </div>
-                                <div class="basket__prop">
-                                    Цвет
-                                    <span class="basket__square"><img src="#" alt=""></span>
-                                </div>
-                                <div class="basket__prop">
-                                    Размер
-                                    <span class="basket__square">59/37/17/145</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="hidden-desktop">
-                        <div class="basket__top">
-                            <p>В вашей корзине:</p>
-                            <p>5 шт. - <b>10 589.45 руб.</b></p>
-                        </div>
-                        <div class="basket__header-panel header-panel">
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
         <div class="page-header__bottom hidden-mobile">
             <div class="main-container">
@@ -273,33 +212,28 @@ import LoginForm from '~/components/user/LoginForm.vue'
 import Sections from '~/components/catalog/Sections.vue'
 import MobileMenu from '~/components/catalog/MobileMenu.vue'
 import SearchForm from '~/components/catalog/search/SearchForm.vue'
-import { mapGetters } from 'vuex'
+import BasketSmall from '~/components/header/basket.small/Basket.vue'
 
 export default {
     data() {
         return {
             featuresHidden: true,
             callRequestOk: false,
-            basketPopup: false,
         }
     },
     components: {
         Sections,
         MobileMenu,
+        BasketSmall,
         SearchForm,
         LoginForm,
         LogOut,
     },
     methods: {
         documentClick(e) {
-            let el = this.$refs.dropdownMenu
-            let target = e.target
-            let basketBtn = this.$refs.basketBtn
-            if ((el !== target) && !el.contains(target) && (basketBtn !== target) && !basketBtn.contains(target)) {
-                this.basketPopup=false;
-            }
-
-            let features = this.$refs.featuresToggle
+            let target = e.target,
+                features = this.$refs.featuresToggle;
+                
             if ((features !== target) && !features.contains(target)) {
                 this.featuresHidden=true;
             }

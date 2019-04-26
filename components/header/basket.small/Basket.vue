@@ -1,7 +1,7 @@
 <template>
 
     <div class="basket page-header__basket">
-        <div class="basket__button" :class="{'active': basketPopup}" @click="basketPopup = !basketPopup" ref="basketBtn"  v-b-modal.basket__mobile>
+        <div class="basket__button" :class="{'active': showPopup}" @click="basketPopup = !basketPopup" ref="basketBtn"  v-b-modal.basket__mobile>
             <button class="btn-icon">
                 <svg width="27" height="27" stroke="#000"><use href="#svg-bag"/></svg>
                 Корзина
@@ -9,7 +9,7 @@
             <p class="hidden-mobile">{{getBasket.BASKET_ITEMS_COUNT}} шт. - <b>{{getBasket.allSum_FORMATED}}</b></p>
         </div>
 
-        <div class="basket__popup" :class="{'active': basketPopup}" ref="dropdownMenu">
+        <div class="basket__popup" :class="{'active': showPopup}" ref="dropdownMenu">
             <div class="hidden-mobile">
                 <div class="basket__item" v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID">
                     <div class="basket__image">
@@ -114,6 +114,15 @@ export default {
 
             if ((el !== target) && !el.contains(target) && (basketBtn !== target) && !basketBtn.contains(target)) {
                 this.basketPopup=false;
+            }
+        }
+    },
+    computed: {
+        showPopup() {
+            if (this.getBasket.BASKET_ITEMS_COUNT === 0) {
+                return false;
+            } else {
+                return this.basketPopup;
             }
         }
     },

@@ -69,9 +69,9 @@ module.exports = {
   plugins: [
     '~/plugins/array',
     '~/plugins/axios',
-    '~/plugins/cookie.js',
-    { src: '~/plugins/swiper.js', ssr: false },
-    { src: '~/plugins/vue-masonry-css', ssr: true }
+    '~/plugins/cookie',
+    { src: '~/plugins/swiper', ssr: false },
+    { src: '~/plugins/masonry', ssr: true }
   ]
 }
 

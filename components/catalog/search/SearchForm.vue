@@ -13,7 +13,11 @@
         </label>
         <ul ref="result" v-show="(showSearch && count)" class="page-header__search-list">
             <li v-for="(item, index) in items" :key="index">
-                <nuxt-link :to="{ name: 'element', params: {section: item.SECTION_CODE, element: item.CODE }}">{{item.CURRENT.NAME}}</nuxt-link>
+                <nuxt-link
+                    :to="{ name: 'element', params: {section: item.SECTION_CODE, element: item.CODE }}"
+                    v-html="item.CURRENT.NAME"
+                    @click.native.prevent="showSearch = false"
+                ></nuxt-link>
             </li>
             <li v-if="count > 5" class="page-header__all-results">
                 <nuxt-link to="#0">Все результаты</nuxt-link>
@@ -41,15 +45,23 @@ export default {
             {
                 clearTimeout(this.timer);
             }
-            this.timer = setTimeout(() => { 
+            this.timer = setTimeout(() => {
                 this.load(value);
-            }, 500);
+            }, 500)
+        },
+        formatSearch(items, input) {
+            for (const key in items) {
+                items[key].CURRENT.NAME = items[key].CURRENT.NAME.replace(
+                    new RegExp(input, 'gi'), str => `<span>${str}</span>`
+                )
+            }
+            this.items = items;
         },
         async load(search) {
-                let response = await this.$axios.$get(`/api/v1/catalog/?count=5&q=${search}`);
-                this.count = response.section.count;
-                this.items = response.section.items;
-                this.showSearch = true;
+            let response = await this.$axios.$get(`/api/v1/catalog/?count=5&q=${search}`);
+            this.count = response.section.count;
+            this.formatSearch(response.section.items, search);
+            this.showSearch = true;
         },
         documentClick(e) {
             let el = this.$refs.result,
@@ -59,7 +71,6 @@ export default {
             
             if ((el !== target) && !el.contains(target) && (input !== target) && !input.contains(target) && (btn !== target) && !btn.contains(target)) {
                 this.showSearch=false;
-                console.log('ok');
             }
         },
         btnClick() {
@@ -67,7 +78,7 @@ export default {
             setTimeout(() => { 
                 this.$refs.input.click();
             }, 0);
-        }
+        },
     },
     mounted() {
         window.addEventListener('click', this.documentClick)

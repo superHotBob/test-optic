@@ -53,13 +53,8 @@
             border-radius: 3px;
         }
     }
-    &__stat-counter {
-        align-self: center;
-        flex-shrink: 0;
-        width: 89px;
-        height: 32px;
+    .stat-counter {
         margin-left: 20px;
-        background: url('~assets/images/placeholders/yandex-rating-5.jpg') no-repeat center;
     }
     &__tels {
         padding-top: 25px;
@@ -260,7 +255,7 @@
                 border: 1px solid #e6e6e6;
             }
         }
-        &__stat-counter {
+        .stat-counter {
             margin-left: auto;
         }
         &__features-toggle {
@@ -420,7 +415,7 @@
 }
 @media (max-width: 450px) {
     .page-header {
-        &__stat-counter {
+        .stat-counter {
             display: none;
         }
         &__features-toggle {

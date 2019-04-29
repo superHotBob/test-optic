@@ -47,7 +47,7 @@ export default {
             }
             this.timer = setTimeout(() => {
                 this.load(value);
-            }, 500)
+            }, 500);
         },
         formatSearch(items, input) {
             for (const key in items) {

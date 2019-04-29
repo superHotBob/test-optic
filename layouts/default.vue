@@ -97,7 +97,7 @@
                     </p>
                     <p>
                         <nuxt-link to="#0">
-                            <span>Список желаемого</span>
+                            <span>Список желаемого <span v-if="favoritesCount > 0">{{favoritesCount}}</span></span>
                         </nuxt-link>
                     </p>
                     <p v-if="!isLogged">
@@ -338,7 +338,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            isLogged: 'user/isLogged'
+            isLogged: 'user/isLogged',
+            favoritesCount: 'catalog/getCountFavorites'
         })
     },
     mounted() {

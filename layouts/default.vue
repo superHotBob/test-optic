@@ -97,7 +97,8 @@
                     </p>
                     <p>
                         <nuxt-link to="#0">
-                            <span>Список желаемого <span v-if="favoritesCount > 0">{{favoritesCount}}</span></span>
+                            <span>Список желаемого</span>
+                            <span v-if="favoritesCount > 0">{{favoritesCount}}</span>
                         </nuxt-link>
                     </p>
                     <p v-if="!isLogged">

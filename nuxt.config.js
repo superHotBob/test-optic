@@ -31,7 +31,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extractCSS: false,
+    extractCSS: true,
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -61,14 +61,15 @@ module.exports = {
     // '/api/': 'http://14.esobolev.ru/',
     '/api/': 'http://home-optic.proj/',
   },
-  cache: false,
+  cache: true,
   css: [
     '~/assets/styles/styles.scss',
     'swiper/dist/css/swiper.css'
   ],
   plugins: [
-    '~/plugins/axios',
     '~/plugins/array',
+    '~/plugins/axios',
+    '~/plugins/cookie.js',
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-masonry-css', ssr: true }
   ]

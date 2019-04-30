@@ -10,6 +10,7 @@ const section = () => import('~/pages/section/_section').then(m => m.default || 
 const element = () => import('~/pages/section/_element').then(m => m.default || m)
 const order = () => import('~/pages/order/index').then(m => m.default || m)
 const basket = () => import('~/pages/basket/index').then(m => m.default || m)
+const advantages = () => import('~/pages/advantages/index').then(m => m.default || m)
 
 export function createRouter () {
     return new Router({
@@ -19,6 +20,11 @@ export function createRouter () {
                 path: '',
                 name: 'main',
                 component: main,
+            },
+            {
+                path: '/our-advantages',
+                name: 'advantages',
+                component: advantages,
             },
             {
                 path: '/order',

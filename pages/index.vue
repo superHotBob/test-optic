@@ -3,7 +3,7 @@
          <div v-swiper:mySwiper="swiperOption">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item, index) in swiperItems" :key="index">
-                    <img :src="item.SRC">
+                    <img :src="item.src">
                 </div>
             </div>
             <div class="swiper-pagination swiper-pagination-bullets"></div>
@@ -33,10 +33,10 @@ export default {
     },
     async asyncData({ $axios }) {
         let [swiperData] = await Promise.all([
-            $axios.get(`/api/v1/iblock/list/?iblock=2`)
+            $axios.get(`/api/v1/iblock/list/?iblock=2&properties[0]=name`)
         ])
         return {
-            swiperItems: swiperData.data.ITEMS,
+            swiperItems: swiperData.data.items,
         }
     }
 }

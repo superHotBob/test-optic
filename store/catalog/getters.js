@@ -24,5 +24,11 @@ export default {
     if (state.favorites.items.hasOwnProperty(id))
       return true;
     return false;
+  },
+  getBestsellers: (state) => {
+    return state.bestsellers;
+  },
+  getNewItems: (state) => {
+    return state.newItems;
   }
 }

@@ -5,6 +5,8 @@ export const actions = {
             dispatch('user/state'),
             dispatch('catalog/sections'),
             dispatch('catalog/favorites'),
+            dispatch('catalog/bestsellers'),
+            dispatch('catalog/newItems'),
             dispatch('order/state'),
             dispatch('basket/state').then(response => {
                 res.setHeader('Set-Cookie', response.headers['set-cookie']);

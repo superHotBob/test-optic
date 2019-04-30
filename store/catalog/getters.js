@@ -14,6 +14,12 @@ export default {
   getCountFavorites: (state) => {
     return state.favorites.count;
   },
+  getEndpointBestsellers: (state) => {
+    return state.endpoint.bestsellers;
+  },
+  getEndpointElements: (state) => {
+    return state.endpoint.elements;
+  },
   isFavorites: (state) => (id) => {
     if (state.favorites.items.hasOwnProperty(id))
       return true;

@@ -16,9 +16,9 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
-    script: [
-      { src: 'https://vk.com/js/api/openapi.js?160' }
-    ],
+    // script: [
+    //   { src: 'https://vk.com/js/api/openapi.js?160' }
+    // ],
   },
   /*
   ** Customize the progress bar color

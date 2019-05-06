@@ -1,34 +1,48 @@
 <template>
-    <div>
-         <div v-swiper:mySwiper="swiperOption">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(item, index) in swiperItems" :key="index">
-                    <img :src="item.src">
-                </div>
-            </div>
-            <div class="swiper-pagination swiper-pagination-bullets"></div>
-        </div>
-    </div>
+<div>
+    <big-slider
+        :items="swiperItems"
+        :breakpoints="bigSliderBps" />
+    <small-slider
+        class="index-features main-container"
+        :breakpoints="indexFeaturesBps"
+        :date="false" />
+
+</div>
 </template>
 
 <script>
 
+import BigSlider from '~/components/sliders/BigSlider.vue'
+import SmallSlider from '~/components/sliders/SmallSlider.vue'
+
 export default {
-    components: {
-        
-    },
     data () {
-      return {
-        swiperOption: {
-            loop: true,
-            slidesPerView: 2,
-            spaceBetween: 0,
-            pagination: {
-                el: '.swiper-pagination',
-                dynamicBullets: true
+        return {
+            bigSliderBps: {
+                768: {
+                    slidesPerView: 1,
+                }
             },
+            indexFeaturesBps: {
+                1000: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                650: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10,
+                }
+            }
         }
-      }
+    },
+    components: {
+        BigSlider,
+        SmallSlider,
     },
     async asyncData({ $axios }) {
         let [swiperData, stockData, banerData] = await Promise.all([
@@ -44,3 +58,16 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+@media (max-width: 1000px) and (min-width: 769px) {
+    .index-features {
+        padding-right: 0;
+    }
+}
+@media (max-width: 650px) {
+    .index-features {
+        padding-right: 0;
+    }
+}
+</style>

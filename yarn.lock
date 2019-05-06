@@ -996,6 +996,11 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
+"@types/lru-cache@^4.1.1":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@types/lru-cache/-/lru-cache-4.1.2.tgz#528ba392658055dba78fc3be906ca338a1a2d1c5"
+  integrity sha512-ve2IoUJClE+4S/sG2zoLGEHP6DCvqgyz7UkHZdiICdQaAYRaCXsRWfJlbL8B0KvUyo9lgzD+oR0YSy4YikFyFQ==
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
@@ -1541,6 +1546,16 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
+
+axios-extensions@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/axios-extensions/-/axios-extensions-3.0.5.tgz#824490e2c017df4adceb277ed3f314123a1d1a77"
+  integrity sha512-jbc4J+kTWi3dGLGyItZ0RzCKqADgqFwLfhkp4CsmT3/XGcS2/CkZ0glbHeiMrZ7bh5uydX7gVRUiu01dIdT/WA==
+  dependencies:
+    "@types/lru-cache" "^4.1.1"
+    lru-cache "^4.1.5"
+    tslib "^1.9.0"
+    util "^0.11.1"
 
 axios-retry@^3.1.2:
   version "3.1.2"
@@ -4765,7 +4780,7 @@ lower-case@^1.1.1:
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
   integrity sha1-miyr0bno4K6ZOkv31YdcOcQujqw=
 
-lru-cache@^4.0.1, lru-cache@^4.1.2:
+lru-cache@^4.0.1, lru-cache@^4.1.2, lru-cache@^4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
   integrity sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
@@ -7918,7 +7933,7 @@ util@0.10.3:
   dependencies:
     inherits "2.0.1"
 
-util@^0.11.0:
+util@^0.11.0, util@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/util/-/util-0.11.1.tgz#3236733720ec64bb27f6e26f421aaa2e1b588d61"
   integrity sha512-HShAsny+zS2TZfaXxD9tYj4HQGlBezXZMZuM/S5PKLLoZkShZiGk9o5CzukI1LVHZvjdvZ2Sj1aW/Ndn2NB/HQ==
@@ -8105,6 +8120,11 @@ vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vuex-cache@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/vuex-cache/-/vuex-cache-3.1.0.tgz#aad576cfb39b325cc7a43ea9a42414e356374c4b"
+  integrity sha512-XDzQ/jddmErZVquyHhbOHc6DPhVSt5bU8433Fzsai3XydU3cxyYTUd3PH2Ww5sesB9yu5f0wKk6MFIqgjSa3Yw==
 
 vuex@^3.1.0:
   version "3.1.0"

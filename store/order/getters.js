@@ -23,7 +23,10 @@ export default {
     return comment;
   },
   getProperties: (state) => {
-    return state.order.ORDER_PROP.properties;
+    if (state.order.hasOwnProperty('ORDER_PROP')) {
+      return state.order.ORDER_PROP.properties;
+    }
+    
   },
   getLocationName: (state) => (payload) => {
     var locations = state.locations[payload.id].output;
@@ -52,7 +55,9 @@ export default {
     }
   },
   getTotalPrice: (state) => {
-    return state.order.TOTAL.ORDER_TOTAL_PRICE_FORMATED;
+    if (state.order.hasOwnProperty('ORDER_PROP')) {
+      return state.order.TOTAL.ORDER_TOTAL_PRICE_FORMATED;
+    }
   },
   isEmptyBasket: (state) => {
     return state.order.SHOW_EMPTY_BASKET;

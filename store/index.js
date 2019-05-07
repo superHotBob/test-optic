@@ -5,7 +5,6 @@ export const actions = {
             dispatch('user/STATE'),
             dispatch('catalog/STATE'),
             dispatch('basket/STATE', res),
-            dispatch('order/STATE')
         ])
     }
 }

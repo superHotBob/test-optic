@@ -7,7 +7,6 @@
         class="index-features main-container"
         :breakpoints="indexFeaturesBps"
         :date="false" />
-
 </div>
 </template>
 
@@ -44,17 +43,8 @@ export default {
         BigSlider,
         SmallSlider,
     },
-    async asyncData({ $axios }) {
-        let [swiperData, stockData, banerData] = await Promise.all([
-            $axios.get(`/api/v1/iblock/list/?iblock=2&properties[0]=name`, { cache: true }),
-            $axios.get(`/api/v1/iblock/list/?iblock=5&count=3&properties[0]=link`, { cache: true }),
-            $axios.get(`/api/v1/iblock/list/?iblock=4&count=1&properties[0]=link`, { cache: true })
-        ])
-        return {
-            swiperItems: swiperData.data.items,
-            stockItems: stockData.data.items,
-            banerData: stockData.data.items
-        }
+    asyncData({ store }) {     
+        return store.dispatch('catalog/CACHE_SERVICE');
     }
 }
 </script>

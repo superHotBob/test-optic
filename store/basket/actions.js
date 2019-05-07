@@ -1,12 +1,14 @@
 import qs from 'qs';
 
 export default {
-    async state({commit, getters}) {
-        // let auth = await this.$axios.post(`/api/v1/auth/`,qs.stringify({'USER_LOGIN':'admin','USER_PASSWORD':'123456','AUTH_FORM':'Y','TYPE':'AUTH'}));
-        let response = await this.$axios.get(getters.getEndpoint);
-        commit('setBasket', response.data.basket);
-        return response;
+
+    STATE ({commit, getters}, response) {
+        return this.$axios.get(getters.getEndpoint).then((result) => {         
+            response.setHeader('Set-Cookie', result.headers['set-cookie']);
+            commit('setBasket', result.data.basket);
+        })
     },
+
     async delete({commit, getters}, payload) {
         var post = {};
 

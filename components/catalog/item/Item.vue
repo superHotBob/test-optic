@@ -46,7 +46,7 @@ export default {
     methods: {
       async basket(url) {
         let response = await this.$axios.get(`${url}&ajax_basket=Y`);
-        this.$store.dispatch('basket/state');
+        this.$store.dispatch('basket/STATE');
       },
       clickFavorites() {
         if (!!this.timer)
@@ -69,7 +69,7 @@ export default {
           elementsId.push(this.id);
 
         this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
-        this.$store.dispatch('catalog/favorites');
+        this.$store.dispatch('catalog/GET_FAVORITES');
       }
     },
     computed: {

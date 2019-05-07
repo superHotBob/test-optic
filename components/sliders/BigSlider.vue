@@ -28,6 +28,7 @@ export default {
     data () {
         return {
             swiperOption: {
+                roundLengths: true,
                 speed: 500,
                 loop: true,
                 slidesPerView: 2,

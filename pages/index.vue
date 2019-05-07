@@ -96,16 +96,14 @@ export default {
 <style lang="scss">
 .index-grid {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 270px minmax(100px, 3fr);
     grid-column-gap: 30px;
-    grid-column-gap: 2.5%;
     grid-template-areas: 
         "aside catalog"
         "aside blog";
     margin-top: 30px;
     &__aside {
         grid-area: aside;
-        width: 270px;
     }
     .aside-1 {
         height: 460px;
@@ -121,18 +119,15 @@ export default {
     }
     &__catalog {
         grid-area: catalog;
+        margin-bottom: auto;
         border: 1px solid red;
-        .item-slider {
-            width: 100%;
-        }
     }
-
+    &__blog {
+        margin-top: auto;
+    }
 }
 @media (max-width: 768px) {
     .index-grid {
-        &__aside {
-            width: 310px;
-        }
         .aside-1 {
             height: 150px;
             img {
@@ -152,7 +147,6 @@ export default {
             .banner-card__over {
                 width: 85%;
             }
-
         }
     }
 }

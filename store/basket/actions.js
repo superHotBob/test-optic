@@ -4,8 +4,8 @@ export default {
 
     STATE ({commit, getters}, response) {
         return this.$axios.get(getters.getEndpoint).then((result) => {         
-            response.setHeader('Set-Cookie', result.headers['set-cookie']);
             commit('setBasket', result.data.basket);
+            return result;
         })
     },
 

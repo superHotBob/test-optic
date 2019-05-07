@@ -78,17 +78,8 @@ export default {
         SmallSlider,
         ItemSlider,
     },
-    async asyncData({ $axios }) {
-        let [swiperData, stockData, banerData] = await Promise.all([
-            $axios.get(`/api/v1/iblock/list/?iblock=2&properties[0]=name`),
-            $axios.get(`/api/v1/iblock/list/?iblock=5&count=3&properties[0]=link`),
-            $axios.get(`/api/v1/iblock/list/?iblock=4&count=1&properties[0]=link`)
-        ])
-        return {
-            swiperItems: swiperData.data.items,
-            stockItems: stockData.data.items,
-            banerData: stockData.data.items
-        }
+    asyncData({ store }) {     
+        return store.dispatch('catalog/CACHE_SERVICE');
     }
 }
 </script>

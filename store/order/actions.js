@@ -1,12 +1,16 @@
 import qs from 'qs';
 
 export default {
-    async state({commit, getters}) {
-        let order = await this.$axios.$get(getters.getEndpointOrder);
-        commit('setOrder', order);
-        commit('setSessid', order);
-        commit('setLocation', order);
+
+    STATE ({commit, getters}) {
+        return this.$axios.$get(getters.getEndpointOrder)
+                .then((result) => {
+                    commit('setOrder', result);
+                    commit('setSessid', result);
+                    commit('setLocation', result);
+                })
     },
+
     async request({commit, getters}, payload) {
         let result = await this.$axios.$post(getters.getEndpointOrder, qs.stringify(payload));
         

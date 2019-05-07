@@ -4,8 +4,8 @@ export const actions = {
         return Promise.all([
             dispatch('user/STATE'),
             dispatch('catalog/STATE'),
-            dispatch('basket/STATE', res).then((result) => {
-                response.setHeader('Set-Cookie', result.headers['set-cookie']);
+            dispatch('basket/STATE').then((result) => {
+                res.setHeader('Set-Cookie', result.headers['set-cookie']);
             }),
         ])
     }

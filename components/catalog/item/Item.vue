@@ -1,10 +1,10 @@
 <template>
 <nuxt-link
     class="swiper-slide item"
-    :to="{ name: 'element', params: {element: item.CODE }}"
+    :to="{path: item.URL}"
 >
     <div class="item__img">
-        <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img"/>
+        <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
     </div>
     <div class="item__flags">
         <span class="item__flag left">NEW</span>
@@ -13,7 +13,7 @@
 
     <template v-if="item.JS_OFFERS">
         <ul
-            class="item__offers sku-props"
+            class="item__offers"
             v-for="prop in item.SKU_PROPS"
             :key="prop.ID"
             ref="sku_line_block"
@@ -121,9 +121,6 @@ export default {
 </script>
 
 <style>
-  .sku-props .selected {
-    color: #007bff;
-  }
   img {
     max-width: 100%;
   }

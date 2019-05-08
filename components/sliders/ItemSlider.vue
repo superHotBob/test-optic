@@ -58,7 +58,6 @@
             </nuxt-link>
         </div>
     </div>
-
 </div>
 </template>
 

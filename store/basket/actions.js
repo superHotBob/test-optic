@@ -2,9 +2,8 @@ import qs from 'qs';
 
 export default {
 
-    STATE ({commit, getters}, response) {
+    STATE ({commit, getters}) {
         return this.$axios.get(getters.getEndpoint).then((result) => {         
-            response.setHeader('Set-Cookie', result.headers['set-cookie']);
             commit('setBasket', result.data.basket);
         })
     },

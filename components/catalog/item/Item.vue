@@ -1,9 +1,9 @@
 <template>
     <div>
-      <img v-for="img in item.CURRENT.MORE_PHOTO" :key="img.ID" :src="'http://home-optic.proj' + img.SRC"/>
+      <img v-for="img in item.CURRENT.MORE_PHOTO" :key="img.ID" v-lazy="img"/>
       <div class="item-name">
         <p>
-          <nuxt-link :to="{ name: 'element', params: {element: item.CODE }}">
+          <nuxt-link :to="{path: item.URL}">
             {{item.CURRENT.NAME}}
           </nuxt-link>
         </p>

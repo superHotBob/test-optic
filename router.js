@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-
 const main = () => import('~/pages/index').then(m => m.default || m)
 const index = () => import('~/pages/section/index').then(m => m.default || m)
 const section = () => import('~/pages/section/_section').then(m => m.default || m)

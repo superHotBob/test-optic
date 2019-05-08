@@ -70,7 +70,8 @@ module.exports = {
     '~/plugins/array',
     '~/plugins/axios',
     '~/plugins/cookie',
-    { src: '~/plugins/vuex-cache.js', ssr: false },
+    { src: '~/plugins/lazyload', ssr: false },
+    { src: '~/plugins/vuex-cache', ssr: false },
     { src: '~/plugins/swiper', ssr: false },
     { src: '~/plugins/masonry', ssr: true }
   ],

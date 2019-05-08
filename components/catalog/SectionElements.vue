@@ -1,12 +1,9 @@
 <template>
-  <masonry :cols="{default: 6, 1300: 5, 1000: 4, 700: 2, 400: 1}" :gutter="15">
-    <div 
-      class="catalog-item" 
-      v-for="(item, index) in items" :key="index" 
-    >
-      <item v-bind:item="item"></item>
+    <div class="main-container">
+      <div style="display: flex; flex-wrap: wrap; margin-left: -15px; margin-right: -15px;">
+        <item v-for="(item, index) in items" :key="index" v-bind:item="item"></item>
+      </div>
     </div>
-  </masonry>
 </template>
 
 <script>

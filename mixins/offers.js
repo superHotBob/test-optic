@@ -52,11 +52,11 @@ export default {
                 boolOneSearch = true;
                 for (j in this.selectedValues)
                 {
-                if (this.selectedValues[j] !== this.item.JS_OFFERS[i].TREE[j])
-                {
-                    boolOneSearch = false;
-                    break;
-                }
+                    if (this.selectedValues[j] !== this.item.JS_OFFERS[i].TREE[j])
+                    {
+                        boolOneSearch = false;
+                        break;
+                    }
                 }
                 if (boolOneSearch)
                 {

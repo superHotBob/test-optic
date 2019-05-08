@@ -140,7 +140,7 @@
                     <b-collapse class="b-collapse" id="accordion-1" accordion="my-accordion" role="tabpanel">
                         <ul>
                             <li><nuxt-link :to="{ name:'advantages' }">Наши преимущества</nuxt-link></li>
-                            <li><nuxt-link to="#0">О нас</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'about' }">О нас</nuxt-link></li>
                             <li><nuxt-link to="#0">Отзывы клиентов</nuxt-link></li>
                         </ul>
                     </b-collapse>

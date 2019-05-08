@@ -25,10 +25,4 @@ export default {
       return true;
     return false;
   },
-  getBestsellers: (state) => {
-    return JSON.parse(JSON.stringify(state.bestsellers));
-  },
-  getNewItems: (state) => {
-    return JSON.parse(JSON.stringify(state.newItems));
-  }
 }

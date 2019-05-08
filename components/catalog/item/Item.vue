@@ -117,7 +117,6 @@ export default {
         isFavorites: 'catalog/isFavorites',
       }),
       labelNew() {
-        console.log(this.item.CURRENT)
         if (this.item.DISPLAY_PROPERTIES.new)
           return true;
         return false;

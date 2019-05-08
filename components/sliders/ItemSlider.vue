@@ -100,16 +100,11 @@ export default {
                 freeMode: true,
                 breakpoints: this.$props.breakpoints,
             },
+            bestsellers: JSON.parse(JSON.stringify(this.$store.state.catalog.bestsellers))
         }
     },
     components: {
         Item
     },
-    computed: {
-        ...mapGetters({
-            bestsellers: 'catalog/getBestsellers',
-        })
-    },
-    
 }
 </script>

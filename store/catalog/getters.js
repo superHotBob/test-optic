@@ -26,9 +26,9 @@ export default {
     return false;
   },
   getBestsellers: (state) => {
-    return state.bestsellers;
+    return JSON.parse(JSON.stringify(state.bestsellers));
   },
   getNewItems: (state) => {
-    return state.newItems;
+    return JSON.parse(JSON.stringify(state.newItems));
   }
 }

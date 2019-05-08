@@ -37,7 +37,7 @@ export default {
                     delay: 5000,
                 },
                 pagination: {
-                    el: '.s-pagination',
+                    el: '.big-slider .s-pagination',
                     bulletClass: 's-pagination__bullet',
                     bulletActiveClass: 's-pagination__bullet--active',
                     clickableClass: 's-pagination--clickable',

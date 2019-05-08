@@ -64,9 +64,11 @@ export default {
                     break;
                 }
             }
-
+            console.log(index);
             if (index > -1)
                 this.item.CURRENT = this.item.JS_OFFERS[index];
+
+            console.log(this.item.CURRENT)
 
             
         },

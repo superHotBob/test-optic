@@ -3,8 +3,8 @@
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
         <div class="swiper-wrapper">
             <p class="swiper-slide active">Название категории</p>
-            <p class="swiper-slide" @click="condition = !condition">Очень длинное название категории</p>
-            <p class="swiper-slide" :class="{'active': condition}">Еще какая-то категория</p>
+            <p class="swiper-slide">Очень длинное название категории</p>
+            <p class="swiper-slide">Еще какая-то категория</p>
         </div>
         <div class="item-slider__controls">
             <button class="item-slider__prev">Назад</button>
@@ -62,18 +62,12 @@ export default {
                 freeMode: true,
                 breakpoints: this.$props.breakpoints,
             },
-            condition: true,
-            wideView: false
+            wideView: false,
+            bestsellers: JSON.parse(JSON.stringify(this.$store.state.catalog.bestsellers))
         }
     },
     components: {
         Item
     },
-    computed: {
-        ...mapGetters({
-            bestsellers: 'catalog/getBestsellers',
-        })
-    },
-    
 }
 </script>

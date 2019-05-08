@@ -7,8 +7,8 @@
         <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
     </div>
     <div class="item__flags">
-        <span class="item__flag left">NEW</span>
-        <span class="item__flag right red">SALE</span>
+        <span v-if="labelNew" class="item__flag left">NEW</span>
+        <span v-if="labelSale" class="item__flag right red">SALE</span>
     </div>
     <div
         class="item__offers"
@@ -118,7 +118,19 @@ export default {
     computed: {
       ...mapGetters({
         isFavorites: 'catalog/isFavorites',
-      })
+      }),
+      labelNew() {
+        if (this.item.DISPLAY_PROPERTIES.new)
+          return true;
+        return false;
+      },
+      labelSale() {
+        var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
+
+        if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
+          return true;
+        return false;
+      }
     },
 }
 </script>

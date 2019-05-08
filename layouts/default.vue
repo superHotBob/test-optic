@@ -362,6 +362,8 @@ export default {
     },
     mounted() {
         window.addEventListener('click', this.documentClick)
+        this.$store.dispatch('user/STATE');
+        this.$store.dispatch('basket/STATE');
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

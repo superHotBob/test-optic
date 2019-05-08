@@ -22,13 +22,6 @@ export default {
         )
     ),
 
-    STATE ({ dispatch }) {
-        return Promise.all([
-            dispatch('CACHE_STATE'),
-            dispatch('GET_FAVORITES')
-        ])
-    },
-
     GET_FAVORITES ({ commit, getters }) {
         return this.$axios.$get(getters.getEndpointFavorites)
                 .then((result) => {

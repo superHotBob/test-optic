@@ -364,6 +364,7 @@ export default {
         window.addEventListener('click', this.documentClick)
         this.$store.dispatch('user/STATE');
         this.$store.dispatch('basket/STATE');
+        this.$store.dispatch('catalog/GET_FAVORITES');
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

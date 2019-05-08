@@ -5,7 +5,6 @@ export default {
     STATE ({commit, getters}) {
         return this.$axios.get(getters.getEndpoint).then((result) => {         
             commit('setBasket', result.data.basket);
-            return result;
         })
     },
 

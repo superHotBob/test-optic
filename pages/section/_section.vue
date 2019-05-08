@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         onChangePagen: function () {
-            this.$router.push({ name: this.$route.name, params:{filter:this.$route.params.filter, pagen:this.pagen}});
+            this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}});
         },
     },
     data() {
@@ -50,7 +50,8 @@ export default {
     },
     asyncData({ params, $axios, error }) {
 
-        var pagen = 1,
+        var url,
+            pagen = 1,
             filter = 'clear';
         
         if (params.filter)  
@@ -59,7 +60,13 @@ export default {
         if (params.pagen)  
             pagen = Number(params.pagen);
         
-        return $axios.get(`/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`)
+        if (params.tag)
+            url = `/api/v1/catalog/${params.section}/${params.tag}/?PAGEN_1=${pagen}`;
+        else   
+            url = `/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`;
+
+
+        return $axios.get(url)
         .then((response) => {
             return { 
                 result: response.data,

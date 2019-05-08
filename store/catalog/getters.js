@@ -24,5 +24,5 @@ export default {
     if (state.favorites.items.hasOwnProperty(id))
       return true;
     return false;
-  },
+  }
 }

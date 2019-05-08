@@ -16,7 +16,7 @@
         </div>
 
         <div class="basket__popup" :class="{'active': showPopup}" ref="dropdownMenu">
-            <div class="hidden-mobile">
+            <div class="hidden-mobile" v-if="getBasket.GRID">
                 <div class="basket__item" v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID">
                     <div class="basket__image">
                         <img src="" alt="">
@@ -134,6 +134,7 @@ export default {
     },
     mounted() {
         window.addEventListener('click', this.documentClick)
+        this.$store.dispatch('basket/STATE');
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

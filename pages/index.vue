@@ -6,6 +6,7 @@
     />
     <small-slider
         class="index-features main-container"
+        :items="stockItems"
         :breakpoints="indexFeaturesBps"
         :date="true"
     />

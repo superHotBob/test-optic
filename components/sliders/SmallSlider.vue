@@ -2,30 +2,15 @@
 <!-- <div> -->
     <div class="small-slider" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper">
-            <nuxt-link class="swiper-slide banner-card" :class="{'s-date': date}" to="#0">
-                <img src="~/assets/images/placeholders/cards/03.jpg" alt="">
+            <nuxt-link 
+                v-for="(item, index) in items" :key="index" 
+                class="swiper-slide banner-card" 
+                :class="{'s-date': date}" 
+                :to="{ path: item.properties.link.value }"
+            >
+                <img v-lazy="item.src" alt="">
                 <div class="banner-card__over">
-                    <p>Скидки до 20% на элитные оправы Marc O'Polo</p>
-                    <span v-if="date">
-                        <svg width="13" height="13"><use href="#svg-calendar"/></svg>
-                        03/08/2016
-                    </span>
-                </div>
-            </nuxt-link>
-            <nuxt-link class="swiper-slide banner-card" :class="{'s-date': date}" to="#0">
-                <img src="~/assets/images/placeholders/cards/04.jpg" alt="">
-                <div class="banner-card__over">
-                    <p>Лучшие цены на мировые линзы Essilor</p>
-                    <span v-if="date">
-                        <svg width="13" height="13"><use href="#svg-calendar"/></svg>
-                        03/08/2016
-                    </span>
-                </div>
-            </nuxt-link>
-            <nuxt-link class="swiper-slide banner-card" :class="{'s-date': date}" to="#0">
-                <img src="~/assets/images/placeholders/cards/05.jpg" alt="">
-                <div class="banner-card__over">
-                    <p>Изысканный дизайн оправ Brendel</p>
+                    <p>{{item.name}}</p>
                     <span v-if="date">
                         <svg width="13" height="13"><use href="#svg-calendar"/></svg>
                         03/08/2016
@@ -41,7 +26,7 @@
 <script>
 
 export default {
-    props: ['breakpoints', 'date'],
+    props: ['items', 'breakpoints', 'date'],
     data () {
         return {
             swiperOption: {

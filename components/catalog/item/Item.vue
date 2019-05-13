@@ -95,7 +95,7 @@ export default {
         }
         this.timer = setTimeout(() => {
             this.loadFavorites();
-        }, 500)
+        }, 100)
       },
       loadFavorites() {
          var cookie, elementsId = [];

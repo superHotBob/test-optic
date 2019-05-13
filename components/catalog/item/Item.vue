@@ -10,25 +10,26 @@
         <span v-if="labelNew" class="item__flag left">NEW</span>
         <span v-if="labelSale" class="item__flag right red">SALE</span>
     </div>
-
-    <template v-if="item.JS_OFFERS">
-        <ul
-            class="item__offers"
-            v-for="prop in item.SKU_PROPS"
-            :key="prop.ID"
-            ref="sku_line_block"
+    <div
+        class="item__offers"
+        :class="{'item__offers--wide': wideView}"
+        v-for="prop in item.SKU_PROPS"
+        :key="prop.ID"
+        ref="sku_line_block"
         >
-            <div>{{prop.NAME}}</div>
+        <p v-if="wideView">{{prop.NAME}}</p>
+        <ul>
             <li
                 :data-value="value.ID"
                 @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
                 v-for="value in prop.VALUES"
                 :key="value.ID"
             >
-                {{value.NAME}}
+                <img v-if="value.PICT" :src="value.PICT.SRC" alt="">
+                <span v-if="!value.PICT">{{value.NAME}}</span>
             </li>
         </ul>
-    </template>
+    </div>
 
     <div class="item__info">
         <p class="item__name">{{item.CURRENT.NAME}}</p>
@@ -74,13 +75,15 @@ import { mapGetters } from 'vuex'
 
 export default {
     mixins: [offers],
+    // props: ['item', 'wideView'],
     props: {
         item: Object,
     },
     data() {
       return {
         timer:null,
-        id: this.item.ID
+        id: this.item.ID,
+        wideView: false
       }
     },
     methods: {
@@ -134,6 +137,6 @@ export default {
 
 <style>
   img {
-    max-width: 100%;
+    /* max-width: 100%; */
   }
 </style>

@@ -1,23 +1,22 @@
 .item {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 300px;
+    height: auto;
     padding: 15px;
     padding-top: 17px;
     padding-bottom: 22px;
     color: #000;
     border: 1px solid #fff;
     transition: border-color 150ms;
-
-
-    border-color: blue;
-
-
     &:hover,
     &:focus {
         text-decoration: none;
     }
     &__img {
         height: 260px;
+        margin-bottom: auto;
         text-align: center;
         white-space: nowrap;
         &::before {
@@ -57,11 +56,26 @@
         }
     }
     &__offers {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        font-size: 0;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        &--wide {
+            justify-content: flex-start;
+        }
+        p {
+            margin: 0;
+            margin-top: 10px;
+            margin-right: 10px;
+            font-size: 12px;
+            line-height: 30px;
+            color: #4a4a4a;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+            text-align: center;
+        }
         li {
             display: inline-block;
             min-height: 30px;
@@ -76,7 +90,10 @@
             border: 1px solid #e6e6e6;
             cursor: pointer;
             transition: color 150ms, border-color 150ms;
-            &.active {
+            * {
+                pointer-events: none;
+            }
+            &.selected {
                 color: #000;
                 border-color: #000;
             }

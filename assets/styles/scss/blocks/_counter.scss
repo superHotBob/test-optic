@@ -1,0 +1,15 @@
+.counter {
+    input {
+        width: 300px;
+        text-align: center;
+        font-size: 30px;
+        color: #000;
+        background-color: #fff;
+        -moz-appearance:textfield;
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none; 
+            margin: 0;     
+        }
+    } 
+}

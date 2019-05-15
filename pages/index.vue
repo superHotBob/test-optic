@@ -41,6 +41,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, doloribus.</p>
         </div>
     </div>
+    <item-preview />
 </div>
 </template>
 
@@ -49,6 +50,7 @@
 import BigSlider from '~/components/sliders/BigSlider.vue'
 import SmallSlider from '~/components/sliders/SmallSlider.vue'
 import ItemSlider from '~/components/sliders/ItemSlider.vue'
+import ItemPreview from '~/components/catalog/item/ItemPreview.vue'
 
 export default {
     data () {
@@ -78,6 +80,7 @@ export default {
         BigSlider,
         SmallSlider,
         ItemSlider,
+        ItemPreview,
     },
     asyncData({ store }) {     
         return store.dispatch('catalog/CACHE_SERVICE');

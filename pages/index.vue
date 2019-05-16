@@ -39,13 +39,41 @@
         <div class="index-grid__blog">
             <h2>Блог</h2>
             <small-slider
-                class="index-features main-container"
+                class="index-features"
                 :items="stockItems"
                 :breakpoints="indexBlogBps"
                 :date="true"
             />
-            <div></div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, doloribus.</p>
+            <div class="index-grid__banners">
+                <nuxt-link class="swiper-slide banner-card" to="#0">
+                    <img src="~/assets/images/placeholders/cards/10.jpg" alt="">
+                    <div class="banner-card__over">
+                        <p>Профессиональое изготовление очков</p>
+                        <b>Подробнее</b>
+                    </div>
+                </nuxt-link>
+                <nuxt-link class="swiper-slide banner-card" to="#0">
+                    <img src="~/assets/images/placeholders/cards/04.jpg" alt="">
+                    <div class="banner-card__over">
+                        <p>Скидка 20% на прогрессивные линзы SEIKO</p>
+                        <b>Купить</b>
+                    </div>
+                </nuxt-link>
+                <nuxt-link class="swiper-slide banner-card" to="#0">
+                    <img src="~/assets/images/placeholders/cards/10.jpg" alt="">
+                    <div class="banner-card__over">
+                        <p>Профессиональое изготовление очков</p>
+                        <b>Подробнее</b>
+                    </div>
+                </nuxt-link>
+                <nuxt-link class="swiper-slide banner-card" to="#0">
+                    <img src="~/assets/images/placeholders/cards/04.jpg" alt="">
+                    <div class="banner-card__over">
+                        <p>Скидка 20% на прогрессивные линзы SEIKO</p>
+                        <b>Купить</b>
+                    </div>
+                </nuxt-link>
+            </div>
         </div>
     </div>
     <item-preview />
@@ -144,9 +172,86 @@ export default {
     &__blog {
         margin-top: auto;
     }
+    &__banners {
+        display: flex;
+        flex-wrap: wrap;
+        .banner-card {
+            flex-shrink: 0;
+            flex-grow: 1;
+            width: calc(57% - 30px);
+            margin-top: 30px;
+            b {
+                display: block;
+                margin-top: 15px;
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase
+            }
+            p {
+                font-size: 20px;
+                line-height: 28px;
+            }
+            &__over {
+                right: unset;
+                bottom: 10px;
+                left: 10px;
+                width: 66%;
+            }
+            &:nth-of-type(2n) {
+                width: 43%;
+                margin-left: 30px;
+                .banner-card {
+                    &__over {
+                        width: 63%;
+                        top: 10px;
+                        bottom: unset;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1100px) {
+    .index-grid {
+        &__banners {
+            .banner-card {
+                p {
+                    font-size: 16px;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .index-grid {
+        &__banners {
+            .banner-card {
+                &:nth-of-type(n) {
+                    width: 100%;
+                    margin-left: 0;
+                    .banner-card {
+                        &__over {
+                            top: unset;
+                            bottom: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 @media (max-width: 768px) {
     .index-grid {
+        grid-template-columns: minmax(100px, 768px);
+        grid-template-areas: 
+            "catalog catalog"
+            "aside aside"
+            "blog blog";
+        grid-template-areas: 
+            "catalog"
+            "aside"
+            "blog";
         .aside-1 {
             height: 150px;
             img {
@@ -165,6 +270,12 @@ export default {
             height: 255px;
             .banner-card__over {
                 width: 85%;
+            }
+        }
+        &__banners {
+            margin-top: 30px;
+            .banner-card {
+                margin-top: 10px;
             }
         }
     }

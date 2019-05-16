@@ -3,6 +3,14 @@
     class="swiper-slide item"
     :to="{path: item.URL}"
 >
+    <button
+        class="item__preview"
+        v-if="!wideView"
+        v-b-modal.item-preview
+        @click.prevent=""
+    >
+        Быстрый просмотр
+    </button>
     <div class="item__img">
         <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
     </div>
@@ -81,62 +89,56 @@ export default {
     },
     data() {
       return {
-        timer:null,
+        timer: null,
         id: this.item.ID,
         wideView: false
       }
     },
     methods: {
-      async basket(url) {
-        let response = await this.$axios.get(`${url}&ajax_basket=Y`);
-        this.$store.dispatch('basket/STATE');
-      },
-      clickFavorites() {
-        if (!!this.timer)
-        {
-            clearTimeout(this.timer);
-        }
-        this.timer = setTimeout(() => {
-            this.loadFavorites();
-        }, 100)
-      },
+        async basket(url) {
+            let response = await this.$axios.get(`${url}&ajax_basket=Y`);
+            this.$store.dispatch('basket/STATE');
+        },
+        clickFavorites() {
+            if (!!this.timer)
+            {
+                clearTimeout(this.timer);
+            }
+            this.timer = setTimeout(() => {
+                this.loadFavorites();
+            }, 100)
+        },
       loadFavorites() {
-         var cookie, elementsId = [];
+        var cookie, elementsId = [];
         
         if (cookie = this.$cookie.get('favorites'))
-          elementsId = JSON.parse(cookie);
+            elementsId = JSON.parse(cookie);
 
         if (this.in_array(this.id,elementsId))
-          elementsId.remove(this.id);
+            elementsId.remove(this.id);
         else 
-          elementsId.push(this.id);
+            elementsId.push(this.id);
 
         this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
         this.$store.dispatch('catalog/GET_FAVORITES');
       }
     },
     computed: {
-      ...mapGetters({
-        isFavorites: 'catalog/isFavorites',
-      }),
-      labelNew() {
-        if (this.item.DISPLAY_PROPERTIES.new)
-          return true;
-        return false;
-      },
-      labelSale() {
-        var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
+        ...mapGetters({
+            isFavorites: 'catalog/isFavorites',
+        }),
+        labelNew() {
+            if (this.item.DISPLAY_PROPERTIES.new)
+                return true;
+            return false;
+        },
+        labelSale() {
+            var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
 
-        if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
-          return true;
-        return false;
-      }
+            if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
+                return true;
+            return false;
+        }
     },
 }
 </script>
-
-<style>
-  img {
-    /* max-width: 100%; */
-  }
-</style>

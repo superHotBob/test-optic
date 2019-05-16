@@ -40,7 +40,7 @@ export default {
                 slidesPerView: 'auto',
                 spaceBetween: 0,
                 pagination: {
-                    el: '.s-pagination',
+                    el: '.item-slider .s-pagination',
                     bulletClass: 's-pagination__bullet',
                     bulletActiveClass: 's-pagination__bullet--active',
                     clickableClass: 's-pagination--clickable',

@@ -22,7 +22,7 @@
         </p>
         <button class="btn btn-primary" v-on:click.stop.prevent="basket(item.CURRENT.ADD_URL)">Купить</button>
       </div>
-    
+
     </div>
 </template>
 

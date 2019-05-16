@@ -39,26 +39,11 @@
         <div class="index-grid__blog">
             <h2>Блог</h2>
             <small-slider
-                class="index-features"
                 :items="stockItems"
                 :breakpoints="indexBlogBps"
                 :date="true"
             />
             <div class="index-grid__banners">
-                <nuxt-link class="swiper-slide banner-card" to="#0">
-                    <img src="~/assets/images/placeholders/cards/10.jpg" alt="">
-                    <div class="banner-card__over">
-                        <p>Профессиональое изготовление очков</p>
-                        <b>Подробнее</b>
-                    </div>
-                </nuxt-link>
-                <nuxt-link class="swiper-slide banner-card" to="#0">
-                    <img src="~/assets/images/placeholders/cards/04.jpg" alt="">
-                    <div class="banner-card__over">
-                        <p>Скидка 20% на прогрессивные линзы SEIKO</p>
-                        <b>Купить</b>
-                    </div>
-                </nuxt-link>
                 <nuxt-link class="swiper-slide banner-card" to="#0">
                     <img src="~/assets/images/placeholders/cards/10.jpg" alt="">
                     <div class="banner-card__over">
@@ -131,153 +116,8 @@ export default {
         ItemSlider,
         ItemPreview,
     },
-    asyncData({ store }) {     
+    asyncData({ store }) {
         return store.dispatch('catalog/CACHE_SERVICE');
     }
 }
 </script>
-
-<style lang="scss">
-.index-grid {
-    display: grid;
-    grid-template-columns: 270px minmax(100px, 3fr);
-    grid-column-gap: 30px;
-    grid-template-areas: 
-        "aside catalog"
-        "aside blog";
-    margin-top: 30px;
-    &__aside {
-        grid-area: aside;
-        .banner-card {
-            max-width: 100%;
-        }
-    }
-    .aside-1 {
-        height: 460px;
-        margin-bottom: 30px;
-    }
-    .aside-2 {
-        margin: auto;
-    }
-    .aside-3 {
-        margin: 0 auto;
-        margin-top: 30px;
-        height: 322px;
-    }
-    &__catalog {
-        grid-area: catalog;
-        margin-bottom: auto;
-        border: 1px solid red;
-    }
-    &__blog {
-        margin-top: auto;
-    }
-    &__banners {
-        display: flex;
-        flex-wrap: wrap;
-        .banner-card {
-            flex-shrink: 0;
-            flex-grow: 1;
-            width: calc(57% - 30px);
-            margin-top: 30px;
-            b {
-                display: block;
-                margin-top: 15px;
-                font-size: 13px;
-                font-weight: 600;
-                text-transform: uppercase
-            }
-            p {
-                font-size: 20px;
-                line-height: 28px;
-            }
-            &__over {
-                right: unset;
-                bottom: 10px;
-                left: 10px;
-                width: 66%;
-            }
-            &:nth-of-type(2n) {
-                width: 43%;
-                margin-left: 30px;
-                .banner-card {
-                    &__over {
-                        width: 63%;
-                        top: 10px;
-                        bottom: unset;
-                    }
-                }
-            }
-        }
-    }
-}
-@media (max-width: 1100px) {
-    .index-grid {
-        &__banners {
-            .banner-card {
-                p {
-                    font-size: 16px;
-                    line-height: 22px;
-                }
-            }
-        }
-    }
-}
-@media (max-width: 1000px) {
-    .index-grid {
-        &__banners {
-            .banner-card {
-                &:nth-of-type(n) {
-                    width: 100%;
-                    margin-left: 0;
-                    .banner-card {
-                        &__over {
-                            top: unset;
-                            bottom: 10px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-@media (max-width: 768px) {
-    .index-grid {
-        grid-template-columns: minmax(100px, 768px);
-        grid-template-areas: 
-            "catalog catalog"
-            "aside aside"
-            "blog blog";
-        grid-template-areas: 
-            "catalog"
-            "aside"
-            "blog";
-        .aside-1 {
-            height: 150px;
-            img {
-                transition: 0ms;
-                transform: scale(1.8) translateY(30px) translateX(-45px);
-            }
-            .banner-card__over {
-                width: 65%;
-            }
-        }
-        .aside-2 {
-            width: 256px;
-        }
-        .aside-3 {
-            width: 256px;
-            height: 255px;
-            .banner-card__over {
-                width: 85%;
-            }
-        }
-        &__banners {
-            margin-top: 30px;
-            .banner-card {
-                margin-top: 10px;
-            }
-        }
-    }
-}
-</style>

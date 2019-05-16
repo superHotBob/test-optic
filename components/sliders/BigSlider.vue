@@ -3,7 +3,8 @@
     <div class="big-slider" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item, index) in items" :key="index">
-                <img :src="item.src" alt="">
+                <img :data-src="item.src" class="swiper-lazy" alt="">
+                <div class="swiper-lazy-preloader"></div>
                 <div class="big-slider__over">
                     <p v-if="item.description">{{ item.description }}</p>
                     <nuxt-link
@@ -43,6 +44,7 @@ export default {
                     clickableClass: 's-pagination--clickable',
                     clickable: true,
                 },
+                lazy: true,
                 breakpoints: this.$props.breakpoints,
             }
         }

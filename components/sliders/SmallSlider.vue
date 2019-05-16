@@ -8,7 +8,8 @@
                 :class="{'s-date': date}" 
                 :to="{ path: item.properties.link.value }"
             >
-                <img v-lazy="item.src" alt="">
+                <img :data-src="item.src" class="swiper-lazy" alt="">
+                <div class="swiper-lazy-preloader"></div>
                 <div class="banner-card__over">
                     <p>{{item.name}}</p>
                     <span v-if="date">
@@ -42,6 +43,7 @@ export default {
                     clickableClass: 's-pagination--clickable',
                     clickable: true,
                 },
+                lazy: true,
                 breakpoints: this.$props.breakpoints,
             }
         }

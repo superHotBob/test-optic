@@ -8,7 +8,7 @@
         class="index-features main-container"
         :items="stockItems"
         :breakpoints="indexFeaturesBps"
-        :date="true"
+        :date="false"
     />
     <div class="index-grid main-container">
         <div class="index-grid__aside">
@@ -37,7 +37,14 @@
             <item-slider />
         </div>
         <div class="index-grid__blog">
-            <h2>Grid 3</h2>
+            <h2>Блог</h2>
+            <small-slider
+                class="index-features main-container"
+                :items="stockItems"
+                :breakpoints="indexBlogBps"
+                :date="true"
+            />
+            <div></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, doloribus.</p>
         </div>
     </div>
@@ -58,7 +65,7 @@ export default {
             bigSliderBps: {
                 768: {
                     slidesPerView: 1,
-                }
+                },
             },
             indexFeaturesBps: {
                 1000: {
@@ -72,8 +79,22 @@ export default {
                 650: {
                     slidesPerView: 'auto',
                     spaceBetween: 10,
-                }
-            }
+                },
+            },
+            indexBlogBps: {
+                1200: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 30,
+                },
+                1000: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10,
+                },
+            },
         }
     },
     components: {
@@ -99,6 +120,9 @@ export default {
     margin-top: 30px;
     &__aside {
         grid-area: aside;
+        .banner-card {
+            max-width: 100%;
+        }
     }
     .aside-1 {
         height: 460px;

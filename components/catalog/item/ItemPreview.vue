@@ -51,9 +51,18 @@
         <div class="item-preview__buttons">
             <div class="counter">
                 <button @click="counterMinus">-</button>
-                <input type="number" v-model="itemAmount" v-uppercase="itemAmount">
+                <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
                 <button @click="itemAmount++">+</button>
             </div>
+            <button class="button black">В корзину</button>
+            <button class="button">
+                <svg id="svg-icon-click" fill="#000" viewBox="0 0 18 25.929" width="20" height="20">
+                    <path d="M18 18L8.353 8.646 7 9v14l3.658-1.835 2.196 4.764.034-.026.006.012 3.186-1.688-2.222-5.168L18 19v-1zm-4.313.062l-1.025.738 2.263 4.908-1.623.859-2.196-4.762L8 21.438V9.707l8.317 8.317-2.63.038z"></path>
+                    <path d="M1 8a7 7 0 1 1 14 0 6.959 6.959 0 0 1-.697 3.03l.869.497A7.95 7.95 0 0 0 16 8 8 8 0 0 0 0 8c0 3.727 2.551 6.849 6 7.738v-1.031A7.001 7.001 0 0 1 1 8z"></path>
+                    <path d="M8 5a3 3 0 0 1 3 3c0 .365-.075.709-.194 1.033l.885.506A4 4 0 1 0 4 8a3.98 3.98 0 0 0 2 3.445v-1.224C5.39 9.672 5 8.885 5 8a3 3 0 0 1 3-3z"></path>
+                </svg>
+                Купить в один клик
+            </button>
         </div>
     </div>
 </b-modal>
@@ -61,28 +70,16 @@
 
 <script>
 
-// import Vue from 'vue';
-// Vue.directive('uppercase', {
-//     bind: function (el, binding, vnode) {
-//         vnode.context.handler = function () {
-//             el.value = el.value.replace(/\D+/g,"");
-//             // if (el.value = '') {
-//             //     el.value = 1;
-//             // }
-//             console.log('123')
-//         }.bind(vnode.context);
-//         el.addEventListener('input', vnode.context.handler);
-//     },
-//     unbind: function () {
-//         el.removeEventListener('input', vnode.context.handler);
-//     }
-// });
-
 export default {
     data() {
         return {
             itemAmount: 1,
-            showModal: true,
+            showModal: false,
+            regxNumbers: {
+                F: {
+                    pattern: /[0-9]/,
+                }
+            }
         }
     },
     methods: {

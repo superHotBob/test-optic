@@ -58,8 +58,8 @@ module.exports = {
     credentials: true
   },
   proxy: {
-    // '/api/': 'http://14.esobolev.ru/',
-    '/api/': 'http://home-optic.proj/',
+    '/api/': 'http://14.esobolev.ru/',
+    // '/api/': 'http://home-optic.proj/',
   },
   cache: true,
   css: [
@@ -73,7 +73,8 @@ module.exports = {
     { src: '~/plugins/lazyload', ssr: false },
     { src: '~/plugins/vuex-cache', ssr: false },
     { src: '~/plugins/swiper', ssr: false },
-    { src: '~/plugins/masonry', ssr: true }
+    { src: '~/plugins/mask', ssr: false },
+    { src: '~/plugins/masonry', ssr: true },
   ],
 }
 

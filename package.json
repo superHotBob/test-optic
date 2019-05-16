@@ -24,6 +24,7 @@
     "vue-lazyload": "^1.2.6",
     "vue-masonry-css": "^1.0.3",
     "vue-slider-component": "^3.0.30",
+    "vue-the-mask": "^0.11.1",
     "vuex-cache": "^3.1.0"
   },
   "devDependencies": {

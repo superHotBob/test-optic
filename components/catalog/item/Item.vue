@@ -6,8 +6,7 @@
     <button
         class="item__preview"
         v-if="!wideView"
-        v-b-modal.item-preview
-        @click.prevent=""
+        @click.prevent="showModal"
     >
         Быстрый просмотр
     </button>
@@ -83,7 +82,6 @@ import { mapGetters } from 'vuex'
 
 export default {
     mixins: [offers],
-    // props: ['item', 'wideView'],
     props: {
         item: Object,
     },
@@ -94,10 +92,14 @@ export default {
         wideView: false
       }
     },
+
     methods: {
         async basket(url) {
             let response = await this.$axios.get(`${url}&ajax_basket=Y`);
             this.$store.dispatch('basket/STATE');
+        },
+        showModal() {
+            this.$root.$emit('preview', this.item);
         },
         clickFavorites() {
             if (!!this.timer)
@@ -108,20 +110,20 @@ export default {
                 this.loadFavorites();
             }, 100)
         },
-      loadFavorites() {
-        var cookie, elementsId = [];
-        
-        if (cookie = this.$cookie.get('favorites'))
-            elementsId = JSON.parse(cookie);
+        loadFavorites() {
+            var cookie, elementsId = [];
+            
+            if (cookie = this.$cookie.get('favorites'))
+                elementsId = JSON.parse(cookie);
 
-        if (this.in_array(this.id,elementsId))
-            elementsId.remove(this.id);
-        else 
-            elementsId.push(this.id);
+            if (this.in_array(this.id,elementsId))
+                elementsId.remove(this.id);
+            else 
+                elementsId.push(this.id);
 
-        this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
-        this.$store.dispatch('catalog/GET_FAVORITES');
-      }
+            this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
+            this.$store.dispatch('catalog/GET_FAVORITES');
+        }
     },
     computed: {
         ...mapGetters({

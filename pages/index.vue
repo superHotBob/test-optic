@@ -83,6 +83,7 @@ import ItemPreview from '~/components/catalog/item/ItemPreview.vue'
 import BrandsSlider from '~/components/sliders/BrandsSlider.vue'
 
 export default {
+    transition: 'fade',
     data () {
         return {
             bigSliderBps: {

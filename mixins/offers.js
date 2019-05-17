@@ -209,7 +209,6 @@ export default {
                 rowItems = null;
     
             var lineContainer = this.$refs.sku_line_block;
-            
             if (intNumber > -1 && intNumber < lineContainer.length)
             {
                 rowItems = lineContainer[intNumber].querySelectorAll('li');
@@ -235,7 +234,7 @@ export default {
         }
     },
     mounted() {
-        if (this.item.PRODUCT.TYPE == 3)
+        if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3)
             this.setCurrent();
     }
 }

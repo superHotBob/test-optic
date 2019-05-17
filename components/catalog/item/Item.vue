@@ -124,6 +124,7 @@ export default {
 
             this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
             this.$store.dispatch('catalog/GET_FAVORITES');
+            this.$root.$emit('favorites');
         }
     },
     computed: {

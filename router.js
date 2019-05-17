@@ -9,6 +9,7 @@ const section = () => import('~/pages/section/_section').then(m => m.default || 
 const element = () => import('~/pages/section/_element').then(m => m.default || m)
 const order = () => import('~/pages/order/index').then(m => m.default || m)
 const basket = () => import('~/pages/basket/index').then(m => m.default || m)
+const favorites = () => import('~/pages/favorites/index').then(m => m.default || m)
 const advantages = () => import('~/pages/company/advantages/index').then(m => m.default || m)
 const about = () => import('~/pages/company/about/index').then(m => m.default || m)
 
@@ -20,6 +21,11 @@ export function createRouter () {
                 path: '',
                 name: 'main',
                 component: main,
+            },
+            {
+                path: '/favorites',
+                name: 'favorites',
+                component: favorites,
             },
             {
                 path: '/company/our-advantages',

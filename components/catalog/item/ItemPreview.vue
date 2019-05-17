@@ -51,7 +51,7 @@
         <div class="item-preview__buttons">
             <div class="counter">
                 <button @click="counterMinus">-</button>
-                <input type="number" v-model="itemAmount" v-uppercase="itemAmount">
+                <input type="number" v-model="itemAmount">
                 <button @click="itemAmount++">+</button>
             </div>
         </div>
@@ -60,23 +60,6 @@
 </template>
 
 <script>
-
-// import Vue from 'vue';
-// Vue.directive('uppercase', {
-//     bind: function (el, binding, vnode) {
-//         vnode.context.handler = function () {
-//             el.value = el.value.replace(/\D+/g,"");
-//             // if (el.value = '') {
-//             //     el.value = 1;
-//             // }
-//             console.log('123')
-//         }.bind(vnode.context);
-//         el.addEventListener('input', vnode.context.handler);
-//     },
-//     unbind: function () {
-//         el.removeEventListener('input', vnode.context.handler);
-//     }
-// });
 
 export default {
     data() {

@@ -89,7 +89,7 @@ export default {
         Item
     },
     mounted() {
-        console.log(this.newItems)
+
     },
     computed: {
         items() {

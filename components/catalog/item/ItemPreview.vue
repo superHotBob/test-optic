@@ -101,7 +101,6 @@ export default {
                     this.setCurrent();
                 }, 100) 
             }
-            console.log(this.item);
         }); 
     },
     methods: {

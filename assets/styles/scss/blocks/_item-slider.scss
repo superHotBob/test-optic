@@ -4,6 +4,7 @@
         display: flex;
         align-items: center;
         width: 100%;
+        min-height: 40px;
         margin-bottom: 55px;
         p {
             position: relative;
@@ -42,6 +43,8 @@
         }
     }
     &__controls {
+        position: absolute;
+        right: 0;
         flex-shrink: 0;
         font-size: 0;
         background-color: #fff;
@@ -104,6 +107,7 @@
     .item-slider {
         &__categories {
             margin-bottom: 25px;
+            min-height: 0;
             p {
                 padding: 2px 0;
                 font-size: 14px;

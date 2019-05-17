@@ -99,3 +99,22 @@
         margin-right: -17px;
     }
 }
+
+@media (max-width: 768px) {
+    .item-slider {
+        &__categories {
+            p {
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+        &__controls {
+            display: none;
+        }
+        &__items {
+            margin-left: 0;
+            margin-right: -5px;
+        }
+    }
+}

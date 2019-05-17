@@ -1,6 +1,8 @@
 .banner-card {
-    display: block;
     position: relative;
+    display: block;
+    width: 320px;
+    height: 220px;
     overflow: hidden;
     color: #000;
     img {
@@ -51,8 +53,9 @@
         height: 190px;
         .banner-card__over {
             right: auto;
-            bottom: 12px;
-            left: 12px;
+            bottom: 10px;
+            left: 10px;
+            width: 70%;
         }
         p {
             font-size: 13px;
@@ -131,8 +134,8 @@
             }
             &.alt {
                 p {
-                    font-size: 22px;
-                    line-height: 26px;
+                    font-size: 20px;
+                    line-height: 22px;
                 }
             }
         }

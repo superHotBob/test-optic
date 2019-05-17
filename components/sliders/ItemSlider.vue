@@ -2,9 +2,27 @@
 <div class="item-slider">
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
         <div class="swiper-wrapper">
-            <p class="swiper-slide active">Название категории</p>
-            <p class="swiper-slide">Очень длинное название категории</p>
-            <p class="swiper-slide">Еще какая-то категория</p>
+            <p
+                class="swiper-slide"
+                :class="{'active': itemCategory == 'newItems'}"
+                @click="itemCategory = 'newItems'"
+            >
+                Новинки
+            </p>
+            <p
+                class="swiper-slide"
+                :class="{'active': itemCategory == 'bestsellers'}"
+                @click="itemCategory = 'bestsellers'"
+            >
+                Бестселлеры
+            </p>
+            <p
+                class="swiper-slide"
+                :class="{'active': itemCategory == 'mostWanted'}"
+                @click="itemCategory = 'mostWanted'"
+            >
+                Самое желанное
+            </p>
         </div>
         <div class="item-slider__controls">
             <button class="item-slider__prev">Назад</button>
@@ -14,7 +32,7 @@
     <div class="item-slider__items" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper">
             <item
-                v-for="(item, index) in bestsellers"
+                v-for="(item, index) in items"
                 :key="index"
                 :item="item"
                 :wideView="wideView"
@@ -33,6 +51,7 @@ export default {
     props: ['breakpoints', 'date'],
         data () {
         return {
+            itemCategory: 'bestsellers',
             swiperOption: {
                 roundLengths: true,
                 speed: 500,
@@ -69,5 +88,19 @@ export default {
     components: {
         Item
     },
+    mounted() {
+        console.log(this.newItems)
+    },
+    computed: {
+        items() {
+            if (this.itemCategory == 'bestsellers')
+                return this.bestsellers;
+            if (this.itemCategory == 'newItems')
+                return this.newItems;
+            if (this.itemCategory == 'mostWanted')
+                return this.mostWanted;
+            return this.bestsellers;
+        }
+    }
 }
 </script>

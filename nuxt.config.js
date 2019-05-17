@@ -73,7 +73,8 @@ module.exports = {
     { src: '~/plugins/lazyload', ssr: false },
     { src: '~/plugins/vuex-cache', ssr: false },
     { src: '~/plugins/swiper', ssr: false },
-    { src: '~/plugins/masonry', ssr: true }
+    { src: '~/plugins/mask', ssr: true },
+    { src: '~/plugins/masonry', ssr: true },
   ],
 }
 

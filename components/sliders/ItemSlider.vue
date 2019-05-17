@@ -82,14 +82,12 @@ export default {
                 breakpoints: this.$props.breakpoints,
             },
             wideView: false,
-            bestsellers: JSON.parse(JSON.stringify(this.$store.state.catalog.bestsellers))
+            bestsellers: JSON.parse(JSON.stringify(this.$store.state.catalog.bestsellers)),
+            newItems: JSON.parse(JSON.stringify(this.$store.state.catalog.newItems)),
         }
     },
     components: {
         Item
-    },
-    mounted() {
-
     },
     computed: {
         items() {

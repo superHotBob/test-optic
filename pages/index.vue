@@ -61,6 +61,15 @@
             </div>
         </div>
     </div>
+    <div class="brands main-container">
+        <div class="brands__header">
+            <h2>Бренды</h2>
+            <nuxt-link class="brands__see-all" to="#0">Смотреть все бренды</nuxt-link>
+        </div>
+        <brands-slider 
+            :breakpoints="brandsBps"
+        />
+    </div>
     <item-preview />
 </div>
 </template>
@@ -71,6 +80,7 @@ import BigSlider from '~/components/sliders/BigSlider.vue'
 import SmallSlider from '~/components/sliders/SmallSlider.vue'
 import ItemSlider from '~/components/sliders/ItemSlider.vue'
 import ItemPreview from '~/components/catalog/item/ItemPreview.vue'
+import BrandsSlider from '~/components/sliders/BrandsSlider.vue'
 
 export default {
     transition: 'fade',
@@ -105,8 +115,27 @@ export default {
                     spaceBetween: 20,
                 },
                 768: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                715: {
                     slidesPerView: 'auto',
                     spaceBetween: 10,
+                },
+            },
+            brandsBps: {
+                1000: {
+                    spaceBetween: 20,
+                },
+                768: {
+                    spaceBetween: 10,
+                    slidesPerView: 3,
+                    slidesPerColumn: 3,
+                },
+                500: {
+                    spaceBetween: 10,
+                    slidesPerView: 2,
+                    slidesPerColumn: 3,
                 },
             },
         }
@@ -116,6 +145,7 @@ export default {
         SmallSlider,
         ItemSlider,
         ItemPreview,
+        BrandsSlider,
     },
     asyncData({ store }) {
         return store.dispatch('catalog/CACHE_SERVICE');

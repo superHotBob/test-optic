@@ -14,8 +14,10 @@
         <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
     </div>
     <div class="item__flags">
-        <span v-if="labelNew" class="item__flag left">NEW</span>
-        <span v-if="labelSale" class="item__flag right red">SALE</span>
+        <!-- <span v-if="labelNew" class="item__flag left">NEW</span>
+        <span v-if="labelSale" class="item__flag right red">SALE</span> -->
+        <span class="item__flag left">NEW</span>
+        <span class="item__flag right red">SALE</span>
     </div>
     <div
         class="item__offers"

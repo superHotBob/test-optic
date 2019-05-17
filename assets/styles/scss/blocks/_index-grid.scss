@@ -30,7 +30,6 @@
     &__catalog {
         grid-area: catalog;
         margin-bottom: auto;
-        border: 1px solid red;
     }
     &__blog {
         margin-top: auto;
@@ -162,7 +161,11 @@
                     margin-top: 10px;
                     font-size: 11px;
                 }
+                &:nth-of-type(2n) {
+                    margin-left: 10px;
+                }
                 &:nth-of-type(n) {
+                    width: calc(50% - 5px);
                     .banner-card {
                         &__over {
                             width: 75%;
@@ -172,11 +175,23 @@
             }
         }
         &__aside {
-            margin-top: 10px;
+            margin-top: 60px;
         }
         &__blog {
             .small-slider {
                 margin-right: -5px;
+            }
+        }
+    }
+}
+@media (max-width: 650px) {
+    .index-grid {
+        &__banners {
+            .banner-card {
+                &:nth-of-type(n) {
+                    width: 100%;
+                    margin-left: 0;
+                }
             }
         }
     }

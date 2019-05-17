@@ -74,7 +74,6 @@ module.exports = {
     { src: '~/plugins/vuex-cache', ssr: false },
     { src: '~/plugins/swiper', ssr: false },
     { src: '~/plugins/mask', ssr: true },
-    { src: '~/plugins/masonry', ssr: true },
   ],
 }
 

@@ -367,13 +367,12 @@ export default {
             favoritesCount: 'catalog/getCountFavorites'
         })
     },
+    created() {
+        this.$store.dispatch('user/STATE');
+        this.$store.dispatch('catalog/GET_FAVORITES');
+    },
     mounted() {
         window.addEventListener('click', this.documentClick)
-        Promise.all([
-            this.$store.dispatch('catalog/GET_FAVORITES'),
-            this.$store.dispatch('user/STATE'),
-            this.$store.dispatch('basket/STATE')
-        ]);
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

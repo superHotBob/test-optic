@@ -6,7 +6,7 @@
     />
     <small-slider
         class="index-features main-container"
-        :items="stockItems"
+        :items="topItems"
         :breakpoints="indexFeaturesBps"
         :date="false"
     />
@@ -39,25 +39,20 @@
         <div class="index-grid__blog">
             <h2>Блог</h2>
             <small-slider
-                :items="stockItems"
+                :items="topItems"
                 :breakpoints="indexBlogBps"
                 :date="true"
             />
             <div class="index-grid__banners">
-                <nuxt-link class="swiper-slide banner-card" to="#0">
-                    <img src="~/assets/images/placeholders/cards/10.jpg" alt="">
-                    <div class="banner-card__over">
-                        <p>Профессиональое изготовление очков</p>
-                        <b>Подробнее</b>
-                    </div>
-                </nuxt-link>
-                <nuxt-link class="swiper-slide banner-card" to="#0">
-                    <img src="~/assets/images/placeholders/cards/04.jpg" alt="">
-                    <div class="banner-card__over">
-                        <p>Скидка 20% на прогрессивные линзы SEIKO</p>
-                        <b>Купить</b>
-                    </div>
-                </nuxt-link>
+                <template v-for="(item, index) in bottomItems">
+                    <nuxt-link :key="index" class="swiper-slide banner-card" :to="{ path: item.properties.link.value }">
+                        <img v-if="item.src" v-lazy="item.src">
+                        <div class="banner-card__over">
+                            <p>{{item.name}}</p>
+                            <b v-if="item.properties.text">{{item.properties.text.value}}</b>
+                        </div>
+                    </nuxt-link>
+                </template>
             </div>
         </div>
     </div>

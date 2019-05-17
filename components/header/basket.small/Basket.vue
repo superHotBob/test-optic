@@ -132,8 +132,11 @@ export default {
             }
         }
     },
+    created() {
+        this.$store.dispatch('basket/STATE');
+    },
     mounted() {
-        window.addEventListener('click', this.documentClick)
+        window.addEventListener('click', this.documentClick);
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

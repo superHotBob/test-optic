@@ -18,17 +18,28 @@
         <div class="basket__popup" :class="{'active': showPopup}" ref="dropdownMenu">
             <div class="hidden-mobile" v-if="getBasket.GRID">
                 <div class="basket__item" v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID">
-                    <div class="basket__image">
-                        <img src="" alt="">
-                        <span>Sale</span>
-                        <span>New</span>
+                    <div class="basket__img">
+                        <img alt="" v-if="arItem.DETAIL_PICTURE_SRC" v-lazy="'http://14.esobolev.ru/' + arItem.DETAIL_PICTURE_SRC">
+                        <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
+                        
+                        <!-- <div class="basket__flags">
+                            <span>Sale</span>
+                            <span>New</span>
+                        </div> -->
                     </div>
-                    <button v-on:click="deleteItem(arItem.ID)" type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <quantity v-bind:id="arItem.ID"/>
-                    <div class="basket__props">
+                    <div class="basket__col-2">
                         <b class="basket__name">{{arItem.NAME}}</b>
+                    </div>
+                    <div class="basket__col-3">
+                        <button v-on:click="deleteItem(arItem.ID)" type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <b class="basket__price">{{arItem.PRICE}}</b>
+                        <quantity v-bind:id="arItem.ID"/>
+                    </div>
+
+
+                    <div class="basket__props">
                         <div class="basket__prop">
                             Ширина линзы
                             <span class="basket__square">59</span>

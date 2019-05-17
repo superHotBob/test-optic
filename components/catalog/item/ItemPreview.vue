@@ -93,7 +93,7 @@ export default {
     },
     mounted() {
         this.$root.$on('preview', (item) => {
-            this.item = item;
+            this.item = JSON.parse(JSON.stringify(item));
             this.id = item.ID;
             this.$bvModal.show('item-preview');
             if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3) {

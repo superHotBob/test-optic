@@ -40,14 +40,15 @@
 
     <div class="item__info">
         <p class="item__name">{{item.CURRENT.NAME}}</p>
-        <p
-            class="item__price"
+        <template
             v-for="price in item.CURRENT.ITEM_PRICES"
-            :key="price.ID"
-        >
-            {{price.PRINT_RATIO_PRICE}}
-        </p>
-        <p class="item__old-price">Старая цена</p>
+        >   
+            <p class="item__price" :key="price.ID">
+                {{price.PRINT_RATIO_PRICE}}
+            </p>
+            <p v-if="labelSale" class="item__old-price" :key="price.ID">{{price.PRINT_BASE_PRICE}}</p>
+        </template>
+       
         <p class="item__sale">Еще -10% по акции</p>
     </div>
     <div class="item__buttons">

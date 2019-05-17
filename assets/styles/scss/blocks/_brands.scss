@@ -1,11 +1,9 @@
 .brands {
-    margin-top: 110px;
     &__header {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         padding-top: 25px;
-        border-top: 1px solid #e6e6e6;
     }
     h2 {
         margin: 0;
@@ -29,8 +27,6 @@
 
 @media (max-width: 768px) {
     .brands {
-        margin-top: 50px;
-        padding: 0 32px;
         &__header {
             padding-top: 17px;
             padding-right: 27px;

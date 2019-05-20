@@ -1,9 +1,17 @@
 .rating {
     svg {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
+        padding: 0 2px;
     }
-    .vue-star-rating-star {
+    .vue-star-rating-pointer {
         font-size: 0;
+    }
+    &--wider {
+        svg {
+            width: 24px;
+            height: 24px;
+            padding: 0 4px;
+        }
     }
 }

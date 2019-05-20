@@ -1,11 +1,9 @@
 .rating {
-    width: 90px;
-    height: 13px;
-    background: url('~assets/images/icons/star-gray.svg') left center repeat-x;
-    &__stars {
-        width: 0;
-        height: 100%;
-        background: url('~assets/images/icons/star-orange.svg') left center repeat-x;
-        cursor: pointer;
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+    .vue-star-rating-star {
+        font-size: 0;
     }
 }

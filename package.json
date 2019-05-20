@@ -23,6 +23,7 @@
     "vue-cookie": "^1.1.4",
     "vue-lazyload": "^1.2.6",
     "vue-slider-component": "^3.0.30",
+    "vue-star-rating": "^1.6.1",
     "vue-the-mask": "^0.11.1",
     "vuex-cache": "^3.1.0"
   },

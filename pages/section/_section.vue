@@ -1,5 +1,6 @@
 <template>
     <div>
+        <sticky-scroll />
         <h1>{{result.seometa.title}}</h1>
         <tags v-bind:tags="result.tags"/>
         <smart-filter v-bind:items="result.filter.items"></smart-filter>
@@ -19,12 +20,15 @@ import SmartFilter from '~/components/catalog/SmartFilter.vue'
 import Tags from '~/components/catalog/Tags.vue'
 import Pagination from '~/components/Pagination.vue'
 
+import StickyScroll from '~/components/StickyScroll.vue'
+
 export default {
     components: {
         SectionElements,
         SmartFilter,
         Pagination,
-        Tags
+        Tags,
+        StickyScroll,
     },
     methods: {
         onChangePagen: function () {

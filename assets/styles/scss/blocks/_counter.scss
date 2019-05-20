@@ -33,9 +33,11 @@
         border-radius: 0;
 
         transition: border-color 150ms;
-        &:hover,
-        &:focus {
+        &:hover {
             border-color: #000;
+            outline: none;
+        }
+        &:focus {
             outline: none;
         }
     }

@@ -79,8 +79,8 @@ export default {
     mixins: [offers],
     data() {
         return {
-            itemAmount: 1,
             showModal: false,
+            itemAmount: 1,
             regxNumbers: {
                 F: {
                     pattern: /[0-9]/,

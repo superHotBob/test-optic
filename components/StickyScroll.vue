@@ -1,32 +1,25 @@
 <template>
 <div>
-    <div class="ss main-container">
-        <div class="ss__col-1">
-            <p v-for="(item, index) in [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]" :key="index">row #{{index}}</p>
-        </div>
-        <div class="ss__col-2">
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-            <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
-        </div>
-    </div>
+    <button style="position: fixed; z-index: 1;" @click="recalculateStickyScroll">RECALC</button>
+    <slot></slot>
 </div>
 </template>
 
 <script>
 export default {
-      data() {
+    props: {
+        // relative container of all blocks
+        sWrapper: {
+            type: String,
+            required: true,
+        },
+        // scroll itself
+        sScroll: {
+            type: String,
+            required: true,
+        },
+    },
+    data() {
         return {
             frameId: null,
             affixHeight: null,
@@ -47,16 +40,15 @@ export default {
             },
             enabled: true,
             scrollAffix: true,
-            relativeElementSelector: '.ss__col-2',
-            scrollContainerSelector: '.ss',
-
+            scrollElem: null,
         };
     },
     mounted() {
-        this.$el = document.querySelector('.ss__col-1');
-        // this.$el.classList.add('vue-affix');
-        this.affixInitialTop = this.getOffsetTop(this.$el);
-        this.topPadding = this.affixInitialTop - this.getOffsetTop(this.relativeElement);
+        this.scrollElem = document.querySelector(this.sScroll);
+        this.scrollElem.classList.add('vue-affix');
+        this.affixInitialTop = this.getOffsetTop(this.scrollElem);
+        // this.topPadding = this.affixInitialTop - this.getOffsetTop(this.relativeElement);
+        this.topPadding = 0;
         this.updateData();
         if (this.scrollAffix) {
             const affixTotalHeight = this.affixHeight + this.offset.bottom + this.offset.top;
@@ -84,7 +76,8 @@ export default {
          * @return {Element} document.querySelector(this.relativeElementSelector)
          */
         relativeElement() {
-            return document.querySelector(this.relativeElementSelector);
+            // return document.querySelector(this.relativeElementSelector);
+            return document.querySelector(this.sWrapper);
         },
         /**
          * Computes the scroll container selector to an element.
@@ -130,10 +123,21 @@ export default {
         },
     },
     methods: {
+        recalculateStickyScroll() {
+            this.affixInitialTop = this.getOffsetTop(this.relativeElement);
+            this.topPadding = 0;
+            this.updateData();
+            if (this.scrollAffix) {
+                const affixTotalHeight = this.affixHeight + this.offset.bottom + this.offset.top;
+                const shouldUseScrollAffix = this.scrollAffix
+                    && affixTotalHeight > this.scrollContainer.innerHeight;
+                if (shouldUseScrollAffix) this.initScrollAffix();
+            }
+        },
         updateData() {
             this.topOfScreen = this.scrollContainer.scrollTop || window.pageYOffset;
-            this.affixRect = this.$el.getBoundingClientRect();
-            this.affixHeight = this.$el.offsetHeight;
+            this.affixRect = this.scrollElem.getBoundingClientRect();
+            this.affixHeight = this.scrollElem.offsetHeight;
             this.relativeElmOffsetTop = this.getOffsetTop(this.relativeElement);
         },
         handleScroll() {
@@ -197,11 +201,11 @@ export default {
                     || (this.currentScrollAffix === 'scrollaffix-up' && this.scrollingDown)
                     || (this.currentScrollAffix === 'scrollaffix-down' && this.scrollingUp);
                 if (this.screenIsBeforeAffix && this.scrollingUp) {
-                this.setScrollAffixUp();
+                    this.setScrollAffixUp();
                 } else if (this.screenIsPastAffix && this.scrollingDown) {
-                this.setScrollAffixDown();
+                    this.setScrollAffixDown();
                 } else if (shouldSetAffixScrolling) {
-                this.setScrollAffixScrolling();
+                    this.setScrollAffixScrolling();
                 }
             }
             this.lastScrollAffixState = this.currentScrollAffix;
@@ -228,8 +232,8 @@ export default {
          */
         setScrollAffixScrolling() {
             this.currentScrollAffix = 'scrollaffix-scrolling';
-            this.$el.style.top = `${(Math.floor(this.affixRect.top) + this.topOfScreen) - this.affixInitialTop}px`;
-            this.$el.style.bottom = 'auto';
+            this.scrollElem.style.top = `${(Math.floor(this.affixRect.top) + this.topOfScreen) - this.affixInitialTop}px`;
+            this.scrollElem.style.bottom = 'auto';
             this.removeClasses();
             this.emitEvent();
         },
@@ -240,11 +244,11 @@ export default {
         setScrollAffixUp() {
             this.currentScrollAffix = 'scrollaffix-up';
             if (this.currentScrollAffix !== this.lastScrollAffixState) {
-                this.$el.style.top = `${this.topPadding + this.offset.top}px`;
-                this.$el.style.bottom = 'auto';
+                this.scrollElem.style.top = `${this.topPadding + this.offset.top}px`;
+                this.scrollElem.style.bottom = 'auto';
                 this.removeClasses();
                 this.emitEvent();
-                this.$el.classList.add('affix');
+                this.scrollElem.classList.add('affix');
             }
         },
         /**
@@ -254,11 +258,11 @@ export default {
         setScrollAffixDown() {
             this.currentScrollAffix = 'scrollaffix-down';
             if (this.currentScrollAffix !== this.lastScrollAffixState) {
-                this.$el.style.bottom = `${this.offset.bottom}px`;
-                this.$el.style.top = 'auto';
+                this.scrollElem.style.bottom = `${this.offset.bottom}px`;
+                this.scrollElem.style.top = 'auto';
                 this.removeClasses();
                 this.emitEvent();
-                this.$el.classList.add('affix');
+                this.scrollElem.classList.add('affix');
             }
         },
         /**
@@ -267,8 +271,8 @@ export default {
          */
         setScrollAffixTop() {
             this.currentScrollAffix = 'scrollaffix-top';
-            this.$el.style.top = 0;
-            this.$el.style.bottom = 'auto';
+            this.scrollElem.style.top = 0;
+            this.scrollElem.style.bottom = 'auto';
             this.removeClasses();
             this.emitEvent();
         },
@@ -278,8 +282,8 @@ export default {
          */
         setScrollAffixBottom() {
             this.currentScrollAffix = 'scrollaffix-bottom';
-            this.$el.style.top = `${this.relativeElmBottomPos - this.affixInitialTop - this.affixHeight}px`;
-            this.$el.style.bottom = 'auto';
+            this.scrollElem.style.top = `${this.relativeElmBottomPos - this.affixInitialTop - this.affixHeight}px`;
+            this.scrollElem.style.bottom = 'auto';
             this.removeClasses();
             this.emitEvent();
         },
@@ -304,9 +308,9 @@ export default {
             if (this.currentState !== this.lastState) {
                 this.emitEvent();
                 this.removeClasses();
-                this.$el.classList.remove('affix');
-                this.$el.classList.add('affix-top');
-                this.$el.style.top = null;
+                this.scrollElem.classList.remove('affix');
+                this.scrollElem.classList.add('affix-top');
+                this.scrollElem.style.top = null;
             }
         },
         /**
@@ -315,11 +319,11 @@ export default {
          */
         setAffix() {
             this.currentState = 'affix';
-            this.$el.style.top = `${this.topPadding + this.offset.top}px`;
+            this.scrollElem.style.top = `${this.topPadding + this.offset.top}px`;
             if (this.currentState !== this.lastState) {
                 this.emitEvent();
                 this.removeClasses();
-                this.$el.classList.add('affix');
+                this.scrollElem.classList.add('affix');
             }
         },
         /**
@@ -328,21 +332,21 @@ export default {
          */
         setAffixBottom() {
             this.currentState = 'affix-bottom';
-            this.$el.style.top = `${this.relativeElement.offsetHeight - this.affixHeight
+            this.scrollElem.style.top = `${this.relativeElement.offsetHeight - this.affixHeight
                 - this.offset.bottom - this.topPadding}px`;
             if (this.currentState !== this.lastState) {
                 this.emitEvent();
                 this.removeClasses();
-                this.$el.classList.add('affix-bottom');
+                this.scrollElem.classList.add('affix-bottom');
             }
         },
         /**
          * Removes all three affix classes.
          */
         removeClasses() {
-            this.$el.classList.remove('affix-top');
-            this.$el.classList.remove('affix');
-            this.$el.classList.remove('affix-bottom');
+            this.scrollElem.classList.remove('affix-top');
+            this.scrollElem.classList.remove('affix');
+            this.scrollElem.classList.remove('affix-bottom');
         },
         /**
          * Emits the events based on the current state of the affix.
@@ -376,24 +380,6 @@ export default {
 </script>
 
 <style lang="scss">
-.ss {
-    // position: relative;
-    display: flex;
-    align-items: flex-start;
-    &__col-1 {
-        width: 30%;
-        // min-height: 3000px;
-        background-color: lightcoral;
-        flex-grow: 0;
-    }
-    &__col-2 {
-        margin-left: auto;
-        width: 70%;
-        // min-height: 700px;
-        background-color: lightgreen;
-        flex-grow: 0;
-    }
-}
 .vue-affix {
     position: relative;
 }

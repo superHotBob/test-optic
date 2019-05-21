@@ -35,6 +35,24 @@
 @import "blocks/item.scss";
 @import "blocks/item-slider.scss";
 @import "blocks/index-grid.scss";
+
+@import "blocks/adventages.scss";
+@import "blocks/about.scss";
+@import "blocks/reviews.scss";
+@import "blocks/exchange.scss";
+@import "blocks/delivery.scss";
+@import "blocks/payment.scss";
+@import "blocks/support.scss";
+@import "blocks/discounts.scss";
+@import "blocks/confidentiality.scss";
+@import "blocks/original.scss";
+@import "blocks/bestprice.scss";
+@import "blocks/guarantee.scss";
+@import "blocks/cheaper-form.scss";
+@import "blocks/glasses_manufacturer.scss";
+@import "blocks/howOrder.scss";
+//overwrites display
+
 @import "blocks/brands-slider.scss";
 @import "blocks/brands.scss";
 @import "blocks/features.scss";
@@ -42,4 +60,5 @@
 @import "blocks/filter.scss";
 
 //"overwrites" display
+
 @import "misc/display.scss";

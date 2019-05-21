@@ -1,0 +1,59 @@
+.bestprice {
+    .center-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .advantages-block {
+        .advantages-block_title {
+            font-size: 21px;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 65px 0px 40px 0px;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .advantage {
+            width: 215px;
+            text-align: center;
+            margin-left: 30px;
+            p {
+                color: #7e7e7e;
+                font-size: 14px;
+                margin: 1em 0;
+                line-height: 18px;
+            }
+            .advantage_img {
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0 auto;
+                width: 108px;
+                height: 88px;
+            }
+            &:nth-of-type(1) {
+                .advantage_img {
+                    background-size: 96px;
+                    background: url("~assets/images/bestprice/bestprice-icon-1.png")
+                        center no-repeat;
+                }
+            }
+            &:nth-of-type(2) {
+                .advantage_img {
+                    background-size: 90px;
+                    background: url("~assets/images/bestprice/bestprice-icon-2.png")
+                        center no-repeat;
+                }
+            }
+            &:nth-of-type(3) {
+                .advantage_img {
+                    background-size: 108px;
+                    background: url("~assets/images/bestprice/bestprice-icon-3.png")
+                        center no-repeat;
+                }
+            }
+        }
+    }
+    
+    
+}

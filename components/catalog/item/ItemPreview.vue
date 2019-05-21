@@ -11,10 +11,9 @@
         </div>
         <div class="item-preview__content">
             <b class="item-preview__name">{{item.CURRENT.NAME}}</b>
+            
             <div class="item-preview__rating">
-                <div class="rating">
-                    <div class="rating__stars" style="width: 80%;"></div>
-                </div>
+                <star-rating class="rating" v-model="rating" :show-rating="false" :round-start-rating="false"/>
                 <p>0 отзывов</p>
             </div>
             <p
@@ -74,13 +73,14 @@
 
 import offers from '~/mixins/offers.js'
 import { mapGetters } from 'vuex'
+import StarRating from 'vue-star-rating'
 
 export default {
     mixins: [offers],
     data() {
         return {
-            itemAmount: 1,
             showModal: false,
+            itemAmount: 1,
             regxNumbers: {
                 F: {
                     pattern: /[0-9]/,
@@ -89,7 +89,11 @@ export default {
             item: false,
             timer: null,
             id: false,
+            rating: 4.4,
         }
+    },
+    components: {
+        StarRating,
     },
     mounted() {
         this.$root.$on('preview', (item) => {

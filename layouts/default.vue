@@ -96,7 +96,7 @@
                             </nuxt-link>
                         </p>
                         <p>
-                            <nuxt-link to="#0">
+                            <nuxt-link to="/favorites">
                                 <span>Список желаемого</span>
                                 <span v-if="favoritesCount > 0">{{favoritesCount}}</span>
                             </nuxt-link>
@@ -367,11 +367,12 @@ export default {
             favoritesCount: 'catalog/getCountFavorites'
         })
     },
+    created() {
+        this.$store.dispatch('user/STATE');
+        this.$store.dispatch('catalog/GET_FAVORITES');
+    },
     mounted() {
         window.addEventListener('click', this.documentClick)
-        this.$store.dispatch('user/STATE');
-        this.$store.dispatch('basket/STATE');
-        this.$store.dispatch('catalog/GET_FAVORITES');
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

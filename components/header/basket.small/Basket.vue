@@ -17,47 +17,11 @@
 
         <div class="basket__popup" :class="{'active': showPopup}" ref="dropdownMenu">
             <div class="hidden-mobile" v-if="getBasket.GRID">
-                <div class="basket__item" v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID">
-                    <div class="basket__image">
-                        <img src="" alt="">
-                        <span>Sale</span>
-                        <span>New</span>
-                    </div>
-                    <button v-on:click="deleteItem(arItem.ID)" type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <quantity v-bind:id="arItem.ID"/>
-                    <div class="basket__props">
-                        <b class="basket__name">{{arItem.NAME}}</b>
-                        <div class="basket__prop">
-                            Ширина линзы
-                            <span class="basket__square">59</span>
-                        </div>
-                        <div class="basket__prop">
-                            Диагональ линзы
-                            <span class="basket__square">62</span>
-                        </div>
-                        <div class="basket__prop">
-                            Высота линзы
-                            <span class="basket__square">37</span>
-                        </div>
-                        <div class="basket__prop">
-                            Ширина наносника
-                            <span class="basket__square">17</span>
-                        </div>
-                        <div class="basket__prop">
-                            Длина дужки
-                            <span class="basket__square">145</span>
-                        </div>
-                        <div class="basket__prop">
-                            Цвет
-                            <span class="basket__square"><img src="#" alt=""></span>
-                        </div>
-                        <div class="basket__prop">
-                            Размер
-                            <span class="basket__square">59/37/17/145</span>
-                        </div>
-                    </div>
+                <basket-item v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID" :arItem="arItem"/>
+                <div class="basket__footer">
+                    <button class="button black">Оформить заказ</button>
+                    <span>Всего {{getBasket.BASKET_ITEMS_COUNT}} {{wording}}</span>
+                    <b>{{getBasket.allSum_FORMATED}}</b>
                 </div>
             </div>
         </div>
@@ -99,13 +63,13 @@
 <script>
 
 import basket from '~/mixins/basket/basket.js'
-import Quantity from '~/components/header/basket.small/Quantity.vue'
+import BasketItem from '~/components/header/basket.small/BasketItem.vue'
 
 export default {
     props: ['isLogged'],
     mixins: [basket],
     components: {
-        Quantity
+        BasketItem,
     },
     data() {
         return {
@@ -130,10 +94,19 @@ export default {
             } else {
                 return this.basketPopup;
             }
+        },
+        wording() {
+            let number = this.getBasket.BASKET_ITEMS_COUNT;
+            let titles = ['товар', 'товара', 'товаров'];
+            let cases = [2, 0, 1, 1, 1, 2];
+            return titles[ (number%100>4 && number%100<20) ? 2 : cases[(number%10<5)?number%10:5] ];  
         }
     },
+    created() {
+        this.$store.dispatch('basket/STATE');
+    },
     mounted() {
-        window.addEventListener('click', this.documentClick)
+        window.addEventListener('click', this.documentClick);
     },
     beforeDestroy () {
         window.removeEventListener('click', this.documentClick)

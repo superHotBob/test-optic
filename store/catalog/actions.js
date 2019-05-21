@@ -30,15 +30,17 @@ export default {
     },
     
     async SERVICE () {
-        let [swiperData, stockData, banerData] = await Promise.all([
+        let [swiperData, topData, banerData, bottomData] = await Promise.all([
             this.$axios.get(`/api/v1/iblock/list/?iblock=2&properties[0]=name`),
-            this.$axios.get(`/api/v1/iblock/list/?iblock=5&count=3&properties[0]=link`),
-            this.$axios.get(`/api/v1/iblock/list/?iblock=4&count=1&properties[0]=link`)
+            this.$axios.get(`/api/v1/iblock/list/?iblock=5&count=3&properties[0]=link&filter[PROPERTY_position_VALUE]=top`),
+            this.$axios.get(`/api/v1/iblock/list/?iblock=4&count=1&properties[0]=link`),
+            this.$axios.get(`/api/v1/iblock/list/?iblock=5&count=2&properties[0]=link&filter[PROPERTY_position_VALUE]=bottom`)
         ])
         return {
             swiperItems: swiperData.data.items,
-            stockItems: stockData.data.items,
-            banerItems: banerData.data.items
+            topItems: topData.data.items,
+            banerItems: banerData.data.items,
+            bottomItems: bottomData.data.items
         }
     },
 

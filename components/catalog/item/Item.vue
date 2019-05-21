@@ -11,7 +11,7 @@
         Быстрый просмотр
     </button>
     <div class="item__img">
-        <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
+        <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
     </div>
     <div class="item__flags">
         <span v-if="labelNew" class="item__flag left">NEW</span>
@@ -31,8 +31,9 @@
                 @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
                 v-for="value in prop.VALUES"
                 :key="value.ID"
+                :class="{'img': value.PICT}"
             >
-                <img v-if="value.PICT" :src="value.PICT.SRC" alt="">
+                <img v-if="value.PICT" :src="value.PICT.SRC" alt="" :title="value.NAME">
                 <span v-if="!value.PICT">{{value.NAME}}</span>
             </li>
         </ul>
@@ -124,6 +125,7 @@ export default {
 
             this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
             this.$store.dispatch('catalog/GET_FAVORITES');
+            this.$root.$emit('favorites');
         }
     },
     computed: {

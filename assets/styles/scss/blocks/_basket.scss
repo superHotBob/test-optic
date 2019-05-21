@@ -144,6 +144,15 @@
             height: 16px;
             object-fit: cover;
         }
+        &.img {
+            padding: 0;
+            img {
+                width: 30px;
+                height: 30px;
+                padding: 6px;
+                pointer-events: auto;
+            }
+        }
     }
     &__price {
         display: block;

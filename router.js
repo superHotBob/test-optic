@@ -11,6 +11,18 @@ const order = () => import('~/pages/order/index').then(m => m.default || m)
 const basket = () => import('~/pages/basket/index').then(m => m.default || m)
 const advantages = () => import('~/pages/company/advantages/index').then(m => m.default || m)
 const about = () => import('~/pages/company/about/index').then(m => m.default || m)
+const reviews = () => import('~/pages/company/reviews/index').then(m => m.default || m)
+const exchange = () => import('~/pages/company/exchange/index').then(m => m.default || m)
+const delivery = () => import('~/pages/company/delivery/index').then(m => m.default || m)
+const payment = () => import('~/pages/company/payment/index').then(m => m.default || m)
+const support = () => import('~/pages/company/support/index').then(m => m.default || m)
+const howOrder = () => import('~/pages/company/howOrder/index').then(m => m.default || m)
+const discounts = () => import('~/pages/company/discounts/index').then(m => m.default || m)
+const glasses_manufacturer = () => import('~/pages/company/glasses_manufacturer/index').then(m => m.default || m)
+const confidentiality = () => import('~/pages/company/confidentiality/index').then(m => m.default || m)
+const original = () => import('~/pages/company/original/index').then(m => m.default || m)
+const bestprice = () => import('~/pages/company/bestprice/index').then(m => m.default || m)
+
 
 export function createRouter () {
     return new Router({
@@ -30,6 +42,61 @@ export function createRouter () {
                 path: '/company/about',
                 name: 'about',
                 component: about,
+            },
+            {
+                path: '/company/reviews',
+                name: 'reviews',
+                component: reviews,
+            },
+            {
+                path: '/company/exchange',
+                name: 'exchange',
+                component: exchange,
+            },
+            {
+                path: '/company/delivery',
+                name: 'delivery',
+                component: delivery,
+            },
+            {
+                path: '/company/payment',
+                name: 'payment',
+                component: payment,
+            },
+            {
+                path: '/company/support',
+                name: 'support',
+                component: support,
+            },
+            {
+                path: '/company/howOrder',
+                name: 'howOrder',
+                component: howOrder,
+            },
+            {
+                path: '/company/discounts',
+                name: 'discounts',
+                component: discounts,
+            },
+            {
+                path: '/company/glasses_manufacturer',
+                name: 'glasses_manufacturer',
+                component: glasses_manufacturer,
+            },
+            {
+                path: '/company/confidentiality',
+                name: 'confidentiality',
+                component: confidentiality,
+            },
+            {
+                path: '/company/original',
+                name: 'original',
+                component: original,
+            },
+            {
+                path: '/company/bestprice',
+                name: 'bestprice',
+                component: bestprice,
             },
             {
                 path: '/order',

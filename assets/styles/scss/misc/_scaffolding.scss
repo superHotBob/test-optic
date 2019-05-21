@@ -55,6 +55,31 @@ body {
 //     background-color: rgba(0,0,0,.4);
 //     z-index: 50;
 // }
+.big-text-bold{
+    font-weight: 700;
+    color: #000;
+    font-size: 21px;
+    text-transform: uppercase;
+}
+
+
+h2{
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.square{
+    margin-left: 20px;
+    padding: 0;
+    color: #4a4a4a;
+    li{
+        list-style: square; 
+    }
+}
+.space-flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
 // only desktop hover, focus
 @media (min-width: 769px) {
@@ -75,4 +100,8 @@ body {
     .main-container {
         padding: 0 5px;
     }
+    .big-text-bold{
+        font-size: 16px;
+    }
 }
+

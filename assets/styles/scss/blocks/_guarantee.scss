@@ -1,0 +1,189 @@
+.bestprice-all { 
+    color: #4a4a4a;
+    .bestprice-all-title {
+        font-size: 21px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 60px 0px;
+        color: #000;
+    }
+
+    .bestprice-nav {
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+
+        .bestprice-nav-btn {
+            width: 208px;
+            height: 63px;
+            border: 1px solid #a1a1a1;
+            font-weight: 600;
+            font-size: 21px;
+            display: flex;
+            border-radius: 10px 10px 0px 0px;
+            border-bottom: none;
+            cursor: pointer;
+            &:nth-of-type(1) {
+                margin-right: 30px;
+            }
+            p {
+                margin: auto;
+                display: inline-block;
+                line-height: 16px;
+            }
+        }
+        .active {
+            background-color: black;
+            border-color: black;
+            p {
+                color: #fff;
+            }
+        }
+    }
+
+    .tabs-blocks {
+        .bestprice-block {
+            background-color: #e5e5e5;
+            padding: 72px 134px;
+            border-top: 3px solid black;
+            margin-bottom: 75px;
+            display: none;
+            &.active {
+                display: block;
+            }
+            .bestprice_flex_item {
+                width: 250px;
+                text-align: center;
+                font-size: 13px;
+                line-height: 18px;
+                
+                
+                .bestprice_flex_img {
+                    width: 130px;
+                    height: 130px;
+                    border-radius: 50%;
+                    box-shadow: 0 0 20px #c4c4c4;
+                    background-color: white;
+                    margin: 0 auto;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+                p:nth-of-type(1) {
+                    font-size: 23px;
+                    margin: 24px 0;
+                    color: #000;
+                }
+                &:nth-of-type(1) {
+                    .bestprice_flex_img {
+                        background-image: url("~assets/images/bestprice/bestprice-icon-4.png");
+                    }
+                }
+                &:nth-of-type(2) {
+                    .bestprice_flex_img {
+                        background-image: url("~assets/images/bestprice/bestprice-icon-5.png");
+                    }
+                }
+                &:nth-of-type(3) {
+                    .bestprice_flex_img {
+                        background-image: url("~assets/images/bestprice/bestprice-icon-6.png");
+                    }
+                }
+            }
+            .bestprice-button {
+                background-color: black;
+                width: 290px;
+                border-radius: 10px;
+                font-size: 18px;
+                text-align: center;
+                padding: 10px 0px;
+                cursor: pointer;
+                margin: 0 auto;
+                margin-top: 50px;
+                p {
+                    color: #fff;
+                    margin: 0;
+                    text-transform: uppercase;
+                }
+            }
+            .bestprice-desc {
+                overflow: hidden;
+                background-color: white;
+                box-shadow: 0 0 20px #c4c4c4;
+                border-radius: 10px;
+                font-size: 16px;
+                padding: 25px 48px;
+                margin-top: 55px;
+                color: #4a4a4a;
+                .droptext {
+                    cursor: pointer;
+                }
+                p {
+                    font-size: 18px;
+                    color: #58a1d9;
+                    border-bottom: dashed 1px #58a1d9;
+                    width: 275px;
+                    margin: 0 auto;
+                }
+                li {
+                    margin-bottom: 25px;
+                    position: relative;
+                    line-height: 18px;
+                }
+                ol {
+                    margin-top: 1em;
+                    counter-reset: item;
+                    transition: linear all 5s;
+
+                    li {
+                        list-style-type: none;
+                        &::before {
+                            content: counter(item) ") ";
+                            counter-increment: item;
+                            font-weight: bold;
+                            position: absolute;
+                            left: -33px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1200px) {
+    .bestprice-all {
+        .tabs-blocks {
+            .bestprice-block {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+    }
+}
+@media (max-width: 500px) {
+    .bestprice-all {
+        .tabs-blocks {
+            .bestprice-block {
+                .bestprice-desc {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 400px) {
+    .bestprice-all {
+        .bestprice-nav {
+            .bestprice-nav-btn {
+                height: 30px;
+                &:nth-of-type(1) {
+                    margin: 0;
+                }
+                p {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}

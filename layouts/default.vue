@@ -141,7 +141,7 @@
                             <ul>
                                 <li><nuxt-link :to="{ name:'advantages' }">Наши преимущества</nuxt-link></li>
                                 <li><nuxt-link :to="{ name:'about' }">О нас</nuxt-link></li>
-                                <li><nuxt-link to="#0">Отзывы клиентов</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'reviews' }">Отзывы клиентов</nuxt-link></li>
                             </ul>
                         </b-collapse>
                     </div>
@@ -149,11 +149,11 @@
                         <a class="page-footer__big-link" v-b-toggle.accordion-2 role="tab">Покупателям</a>
                         <b-collapse class="b-collapse" id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
                             <ul>
-                                <li><nuxt-link to="#0">Возврат и обмен</nuxt-link></li>
-                                <li><nuxt-link to="#0">Доставка</nuxt-link></li>
-                                <li><nuxt-link to="#0">Оплата</nuxt-link></li>
-                                <li><nuxt-link to="#0">Центр поддержки</nuxt-link></li>
-                                <li><nuxt-link to="#0">Как заказать</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'exchange' }">Возврат и обмен</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'delivery' }">Доставка</nuxt-link></li>
+                                <li><nuxt-link :to="{ name: 'payment' }">Оплата</nuxt-link></li>
+                                <li><nuxt-link :to="{ name: 'support' }">Центр поддержки</nuxt-link></li>
+                                <li><nuxt-link :to="{ name: 'howOrder' }">Как заказать</nuxt-link></li>
                             </ul>
                         </b-collapse>
                     </div>
@@ -161,11 +161,11 @@
                         <a class="page-footer__big-link" v-b-toggle.accordion-3 role="tab">Информация</a>
                         <b-collapse class="b-collapse" id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <ul>
-                                <li><nuxt-link to="#0">Гарантия лучшей цены</nuxt-link></li>
-                                <li><nuxt-link to="#0">Дополнительные скидки</nuxt-link></li>
-                                <li><nuxt-link to="#0">Изготовление очков</nuxt-link></li>
-                                <li><nuxt-link to="#0">Конфиденциальность</nuxt-link></li>
-                                <li><nuxt-link to="#0">Оригинальная продукция</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'bestprice'}">Гарантия лучшей цены</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'discounts' }">Дополнительные скидки</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'glasses_manufacturer' }">Изготовление очков</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'confidentiality' }">Конфиденциальность</nuxt-link></li>
+                                <li><nuxt-link :to="{ name:'original' }">Оригинальная продукция</nuxt-link></li>
                             </ul>
                         </b-collapse>
                     </div>

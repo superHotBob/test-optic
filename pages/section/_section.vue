@@ -12,26 +12,16 @@
     <sticky-scroll sWrapper=".catalog" sScroll=".filter">
         <div class="catalog catalog main-container">
             <div class="catalog__col-1">
-                <div class="filter">
-                    <h2>Фильтр</h2>
-                    <!-- <div>
-                        <b-button v-b-toggle.collapse-a>Toggle A</b-button>
-                        <b-collapse id="collapse-a" class="mt-2">
-                            <b-card>I am collapsible content A!</b-card>
-                        </b-collapse>
-                    </div> -->
-                    <!-- <p v-for="(item, index) in [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" :key="index">row with a kinda long name #{{index}}</p> -->
-                    <smart-filter v-bind:items="result.filter.items"></smart-filter>
-                </div>
+                <smart-filter v-bind:items="result.filter.items"></smart-filter>
             </div>
             <div class="catalog__col-2">
                 <section-elements class="catalog__items" v-bind:items="result.section.items"></section-elements>
-                    <pagination v-model="pagen"
-                        :page-count="result.section.pagen.count"
-                        :classes="bootstrapPaginationClasses"
-                        :labels="customLabels"
-                        @change="onChangePagen"
-                    />
+                <pagination v-model="pagen"
+                    :page-count="result.section.pagen.count"
+                    :classes="bootstrapPaginationClasses"
+                    :labels="customLabels"
+                    @change="onChangePagen"
+                />
             </div>
         </div>
     </sticky-scroll>
@@ -126,7 +116,7 @@ export default {
     display: flex;
     &__col-1 {
         width: 270px;
-        background-color: red;
+        // background-color: red;
     }
     &__col-2 {
         width: calc(100% - 300px);
@@ -135,7 +125,7 @@ export default {
     .filter {
         width: 270px;
         padding-top: 40px; // no padding to parent element, only to scroll itself
-        background-color: lightcoral;
+        // background-color: lightcoral;
         border-bottom: 1px solid transparent; // border or flex, so that last margin-bottom doesn't collapse
     }
 }

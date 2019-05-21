@@ -56,6 +56,10 @@ body {
 //     z-index: 50;
 // }
 
+
+.__nuxt-error-page {
+    position: static;
+}
 // only desktop hover, focus
 @media (min-width: 769px) {
 

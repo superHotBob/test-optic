@@ -1,3 +1,92 @@
 .filter {
-    
+    h2 {
+        margin-bottom: 40px;
+        font-size: 21px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    &__prop {
+        border-top: 1px solid #d9d9d9
+    }
+    &__heading {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 25px 0;
+        padding-right: 50px;
+        font-size: 16px;
+        text-align: left;
+        text-transform: uppercase;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        &::before,
+        &::after {
+           content: "";
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+           background-color: #000;
+        }
+        &::before {
+            right: 27px;
+            width: 10px;
+            height: 2px;
+        }
+        &::after {
+            display: none;
+            right: 31px;
+            width: 2px;
+            height: 10px;
+        }
+        &.collapsed {
+            &::after {
+                display: block;
+            }
+        }
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        padding-bottom: 20px;
+    }
+    &__categories {
+        li {
+            position: relative;
+            padding-left: 16px;
+            font-size: 14px;
+            color: #4a4a4a;
+            cursor: pointer;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 8px;
+                left: 0;
+                width: 5px;
+                height: 5px;
+                background-color: #4a4a4a;
+            }
+            &:not(:last-of-type) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .filter {
+        &__categories {
+            li {
+                &:hover {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
 }

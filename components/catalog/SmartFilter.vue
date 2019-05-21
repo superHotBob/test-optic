@@ -1,35 +1,47 @@
 <template>
-    <div>
-        <form>
-            <div v-for="item in items" :key="item.CODE">
-                <div class='price' v-if="item.price">
-                    <vue-slider 
-                        :min="item.values.min" 
-                        :max="item.values.max" 
-                        v-model="item.values.array"
-                        @change="change()">
-                    </vue-slider>
-                </div>
-                <div v-else>
-                    <div v-if="item.display_type === 'F'">
-                        <ul>
-                            <li v-for="(value, index) in item.values" :key="index">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        v-model="value.checked"
-                                        v-on:click="change()"
-                                    />
-                                    {{value.name}}
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <button class="btn btn-secondary" v-on:click="clear">Clear</button>
+<form class="filter">
+    <h2>Фильтр</h2>
+    <div class="filter__prop">
+        <button class="filter__heading" type="button" v-b-toggle="'collapse-420'">Категории</button>
+        <b-collapse class="filter__values" id="collapse-420" visible>
+            <ul class="filter__categories">
+                <li>Оправы</li>
+                <li>Линзы для очков</li>
+            </ul>
+        </b-collapse>
     </div>
+    <template v-for="(item, itemIndex) in items">
+        <div class='filter__prop' v-if="item.price" :key="item.CODE">
+            <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">Цена</button>
+            <b-collapse class="filter__values" :id="'collapse-'+itemIndex" visible>
+                <vue-slider 
+                    :min="item.values.min" 
+                    :max="item.values.max" 
+                    v-model="item.values.array"
+                    @change="change()">
+                </vue-slider>
+            </b-collapse>
+        </div>
+        <div class="filter__prop" v-else :key="item.CODE">
+            <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
+            <b-collapse class="filter__values" :id="'collapse-'+itemIndex" visible>
+                <ul v-if="item.display_type === 'F'">
+                    <li v-for="(value, index) in item.values" :key="index">
+                        <label>
+                            <input
+                                type="radio"
+                                v-model="value.checked"
+                                v-on:click="change()"
+                            />
+                            {{value.name}}
+                        </label>
+                    </li>
+                </ul>
+            </b-collapse>
+        </div>
+    </template>
+    <button class="btn btn-secondary" type="button" v-on:click="clear">Сбросить</button>
+</form>
 </template>
 
 <script>

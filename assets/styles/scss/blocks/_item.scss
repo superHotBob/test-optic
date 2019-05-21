@@ -120,6 +120,15 @@
                 color: #000;
                 border-color: #000;
             }
+            &.img {
+                padding: 0;
+                img {
+                    width: 30px;
+                    height: 30px;
+                    padding: 6px;
+                    pointer-events: auto;
+                }
+            }
             &:not(:last-of-type) {
                 margin-right: 10px;
             }

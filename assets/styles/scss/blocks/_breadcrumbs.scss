@@ -1,0 +1,58 @@
+.breadcrumbs {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    li {
+        position: relative;
+        display: inline-block;
+        &:not(:last-of-type) {
+            margin-right: 5px;
+            &::after {
+                content: "/";
+                display: inline-block;
+                margin-left: 5px;
+                font-size: 13px;
+                color: #9a9a9a;
+            }
+        }
+    }
+    a {
+        color: #9a9a9a;
+        font-family: "Open Sans";
+        font-size: 13px;
+        font-weight: 400;
+        &:hover,
+        &:focus {
+            outline: none;
+            text-decoration: none;
+        }
+        &:not([href]) {
+            cursor: default;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .breadcrumbs {
+        a {
+            &[href] {
+                &:hover,
+                &:focus {
+                    color: #000;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 500px) {
+    .breadcrumbs {
+        a {
+            font-size: 12px;
+        }
+    }
+}

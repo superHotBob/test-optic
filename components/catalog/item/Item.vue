@@ -31,8 +31,9 @@
                 @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
                 v-for="value in prop.VALUES"
                 :key="value.ID"
+                :class="{'img': value.PICT}"
             >
-                <img v-if="value.PICT" :src="value.PICT.SRC" alt="">
+                <img v-if="value.PICT" :src="value.PICT.SRC" alt="" :title="value.NAME">
                 <span v-if="!value.PICT">{{value.NAME}}</span>
             </li>
         </ul>

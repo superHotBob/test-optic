@@ -1,6 +1,6 @@
 <template>
     <div>
-        <sticky-scroll sWrapper=".ss" sScroll=".ss__filter">
+        <!-- <sticky-scroll sWrapper=".ss" sScroll=".ss__filter">
             <div class="ss main-container">
                 <div class="ss__col-1">
                     <div class="ss__filter">
@@ -24,8 +24,16 @@
                     <h2>SECOND COLUMN SECOND COLUMN SECOND COLUMN SECOND COLUMN</h2>
                 </div>
             </div>
-        </sticky-scroll>
-        <h1>{{result.seometa.title}}</h1>
+        </sticky-scroll> -->
+        <div class="content-header">
+            <div class="main-container">
+                <h2>{{result.seometa.title}}</h2>
+                <ul class="breadcrumbs">
+                    <li><nuxt-link to="/">Главная</nuxt-link></li>
+                    <li><a>Женщинам</a></li>
+                </ul>
+            </div>
+        </div>
         <tags v-bind:tags="result.tags"/>
         <smart-filter v-bind:items="result.filter.items"></smart-filter>
         <section-elements v-bind:items="result.section.items"></section-elements>
@@ -39,10 +47,10 @@
 
 <script>
 
-import StickyScroll from '~/components/StickyScroll.vue'
-import SectionElements from '~/components/catalog/SectionElements.vue'
-import SmartFilter from '~/components/catalog/SmartFilter.vue'
 import Tags from '~/components/catalog/Tags.vue'
+import SmartFilter from '~/components/catalog/SmartFilter.vue'
+import SectionElements from '~/components/catalog/SectionElements.vue'
+import StickyScroll from '~/components/StickyScroll.vue'
 import Pagination from '~/components/Pagination.vue'
 
 export default {

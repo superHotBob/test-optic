@@ -2,21 +2,23 @@
 <form class="filter">
     <h2>Фильтр</h2>
     <div class="filter__prop">
-        <button class="filter__heading" type="button" v-b-toggle="'collapse-420'">Категории</button>
-        <b-collapse class="filter__values" id="collapse-420" visible>
+        <button class="filter__heading" type="button" v-b-toggle="'collapse-categories'">Категории</button>
+        <b-collapse class="filter__values" id="collapse-categories" visible>
             <ul class="filter__categories">
-                <li>Оправы</li>
-                <li>Линзы для очков</li>
+                <li v-for="section in sections" :key="section.CODE">
+                    <nuxt-link :to="{ name: 'section', params: {section: section.CODE }}" >{{section.NAME}}</nuxt-link>
+                </li>
             </ul>
         </b-collapse>
     </div>
     <template v-for="(item, itemIndex) in items">
+        <!-- {{item}} -->
         <div class='filter__prop' v-if="item.price" :key="item.CODE">
             <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">Цена</button>
             <b-collapse class="filter__values" :id="'collapse-'+itemIndex" visible>
-                <vue-slider 
-                    :min="item.values.min" 
-                    :max="item.values.max" 
+                <vue-slider
+                    :min="item.values.min"
+                    :max="item.values.max"
                     v-model="item.values.array"
                     @change="change()">
                 </vue-slider>
@@ -25,15 +27,19 @@
         <div class="filter__prop" v-else :key="item.CODE">
             <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
             <b-collapse class="filter__values" :id="'collapse-'+itemIndex" visible>
-                <ul v-if="item.display_type === 'F'">
+                <ul class="filter__square" v-if="item.display_type === 'F'">
                     <li v-for="(value, index) in item.values" :key="index">
-                        <label>
+                        <label :class="{'active': value.checked, 'disabled': value.disabled, 'color': (item.code == 'color')}">
+                            <!-- {{value}} -->
                             <input
-                                type="radio"
+                                type="checkbox"
                                 v-model="value.checked"
                                 v-on:click="change()"
+                                :disabled="value.disabled"
                             />
-                            {{value.name}}
+                            <img alt="" v-if="item.code == 'color' && value.image" v-lazy="'http://14.esobolev.ru'+value.image" :title="value.name">
+                            <img alt="" v-if="item.code == 'color' && !value.image" v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'" :title="value.name">
+                            <span v-if="item.code !== 'color'">{{value.name}} {{value.checked}}</span>
                         </label>
                     </li>
                 </ul>
@@ -50,6 +56,8 @@ import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.mi
 import 'vue-slider-component/dist-css/vue-slider-component.css'
 import 'vue-slider-component/theme/default.css'
 
+import { mapGetters } from 'vuex'
+
 export default {
     name: 'SmartFilter',
     components: {
@@ -63,6 +71,11 @@ export default {
             timer:null,
         }
     },
+    computed: {
+        ...mapGetters({
+            sections: 'catalog/getSections',
+        }),
+    },
     methods: {
         clear() {
             this.$router.push({ name: 'filter', params: {filter: ['clear']}})
@@ -71,11 +84,11 @@ export default {
             var properties = {}, values, url_params = [];
 
             for (let item in this.items) {
-                if (this.items[item].price) 
+                if (this.items[item].price)
                 {
                     url_params.push('price-' + this.items[item].code + '-from-' + this.items[item].values.array.join('-to-'));
-                } 
-                else 
+                }
+                else
                 {
                     values = [];
 
@@ -97,12 +110,12 @@ export default {
             this.$router.push({ name: 'filter', params: {filter: url_params}})
         },
         change() {
-                
+
             if (!!this.timer)
             {
                 clearTimeout(this.timer);
             }
-            this.timer = setTimeout(() => { 
+            this.timer = setTimeout(() => {
                 this.reload();
             }, 500);
         },

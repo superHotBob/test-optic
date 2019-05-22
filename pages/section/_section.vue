@@ -72,22 +72,22 @@ export default {
         var url,
             pagen = 1,
             filter = 'clear';
-        
-        if (params.filter)  
+
+        if (params.filter)
             filter = params.filter;
 
-        if (params.pagen)  
+        if (params.pagen)
             pagen = Number(params.pagen);
-        
+
         if (params.tag)
             url = `/api/v1/catalog/${params.section}/${params.tag}/?PAGEN_1=${pagen}`;
-        else   
+        else
             url = `/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`;
 
 
         return $axios.get(url)
         .then((response) => {
-            return { 
+            return {
                 result: response.data,
                 pagen: pagen,
             }
@@ -100,7 +100,7 @@ export default {
     validate ({ params }) {
         if (params.pagen)
             return /^\d+$/.test(params.pagen)
-        
+
         return true;
     },
     head() {

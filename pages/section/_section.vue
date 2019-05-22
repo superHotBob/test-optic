@@ -12,20 +12,33 @@
     <sticky-scroll sWrapper=".catalog" sScroll=".filter">
         <div class="catalog catalog main-container">
             <div class="catalog__col-1">
-                <smart-filter v-bind:items="result.filter.items"></smart-filter>
+                <smart-filter v-bind:items="result.filter.items" />
             </div>
             <div class="catalog__col-2">
-                <section-elements class="catalog__items" v-bind:items="result.section.items"></section-elements>
-                <pagination v-model="pagen"
+                <div class="catalog__top">
+                    <div class="catalog__sort">Сортировка по названию, популярности, цене</div>
+                    <div class="catalog__viwer">
+                        <button>narrow</button>
+                        <button>wide</button>
+                    </div>
+                </div>
+                <tags v-bind:tags="result.tags" />
+                <section-elements
+                    class="catalog__items"
+                    v-bind:items="result.section.items"
+                />
+                <pagination
+                    v-model="pagen"
                     :page-count="result.section.pagen.count"
-                    :classes="bootstrapPaginationClasses"
+                    :classes="paginationClasses"
                     :labels="customLabels"
                     @change="onChangePagen"
                 />
+                <button class="catalog__ajax-pagen button black hidden-desktop">Показать еще {{8}} товаров из {{54}}</button>
+                <button class="catalog__reset-filter button hidden-desktop" type="button" @click="clear">Сбросить</button>
             </div>
         </div>
     </sticky-scroll>
-    <tags v-bind:tags="result.tags"/>
 </div>
 </template>
 
@@ -40,12 +53,12 @@ import Pagination from '~/components/Pagination.vue'
 export default {
     data() {
         return {
-            bootstrapPaginationClasses: {
+            paginationClasses: {
                 ul: 'pagination',
-                li: 'page-item',
+                li: 'pagination__li',
                 liActive: 'active',
                 liDisable: 'disabled',
-                button: 'page-link'
+                button: 'pagination__btn'
             },
             customLabels: {
                 first: 'First',
@@ -63,6 +76,9 @@ export default {
         Tags,
     },
     methods: {
+        clear() {
+            this.$router.push({ name: 'filter', params: {filter: ['clear']}})
+        },
         onChangePagen: function () {
             this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}});
         },
@@ -110,23 +126,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-.catalog {
-    display: flex;
-    &__col-1 {
-        width: 270px;
-        // background-color: red;
-    }
-    &__col-2 {
-        width: calc(100% - 300px);
-        margin-left: auto;
-    }
-    .filter {
-        width: 270px;
-        padding-top: 40px; // no padding to parent element, only to scroll itself
-        // background-color: lightcoral;
-        border-bottom: 1px solid transparent; // border or flex, so that last margin-bottom doesn't collapse
-    }
-}
-</style>

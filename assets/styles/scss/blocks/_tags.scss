@@ -1,0 +1,48 @@
+.tags {
+    position: sticky;
+    top: 0;
+    padding-top: 7px;
+    background-color: #fff;
+    z-index: 10;
+    &__tag {
+        display: inline-block;
+        margin-right: 8px;
+        margin-bottom: 7px;
+    }
+    a {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: 30px;
+        min-width: 30px;
+        margin: 0;
+        padding: 5px 10px;
+        font-size: 13px;
+        color: #999;
+        border: 1px solid #b3b3b3;
+        transition: color 150ms, border-color 150ms;
+        &.active {
+            color: #000;
+            border-color: #000;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .tags {
+        a {
+            &:hover {
+                color: #000;
+                border-color: #000;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .tags {
+        top: 45px;
+    }
+}

@@ -18,6 +18,16 @@ export default {
             type: String,
             required: true,
         },
+        // offset margin between the top/bottom of the window
+        offset: {
+            type: Object,
+            default() {
+                return {
+                    top: 0,
+                    bottom: 30,
+                };
+            },
+        },
     },
     data() {
         return {
@@ -34,10 +44,6 @@ export default {
             lastDistanceFromTop: null,
             scrollingUp: null,
             scrollingDown: null,
-            offset: {
-                top: 0,
-                bottom: 0,
-            },
             enabled: true,
             scrollAffix: true,
             scrollElem: null,
@@ -124,6 +130,9 @@ export default {
     },
     methods: {
         recalculateStickyScroll() {
+            this.scrollElem = document.querySelector(this.sScroll); //questionable
+            this.scrollElem.classList.add('vue-affix');
+
             this.affixInitialTop = this.getOffsetTop(this.relativeElement);
             this.topPadding = 0;
             this.updateData();

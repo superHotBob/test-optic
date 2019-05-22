@@ -1,6 +1,6 @@
 <template>
   <ul v-if="pageCount > 1" :class="paginationClasses.ul">
-    <li
+    <!-- <li
       v-if="paginationLabels.first"
       :class="`${paginationClasses.li} ${hasFirst ? paginationClasses.liDisable : ''}`"
     >
@@ -10,13 +10,14 @@
         :class="`${paginationClasses.button} ${hasFirst ? paginationClasses.buttonDisable : ''}`"
         v-html="paginationLabels.first"
       ></button>
-    </li>
+    </li> -->
 
     <li
       v-if="paginationLabels.prev"
       :class="`${paginationClasses.li} ${hasFirst ? paginationClasses.liDisable : ''}`"
     >
       <button
+        class="arrow-prev"
         @click="prev"
         :disabled="hasFirst"
         :class="`${paginationClasses.button} ${hasFirst ? paginationClasses.buttonDisable : ''}`"
@@ -49,6 +50,7 @@
       :class="`${paginationClasses.li} ${hasLast ? paginationClasses.liDisable : ''}`"
     >
       <button
+        class="arrow-next"
         @click="next"
         :disabled="hasLast"
         :class="`${paginationClasses.button} ${hasLast ? paginationClasses.buttonDisable : ''}`"
@@ -56,7 +58,7 @@
       ></button>
     </li>
 
-    <li
+    <!-- <li
       v-if="paginationLabels.last"
       :class="`${paginationClasses.li} ${hasLast ? paginationClasses.liDisable : ''}`"
     >
@@ -66,7 +68,7 @@
         :class="`${paginationClasses.button} ${hasLast ? paginationClasses.buttonDisable : ''}`"
         v-html="paginationLabels.last"
       ></button>
-    </li>
+    </li> -->
   </ul>
 </template>
 

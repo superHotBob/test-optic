@@ -77,7 +77,12 @@ export default {
                 return;
     
             if(this.searchOfferPropIndex(prop_id,value_id)) {
-                rowItems = $event.target.parentNode.querySelectorAll('li');
+                if ($event.target.tagName == 'IMG') {
+                    rowItems = $event.target.parentNode.parentNode.querySelectorAll('li');
+                } else {
+                    rowItems = $event.target.parentNode.querySelectorAll('li');
+                }
+                console.log($event.target.tagName == 'IMG')
                 if (rowItems && 0 < rowItems.length)
                 {
                     for (i = 0; i < rowItems.length; i++)

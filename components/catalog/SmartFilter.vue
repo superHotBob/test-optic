@@ -1,60 +1,69 @@
 <template>
 <form class="filter">
     <h2>Фильтр</h2>
-    <div class="filter__prop">
-        <button class="filter__heading" type="button" v-b-toggle="'collapse-categories'">Категории</button>
-        <b-collapse class="filter__values" id="collapse-categories" visible>
-            <ul class="filter__categories">
-                <li v-for="section in sections" :key="section.CODE">
-                    <nuxt-link :to="{ name: 'section', params: {section: section.CODE }}" >{{section.NAME}}</nuxt-link>
-                </li>
-            </ul>
-        </b-collapse>
-    </div>
-    <template v-for="(item, itemIndex) in items">
-        <!-- {{item}} -->
-        <div class='filter__prop' v-if="item.price" :key="item.CODE">
-            <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">Цена</button>
-            <b-collapse class="filter__values" :id="'collapse-'+itemIndex" visible>
-                <vue-slider
-                    :min="item.values.min"
-                    :max="item.values.max"
-                    v-model="item.values.array"
-                    @change="change()">
-                </vue-slider>
-            </b-collapse>
-        </div>
-        <div class="filter__prop" v-else :key="item.CODE">
-            <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
-            <b-collapse class="filter__values" :id="'collapse-'+itemIndex" visible>
-                <ul class="filter__square" v-if="item.display_type === 'F'">
-                    <li v-for="(value, index) in item.values" :key="index">
-                        <label :class="{'active': value.checked, 'disabled': value.disabled, 'color': (item.code == 'color')}">
-                            <!-- {{value}} -->
-                            <input
-                                type="checkbox"
-                                v-model="value.checked"
-                                v-on:click="change()"
-                                :disabled="value.disabled"
-                            />
-                            <img alt="" v-if="item.code == 'color' && value.image" v-lazy="'http://14.esobolev.ru'+value.image" :title="value.name">
-                            <img alt="" v-if="item.code == 'color' && !value.image" v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'" :title="value.name">
-                            <span v-if="item.code !== 'color'">{{value.name}} {{value.checked}}</span>
-                        </label>
+    <button class="filter__f-toggle button black hidden-desktop" type="button"  @click="showFilter = !showFilter">
+        {{showFilter ? 'Скрыть фильтры' : 'Показать фильтры'}}
+    </button>
+    <b-collapse class="filter__collapse" id="collapse-filter" v-model="showFilter">
+        <div>
+            <button class="filter__heading" type="button" v-b-toggle="'collapse-categories'">Категории</button>
+            <b-collapse id="collapse-categories" visible>
+                <ul class="filter__categories">
+                    <li v-for="section in sections" :key="section.CODE">
+                        <nuxt-link :to="{ name: 'section', params: {section: section.CODE }}" >{{section.NAME}}</nuxt-link>
                     </li>
                 </ul>
             </b-collapse>
         </div>
-    </template>
-    <button class="btn btn-secondary" type="button" v-on:click="clear">Сбросить</button>
+        <template v-for="(item, itemIndex) in items">
+            <div class="filter__slider" v-if="item.price" :key="item.CODE">
+                <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">Цена</button>
+                <b-collapse :id="'collapse-'+itemIndex">
+                    <vue-slider
+                        v-model="item.values.array"
+                        :min="item.values.min"
+                        :max="item.values.max"
+                        :dotSize="15"
+                        :height="1"
+                        tooltip="none"
+                        contained="true"
+                        @change="change()"
+                    >
+                    </vue-slider>
+                    <p>от {{minPrice}} до {{maxPrice}}</p>
+                </b-collapse>
+            </div>
+        </template>
+        <template v-for="(item, itemIndex) in items">
+            <div v-if="!item.price" :key="item.CODE">
+                <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
+                <b-collapse :id="'collapse-'+itemIndex">
+                    <ul class="filter__square" v-if="item.display_type === 'F'">
+                        <li v-for="(value, index) in item.values" :key="index">
+                            <label :class="{'active': value.checked, 'disabled': value.disabled, 'color': (item.code == 'color')}">
+                                <input
+                                    type="checkbox"
+                                    v-model="value.checked"
+                                    @click="change()"
+                                    :disabled="value.disabled"
+                                />
+                                <img alt="" v-if="item.code == 'color' && value.image" v-lazy="'http://14.esobolev.ru'+value.image" :title="value.name">
+                                <img alt="" v-if="item.code == 'color' && !value.image" v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'" :title="value.name">
+                                <span v-if="item.code !== 'color'">{{value.name}}</span>
+                            </label>
+                        </li>
+                    </ul>
+                </b-collapse>
+            </div>
+        </template>
+    </b-collapse>
+    <button class="filter__reset button" type="button" @click="clear">Сбросить</button>
 </form>
 </template>
 
 <script>
 
 import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
-import 'vue-slider-component/dist-css/vue-slider-component.css'
-import 'vue-slider-component/theme/default.css'
 
 import { mapGetters } from 'vuex'
 
@@ -68,13 +77,20 @@ export default {
     },
     data() {
         return {
-            timer:null,
+            timer: null,
+            showFilter: false,
         }
     },
     computed: {
         ...mapGetters({
             sections: 'catalog/getSections',
         }),
+        minPrice() {
+            return this.items.base.values.array[0].toLocaleString('ru-RU')
+        },
+        maxPrice() {
+            return this.items.base.values.array[1].toLocaleString('ru-RU')
+        },
     },
     methods: {
         clear() {
@@ -122,10 +138,3 @@ export default {
     },
 }
 </script>
-
-<style>
-    .price {
-        margin-left: 20px;
-        max-width: 300px;
-    }
-</style>

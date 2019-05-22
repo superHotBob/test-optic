@@ -25,6 +25,7 @@
         font-size: 13px;
         font-weight: 700;
         text-transform: uppercase;
+        color: #000;
         background-color: #ffffff;
         border: 1px solid #000000;
         box-shadow: 0 8px 18px 1px #dedede;
@@ -39,6 +40,7 @@
     }
     &__img {
         height: 260px;
+        margin: 0 auto;
         margin-bottom: auto;
         text-align: center;
         white-space: nowrap;

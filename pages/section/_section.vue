@@ -16,7 +16,7 @@
             </div>
             <div class="catalog__col-2">
                 <div class="catalog__top">
-                    <div class="catalog__sort">Сортировка по названию, популярности, цене</div>
+                    <sort-by class="catalog__sort" />
                     <div class="catalog__view item-view">
                         <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false">narrow</button>
                         <button class="item-view__wide" :class="{'active' : wideItem}" @click="wideItem = true">wide</button>
@@ -50,6 +50,7 @@ import Tags from '~/components/catalog/Tags.vue'
 import SmartFilter from '~/components/catalog/SmartFilter.vue'
 import ClearFilter from '~/components/catalog/ClearFilter.vue'
 import SectionElements from '~/components/catalog/SectionElements.vue'
+import SortBy from '~/components/catalog/SortBy.vue'
 import StickyScroll from '~/components/StickyScroll.vue'
 import Pagination from '~/components/Pagination.vue'
 
@@ -77,6 +78,7 @@ export default {
         SectionElements,
         SmartFilter,
         ClearFilter,
+        SortBy,
         Pagination,
         Tags,
     },

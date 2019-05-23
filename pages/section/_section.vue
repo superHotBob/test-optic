@@ -17,15 +17,16 @@
             <div class="catalog__col-2">
                 <div class="catalog__top">
                     <div class="catalog__sort">Сортировка по названию, популярности, цене</div>
-                    <div class="catalog__viwer">
-                        <button>narrow</button>
-                        <button>wide</button>
+                    <div class="catalog__view item-view">
+                        <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false">narrow</button>
+                        <button class="item-view__wide" :class="{'active' : wideItem}" @click="wideItem = true">wide</button>
                     </div>
                 </div>
                 <tags v-bind:tags="result.tags" />
                 <section-elements
                     class="catalog__items"
                     v-bind:items="result.section.items"
+                    :wideItem="wideItem"
                 />
                 <pagination
                     v-model="pagen"
@@ -67,6 +68,7 @@ export default {
                 next: 'Next',
                 last: 'Last'
             },
+            wideItem: true,
         }
     },
     components: {

@@ -1,10 +1,10 @@
 <template>
-    <div>
-      <div class="items">
-        <item v-for="(item, index) in items" :key="index" v-bind:item="item"></item>
-      </div>
-      <item-preview/>
+<div>
+    <div class="items">
+        <item v-for="(item, index) in items" :key="index" :item="item" :wideItem="wideItem"></item>
     </div>
+    <item-preview/>
+</div>
 </template>
 
 <script>
@@ -14,12 +14,18 @@ import ItemPreview from '~/components/catalog/item/ItemPreview.vue'
 
 export default {
     name: 'SectionElements',
+    props: {
+        items: {
+            type: Object,
+        },
+        wideItem: {
+            type: Boolean,
+            default: () => false,
+        },
+    },
     components: {
       Item,
-      ItemPreview
+      ItemPreview,
     },
-    props: ['items'],
 }
 </script>
-  
-

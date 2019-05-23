@@ -1,11 +1,12 @@
 <template>
 <nuxt-link
     class="swiper-slide item"
+    :class="{'item--wide': wideItem}"
     :to="{path: item.URL}"
 >
     <button
         class="item__preview"
-        v-if="!wideView"
+        v-if="!wideItem"
         @click.prevent="showModal"
     >
         Быстрый просмотр
@@ -19,12 +20,12 @@
     </div>
     <div
         class="item__offers"
-        :class="{'item__offers--wide': wideView}"
+        :class="{'item__offers--wide': wideItem}"
         v-for="prop in item.SKU_PROPS"
         :key="prop.ID"
         ref="sku_line_block"
         >
-        <p v-if="wideView">{{prop.NAME}}</p>
+        <p v-if="wideItem">{{prop.NAME}}</p>
         <ul>
             <li
                 :data-value="value.ID"
@@ -86,13 +87,16 @@ export default {
     mixins: [offers],
     props: {
         item: Object,
+        wideItem: {
+            type: Boolean,
+            default: () => false,
+        }
     },
     data() {
-      return {
-        timer: null,
-        id: this.item.ID,
-        wideView: false
-      }
+        return {
+            timer: null,
+            id: this.item.ID,
+        }
     },
 
     methods: {

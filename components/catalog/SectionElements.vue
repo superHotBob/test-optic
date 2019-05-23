@@ -1,9 +1,9 @@
 <template>
 <div>
     <div class="items">
-        <item v-for="(item, index) in items" :key="index" :item="item" :wideItem="wideItem"></item>
+        <item v-for="(item, index) in items" :key="index" :item="item" :wideItem="wideItem" />
     </div>
-    <item-preview/>
+    <item-preview />
 </div>
 </template>
 

@@ -11,71 +11,85 @@
     >
         Быстрый просмотр
     </button>
-    <div class="item__img">
-        <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
+    <div class="item__wide-left">
+        <div class="item__img">
+            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
+        </div>
+        <div class="item__flags">
+            <!-- <span v-if="labelNew" class="item__flag left">NEW</span>
+            <span v-if="labelSale" class="item__flag right red">SALE</span> -->
+            <span class="item__flag left">NEW</span>
+            <span class="item__flag right red">SALE</span>
+        </div>
+        <div class="counter" v-if="wideItem" @click.prevent>
+            <button @click="counterMinus">-</button>
+            <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
+            <button @click="itemAmount++">+</button>
+        </div>
     </div>
-    <div class="item__flags">
-        <span v-if="labelNew" class="item__flag left">NEW</span>
-        <span v-if="labelSale" class="item__flag right red">SALE</span>
-    </div>
-    <div
-        class="item__offers"
-        :class="{'item__offers--wide': wideItem}"
-        v-for="prop in item.SKU_PROPS"
-        :key="prop.ID"
-        ref="sku_line_block"
-        >
-        <p v-if="wideItem">{{prop.NAME}}</p>
-        <ul>
-            <li
-                :data-value="value.ID"
-                @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
-                v-for="value in prop.VALUES"
-                :key="value.ID"
-                :class="{'img': value.PICT}"
+    <div class="item__wide-right">
+        <div v-if="wideItem" style="height: 20px; border: 1px solid #999; text-align: right;">- - Rating placeholder - -</div>
+        <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
+        <div class="item__wide-offers">
+            <div
+                class="item__offers"
+                v-for="prop in item.SKU_PROPS"
+                :key="prop.ID"
+                ref="sku_line_block"
             >
-                <img v-if="value.PICT" :src="value.PICT.SRC" alt="" :title="value.NAME">
-                <span v-if="!value.PICT">{{value.NAME}}</span>
-            </li>
-        </ul>
-    </div>
-
-    <div class="item__info">
-        <p class="item__name">{{item.CURRENT.NAME}}</p>
-        <template
-            v-for="(price, index) in item.CURRENT.ITEM_PRICES"
-        >   
-            <p class="item__price" :key="price.ID">
-                {{price.PRINT_RATIO_PRICE}}
-            </p>
-            <p v-if="labelSale" class="item__old-price" :key="index">{{price.PRINT_BASE_PRICE}}</p>
-        </template>
-       
-        <p class="item__sale">Еще -10% по акции</p>
-    </div>
-    <div class="item__buttons">
-        <button
-            class="item__add-to-cart"
-            @click.prevent="basket(item.CURRENT.ADD_URL)"
-        >
-            В корзину
-        </button>
-        <button
-            class="item__favorite"
-            :class="{'active':isFavorites(item.ID)}"
-            @click.prevent="clickFavorites"
-        >
-            <svg width="17" height="17" fill="#000"><use href="#svg-heart" /></svg>
-            <svg width="16" height="16" fill="#fff"><use href="#svg-heart2" /></svg>
-            В избранное
-        </button>
-        <button class="item__compare" @click.prevent>
-            <svg width="18" height="18" fill="#000"><use href="#svg-compare" /></svg>
-            В сравнение
-        </button>
+                <p v-if="wideItem">{{prop.NAME}}</p>
+                <ul>
+                    <li
+                        :data-value="value.ID"
+                        @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
+                        v-for="value in prop.VALUES"
+                        :key="value.ID"
+                        :class="{'img': value.PICT}"
+                    >
+                        <img v-if="value.PICT" :src="value.PICT.SRC" alt="" :title="value.NAME">
+                        <span v-if="!value.PICT">{{value.NAME}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="item__wide-bottom">
+            <div class="item__info">
+                <p class="item__name" v-if="!wideItem">{{item.CURRENT.NAME}}</p>
+                <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">   
+                    <p class="item__price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
+                    <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
+                </template>
+                <p class="item__sale">Еще -10% по акции</p>
+            </div>
+            <div class="item__buttons">
+                <div class="counter" v-if="wideItem" @click.prevent>
+                    <button @click="counterMinus">-</button>
+                    <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
+                    <button @click="itemAmount++">+</button>
+                </div>
+                <button
+                    class="item__add-to-cart"
+                    @click.prevent="basket(item.CURRENT.ADD_URL)"
+                >
+                    В корзину
+                </button>
+                <button
+                    class="item__favorite"
+                    :class="{'active':isFavorites(item.ID)}"
+                    @click.prevent="clickFavorites"
+                >
+                    <svg width="17" height="17" fill="#000"><use href="#svg-heart" /></svg>
+                    <svg width="16" height="16" fill="#fff"><use href="#svg-heart2" /></svg>
+                    В избранное
+                </button>
+                <button class="item__compare" @click.prevent>
+                    <svg width="18" height="18" fill="#000"><use href="#svg-compare" /></svg>
+                    В сравнение
+                </button>
+            </div>
+        </div>
     </div>
 </nuxt-link>
-
 </template>
 
 <script>
@@ -96,6 +110,12 @@ export default {
         return {
             timer: null,
             id: this.item.ID,
+            itemAmount: 1,
+            regxNumbers: {
+                F: {
+                    pattern: /[0-9]/,
+                },
+            },
         }
     },
 
@@ -130,7 +150,14 @@ export default {
             this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
             this.$store.dispatch('catalog/GET_FAVORITES');
             this.$root.$emit('favorites');
-        }
+        },
+        counterMinus() {
+            if (this.itemAmount <= 1) {
+                return
+            } else {
+                this.itemAmount--;
+            }
+        },
     },
     computed: {
         ...mapGetters({

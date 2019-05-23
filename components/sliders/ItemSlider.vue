@@ -32,7 +32,6 @@
                 v-for="(item, index) in returnItems"
                 :key="index"
                 :item="item"
-                :wideView="wideView"
             />
         </div>
     </div>
@@ -79,9 +78,7 @@ export default {
                 slidesPerView: 'auto',
                 spaceBetween: 0,
                 freeMode: true,
-                // breakpoints: this.$props.breakpoints,
             },
-            wideView: false,
             bestsellers: JSON.parse(JSON.stringify(this.$store.state.catalog.bestsellers)),
             newItems: JSON.parse(JSON.stringify(this.$store.state.catalog.newItems)),
         }

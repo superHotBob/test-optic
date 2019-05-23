@@ -25,6 +25,7 @@
                 <tags v-bind:tags="result.tags" />
                 <section-elements
                     class="catalog__items"
+                    :class="{'catalog__items--wide': wideItem}"
                     v-bind:items="result.section.items"
                     :wideItem="wideItem"
                 />
@@ -80,9 +81,6 @@ export default {
         Tags,
     },
     methods: {
-        clear() {
-            this.$router.push({ name: 'filter', params: {filter: ['clear']}})
-        },
         onChangePagen: function () {
             this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}});
         },

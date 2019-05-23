@@ -101,6 +101,9 @@
         margin-left: -15px;
         margin-right: -17px;
     }
+    .simple {
+        border-bottom: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -129,6 +132,10 @@
         &__items {
             margin-left: 0;
             margin-right: -5px;
+        }
+        .simple {
+            border-bottom: transparent;
+            font-size: 16px;
         }
     }
 }

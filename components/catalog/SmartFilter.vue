@@ -57,20 +57,22 @@
             </div>
         </template>
     </b-collapse>
-    <button class="filter__reset button" type="button" @click="clear">Сбросить</button>
+    <clear-filter class="filter__reset button" />
 </form>
 </template>
 
 <script>
 
 import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
+import ClearFilter from '~/components/catalog/ClearFilter.vue'
 
 import { mapGetters } from 'vuex'
 
 export default {
     name: 'SmartFilter',
     components: {
-        VueSlider
+        VueSlider,
+        ClearFilter,
     },
     props: {
       items: Object,
@@ -93,9 +95,6 @@ export default {
         },
     },
     methods: {
-        clear() {
-            this.$router.push({ name: 'filter', params: {filter: ['clear']}})
-        },
         reload() {
             var properties = {}, values, url_params = [];
 

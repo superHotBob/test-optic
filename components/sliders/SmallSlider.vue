@@ -1,10 +1,10 @@
 <template>
 <div class="small-slider" v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
-        <nuxt-link 
-            class="swiper-slide banner-card" 
-            v-for="(item, index) in items" :key="index" 
-            :class="{'s-date': date}" 
+        <nuxt-link
+            class="swiper-slide banner-card"
+            v-for="(item, index) in items" :key="index"
+            :class="{'s-date': date}"
             :to="{ path: item.properties.link.value }"
         >
             <img class="swiper-lazy" alt="" :data-src="item.src">

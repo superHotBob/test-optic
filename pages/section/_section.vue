@@ -34,8 +34,8 @@
                     :labels="customLabels"
                     @change="onChangePagen"
                 />
-                <button class="catalog__ajax-pagen button black hidden-desktop">Показать еще {{8}} товаров из {{54}}</button>
-                <button class="catalog__reset-filter button hidden-desktop" type="button" @click="clear">Сбросить</button>
+                <button class="catalog__ajax-pagen button black hidden-desktop">Показать еще N товаров из Z</button>
+                <clear-filter class="catalog__reset-filter button hidden-desktop" />
             </div>
         </div>
     </sticky-scroll>
@@ -46,6 +46,7 @@
 
 import Tags from '~/components/catalog/Tags.vue'
 import SmartFilter from '~/components/catalog/SmartFilter.vue'
+import ClearFilter from '~/components/catalog/ClearFilter.vue'
 import SectionElements from '~/components/catalog/SectionElements.vue'
 import StickyScroll from '~/components/StickyScroll.vue'
 import Pagination from '~/components/Pagination.vue'
@@ -72,6 +73,7 @@ export default {
         StickyScroll,
         SectionElements,
         SmartFilter,
+        ClearFilter,
         Pagination,
         Tags,
     },

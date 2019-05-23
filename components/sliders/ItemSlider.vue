@@ -1,28 +1,25 @@
 <template>
 <div class="item-slider">
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
-        <div class="swiper-wrapper">
+        <div v-if="items == 'recommended'">
+            <p class="simple active">Рекоммендуем вам</p>
+        </div>
+        <div class="swiper-wrapper"  v-else>
             <p
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'newItems'}"
                 @click="itemCategory = 'newItems'"
-            >
-                Новинки
-            </p>
+            >Новинки</p>
             <p
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'bestsellers'}"
                 @click="itemCategory = 'bestsellers'"
-            >
-                Бестселлеры
-            </p>
+            >Бестселлеры</p>
             <p
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'mostWanted'}"
                 @click="itemCategory = 'mostWanted'"
-            >
-                Самое желанное
-            </p>
+            >Самое желанное</p>
         </div>
         <div class="item-slider__controls">
             <button class="item-slider__prev">Назад</button>
@@ -32,7 +29,7 @@
     <div class="item-slider__items" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper">
             <item
-                v-for="(item, index) in items"
+                v-for="(item, index) in returnItems"
                 :key="index"
                 :item="item"
                 :wideView="wideView"
@@ -48,8 +45,11 @@ import Item from '~/components/catalog/item/Item.vue';
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['breakpoints', 'date'],
-        data () {
+    props: {
+        breakpoints: {},
+        items: '',
+    },
+    data () {
         return {
             itemCategory: 'bestsellers',
             swiperOption: {
@@ -79,7 +79,7 @@ export default {
                 slidesPerView: 'auto',
                 spaceBetween: 0,
                 freeMode: true,
-                breakpoints: this.$props.breakpoints,
+                // breakpoints: this.$props.breakpoints,
             },
             wideView: false,
             bestsellers: JSON.parse(JSON.stringify(this.$store.state.catalog.bestsellers)),
@@ -90,7 +90,10 @@ export default {
         Item
     },
     computed: {
-        items() {
+        returnItems() {
+            if (this.items == 'recommended')
+                return this.bestsellers; // нужно подставить правильный геттер
+
             if (this.itemCategory == 'bestsellers')
                 return this.bestsellers;
             if (this.itemCategory == 'newItems')

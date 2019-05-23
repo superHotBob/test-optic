@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button style="position: fixed; z-index: 1;" @click="recalculateStickyScroll">RECALC</button>
+    <button style="position: fixed; bottom: 0; z-index: 5;" @click="recalculateStickyScroll">Recalc StickyScroll</button>
     <slot></slot>
 </div>
 </template>

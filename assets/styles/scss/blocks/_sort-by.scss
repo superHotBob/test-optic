@@ -1,5 +1,12 @@
 .sort-by {
     font-size: 0;
+    &__desktop {
+        button {
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
     &__btn {
         position: relative;
         vertical-align: middle;
@@ -44,11 +51,35 @@
             }
         }
     }
-    &__desktop {
-        button {
-            &:last-of-type {
-                margin-right: 0;
-            }
+    &__mobile {
+        font-size: 16px;
+    }
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    &__toggle {
+        width: 200px;
+        padding: 0;
+        padding-left: 12px;
+        text-align: left;
+        background-color: #fff;
+        border: 1px solid #e6e6e6;
+        border-radius: 0;
+        cursor: pointer;
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+    }
+    &__option {
+        padding-left: 12px;
+        font-size: 13px;
+        color: #4d4d4d;
+        &.asc,
+        &.desc {
+
         }
     }
 }

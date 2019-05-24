@@ -24,7 +24,31 @@
         >По цене</button>
     </div>
     <div class="sort-by__mobile hidden-desktop">
-        
+        <button class="sort-by__toggle">
+            <span
+                class="sort-by__option"
+                :class="{'asc': sort.byAsc, 'desc': !sort.byAsc}"
+                v-if="sort.params.name == true"
+            >По названию</span>
+            <span
+                class="sort-by__option"
+                :class="{'asc': sort.byAsc, 'desc': !sort.byAsc}"
+                v-else-if="sort.params.rating == true"
+            >По популярности</span>
+            <span
+                class="sort-by__option"
+                :class="{'asc': sort.byAsc, 'desc': !sort.byAsc}"
+                v-else-if="sort.params.price == true"
+            >По цене</span>
+        </button>
+        <ul class="sort-by__list">
+            <li><span class="sort-by__option asc">По названию</span></li>
+            <li><span class="sort-by__option desc">По названию</span></li>
+            <li><span class="sort-by__option asc">По популярности</span></li>
+            <li><span class="sort-by__option desc">По популярности</span></li>
+            <li><span class="sort-by__option asc">По цене</span></li>
+            <li><span class="sort-by__option desc">По цене</span></li>
+        </ul>
     </div>
 </div>
 </template>
@@ -61,6 +85,9 @@ export default {
                 this.sort.byAsc = !this.sort.byAsc;
             }
         },
+        toggleList() {
+
+        }
     }
 }
 </script>

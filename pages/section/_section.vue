@@ -84,7 +84,7 @@ export default {
     },
     methods: {
         onChangePagen: function () {
-            this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}});
+            this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}, query: this.$route.query});
         },
     },
     asyncData({ params, $axios, error }) {

@@ -1,5 +1,12 @@
 .sort-by {
-    font-size: 0;
+    // font-size: 0;
+    a {
+        &:hover,
+        &:focus {
+            outline: none;
+            text-decoration: none;
+        }
+    }
     &__desktop {
         button {
             &:last-of-type {
@@ -8,24 +15,20 @@
         }
     }
     &__btn {
+        display: inline-block;
         position: relative;
         vertical-align: middle;
         margin-right: 30px;
-        padding: 0;
+        padding: 5px 0;
         padding-right: 20px;
         font-size: 13px;
         text-align: left;
-        text-decoration: none;
         color: #999;
         background-color: #fff;
         border: none;
         border-radius: 0;
         transition: color 150ms;
         cursor: pointer;
-        &:hover,
-        &:focus {
-            outline: none;
-        }
         &.active {
             color: #000;
             &::after {
@@ -52,17 +55,32 @@
         }
     }
     &__mobile {
+        position: relative;
         font-size: 16px;
     }
     &__list {
-        list-style: none;
+        position: absolute;
+        top: 40px;
+        display: none;
+        width: 200px;
         margin: 0;
         padding: 0;
+        list-style: none;
+        background-color: #fff;
+        border-right: 1px solid #e6e6e6;
+        border-left: 1px solid #e6e6e6;
+        z-index: 15;
+        li {
+            border-bottom: 1px solid #e6e6e6;
+        }
+        &.active {
+            display: block;
+        }
     }
     &__toggle {
+        position: relative;
         width: 200px;
         padding: 0;
-        padding-left: 12px;
         text-align: left;
         background-color: #fff;
         border: 1px solid #e6e6e6;
@@ -72,14 +90,78 @@
         &:focus {
             outline: none;
         }
+        &::before {
+            content: "";
+            position: absolute;
+            top: 16px;
+            right: 10px;
+            width: 7px;
+            height: 7px;
+            background-color: #fff;
+            border-left: 1px solid #4d4d4d;
+            border-bottom: 1px solid #4d4d4d;
+            transform: rotate(-45deg);
+        }
+        &.active {
+            &::before {
+                top: 19px;
+                transform: rotate(-225deg);
+            }
+        }
     }
     &__option {
-        padding-left: 12px;
+        display: block;
+        padding: 0;
         font-size: 13px;
         color: #4d4d4d;
+        border-top: none;
+        &:hover,
+        &:focus {
+            color: #4d4d4d;
+        }
         &.asc,
         &.desc {
-
+            span {
+                position: relative;
+                display: inline-block;
+                padding: 10px 12px;
+                padding-right: 20px;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    right: 6px;
+                    top: 15px;
+                    width: 1px;
+                    height: 10px;
+                    background-color: #4d4d4d;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    border-left: 1px solid #4d4d4d;
+                    border-bottom: 1px solid #4d4d4d;
+                }
+            }
+        }
+        &.asc {
+            span {
+                &::after {
+                    top: 15px;
+                    right: 4px;
+                    transform: rotate(135deg);
+                }
+            }
+        }
+        &.desc {
+            span {
+                &:after {
+                    top: 20px;
+                    right: 4px;
+                    transform: rotate(-45deg);
+                }
+            }
         }
     }
 }

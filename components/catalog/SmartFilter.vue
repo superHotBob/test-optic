@@ -122,7 +122,7 @@ export default {
                     url_params.push(key + '-is-' + properties[key].join('-or-'));
             }
 
-            this.$router.push({ name: 'filter', params: {filter: url_params}})
+            this.$router.push({ name: 'filter', params: {filter: url_params}, query: this.$route.query})
         },
         change() {
 

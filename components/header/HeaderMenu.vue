@@ -56,11 +56,10 @@
                 </p>
             </div>
             <ul class="header-category__list" v-if="showCategories">
-                <li v-for="(category, key) in section(indexCategories).SECTIONS" :key="key"><nuxt-link to="#0">{{category.UF_NAME}}</nuxt-link></li>
-                <li class="header-category__all"><nuxt-link to="#0">... смотреть все категории</nuxt-link></li>
+                <li v-for="(category, key) in section(indexCategories).SECTIONS" :key="key"><nuxt-link :to="category.UF_LINK">{{category.UF_NAME}}</nuxt-link></li>
             </ul>
             <ul class="header-category__list" v-if="!showCategories">
-                <li v-for="(brand, key) in section(indexCategories).BRANDS" :key="key"><nuxt-link to="#0">{{brand.UF_NAME}}</nuxt-link></li>
+                <li v-for="(brand, key) in section(indexCategories).BRANDS" :key="key"><nuxt-link :to="brand.UF_LINK">{{brand.UF_NAME}}</nuxt-link></li>
                 <li class="header-category__all"><nuxt-link to="#0">... смотреть все бренды</nuxt-link></li>
             </ul>
         </b-modal>

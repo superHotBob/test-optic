@@ -26,7 +26,17 @@
         </div>
     </div>
     <div class="item__wide-right">
-        <div v-if="wideItem" style="height: 20px; border: 1px solid #999; text-align: right;">- - Rating placeholder - -</div>
+        <div v-if="wideItem" @click.prevent style="display: flex;">
+            <star
+                class="rating"
+                v-model="rating"
+                :show-rating="false"
+                :round-start-rating="false"
+                :star-size="16"
+                :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
+                style="transform: scale(1)"
+            />
+        </div>
         <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
         <div class="item__wide-offers">
             <div
@@ -87,6 +97,7 @@
             </div>
         </div>
     </div>
+    
 </nuxt-link>
 </template>
 
@@ -95,6 +106,8 @@
 import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
 import { mapGetters } from 'vuex'
+
+import Star from '~/components/catalog/item/star/star.vue'
 
 export default {
     mixins: [offers, item],
@@ -110,6 +123,7 @@ export default {
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
+            rating: 4.4,
             regxNumbers: {
                 F: {
                     pattern: /[0-9]/,
@@ -117,7 +131,9 @@ export default {
             },
         }
     },
-
+    components: {
+        Star,
+    },
     methods: {
         showModal() {
             this.$root.$emit('preview', this.item);

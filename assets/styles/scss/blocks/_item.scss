@@ -463,7 +463,10 @@
                 width: 43%;
             }
             .item__wide-right {
+                display: flex;
+                flex-direction: column;
                 width: 57%;
+                margin-top: 0;
             }
             .item__buttons {
                 position: relative;
@@ -472,11 +475,13 @@
                 margin-bottom: auto;
             }
             .item__name {
+                margin-top: 12px;
                 margin-bottom: 11px;
             }
             .item__offers {
                 display: block;
                 margin-right: 30px;
+                margin-bottom: 5px;;
                 p {
                     margin: 0;
                     line-height: normal;
@@ -488,12 +493,11 @@
                 ul {
                     margin-top: 7px;
                 }
-                // p {
-                //     display: block;
-                // }
             }
             .item__wide-bottom {
-                margin-top: 5px;
+                justify-self: stretch;
+                flex-grow: 1;
+                margin: 0;
             }
             .item__info {
                 margin-bottom: 18px;

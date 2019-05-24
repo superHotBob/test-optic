@@ -8,10 +8,6 @@ export default {
         deleteItem(id) {
             this.$store.dispatch('basket/delete',{'id':id});
         },
-        async addToBasket(url) {
-            let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}`);
-            this.$store.dispatch('basket/STATE');
-        },
     },
     mounted() {
         this.$root.$on('login/logout', result => { 

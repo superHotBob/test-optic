@@ -72,12 +72,12 @@
 <script>
 
 import offers from '~/mixins/offers.js'
-import basket from '~/mixins/basket/basket.js'
+import item from '~/mixins/item.js'
 import { mapGetters } from 'vuex'
 import StarRating from 'vue-star-rating'
 
 export default {
-    mixins: [offers, basket],
+    mixins: [offers, item],
     data() {
         return {
             showModal: false,

@@ -93,11 +93,11 @@
 <script>
 
 import offers from '~/mixins/offers.js'
-import basket from '~/mixins/basket/basket.js'
+import item from '~/mixins/item.js'
 import { mapGetters } from 'vuex'
 
 export default {
-    mixins: [offers, basket],
+    mixins: [offers, item],
     props: {
         item: Object,
         wideItem: {

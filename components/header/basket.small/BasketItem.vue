@@ -15,7 +15,7 @@
             <template v-for="(value, propIndex) in prop.SKU_VALUES_LIST">
                 <span class="basket__square img" v-if="value.SELECTED && value.PROP_CODE == 'color'" :key="propIndex">
                     <img :title="value.NAME" alt="" v-if="value.PICT" v-lazy="'http://14.esobolev.ru/' + value.PICT">
-                    <img :title="value.NAME" alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
+                    <span class="basket__square" v-else :key="propIndex">{{value.NAME}}</span>
                 </span>
                 <span class="basket__square" v-if="value.SELECTED && value.PROP_CODE !== 'color'" :key="propIndex">{{value.NAME}}</span>
             </template>

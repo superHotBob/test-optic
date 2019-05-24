@@ -131,6 +131,7 @@ export default {
             }
             this.timer = setTimeout(() => {
                 this.reload();
+                this.$root.$emit('recalcSlider');
             }, 500);
         },
     },

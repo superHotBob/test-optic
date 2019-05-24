@@ -42,6 +42,7 @@
             </div>
         </div>
     </sticky-scroll>
+    <button @click="$root.$emit('recalcSlider')" style="position: fixed; bottom: 0; z-index: 5;">GENERATE EVENT</button>
 </div>
 </template>
 
@@ -89,6 +90,12 @@ export default {
         onChangePagen: function () {
             this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}, query: this.$route.query});
         },
+    },
+    watch: {
+        // '$route' (to, from) {
+        //     console.log('router watched')
+        //     this.$root.$emit('recalcSlider')
+        // },
     },
     asyncData({ params, $axios, error }) {
 

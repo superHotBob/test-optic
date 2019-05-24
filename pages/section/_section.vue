@@ -16,6 +16,7 @@
             </div>
             <div class="catalog__col-2">
                 <div class="catalog__top">
+                    <p class="catalog__items-found hidden-desktop">Найдено {{54}} {{wording(54)}}</p>
                     <sort-by class="catalog__sort" />
                     <div class="catalog__view item-view">
                         <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false">narrow</button>
@@ -46,6 +47,7 @@
 
 <script>
 
+import util from '~/mixins/util.js'
 import Tags from '~/components/catalog/Tags.vue'
 import SmartFilter from '~/components/catalog/SmartFilter.vue'
 import ClearFilter from '~/components/catalog/ClearFilter.vue'
@@ -55,6 +57,7 @@ import StickyScroll from '~/components/StickyScroll.vue'
 import Pagination from '~/components/Pagination.vue'
 
 export default {
+    mixins: [util],
     data() {
         return {
             paginationClasses: {
@@ -104,7 +107,7 @@ export default {
         else
             url = `/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`;
 
-
+        
         return $axios.get(url)
         .then((response) => {
             return {

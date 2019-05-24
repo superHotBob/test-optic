@@ -41,8 +41,8 @@
                         v-for="value in prop.VALUES"
                         :key="value.ID"
                     >
-                        <img v-if="value.PICT" :src="value.PICT.SRC" alt="">
-                        <span v-if="!value.PICT">{{value.NAME}}</span>
+                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="">
+                        <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
                     <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
                     <button @click="itemAmount++">+</button>
                 </div>
-                <button class="button black" @click.prevent="basket(item.CURRENT.ADD_URL)">В корзину</button>
+                <button class="button black" @click.prevent="addToBasket(item.CURRENT.ADD_URL)">В корзину</button>
                 <button class="button">
                     <svg id="svg-icon-click" fill="#000" viewBox="0 0 18 25.929" width="20" height="20">
                         <path d="M18 18L8.353 8.646 7 9v14l3.658-1.835 2.196 4.764.034-.026.006.012 3.186-1.688-2.222-5.168L18 19v-1zm-4.313.062l-1.025.738 2.263 4.908-1.623.859-2.196-4.762L8 21.438V9.707l8.317 8.317-2.63.038z"></path>
@@ -72,11 +72,12 @@
 <script>
 
 import offers from '~/mixins/offers.js'
+import basket from '~/mixins/basket/basket.js'
 import { mapGetters } from 'vuex'
 import StarRating from 'vue-star-rating'
 
 export default {
-    mixins: [offers],
+    mixins: [offers, basket],
     data() {
         return {
             showModal: false,
@@ -108,10 +109,6 @@ export default {
         }); 
     },
     methods: {
-        async basket(url) {
-            let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}`);
-            this.$store.dispatch('basket/STATE');
-        },
         counterMinus() {
             if (this.itemAmount <= 1) {
                 return

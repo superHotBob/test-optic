@@ -125,15 +125,12 @@
             &.img {
                 padding: 0;
                 img {
-                    width: 30px;
-                    height: 30px;
+                    width: 28px;
+                    height: 28px;
                     padding: 6px;
                     pointer-events: auto;
                 }
             }
-            // &:not(:last-of-type) {
-            //     margin-right: 10px;
-            // }
         }
         img {
             display: block;

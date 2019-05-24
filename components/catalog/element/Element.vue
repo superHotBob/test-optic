@@ -20,7 +20,7 @@
         <p v-for="price in item.CURRENT.ITEM_PRICES" :key="price.ID">
           {{price.PRINT_RATIO_PRICE}}
         </p>
-        <button class="btn btn-primary" v-on:click.stop.prevent="basket(item.CURRENT.ADD_URL)">Купить</button>
+        <button class="btn btn-primary" v-on:click.stop.prevent="addToBasket(item.CURRENT.ADD_URL)">Купить</button>
       </div>
 
     </div>
@@ -29,19 +29,12 @@
 <script>
 
 import offers from '~/mixins/offers.js'
+import basket from '~/mixins/basket/basket.js'
 
 export default {
-    mixins: [offers],
+    mixins: [offers, basket],
     props: {
         item: Object,
-    },
-    methods: {
-      async basket(url) {
-        let response = await this.$axios.get(`${url}&ajax_basket=Y`);
-        this.$store.dispatch('basket/state');
-      },
-    },
-    computed: {
     },
 }
 </script>

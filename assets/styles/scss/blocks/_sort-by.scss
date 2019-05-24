@@ -1,5 +1,5 @@
 .sort-by {
-    // font-size: 0;
+    font-size: 0;
     a {
         &:hover,
         &:focus {
@@ -29,6 +29,9 @@
         border-radius: 0;
         transition: color 150ms;
         cursor: pointer;
+        &:last-of-type {
+            margin: 0;
+        }
         &.active {
             color: #000;
             &::after {

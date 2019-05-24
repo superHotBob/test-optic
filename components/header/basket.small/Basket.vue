@@ -20,7 +20,7 @@
                 <basket-item v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID" :arItem="arItem"/>
                 <div class="basket__footer">
                     <button class="button black">Оформить заказ</button>
-                    <span>Всего {{getBasket.BASKET_ITEMS_COUNT}} {{wording}}</span>
+                    <span>Всего {{getBasket.BASKET_ITEMS_COUNT}} {{wording(getBasket.BASKET_ITEMS_COUNT)}}</span>
                     <b>{{getBasket.allSum_FORMATED}}</b>
                 </div>
             </div>
@@ -62,12 +62,13 @@
 
 <script>
 
+import util from '~/mixins/util.js'
 import basket from '~/mixins/basket/basket.js'
 import BasketItem from '~/components/header/basket.small/BasketItem.vue'
 
 export default {
     props: ['isLogged'],
-    mixins: [basket],
+    mixins: [util, basket],
     components: {
         BasketItem,
     },
@@ -85,7 +86,7 @@ export default {
             if ((el !== target) && !el.contains(target) && (basketBtn !== target) && !basketBtn.contains(target)) {
                 this.basketPopup=false;
             }
-        }
+        },
     },
     computed: {
         showPopup() {
@@ -95,12 +96,6 @@ export default {
                 return this.basketPopup;
             }
         },
-        wording() {
-            let number = this.getBasket.BASKET_ITEMS_COUNT;
-            let titles = ['товар', 'товара', 'товаров'];
-            let cases = [2, 0, 1, 1, 1, 2];
-            return titles[ (number%100>4 && number%100<20) ? 2 : cases[(number%10<5)?number%10:5] ];  
-        }
     },
     created() {
         this.$store.dispatch('basket/STATE');

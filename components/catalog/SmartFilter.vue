@@ -40,16 +40,15 @@
                 <b-collapse :id="'collapse-'+itemIndex">
                     <ul class="filter__square" v-if="item.display_type === 'F'">
                         <li v-for="(value, index) in item.values" :key="index">
-                            <label :class="{'active': value.checked, 'disabled': value.disabled, 'color': (item.code == 'color')}">
+                            <label :class="{'active': value.checked, 'disabled': value.disabled, 'color': value.image}">
                                 <input
                                     type="checkbox"
                                     v-model="value.checked"
                                     @click="change()"
                                     :disabled="value.disabled"
                                 />
-                                <img alt="" v-if="item.code == 'color' && value.image" v-lazy="'http://14.esobolev.ru'+value.image" :title="value.name">
-                                <img alt="" v-if="item.code == 'color' && !value.image" v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'" :title="value.name">
-                                <span v-if="item.code !== 'color'">{{value.name}}</span>
+                                <img alt="" v-if="value.image" v-lazy="'http://14.esobolev.ru'+value.image" :title="value.name">
+                                <span v-if="!value.image">{{value.name}}</span>
                             </label>
                         </li>
                     </ul>

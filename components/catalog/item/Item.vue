@@ -16,10 +16,8 @@
             <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
         </div>
         <div class="item__flags">
-            <!-- <span v-if="labelNew" class="item__flag left">NEW</span>
-            <span v-if="labelSale" class="item__flag right red">SALE</span> -->
-            <span class="item__flag left">NEW</span>
-            <span class="item__flag right red">SALE</span>
+            <span v-if="labelNew" class="item__flag left">NEW</span>
+            <span v-if="labelSale" class="item__flag right red">SALE</span>
         </div>
         <div class="counter" v-if="wideItem" @click.prevent>
             <button @click="counterMinus">-</button>
@@ -44,10 +42,10 @@
                         @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
                         v-for="value in prop.VALUES"
                         :key="value.ID"
-                        :class="{'img': value.PICT}"
+                        :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
                     >
-                        <img v-if="value.PICT" :src="value.PICT.SRC" alt="" :title="value.NAME">
-                        <span v-if="!value.PICT">{{value.NAME}}</span>
+                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
+                        <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
                     </li>
                 </ul>
             </div>
@@ -69,7 +67,7 @@
                 </div>
                 <button
                     class="item__add-to-cart"
-                    @click.prevent="basket(item.CURRENT.ADD_URL)"
+                    @click.prevent="addToBasket(item.CURRENT.ADD_URL)"
                 >
                     В корзину
                 </button>
@@ -95,10 +93,11 @@
 <script>
 
 import offers from '~/mixins/offers.js'
+import basket from '~/mixins/basket/basket.js'
 import { mapGetters } from 'vuex'
 
 export default {
-    mixins: [offers],
+    mixins: [offers, basket],
     props: {
         item: Object,
         wideItem: {
@@ -120,10 +119,6 @@ export default {
     },
 
     methods: {
-        async basket(url) {
-            let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}`);
-            this.$store.dispatch('basket/STATE');
-        },
         showModal() {
             this.$root.$emit('preview', this.item);
         },

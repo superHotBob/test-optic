@@ -29,6 +29,15 @@
         min-height: 95px; //temp style
         align-items: center; //temp style
     }
+    &__items-found {
+        width: 100%;
+        margin: 0;
+        padding-top: 32px;
+        padding-bottom: 37px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+    }
     &__items {
         margin-top: 40px;
         .items {
@@ -75,6 +84,9 @@
         }
         &__col-2 {
             width: 100%;
+        }
+        &__top {
+            margin-bottom: 20px;
         }
         &__items {
             margin-top: 20px;

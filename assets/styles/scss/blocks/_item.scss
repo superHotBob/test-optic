@@ -83,6 +83,18 @@
     &__wide-right {
         margin-top: auto;
     }
+    &__rating {
+        display: flex;
+        align-items: center;
+        .rating {
+            transform: scale(0.94) translateX(-5px);
+            margin-left: auto;
+        }
+        span {
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+    }
     &__offers {
         display: flex;
         justify-content: center;
@@ -412,6 +424,16 @@
         }
         &__img {
             height: 150px;
+        }
+        &__rating {
+            .rating {
+                transform: scale(0.81) translateX(0);
+                margin: 0;
+            }
+            span {
+                transform: translateX(-14px);
+                font-size: 12px;
+            }
         }
         &__name {
             margin-top: 16px;

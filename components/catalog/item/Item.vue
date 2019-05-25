@@ -26,16 +26,17 @@
         </div>
     </div>
     <div class="item__wide-right">
-        <div v-if="wideItem" @click.prevent style="display: flex;">
+        <div class="item__rating" v-if="wideItem" @click.prevent>
             <star
                 class="rating"
                 v-model="rating"
+                inactive-color="#e6e6e6"
+                active-color="#999999"
                 :show-rating="false"
                 :round-start-rating="false"
-                :star-size="16"
                 :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
-                style="transform: scale(1)"
             />
+            <span>(35)</span>
         </div>
         <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
         <div class="item__wide-offers">
@@ -63,7 +64,7 @@
         <div class="item__wide-bottom">
             <div class="item__info">
                 <p class="item__name" v-if="!wideItem">{{item.CURRENT.NAME}}</p>
-                <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">   
+                <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
                     <p class="item__price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
                     <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
                 </template>
@@ -97,7 +98,7 @@
             </div>
         </div>
     </div>
-    
+
 </nuxt-link>
 </template>
 
@@ -149,13 +150,13 @@ export default {
         },
         loadFavorites() {
             var cookie, elementsId = [];
-            
+
             if (cookie = this.$cookie.get('favorites'))
                 elementsId = JSON.parse(cookie);
 
             if (this.in_array(this.id,elementsId))
                 elementsId.remove(this.id);
-            else 
+            else
                 elementsId.push(this.id);
 
             this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });

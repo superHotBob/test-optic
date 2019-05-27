@@ -92,7 +92,6 @@ export default {
     },
     watch: {
         '$route' (to, from) {
-            console.log(to);
             this.$store.dispatch('catalog/LOAD_SECTION', {'params':to.params, 'query':to.query}).then((response) => {
                 
                 if (response.hasOwnProperty('error'))

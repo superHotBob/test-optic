@@ -1,11 +1,11 @@
 <template>
     <div>
-      <img v-for="img in item.CURRENT.MORE_PHOTO" :key="img.ID" :src="'http://home-optic.proj' + img.SRC"/>
+      <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img"/>
       <div class="item-name">
         <p>
-          <nuxt-link :to="{ name: 'element', params: {element: item.CODE }}">
+         
             {{item.CURRENT.NAME}}
-          </nuxt-link>
+          
         </p>
         <div v-if="item.JS_OFFERS">
           <div v-for="prop in item.SKU_PROPS" :key="prop.ID" ref="sku_line_block">

@@ -8,31 +8,31 @@
                     </div>
                     <div class="page-header__features" :class="{'hidden': featuresHidden}">
                         <div class="header-feature">
-                            <nuxt-link to="#0">Быстрая доставка</nuxt-link>
+                            <nuxt-link :to="{ name:'delivery' }">Быстрая доставка</nuxt-link>
                             <div class="header-feature__popup">
                                 <p>Мгновенно доставим любой товар в любую точку России.</p>
-                                <nuxt-link to="#0">Подробнее ...</nuxt-link>
+                                <nuxt-link :to="{ name:'delivery' }">Подробнее ...</nuxt-link>
                             </div>
                         </div>
                         <div class="header-feature">
-                            <nuxt-link to="#0">Гарантия лучшей цены</nuxt-link>
+                            <nuxt-link :to="{ name:'bestprice'}">Гарантия лучшей цены</nuxt-link>
                             <div class="header-feature__popup">
                                 <p>Гарантируем лучшие цены на все товары. Мы заботимся о Вас и хотим, чтобы вы приобретали хорошие товары по лучшим ценам.</p>
-                                <nuxt-link to="#0">Подробнее ...</nuxt-link>
+                                <nuxt-link :to="{ name:'bestprice'}">Подробнее ...</nuxt-link>
                             </div>
                         </div>
                         <div class="header-feature">
-                            <nuxt-link to="#0">Изготовление очков</nuxt-link>
+                            <nuxt-link :to="{ name:'glasses_manufacturer' }">Изготовление очков</nuxt-link>
                             <div class="header-feature__popup">
                                 <p>Профессионально установим линзы любой сложности в любую оправу.</p>
-                                <nuxt-link to="#0">Подробнее ...</nuxt-link>
+                                <nuxt-link :to="{ name:'glasses_manufacturer' }">Подробнее ...</nuxt-link>
                             </div>
                         </div>
                         <div class="header-feature">
-                            <nuxt-link to="#0">Оригинальная продукция</nuxt-link>
+                            <nuxt-link :to="{ name:'original' }">Оригинальная продукция</nuxt-link>
                             <div class="header-feature__popup">
                                 <p>Мы занимаемся только оригинальной продукцией. С радостью подтвердим все товары сертификатами производителей.</p>
-                                <nuxt-link to="#0">Подробнее ...</nuxt-link>
+                                <nuxt-link :to="{ name:'original' }">Подробнее ...</nuxt-link>
                             </div>
                         </div>
                     </div>
@@ -334,8 +334,10 @@ import BasketSmall from '~/components/header/basket.small/Basket.vue'
 import DeliveryRegion from '~/components/header/DeliveryRegion.vue'
 
 import { mapGetters } from 'vuex'
+import basketInit from '~/mixins/basket/init.js'
 
 export default {
+    mixins: [basketInit],
     data() {
         return {
             featuresHidden: true,

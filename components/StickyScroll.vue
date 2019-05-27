@@ -143,7 +143,6 @@ export default {
                         && affixTotalHeight > this.scrollContainer.innerHeight;
                     if (shouldUseScrollAffix) this.initScrollAffix();
                 }
-                console.log('- - - StickyScroll recalculated - - -')
             }, 200)
         },
         updateData() {

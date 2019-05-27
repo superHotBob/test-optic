@@ -4,17 +4,20 @@
         <div class="main-container section-item-slider">
             <item-slider items="recommended"/>
         </div>
+        <item-preview />
     </div>
 </template>
 
 <script>
 
 import ItemSlider from '~/components/sliders/ItemSlider.vue'
+import ItemPreview from '~/components/catalog/item/ItemPreview.vue'
 
 export default {
     transition: 'fade',
     components: {
         ItemSlider,
+        ItemPreview,
     },
 }
 </script>

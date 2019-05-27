@@ -13,7 +13,7 @@
             <b class="item-preview__name">{{item.CURRENT.NAME}}</b>
             
             <div class="item-preview__rating">
-                <star-rating class="rating" v-model="rating" :show-rating="false" :round-start-rating="false"/>
+                <star-rating class="rating" v-model="rating" :read-only="true" :show-rating="false" :round-start-rating="false"/>
                 <p>0 отзывов</p>
             </div>
             <p

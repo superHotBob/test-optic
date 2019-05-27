@@ -1,49 +1,251 @@
 <template>
-    <div>
-      <img v-for="img in item.CURRENT.MORE_PHOTO" :key="img.ID" :src="'http://home-optic.proj' + img.SRC"/>
-      <div class="item-name">
+<div class="card main-container">
+    <div class="card__top">
+        <div class="card__img">
+            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
+            <div class="item__flags">
+                <!-- <span v-if="labelNew" class="item__flag left">NEW</span>
+                <span v-if="labelSale" class="item__flag right red">SALE</span> -->
+                <span class="item__flag left">NEW</span>
+                <span class="item__flag right red">SALE</span>
+            </div>
+        </div>
+        <div class="card__info">
+            <div class="social card__social">
+                <a href="#0">
+                    <svg width='18' height="18" fill="#000"><use href="#svg-vk"/></svg>
+                    Вконтакте
+                </a>
+                <a href="#0">
+                    <svg width='15' height="15" fill="#000"><use href="#svg-facebook"/></svg>
+                    Фейсбук
+                </a>
+                <a href="#0">
+                    <svg width='15' height="15" fill="#000"><use href="#svg-pinterest"/></svg>
+                    Пинтерест
+                </a>
+                <a href="#0">
+                    <svg width='15' height="15" fill="#000"><use href="#svg-twitter"/></svg>
+                    Твиттер
+                </a>
+            </div>
+            <p class="card__article">Артикул: 18000</p>
+            <div class="card__rating">
+                <star
+                    class="rating"
+                    v-model="rating"
+                    inactive-color="#e6e6e6"
+                    active-color="#999999"
+                    :read-only="true"
+                    :show-rating="false"
+                    :round-start-rating="false"
+                    :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
+                />
+                <span class="card__replies">0 отзывов</span>
+                <button>Добавить отзыв</button>
+            </div>
+            <div class="card__available">
+                <svg width="15" height="15" fill="#000"><use href="#svg-layers"/></svg>
+                Доступно Много
+                <button>
+                    <svg width="15" height="15" fill="#000"><use href="#svg-compare2"/></svg>
+                    Добавить к сравнению
+                </button>
+            </div>
+            <div class="card__offers" v-if="item.SKU_PROPS">
+                <div
+                    class="item__offers"
+                    v-for="prop in item.SKU_PROPS"
+                    :key="prop.ID"
+                    ref="sku_line_block"
+                >
+                    <p>{{prop.NAME}}</p>
+                    <ul>
+                        <li
+                            :data-value="value.ID"
+                            @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
+                            v-for="value in prop.VALUES"
+                            :key="value.ID"
+                            :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
+                        >
+                            <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
+                            <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card__lense-production-wrapper">
+                <div class="card__lense-production">
+                    <p>Линзы изготавливаются на заказ.</p>
+                    <p>Срок изготовления 10 рабочих дней.</p>
+                </div>
+            </div>
+            <div class="card__guarantee">
+                <p>Гарантируем лучшую цену! Нашли дешевле? Снизим цену</p>
+                <p>
+                    Дополнительная <span>10% скидка по промокоду</span> <br>
+                    при изготовлении очков в нашей мастерской или при заказе онлайн.
+                </p>
+            </div>
+        </div>
+    </div> 
+    <div class="card__price">
+        <div class="card__price-inner"> 
+            <h3>Цена</h3>
+            <p class="card__old-price">10 039.40 руб.</p>
+            <p class="card__current-price">9 035.46 руб.</p>
+            <div class="card__counter counter">
+                <button @click="counterMinus">-</button>
+                <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
+                <button @click="itemAmount++">+</button>
+            </div>
+            <button class="card__promo">Доп скидка 10% по промокоду</button>
+            <button class="card__add-to-cart button black">В корзину</button>
+        </div>
+        <button class="card__buy-one-click button">
+            <svg width="22" height="22" fill="#000"><use href="#svg-click"/></svg>
+            Купить в один клик
+        </button>
+    </div>
+    <div class="card__lenses"></div>
+    <div class="card__workshop">
+        
+    </div>
+    <div class="card__workshop">
+        
+    </div>
+    <div class="card__tabs card-tabs">
+        <div class="card__slider" v-swiper:card__tabs="tabsOptions">
+            <div class="swiper-wrapper">
+                <p class="swiper-slide"
+                    :class="{'active': tabs[1] == true}"
+                    @click="toggleTab(1)"
+                >Описание</p>
+                <p class="swiper-slide"
+                    :class="{'active': tabs[2] == true}"
+                    @click="toggleTab(2)"
+                >Характеристики</p>
+                <p class="swiper-slide"
+                    :class="{'active': tabs[3] == true}"
+                    @click="toggleTab(3)"
+                >Мультипокрытие</p>
+                <p class="swiper-slide"
+                    :class="{'active': tabs[4] == true}"
+                    @click="toggleTab(4)"
+                >Доп. возможности</p>
+                <p class="swiper-slide"
+                    :class="{'active': tabs[5] == true}"
+                    @click="toggleTab(5)"
+                >Задать вопрос</p>
+                <p class="swiper-slide"
+                    :class="{'active': tabs[6] == true}"
+                    @click="toggleTab(6)"
+                >Отзывы</p>
+            </div>
+        </div>
+    </div>
+    <div class="card__usp"></div>
+
+    <div class="item-name" hidden>
         <p>
-          <nuxt-link :to="{ name: 'element', params: {element: item.CODE }}">
-            {{item.CURRENT.NAME}}
-          </nuxt-link>
+            <nuxt-link :to="{ name: 'element', params: {element: item.CODE }}">
+                {{item.CURRENT.NAME}}
+            </nuxt-link>
         </p>
         <div v-if="item.JS_OFFERS">
-          <div v-for="prop in item.SKU_PROPS" :key="prop.ID" ref="sku_line_block">
-            <div>{{prop.NAME}}</div>
-            <ul class="sku-props">
-              <li :data-value="value.ID" v-on:click="selectOfferProp(prop.ID, value.ID, $event)" v-for="value in prop.VALUES" :key="value.ID">
-                {{value.NAME}}
-              </li>
-            </ul>
-          </div>
+            <div v-for="prop in item.SKU_PROPS" :key="prop.ID" ref="sku_line_block">
+                <div>{{prop.NAME}}</div>
+                <ul class="sku-props">
+                    <li :data-value="value.ID" v-on:click="selectOfferProp(prop.ID, value.ID, $event)" v-for="value in prop.VALUES" :key="value.ID">
+                        {{value.NAME}}
+                    </li>
+                </ul>
+            </div>
         </div>
         <p v-for="price in item.CURRENT.ITEM_PRICES" :key="price.ID">
-          {{price.PRINT_RATIO_PRICE}}
+            {{price.PRINT_RATIO_PRICE}}
         </p>
         <button class="btn btn-primary" v-on:click.stop.prevent="addToBasket(item.CURRENT.ADD_URL)">Купить</button>
-      </div>
-
     </div>
+    <div style="display: none;">
+        <svg id="svg-click"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.043 512.043" xml:space="preserve">
+            <path d="M444.902,365.824L231.569,152.491c-3.072-3.029-7.637-3.968-11.627-2.304c-3.989,1.643-6.592,5.547-6.592,9.856v295.381 c0,4.075,2.325,7.787,5.995,9.579c3.669,1.792,8.043,1.344,11.221-1.173l54.165-42.347l47.275,85.077 c1.963,3.499,5.589,5.483,9.344,5.483c1.6,0,3.243-0.363,4.779-1.131l64-32c2.603-1.301,4.565-3.605,5.419-6.379 c0.853-2.795,0.533-5.803-0.853-8.341l-44.544-80.149h67.2c4.309,0,8.192-2.603,9.856-6.592 C448.87,373.461,447.953,368.875,444.902,365.824z M352.038,362.731c-3.776,0-7.275,2.005-9.195,5.269 c-1.92,3.243-1.984,7.275-0.149,10.581l47.936,86.251l-44.907,22.464l-48.363-87.083c-1.515-2.731-4.16-4.672-7.211-5.291 c-0.725-0.149-1.429-0.213-2.133-0.213c-2.347,0-4.693,0.789-6.571,2.261l-46.763,36.565V185.792l176.939,176.939H352.038z"/>
+            <path d="M224.017,0c-5.888,0-10.667,4.779-10.667,10.667v64c0,5.888,4.779,10.667,10.667,10.667s10.667-4.779,10.667-10.667v-64 C234.683,4.779,229.905,0,224.017,0z"/>
+            <path d="M138.683,149.333h-64c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h64 c5.888,0,10.667-4.779,10.667-10.667S144.571,149.333,138.683,149.333z"/>
+            <path d="M373.35,149.333h-64c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h64 c5.888,0,10.667-4.779,10.667-10.667S379.238,149.333,373.35,149.333z"/>
+            <path d="M171.217,92.117l-45.269-45.248c-4.16-4.16-10.923-4.16-15.083,0c-4.16,4.16-4.16,10.923,0,15.083l45.269,45.248 c2.091,2.069,4.821,3.115,7.552,3.115c2.731,0,5.461-1.024,7.531-3.115C175.377,103.04,175.377,96.277,171.217,92.117z"/>
+            <path d="M171.217,212.821c-4.16-4.16-10.923-4.16-15.083,0l-45.269,45.248c-4.16,4.16-4.16,10.923,0,15.083 c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.115l45.269-45.248C175.377,223.744,175.377,216.981,171.217,212.821z"/>
+            <path d="M337.169,46.869c-4.16-4.181-10.923-4.181-15.104,0l-45.269,45.248c-4.16,4.16-4.16,10.923,0,15.083 c2.091,2.069,4.821,3.115,7.552,3.115c2.731,0,5.461-1.024,7.552-3.115l45.269-45.248 C341.329,57.792,341.329,51.051,337.169,46.869z"/>
+        </svg>
+    </div>
+</div>
 </template>
 
 <script>
 
 import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
+import Star from '~/components/catalog/star/star.vue'
 
 export default {
     mixins: [offers, item],
     props: {
         item: Object,
     },
+    data() {
+        return {
+            itemAmount: 1,
+            regxNumbers: {
+                F: {
+                    pattern: /[0-9]/,
+                }
+            },
+            rating: 4.4,
+            tabs: {
+                1: true,
+                2: false,
+                3: false,
+                4: false,
+                5: false,
+                6: false,
+            },
+            tabsOptions: {
+                roundLengths: true,
+                speed: 500,
+                loop: false,
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+                freeMode: true,
+            },
+        }
+    },
+    components: {
+        Star,
+    },
+    methods: {
+        counterMinus() {
+            if (this.itemAmount <= 1) {
+                return
+            } else {
+                this.itemAmount--;
+            }
+        },
+        toggleTab(tabNum) {
+            for (let [key, tab] in this.tabs) {
+                if (tabNum == key) {
+                    this.tabs[key] = true
+                } else {
+                    this.tabs[key] = false
+                }
+            }
+        }
+    },
 }
 </script>
 
 <style>
-  .sku-props .selected {
-    color: #007bff;
-  }
-  img {
-    max-width: 100%;
-  }
+    .sku-props .selected {
+        color: #007bff;
+    }
 </style>

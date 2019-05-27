@@ -32,6 +32,7 @@
                 v-model="rating"
                 inactive-color="#e6e6e6"
                 active-color="#999999"
+                :read-only="true"
                 :show-rating="false"
                 :round-start-rating="false"
                 :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
@@ -108,7 +109,7 @@ import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
 import { mapGetters } from 'vuex'
 
-import Star from '~/components/catalog/item/star/star.vue'
+import Star from '~/components/catalog/star/star.vue'
 
 export default {
     mixins: [offers, item],

@@ -91,44 +91,33 @@ export default {
         },
     },
     watch: {
-        // '$route' (to, from) {
-        //     console.log('router watched')
-        //     this.$root.$emit('recalcSlider')
-        // },
+        '$route' (to, from) {
+            console.log(to);
+            this.$store.dispatch('catalog/LOAD_SECTION', {'params':to.params, 'query':to.query}).then((response) => {
+                
+                if (response.hasOwnProperty('error'))
+                    this.$nuxt.error({ statusCode: response.statusCode, message: response.error.message })
+                
+                this.result = response.result;
+                this.pagen = response.pagen;
+            })
+        },
     },
     updated() {
         this.$root.$emit('recalcSlider')
     },
-    asyncData({ params, $axios, error }) {
+    
+    async asyncData({ store, error, params, query }) {
+        let response = await store.dispatch('catalog/LOAD_SECTION', {'params':params, 'query':query})
 
-        var url,
-            pagen = 1,
-            filter = 'clear';
+        if (response.hasOwnProperty('error'))
+            error({ statusCode: response.statusCode, message: response.error.message })
 
-        if (params.filter)
-            filter = params.filter;
-
-        if (params.pagen)
-            pagen = Number(params.pagen);
-
-        if (params.tag)
-            url = `/api/v1/catalog/${params.section}/${params.tag}/?PAGEN_1=${pagen}`;
-        else
-            url = `/api/v1/catalog/${params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}`;
-
-        
-        return $axios.get(url)
-        .then((response) => {
-            return {
-                result: response.data,
-                pagen: pagen,
-            }
-        }).catch((e) => {
-            if (e.response.status === 404) {
-                error({ statusCode: 404, message: e.message })
-            }
-        })
-    },
+        return {
+            result: response.result,
+            pagen: response.pagen,
+        }
+},
     validate ({ params }) {
         if (params.pagen)
             return /^\d+$/.test(params.pagen)

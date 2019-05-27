@@ -29,7 +29,7 @@
         <div class="item__rating" v-if="wideItem" @click.prevent>
             <star
                 class="rating"
-                v-model="rating"
+                @rating-selected="setReting"
                 inactive-color="#e6e6e6"
                 active-color="#999999"
                 :show-rating="false"
@@ -136,6 +136,9 @@ export default {
         Star,
     },
     methods: {
+        setReting(value) {
+            console.log(value);
+        },
         showModal() {
             this.$root.$emit('preview', this.item);
         },

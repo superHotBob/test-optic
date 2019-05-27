@@ -130,18 +130,21 @@ export default {
     },
     methods: {
         recalculateStickyScroll() {
-            this.scrollElem = document.querySelector(this.sScroll); //questionable
-            this.scrollElem.classList.add('vue-affix');
+            setTimeout(() => {
+                this.scrollElem = document.querySelector(this.sScroll); //questionable
+                this.scrollElem.classList.add('vue-affix');
 
-            this.affixInitialTop = this.getOffsetTop(this.relativeElement);
-            this.topPadding = 0;
-            this.updateData();
-            if (this.scrollAffix) {
-                const affixTotalHeight = this.affixHeight + this.offset.bottom + this.offset.top;
-                const shouldUseScrollAffix = this.scrollAffix
-                    && affixTotalHeight > this.scrollContainer.innerHeight;
-                if (shouldUseScrollAffix) this.initScrollAffix();
-            }
+                this.affixInitialTop = this.getOffsetTop(this.relativeElement);
+                this.topPadding = 0;
+                this.updateData();
+                if (this.scrollAffix) {
+                    const affixTotalHeight = this.affixHeight + this.offset.bottom + this.offset.top;
+                    const shouldUseScrollAffix = this.scrollAffix
+                        && affixTotalHeight > this.scrollContainer.innerHeight;
+                    if (shouldUseScrollAffix) this.initScrollAffix();
+                }
+                console.log('- - - StickyScroll recalculated - - -')
+            }, 200)
         },
         updateData() {
             this.topOfScreen = this.scrollContainer.scrollTop || window.pageYOffset;

@@ -19,8 +19,8 @@
                     <p class="catalog__items-found hidden-desktop">Найдено {{54}} {{wording(54)}}</p>
                     <sort-by class="catalog__sort" />
                     <div class="catalog__view item-view">
-                        <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false">narrow</button>
-                        <button class="item-view__wide" :class="{'active' : wideItem}" @click="wideItem = true">wide</button>
+                        <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false; $root.$emit('recalcSlider')">narrow</button>
+                        <button class="item-view__wide" :class="{'active' : wideItem}" @click="wideItem = true; $root.$emit('recalcSlider')">wide</button>
                     </div>
                 </div>
                 <tags v-bind:tags="result.tags" />
@@ -42,7 +42,6 @@
             </div>
         </div>
     </sticky-scroll>
-    <button @click="$root.$emit('recalcSlider')" style="position: fixed; bottom: 0; z-index: 5;">GENERATE EVENT</button>
 </div>
 </template>
 
@@ -96,6 +95,9 @@ export default {
         //     console.log('router watched')
         //     this.$root.$emit('recalcSlider')
         // },
+    },
+    updated() {
+        this.$root.$emit('recalcSlider')
     },
     asyncData({ params, $axios, error }) {
 

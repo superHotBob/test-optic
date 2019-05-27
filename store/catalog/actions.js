@@ -58,6 +58,43 @@ export default {
         ]);
     
         return promise;
-    }
+    },
+
+    LOAD_SECTION ({ state }, payload) {
+        var url,
+            pagen = 1,
+            query = '',
+            filter = 'clear';
+
+        if (payload.params.filter)
+            filter = payload.params.filter;
+
+        if (payload.params.pagen)
+            pagen = Number(payload.params.pagen);
+
+        for (let key in payload.query) {
+            query += `&${key}=${payload.query[key]}`;
+        }
+
+        if (payload.params.tag)
+            url = `/api/v1/catalog/${payload.params.section}/${payload.params.tag}/?PAGEN_1=${pagen}${query}`;
+        else
+            url = `/api/v1/catalog/${payload.params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}${query}`;
+        
+        return this.$axios.get(url)
+        .then((response) => {
+            return {
+                result: response.data,
+                pagen: pagen,
+            }
+        }).catch((e) => {
+            if (e.response.status === 404) {
+                return {
+                    error: e,
+                    statusCode: 404
+                }
+            }
+        })
+    },
   
 }

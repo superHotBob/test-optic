@@ -1,66 +1,115 @@
 <template>
-    <b-modal class="auth-modal" id="auth-modal" hide-header hide-footer>
-        <div class="modal-wrap">
-            <button class="modal-close" @click="$bvModal.hide('auth-modal')"></button>
-            <p class="auth-modal__header">
-                <span
-                    :class="{'active': (loginShown && !passwordRecovery)}"
-                    @click="loginShown = true; passwordRecovery = false;"
-                >
-                    Авторизация
-                </span>
-                /
-                <span
-                    :class="{'active': (!loginShown && !passwordRecovery)}"
-                    @click="loginShown = false; passwordRecovery = false;"
-                >
-                    Регистрация
-                </span>
-            </p>
+<b-modal class="auth-modal" id="auth-modal" hide-header hide-footer>
+    <div class="modal-wrap">
+        <button class="modal-close" @click="$bvModal.hide('auth-modal')"></button>
+        <p class="auth-modal__header">
+            <span
+                :class="{'active': (loginShown && !passwordRecovery)}"
+                @click="loginShown = true; passwordRecovery = false;"
+            >
+                Авторизация
+            </span>
+            /
+            <span
+                :class="{'active': (!loginShown && !passwordRecovery)}"
+                @click="loginShown = false; passwordRecovery = false;"
+            >
+                Регистрация
+            </span>
+        </p>
 
-            <form @submit.prevent="login" v-if="loginShown && !passwordRecovery">
-                <label class="textfield">
-                    <span>Логин</span>
-                    <input name="name" type="text" v-model="username">
-                </label>
-                <label class="textfield">
-                    <span>Пароль</span>
-                    <input name="password" type="password" v-model="password">
-                </label>
-                <button class="auth-modal__submit button black" type="submit">Войти</button>
-                <button
-                    class="auth-modal__forgot-pwd"
-                    @click="loginShown = false; passwordRecovery = true;"
-                >
-                    Забыли пароль?
-                </button>
-            </form>
+        <form
+            ref="form-login"
+            v-if="loginShown && !passwordRecovery"
+            @submit.prevent="validateForm('form-login')"
+            data-vv-scope="form-login">
+            <label class="textfield">
+                <span>Логин</span>
+                <input
+                    name="name"
+                    type="text"
+                    v-model="username"
+                    v-validate="'required'"
+                    data-vv-as="Логин">
+                <span v-show="errors.has('form-login.name')" class="error">{{ errors.first('form-login.name') }}</span>
+            </label>
+            <label class="textfield">
+                <span>Пароль</span>
+                <input
+                    v-validate="'required'"
+                    v-model="password"
+                    name="password"
+                    type="password"
+                    data-vv-as="Пароль">
+                <span v-show="errors.has('form-login.password')" class="error">{{ errors.first('form-login.password') }}</span>
+            </label>
+            <button class="auth-modal__submit button black" type="submit">Войти</button>
+            <span
+                class="auth-modal__forgot-pwd"
+                @click="loginShown = false; passwordRecovery = true;"
+            >
+                Забыли пароль?
+            </span>
+        </form>
 
-            <form v-if="!loginShown && !passwordRecovery">
-                <label class="textfield">
-                    <span>Логин</span>
-                    <input name="name" type="text">
-                </label>
-                <label class="textfield">
-                    <span>Пароль</span>
-                    <input name="password" type="password">
-                </label>
-                <label class="textfield">
-                    <span>Повторите пароль</span>
-                    <input name="password2" type="password">
-                </label>
-                <button class="auth-modal__submit button black" type="submit">Зарегистрироваться</button>
-            </form>
+        <form 
+            ref="form-register"
+            v-if="!loginShown && !passwordRecovery"
+            @submit.prevent="validateForm('form-register')"
+            data-vv-scope="form-register">
+            <label class="textfield">
+                <span>Логин</span>
+                <input
+                    v-validate="'required'"
+                    v-model="username"
+                    name="name"
+                    type="text"
+                    data-vv-as="Логин">
+                <span v-show="errors.has('form-register.name')" class="error">{{ errors.first('form-register.name') }}</span>
+            </label>
+            <label class="textfield">
+                <span>Пароль</span>
+                <input 
+                    ref="regPassword"
+                    name="password"
+                    type="password"
+                    v-model="password"
+                    v-validate="'required'"
+                    data-vv-as="Пароль">
+                <span v-show="errors.has('form-register.password')" class="error">{{ errors.first('form-register.password') }}</span>
+            </label>
+            <label class="textfield">
+                <span>Повторите пароль</span>
+                <input
+                    name="password_confirmation"
+                    type="password"
+                    v-model="passwordConfirmation"
+                    v-validate="'required|confirmed:regPassword'"
+                    data-vv-as="Повторите пароль">
+                <span v-show="errors.has('form-register.password_confirmation')" class="error">{{ errors.first('form-register.password_confirmation') }}</span>
+            </label>
+            <button class="auth-modal__submit button black" type="submit">Зарегистрироваться</button>
+        </form>
 
-            <form v-if="passwordRecovery">
-                <label class="textfield">
-                    <span>Логин</span>
-                    <input name="name" type="text">
-                </label>
-                <button class="auth-modal__submit button black" type="submit">Восстановить пароль</button>
-            </form>
-        </div>
-    </b-modal>
+        <form
+            ref="form-recovery"
+            v-if="passwordRecovery"
+            @submit.prevent="validateForm('form-recovery')"
+            data-vv-scope="form-recovery">
+            <label class="textfield">
+                <span>Логин</span>
+                <input
+                    v-validate="'required'"
+                    v-model="username"
+                    name="name"
+                    type="text"
+                    data-vv-as="Логин">
+                <span v-show="errors.has('form-recovery.name')" class="error">{{ errors.first('form-recovery.name') }}</span>
+            </label>
+            <button class="auth-modal__submit button black" type="submit">Восстановить пароль</button>
+        </form>
+    </div>
+</b-modal>
 </template>
 
 <script>
@@ -69,6 +118,7 @@ export default {
         return {
             username: '',
             password: '',
+            passwordConfirmation: '',
             remember: false,
             loginShown: true,
             passwordRecovery: false
@@ -78,7 +128,17 @@ export default {
         async login() {
             let response = await this.$store.dispatch('user/login',{'username':this.username, 'password':this.password, 'remember':this.remember});
             this.$root.$emit('login/logout');
-        }
+        },
+        validateForm(scope) {
+            console.log('- - - VALIDATION - - -')
+            this.$validator.validateAll(scope).then((result) => {
+                if (result && (scope == 'form-login')) {
+                    this.login();
+                } else if (result){
+                    this.$refs[scope].submit();
+                }
+            });
+        },
     },
 }
 </script>
@@ -122,6 +182,7 @@ export default {
         color: #4a4a4a;
         background-color: transparent;
         border: none;
+        cursor: pointer;
     }
 }
 

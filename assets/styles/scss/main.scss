@@ -52,15 +52,15 @@
 @import "blocks/card.scss";
 
 // custom pages
-@import "blocks/custom-page.scss";
-@import "blocks/reviews.scss";
-@import "blocks/delivery.scss";
-@import "blocks/support.scss";
-@import "blocks/bestprice.scss";
-@import "blocks/guarantee.scss";
-@import "blocks/cheaper-form.scss";
-@import "blocks/glasses_manufacturer.scss";
-@import "blocks/howOrder.scss";
+@import "custom-pages/custom-page.scss";
+@import "custom-pages/reviews.scss";
+@import "custom-pages/delivery.scss";
+@import "custom-pages/support.scss";
+@import "custom-pages/bestprice.scss";
+@import "custom-pages/guarantee.scss";
+@import "custom-pages/cheaper-form.scss";
+@import "custom-pages/glasses_manufacturer.scss";
+@import "custom-pages/howOrder.scss";
 
 //"overwrites" display
 @import "misc/display.scss";

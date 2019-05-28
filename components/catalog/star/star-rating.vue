@@ -1,25 +1,25 @@
 <template>
-    <svg class="vue-star-rating-star" :height="getSize" :width="getSize" :viewBox="viewBox" @mousemove="mouseMoving" @click="selected">
+<svg class="vue-star-rating-star" :height="getSize" :width="getSize" :viewBox="viewBox" @mousemove="mouseMoving" @click="selected">
 
-        <linearGradient :id="grad" x1="0" x2="100%" y1="0" y2="0">
-            <stop :offset="getFill" :stop-color="(rtl) ? inactiveColor : activeColor" />
-            <stop :offset="getFill" :stop-color="(rtl) ? activeColor : inactiveColor" />
-        </linearGradient>
+    <linearGradient :id="grad" x1="0" x2="100%" y1="0" y2="0">
+        <stop :offset="getFill" :stop-color="(rtl) ? inactiveColor : activeColor" />
+        <stop :offset="getFill" :stop-color="(rtl) ? activeColor : inactiveColor" />
+    </linearGradient>
 
-        <filter :id="glowId"  height="130%" width="130%" filterUnits="userSpaceOnUse">
-            <feGaussianBlur :stdDeviation="glow" result="coloredBlur"/>
-            <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
+    <filter :id="glowId"  height="130%" width="130%" filterUnits="userSpaceOnUse">
+        <feGaussianBlur :stdDeviation="glow" result="coloredBlur"/>
+        <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
 
-        <polygon :points="starPointsToString" :fill="getGradId" :stroke="glowColor"
-              :filter="'url(#'+this.glowId+')'" v-show="fill > 1" />
+    <polygon :points="starPointsToString" :fill="getGradId" :stroke="glowColor"
+            :filter="'url(#'+this.glowId+')'" v-show="fill > 1" />
 
-        <polygon :points="starPointsToString" :fill="getGradId" :stroke="getBorderColor" :stroke-width="border" :stroke-linejoin="roundedCorners ? 'round' : 'miter'" />
-        <polygon :points="starPointsToString" :fill="getGradId" />
-    </svg>
+    <polygon :points="starPointsToString" :fill="getGradId" :stroke="getBorderColor" :stroke-width="border" :stroke-linejoin="roundedCorners ? 'round' : 'miter'" />
+    <polygon :points="starPointsToString" :fill="getGradId" />
+</svg>
 </template>
 
 <script type="text/javascript">

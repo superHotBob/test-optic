@@ -1,29 +1,29 @@
 <template>
-    <form class="page-header__search" aria-label="Поиск">
-        <button class="btn-icon hidden-desktop" type="button" @click="btnClick" ref="btn">
+<form class="page-header__search" aria-label="Поиск">
+    <button class="btn-icon hidden-desktop" type="button" @click="btnClick" ref="btn">
+        <svg width="15" height="15"><use href="#svg-search"/></svg>
+        Поиск
+    </button>
+    <label @click="showSearch = true" ref="input" class="textfield light" :class="{'active': showSearch}">
+        <input @input="search($event.target.value)" type="text" placeholder="Поиск...">
+        <button class="textfield__icon" type="button">
             <svg width="15" height="15"><use href="#svg-search"/></svg>
             Поиск
         </button>
-        <label @click="showSearch = true" ref="input" class="textfield light" :class="{'active': showSearch}">
-            <input @input="search($event.target.value)" type="text" placeholder="Поиск...">
-            <button class="textfield__icon" type="button">
-                <svg width="15" height="15"><use href="#svg-search"/></svg>
-                Поиск
-            </button>
-        </label>
-        <ul ref="result" v-show="(showSearch && count)" class="page-header__search-list">
-            <li v-for="(item, index) in items" :key="index">
-                <nuxt-link
-                    :to="{ name: 'element', params: {section: item.SECTION_CODE, element: item.CODE }}"
-                    v-html="item.CURRENT.NAME"
-                    @click.native.prevent="showSearch = false"
-                ></nuxt-link>
-            </li>
-            <li v-if="count > 5" class="page-header__all-results">
-                <nuxt-link to="#0">Все результаты</nuxt-link>
-            </li>
-        </ul>
-    </form>
+    </label>
+    <ul ref="result" v-show="(showSearch && count)" class="page-header__search-list">
+        <li v-for="(item, index) in items" :key="index">
+            <nuxt-link
+                :to="{ name: 'element', params: {section: item.SECTION_CODE, element: item.CODE }}"
+                v-html="item.CURRENT.NAME"
+                @click.native.prevent="showSearch = false"
+            ></nuxt-link>
+        </li>
+        <li v-if="count > 5" class="page-header__all-results">
+            <nuxt-link to="#0">Все результаты</nuxt-link>
+        </li>
+    </ul>
+</form>
 </template>
 
 <script>

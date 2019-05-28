@@ -1,340 +1,340 @@
 <template>
-    <div class="app-container">
-        <header class="page-header">
-            <div class="page-header__top hidden-mobile">
-                <div class="main-container">
-                    <div class="page-header__region">
-                        <p v-b-modal.delivery-region>Ваш регион доставки: Санкт-Петербург</p>
+<div class="app-container">
+    <header class="page-header">
+        <div class="page-header__top hidden-mobile">
+            <div class="main-container">
+                <div class="page-header__region">
+                    <p v-b-modal.delivery-region>Ваш регион доставки: Санкт-Петербург</p>
+                </div>
+                <div class="page-header__features" :class="{'hidden': featuresHidden}">
+                    <div class="header-feature">
+                        <nuxt-link :to="{ name:'delivery' }">Быстрая доставка</nuxt-link>
+                        <div class="header-feature__popup">
+                            <p>Мгновенно доставим любой товар в любую точку России.</p>
+                            <nuxt-link :to="{ name:'delivery' }">Подробнее ...</nuxt-link>
+                        </div>
                     </div>
-                    <div class="page-header__features" :class="{'hidden': featuresHidden}">
-                        <div class="header-feature">
-                            <nuxt-link :to="{ name:'delivery' }">Быстрая доставка</nuxt-link>
-                            <div class="header-feature__popup">
-                                <p>Мгновенно доставим любой товар в любую точку России.</p>
-                                <nuxt-link :to="{ name:'delivery' }">Подробнее ...</nuxt-link>
-                            </div>
+                    <div class="header-feature">
+                        <nuxt-link :to="{ name:'bestprice'}">Гарантия лучшей цены</nuxt-link>
+                        <div class="header-feature__popup">
+                            <p>Гарантируем лучшие цены на все товары. Мы заботимся о Вас и хотим, чтобы вы приобретали хорошие товары по лучшим ценам.</p>
+                            <nuxt-link :to="{ name:'bestprice'}">Подробнее ...</nuxt-link>
                         </div>
-                        <div class="header-feature">
-                            <nuxt-link :to="{ name:'bestprice'}">Гарантия лучшей цены</nuxt-link>
-                            <div class="header-feature__popup">
-                                <p>Гарантируем лучшие цены на все товары. Мы заботимся о Вас и хотим, чтобы вы приобретали хорошие товары по лучшим ценам.</p>
-                                <nuxt-link :to="{ name:'bestprice'}">Подробнее ...</nuxt-link>
-                            </div>
+                    </div>
+                    <div class="header-feature">
+                        <nuxt-link :to="{ name:'glasses_manufacturer' }">Изготовление очков</nuxt-link>
+                        <div class="header-feature__popup">
+                            <p>Профессионально установим линзы любой сложности в любую оправу.</p>
+                            <nuxt-link :to="{ name:'glasses_manufacturer' }">Подробнее ...</nuxt-link>
                         </div>
-                        <div class="header-feature">
-                            <nuxt-link :to="{ name:'glasses_manufacturer' }">Изготовление очков</nuxt-link>
-                            <div class="header-feature__popup">
-                                <p>Профессионально установим линзы любой сложности в любую оправу.</p>
-                                <nuxt-link :to="{ name:'glasses_manufacturer' }">Подробнее ...</nuxt-link>
-                            </div>
+                    </div>
+                    <div class="header-feature">
+                        <nuxt-link :to="{ name:'original' }">Оригинальная продукция</nuxt-link>
+                        <div class="header-feature__popup">
+                            <p>Мы занимаемся только оригинальной продукцией. С радостью подтвердим все товары сертификатами производителей.</p>
+                            <nuxt-link :to="{ name:'original' }">Подробнее ...</nuxt-link>
                         </div>
-                        <div class="header-feature">
-                            <nuxt-link :to="{ name:'original' }">Оригинальная продукция</nuxt-link>
-                            <div class="header-feature__popup">
-                                <p>Мы занимаемся только оригинальной продукцией. С радостью подтвердим все товары сертификатами производителей.</p>
-                                <nuxt-link :to="{ name:'original' }">Подробнее ...</nuxt-link>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div class="stat-counter"></div>
+                <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden" ref="featuresToggle">Показать</button>
+            </div>
+        </div>
+        <div class="page-header__tels main-container hidden-mobile">
+            <p>Контактные номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
+            <p>Режим работы Пн-Сб: <b>с 10:00 до 20:00</b></p>
+        </div>
+        <div class="page-header__main main-container">
+            <button class="page-header__menu-btn hidden-desktop" v-b-modal.header-menu>Меню</button>
+
+            <nuxt-link class="page-header__logo" to="/" exact>
+                <svg width="269" height="48"><use href="#svg-logo"/></svg>
+                Главная
+            </nuxt-link>
+
+            <search-form/>
+
+            <button class="page-header__call-request btn-icon" v-b-modal.call-request>
+                <svg width="25" height="25" fill="#000"><use href="#svg-phone"/></svg>
+                Обратный звонок
+            </button>
+
+            <b-modal class="call-request" id="call-request" hide-header hide-footer>
+                <div class="modal-wrap">
+                    <button class="modal-close" @click="$bvModal.hide('call-request')"></button>
+                    <div class="call-request__text" v-if="!callRequestOk">
+                        <h3>Обратный звонок</h3>
+                        <p>Вышлите нам свой номер телефона, <br> и наш менеджер перезвонит вам <br> в близжайшие 20 минут.</p>
+                    </div>
+                    <form class="call-request__form" aria-label="Заказать обратный звонок" v-if="!callRequestOk" @submit.prevent="callRequestOk = !callRequestOk">
+                        <label class="textfield">
+                            <span>Ваше имя</span>
+                            <input name="name" type="text">
+                        </label>
+                        <label class="textfield">
+                            <span>Ваш телефон</span>
+                            <input name="phone" type="text">
+                        </label>
+                        <button class="call-request__submit button black" type="submit">Заказать звонок</button>
+                    </form>
+                    <div class="call-request__ok" v-if="callRequestOk">
+                        <p>Ваша заявка принята.</p>
+                        <p>Наш менеджер перезвонит вам <br> в ближайшие 20 минут.</p>
+                    </div>
+                </div>
+            </b-modal>
+
+            <basket-small :isLogged="isLogged" />
+        </div>
+        <div class="page-header__bottom hidden-mobile">
+            <div class="main-container">
+                <sections/>
+                <div class="header-panel">
+                    <p>
+                        <nuxt-link to="#0">
+                            <span>Сравнение</span>
+                        </nuxt-link>
+                    </p>
+                    <p>
+                        <nuxt-link to="/favorites">
+                            <span>Список желаемого</span>
+                            <span v-if="favoritesCount > 0">{{favoritesCount}}</span>
+                        </nuxt-link>
+                    </p>
+                    <p v-if="!isLogged">
+                        <a class="header-panel__login" @click="$bvModal.show('auth-modal')">
+                            <span>Вход</span>
+                        </a>
+                    </p>
+                    <p v-if="isLogged">
+                        <logout-button />
+                    </p>
+                    <p v-if="isLogged">
+                        <nuxt-link class="header-panel__icon" to="#0">
+                            <svg width="15" height="15" fill="#999"><use href="#svg-user"/></svg>
+                            Профиль
+                        </nuxt-link>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <delivery-region />
+        <header-menu :isLogged="isLogged" />
+        <auth-modal v-if="!isLogged" />
+    </header>
+    <main>
+        <nuxt/>
+    </main>
+    <footer class="page-footer">
+        <div class="page-footer__top main-container">
+            <div class="page-footer__logo">
+                <nuxt-link to="/" exact="">
+                    <svg width='271' height="151"><use href="#svg-footer-logo"/></svg>
+                </nuxt-link>
+                <p>Интернет-оптика, в который Вы найдете оправы и линзы любого типа</p>
+            </div>
+            <div class="page-footer__lists" role="tablist">
+                <div class="page-footer__list">
+                    <a class="page-footer__big-link" v-b-toggle.accordion-1 role="tab">Компания</a>
+                    <b-collapse class="b-collapse" id="accordion-1" accordion="my-accordion" role="tabpanel">
+                        <ul>
+                            <li><nuxt-link :to="{ name:'advantages' }">Наши преимущества</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'about' }">О нас</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'reviews' }">Отзывы клиентов</nuxt-link></li>
+                        </ul>
+                    </b-collapse>
+                </div>
+                <div class="page-footer__list">
+                    <a class="page-footer__big-link" v-b-toggle.accordion-2 role="tab">Покупателям</a>
+                    <b-collapse class="b-collapse" id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
+                        <ul>
+                            <li><nuxt-link :to="{ name:'exchange' }">Возврат и обмен</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'delivery' }">Доставка</nuxt-link></li>
+                            <li><nuxt-link :to="{ name: 'payment' }">Оплата</nuxt-link></li>
+                            <li><nuxt-link :to="{ name: 'support' }">Центр поддержки</nuxt-link></li>
+                            <li><nuxt-link :to="{ name: 'howOrder' }">Как заказать</nuxt-link></li>
+                        </ul>
+                    </b-collapse>
+                </div>
+                <div class="page-footer__list">
+                    <a class="page-footer__big-link" v-b-toggle.accordion-3 role="tab">Информация</a>
+                    <b-collapse class="b-collapse" id="accordion-3" accordion="my-accordion" role="tabpanel">
+                        <ul>
+                            <li><nuxt-link :to="{ name:'bestprice'}">Гарантия лучшей цены</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'discounts' }">Дополнительные скидки</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'glasses_manufacturer' }">Изготовление очков</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'confidentiality' }">Конфиденциальность</nuxt-link></li>
+                            <li><nuxt-link :to="{ name:'original' }">Оригинальная продукция</nuxt-link></li>
+                        </ul>
+                    </b-collapse>
+                </div>
+                <div class="page-footer__list">
+                    <nuxt-link class="page-footer__big-link no-after" to="#0">Контакты</nuxt-link>
+                    <ul class="page-footer__icon-list">
+                        <li>
+                            <a>
+                                <svg width='23' height="23" fill="#999"><use href="#svg-home"/></svg>
+                                Россия, Москва, 117556 Варшавское шоссе, д.79, к.2, оф.211
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel: +78004443488">
+                                <svg width='20' height="20" fill="#999"><use href="#svg-mobile"/></svg>
+                                +7 (800) 444-3488
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto: info@home-optic.ru">
+                                <svg width='22' height="22" fill="#999"><use href="#svg-letter"/></svg>
+                                info@home-optic.ru
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer__bottom">
+            <div class="main-container">
+                <p class="copyright">© 2018 <span>«HOME OPTIC»</span></p>
+                <div class="page-footer__sub-line">
+                    <div class="social">
+                        <a href="#0">
+                            <svg width='17' height="17" fill="#000"><use href="#svg-vk"/></svg>
+                            Мы в Вконтакте
+                        </a>
+                        <a href="#0">
+                            <svg width='15' height="15" fill="#000"><use href="#svg-instagram"/></svg>
+                            Мы в Инстаграме
+                        </a>
                     </div>
                     <div class="stat-counter"></div>
-                    <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden" ref="featuresToggle">Показать</button>
                 </div>
             </div>
-            <div class="page-header__tels main-container hidden-mobile">
-                <p>Контактные номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
-                <p>Режим работы Пн-Сб: <b>с 10:00 до 20:00</b></p>
-            </div>
-            <div class="page-header__main main-container">
-                <button class="page-header__menu-btn hidden-desktop" v-b-modal.header-menu>Меню</button>
-
-                <nuxt-link class="page-header__logo" to="/" exact>
-                    <svg width="269" height="48"><use href="#svg-logo"/></svg>
-                    Главная
-                </nuxt-link>
-
-                <search-form/>
-
-                <button class="page-header__call-request btn-icon" v-b-modal.call-request>
-                    <svg width="25" height="25" fill="#000"><use href="#svg-phone"/></svg>
-                    Обратный звонок
-                </button>
-
-                <b-modal class="call-request" id="call-request" hide-header hide-footer>
-                    <div class="modal-wrap">
-                        <button class="modal-close" @click="$bvModal.hide('call-request')"></button>
-                        <div class="call-request__text" v-if="!callRequestOk">
-                            <h3>Обратный звонок</h3>
-                            <p>Вышлите нам свой номер телефона, <br> и наш менеджер перезвонит вам <br> в близжайшие 20 минут.</p>
-                        </div>
-                        <form class="call-request__form" aria-label="Заказать обратный звонок" v-if="!callRequestOk" @submit.prevent="callRequestOk = !callRequestOk">
-                            <label class="textfield">
-                                <span>Ваше имя</span>
-                                <input name="name" type="text">
-                            </label>
-                            <label class="textfield">
-                                <span>Ваш телефон</span>
-                                <input name="phone" type="text">
-                            </label>
-                            <button class="call-request__submit button black" type="submit">Заказать звонок</button>
-                        </form>
-                        <div class="call-request__ok" v-if="callRequestOk">
-                            <p>Ваша заявка принята.</p>
-                            <p>Наш менеджер перезвонит вам <br> в ближайшие 20 минут.</p>
-                        </div>
-                    </div>
-                </b-modal>
-
-                <basket-small :isLogged="isLogged" />
-            </div>
-            <div class="page-header__bottom hidden-mobile">
-                <div class="main-container">
-                    <sections/>
-                    <div class="header-panel">
-                        <p>
-                            <nuxt-link to="#0">
-                                <span>Сравнение</span>
-                            </nuxt-link>
-                        </p>
-                        <p>
-                            <nuxt-link to="/favorites">
-                                <span>Список желаемого</span>
-                                <span v-if="favoritesCount > 0">{{favoritesCount}}</span>
-                            </nuxt-link>
-                        </p>
-                        <p v-if="!isLogged">
-                            <a class="header-panel__login" @click="$bvModal.show('auth-modal')">
-                                <span>Вход</span>
-                            </a>
-                        </p>
-                        <p v-if="isLogged">
-                            <logout-button />
-                        </p>
-                        <p v-if="isLogged">
-                            <nuxt-link class="header-panel__icon" to="#0">
-                                <svg width="15" height="15" fill="#999"><use href="#svg-user"/></svg>
-                                Профиль
-                            </nuxt-link>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <delivery-region />
-            <header-menu :isLogged="isLogged" />
-            <auth-modal v-if="!isLogged" />
-        </header>
-        <main>
-            <nuxt/>
-        </main>
-        <footer class="page-footer">
-            <div class="page-footer__top main-container">
-                <div class="page-footer__logo">
-                    <nuxt-link to="/" exact="">
-                        <svg width='271' height="151"><use href="#svg-footer-logo"/></svg>
-                    </nuxt-link>
-                    <p>Интернет-оптика, в который Вы найдете оправы и линзы любого типа</p>
-                </div>
-                <div class="page-footer__lists" role="tablist">
-                    <div class="page-footer__list">
-                        <a class="page-footer__big-link" v-b-toggle.accordion-1 role="tab">Компания</a>
-                        <b-collapse class="b-collapse" id="accordion-1" accordion="my-accordion" role="tabpanel">
-                            <ul>
-                                <li><nuxt-link :to="{ name:'advantages' }">Наши преимущества</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'about' }">О нас</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'reviews' }">Отзывы клиентов</nuxt-link></li>
-                            </ul>
-                        </b-collapse>
-                    </div>
-                    <div class="page-footer__list">
-                        <a class="page-footer__big-link" v-b-toggle.accordion-2 role="tab">Покупателям</a>
-                        <b-collapse class="b-collapse" id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
-                            <ul>
-                                <li><nuxt-link :to="{ name:'exchange' }">Возврат и обмен</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'delivery' }">Доставка</nuxt-link></li>
-                                <li><nuxt-link :to="{ name: 'payment' }">Оплата</nuxt-link></li>
-                                <li><nuxt-link :to="{ name: 'support' }">Центр поддержки</nuxt-link></li>
-                                <li><nuxt-link :to="{ name: 'howOrder' }">Как заказать</nuxt-link></li>
-                            </ul>
-                        </b-collapse>
-                    </div>
-                    <div class="page-footer__list">
-                        <a class="page-footer__big-link" v-b-toggle.accordion-3 role="tab">Информация</a>
-                        <b-collapse class="b-collapse" id="accordion-3" accordion="my-accordion" role="tabpanel">
-                            <ul>
-                                <li><nuxt-link :to="{ name:'bestprice'}">Гарантия лучшей цены</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'discounts' }">Дополнительные скидки</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'glasses_manufacturer' }">Изготовление очков</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'confidentiality' }">Конфиденциальность</nuxt-link></li>
-                                <li><nuxt-link :to="{ name:'original' }">Оригинальная продукция</nuxt-link></li>
-                            </ul>
-                        </b-collapse>
-                    </div>
-                    <div class="page-footer__list">
-                        <nuxt-link class="page-footer__big-link no-after" to="#0">Контакты</nuxt-link>
-                        <ul class="page-footer__icon-list">
-                            <li>
-                                <a>
-                                    <svg width='23' height="23" fill="#999"><use href="#svg-home"/></svg>
-                                    Россия, Москва, 117556 Варшавское шоссе, д.79, к.2, оф.211
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tel: +78004443488">
-                                    <svg width='20' height="20" fill="#999"><use href="#svg-mobile"/></svg>
-                                    +7 (800) 444-3488
-                                </a>
-                            </li>
-                            <li>
-                                <a href="mailto: info@home-optic.ru">
-                                    <svg width='22' height="22" fill="#999"><use href="#svg-letter"/></svg>
-                                    info@home-optic.ru
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="page-footer__bottom">
-                <div class="main-container">
-                    <p class="copyright">© 2018 <span>«HOME OPTIC»</span></p>
-                    <div class="page-footer__sub-line">
-                        <div class="social">
-                            <a href="#0">
-                                <svg width='17' height="17" fill="#000"><use href="#svg-vk"/></svg>
-                                Мы в Вконтакте
-                            </a>
-                            <a href="#0">
-                                <svg width='15' height="15" fill="#000"><use href="#svg-instagram"/></svg>
-                                Мы в Инстаграме
-                            </a>
-                        </div>
-                        <div class="stat-counter"></div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <div style="display: none;">
-            <svg id="svg-logo" fill="#2b2a29"
-                xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 6926 1236" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path class="fil0" d="M0 103l0 835 194 0 0 -414 384 0 0 414 194 0 0 -936 -194 0 0 350 -384 0 0 -350 -98 0c-54,0 -96,47 -96,100zm1185 96c-220,0 -330,125 -330,379 0,251 110,377 330,377 220,0 332,-127 332,-377 0,-253 -111,-379 -332,-379zm0 161c94,0 140,70 140,212 -1,145 -48,219 -142,219 -94,0 -142,-72 -143,-213 0,-145 48,-217 145,-217zm729 0c81,0 122,37 127,113l0 465 184 0 0 -462c1,-76 43,-113 124,-113 81,0 122,37 127,113l0 374c0,58 30,87 91,91l95 0 0 -428c1,-208 -102,-311 -310,-311 -94,0 -165,19 -217,59 -52,-41 -124,-62 -217,-62 -208,0 -312,103 -312,311l0 428 186 0 0 -465c1,-76 43,-113 124,-113zm1496 355l-135 0c-25,0 -45,8 -62,26 -36,34 -76,52 -118,52 -89,0 -138,-56 -145,-168l471 0c14,-285 -95,-427 -326,-427 -222,1 -333,125 -333,373 0,248 110,376 330,383 179,0 278,-85 318,-239zm-318 -366c78,0 124,50 135,146l-274 0c14,-96 61,-146 139,-146z"/>
-                <path class="fil0" d="M4293 167c175,0 257,132 257,317 0,189 -83,321 -257,321 -175,0 -256,-138 -256,-321 0,-182 81,-317 256,-317zm0 798c285,0 449,-194 449,-482 0,-284 -169,-483 -449,-483 -278,0 -447,197 -447,483 0,286 162,482 447,482zm724 180c0,61 -30,91 -91,91l-92 0 0 -696c10,-217 122,-325 341,-325 226,0 339,122 339,367 0,248 -96,376 -290,383 -91,0 -160,-37 -206,-113l0 293zm156 -344c99,0 150,-70 154,-211 0,-147 -52,-220 -157,-220 -105,0 -154,73 -153,220 6,140 56,211 156,211zm720 -538l0 -40 -110 0 0 -116c0,-48 -40,-92 -88,-92l-95 0 0 796c-1,81 32,124 100,131 69,7 134,7 193,1l0 -139 -56 0c-36,0 -54,-17 -54,-47l0 -403 19 0c51,0 91,-39 91,-91zm105 -248l0 143 183 0 0 -54c1,-59 -28,-89 -88,-89l-95 0zm0 208l0 728 183 0 0 -640c0,-59 -29,-88 -88,-88l-95 0zm929 505l-138 0c-23,0 -44,8 -62,26 -30,34 -67,52 -110,52 -102,1 -153,-72 -153,-216 0,-145 48,-217 145,-217 58,0 96,26 118,76l200 0c-32,-158 -136,-237 -312,-237 -224,4 -336,129 -336,379 6,251 118,377 339,377 169,4 277,-91 310,-239z"/>
-            </svg>
-            <svg id="svg-search" 
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 451 451" xml:space="preserve">
-                <path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3 s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4 C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3 s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"/>
-            </svg>
-            <svg id="svg-phone"
-                version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="187 -161.8 448.8 448.8" xml:space="preserve">
-                <path d="M561.5,106.7c-9.7-10.1-21.4-15.5-33.8-15.5c-12.3,0-24.1,5.3-34.2,15.4l-31.6,31.5c-2.6-1.4-5.2-2.7-7.7-4 c-3.6-1.8-7-3.5-9.9-5.3c-29.6-18.8-56.5-43.3-82.3-75c-12.5-15.8-20.9-29.1-27-42.6c8.2-7.5,15.8-15.3,23.2-22.8 c2.8-2.8,5.6-5.7,8.4-8.5c21-21,21-48.2,0-69.2l-27.3-27.3c-3.1-3.1-6.3-6.3-9.3-9.5c-6-6.2-12.3-12.6-18.8-18.6 c-9.7-9.6-21.3-14.7-33.5-14.7c-12.2,0-24,5.1-34,14.7c-0.1,0.1-0.1,0.1-0.2,0.2l-34,34.3c-12.8,12.8-20.1,28.4-21.7,46.5 c-2.4,29.2,6.2,56.4,12.8,74.2c16.2,43.7,40.4,84.2,76.5,127.6c43.8,52.3,96.5,93.6,156.7,122.7c23,10.9,53.7,23.8,88,26 c2.1,0.1,4.3,0.2,6.3,0.2c23.1,0,42.5-8.3,57.7-24.8c0.1-0.2,0.3-0.3,0.4-0.5c5.2-6.3,11.2-12,17.5-18.1c4.3-4.1,8.7-8.4,13-12.9 c9.9-10.3,15.1-22.3,15.1-34.6c0-12.4-5.3-24.3-15.4-34.3L561.5,106.7z M597.3,212C597.2,212,597.2,212.1,597.3,212 c-3.9,4.2-7.9,8-12.2,12.2c-6.5,6.2-13.1,12.7-19.3,20c-10.1,10.8-22,15.9-37.6,15.9c-1.5,0-3.1,0-4.6-0.1 c-29.7-1.9-57.3-13.5-78-23.4C389,209.2,339.3,170.3,298,121c-34.1-41.1-56.9-79.1-72-119.9c-9.3-24.9-12.7-44.3-11.2-62.6 c1-11.7,5.5-21.4,13.8-29.7l34.1-34.1c4.9-4.6,10.1-7.1,15.2-7.1c6.3,0,11.4,3.8,14.6,7c0.1,0.1,0.2,0.2,0.3,0.3 c6.1,5.7,11.9,11.6,18,17.9c3.1,3.2,6.3,6.4,9.5,9.7l27.3,27.3c10.6,10.6,10.6,20.4,0,31c-2.9,2.9-5.7,5.8-8.6,8.6 C330.6-22,322.6-14,313.9-6.2c-0.2,0.2-0.4,0.3-0.5,0.5c-8.6,8.6-7,17-5.2,22.7c0.1,0.3,0.2,0.6,0.3,0.9 c7.1,17.2,17.1,33.4,32.3,52.7l0.1,0.1c27.6,34,56.7,60.5,88.8,80.8c4.1,2.6,8.3,4.7,12.3,6.7c3.6,1.8,7,3.5,9.9,5.3 c0.4,0.2,0.8,0.5,1.2,0.7c3.4,1.7,6.6,2.5,9.9,2.5c8.3,0,13.5-5.2,15.2-6.9l34.2-34.2c3.4-3.4,8.8-7.5,15.1-7.5 c6.2,0,11.3,3.9,14.4,7.3c0.1,0.1,0.1,0.1,0.2,0.2l55.1,55.1C607.5,190.9,607.5,201.4,597.3,212z"/>
-            </svg>
-            <svg id="svg-bag" 
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-66 67.5 33 34" xml:space="preserve">
-                <path d="M-37.7,101h-23.6c-0.1, 0-0.3-0.1-0.4-0.2c-0.1-0.1-0.1-0.2-0.1-0.4l1.1-23.6c0-0.3,0.2-0.5,0.5-0.5h21.4 c0.3,0,0.5,0.2,0.5,0.5l1.1,23.6c0,0.1,0,0.3-0.1,0.4C-37.4,100.9-37.6,101-37.7,101z M-60.8, 100h22.6l-1.1-22.6h-20.4L-60.8,100z"/>
-                <path d="M-44.6,77v-3.1c0-2.7-2.2-4.9-4.9-4.9s-4.9,2.2-4.9, 4.9v2.8h-1v-2.8c0-3.3,2.6-5.9,5.9-5.9s5.9,2.6,5.9,5.9V77 C-43.6,77.3-44.6,77.3-44.6,77z"/>
-            </svg>
-            <svg id="svg-logout"
-                viewBox="0 0 330 330">
-                <path d="M245.608 84.392c-5.856-5.857-15.355-5.858-21.213-.001-5.857 5.858-5.858 15.355 0 21.213L268.789 150H85.002c-8.284 0-15 6.716-15 15s6.716 15 15 15h183.785l-44.392 44.392c-5.858 5.858-5.858 15.355 0 21.213a14.953 14.953 0 0 0 10.607 4.393 14.95 14.95 0 0 0 10.606-4.393l69.998-69.998c5.858-5.857 5.858-15.355 0-21.213l-69.998-70.002z"></path>
-                <path d="M155 330c8.284 0 15-6.716 15-15s-6.716-15-15-15H40V30h115c8.284 0 15-6.716 15-15s-6.716-15-15-15H25c-8.284 0-15 6.716-15 15v300c0 8.284 6.716 15 15 15h130z"></path>
-            </svg>
-            <svg id="svg-user"
-                viewBox="0 0 488.9 488.9">
-                <path d="M477.7 454.8v-26c0-26.5-12.4-52-33.1-68.1-48.2-37.4-97.3-63.5-114.5-72.2v-29.7c3.5-7.8 6.4-16.3 8.6-25.5 12.8-4.6 19.8-23.4 24.5-40 6.3-22.1 5.6-37.6-1.8-46.2 7.8-42.5 4.3-73.8-10.3-93.1-7.7-10.1-16.7-14.4-22.7-16.3-4.3-6-13-16.1-27.7-24.2C285.5 4.5 268.4 0 249.6 0c-3.4 0-6.8.2-9.8.4-8.4.4-16.7 2-24.9 4.7-.1 0-.2.1-.3.1-9 3.1-17.8 7.6-26.3 13.4-9.7 6.2-18.6 13.6-26.3 21.8-15.1 15.5-25.1 33-29.4 51.7-4.1 15.5-4.4 31.1-1 46.4-1.8 1.3-3.4 2.8-4.8 4.6-6.9 9.1-7.2 23.4-1.1 45.1 4.2 15 9.8 30.3 19.3 37.2 2.8 14.4 7.5 27.5 13.8 39.1v24.1c-17.2 8.7-66.3 34.7-114.5 72.2-20.7 16.1-33.1 41.5-33.1 68.1v26c0 18.8 15.3 34 34 34h398.5c18.7 0 34-15.3 34-34.1zm-442.1 0v-26c0-19 8.8-37.2 23.6-48.7 52-40.3 104.9-66.9 115-71.8 5.6-2.7 9.1-8.3 9.1-14.6v-32.5c0-2.2-.6-4.3-1.7-6.2-6.6-11.2-11.2-24.6-13.5-39.9-.8-4.9-4.4-8.8-9.1-10-1.3-1.5-5-6.9-9.7-23.6-3.9-13.8-3.6-20.2-3.2-22.5 3.9.2 7.8-1.6 10.3-4.7 2.6-3.3 3.3-7.7 1.9-11.6-5.2-14.5-5.8-29.4-1.8-44.6 3.4-14.6 11.2-28.2 23.3-40.6 6.5-7 14-13.1 22-18.2.1-.1.3-.2.4-.3 6.7-4.7 13.7-8.2 20.6-10.6.1 0 .2-.1.2-.1 5.9-2 12-3.1 18.4-3.4 17.5-1.5 33.2 1.8 47.1 9.9 15.2 8.4 21.4 19.4 21.4 19.4 1.9 3.9 5.3 6.2 9.7 6.5.3 0 6.8 1 12.4 8.9 5.9 8.4 14.3 30 3.8 80.4-1.2 5.6 1.7 11.2 6.8 13.6.5 1.8 1.3 7.9-3 23.1-3.8 13.4-6.9 19.5-8.7 22.2-2.3-.4-4.7-.2-6.9.8-3.8 1.6-6.6 5.1-7.3 9.1-2.1 12-5.5 22.8-9.9 32-.8 1.7-1.2 3.5-1.2 5.3v37.6c0 6.3 3.5 11.8 9.1 14.6 10.1 4.9 63 31.6 114.9 71.8 14.8 11.5 23.6 29.7 23.6 48.7v26c0 5.2-4.3 9.5-9.5 9.5H45.2c-5.3.1-9.6-4.2-9.6-9.5z"></path>
-            </svg>
-            <svg id="svg-mobile"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.442 27.442" xml:space="preserve">
-                <path d="M19.494,0H7.948C6.843,0,5.951,0.896,5.951,1.999v23.446c0,1.102,0.892,1.997,1.997,1.997h11.546 c1.103,0,1.997-0.895,1.997-1.997V1.999C21.491,0.896,20.597,0,19.494,0z M10.872,1.214h5.7c0.144,0,0.261,0.215,0.261,0.481 s-0.117,0.482-0.261,0.482h-5.7c-0.145,0-0.26-0.216-0.26-0.482C10.612,1.429,10.727,1.214,10.872,1.214z M13.722,25.469 c-0.703,0-1.275-0.572-1.275-1.276s0.572-1.274,1.275-1.274c0.701,0,1.273,0.57,1.273,1.274S14.423,25.469,13.722,25.469z M19.995,21.1H7.448V3.373h12.547V21.1z"/>
-            </svg>
-            <svg id="svg-clock"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" xml:space="preserve">
-                <path d="M30,0.061c-16.542,0-30,13.458-30,30s13.458,29.879,30, 29.879s30-13.337,30-29.879S46.542,0.061,30,0.061z M32,30.939 c0,1.104-0.896,2-2,2H14c-1.104,0-2-0.896-2-2s0.896-2, 2-2h14v-22c0-1.104,0.896-2,2-2s2,0.896,2,2V30.939z"/>
-            </svg>
-            <svg id="svg-footer-logo" fill="#2b2a29"
-                xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 5686 3162" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path class="fil0" d="M562 44c16,9 245,43 340,274 -22,-12 -36,-28 -56,-45 -12,-7 -31,-22 -50,-34 -20,-13 -39,-23 -59,-29 -19,-6 -39,-9 -63,-8 -24,1 -52,5 -72,10 -13,3 -23,6 -30,9 -19,9 -40,20 -58,33 -21,15 -39,32 -48,50l0 0c59,15 103,104 119,178 -71,17 -158,51 -198,103 55,68 55,60 103,171 24,77 31,95 46,172 -63,-17 -102,-35 -133,-52 0,128 63,351 95,470l-8 9 -15 0c17,21 32,44 46,66 36,59 57,119 71,178 -8,-63 -14,-126 -15,-192 -2,-15 -2,-35 2,-57 2,-9 4,-18 6,-26 9,-84 47,-168 71,-252 16,-103 8,-214 79,-248 87,-51 316,77 506,77 150,0 403,-128 506,-77 22,13 36,31 46,52 2,4 4,8 6,14 1,4 3,9 5,15 3,12 8,27 12,44 5,20 10,45 16,69 5,27 13,60 19,87 14,73 30,139 30,223 0,5 0,11 0,16 10,41 19,102 25,145 8,50 13,75 14,98 1,13 0,26 -1,38l1 0c11,-103 44,-194 90,-264 -11,-2 -25,-1 -42,0 40,-128 127,-479 119,-607 -32,43 -47,86 -79,120 0,-86 0,-317 -49,-407 -19,-49 -47,-98 -75,-138 -3,-5 -7,-10 -10,-14 -41,-56 -88,-106 -119,-125 24,94 142,256 119,368 -95,-188 -229,-393 -491,-376l24 68c-55,-86 -63,-94 -142,-154 -269,-180 -633,-51 -704,-51zm52 1700l-1 -7c0,2 0,4 0,6l1 1z"/>
-                <path class="fil0 str0" d="M1319 1486c0,-19 20,-51 38,-74 17,-23 32,-37 52,-46 20,-10 45,-15 70,-19 25,-4 51,-6 77,-7 26,-1 51,1 76,3 26,2 51,5 74,13 23,7 42,18 62,28 20,10 41,20 60,35 19,15 37,36 25,42 -11,6 -52,-4 -107,-6 -55,-3 -125,1 -182,9 -57,8 -101,19 -133,28 -32,9 -53,16 -73,16 -20,1 -40,-4 -39,-23z"/>
-                <path class="fil0 str0" d="M1247 2194c-12,-4 -28,-14 -47,-18 -19,-5 -39,-4 -58,-1 -19,2 -38,7 -53,11 -15,4 -27,8 -36,11 -9,3 -16,5 -22,6 -7,1 -14,1 -19,1 -5,0 -9,0 -12,-2 -3,-1 -6,-3 -9,-5 -3,-2 -7,-6 -11,-8 -4,-2 -7,-3 -4,0 3,3 9,9 20,15 0,0 0,1 0,1 0,7 20,33 43,56 23,23 48,43 76,58 28,16 59,27 88,33 28,6 53,7 79,5 26,-2 52,-6 75,-12 24,-6 45,-15 65,-24 20,-10 39,-21 53,-31 14,-10 24,-20 32,-29 9,-9 16,-19 21,-28 5,-9 6,-17 7,-21 0,-1 0,-2 0,-3 1,-1 1,-1 1,-1 0,-1 -11,1 -21,3 -10,2 -20,3 -31,2 -12,-1 -25,-4 -38,-7 -12,-4 -23,-9 -35,-14 -12,-5 -26,-10 -37,-13 -11,-3 -21,-3 -30,-4 -9,0 -18,0 -26,1 -7,1 -13,3 -18,5 -5,2 -9,5 -14,7 -5,2 -10,5 -16,7 -6,2 -12,4 -24,0zm-196 34c5,2 26,9 44,13 18,3 35,2 51,2 17,-1 34,-2 48,0 13,1 23,5 35,7 12,2 27,3 39,3 12,0 22,-1 30,-2 9,-1 16,-2 22,-4 6,-1 10,-2 13,-3 3,-1 6,-2 13,-2 6,0 16,1 30,2 14,1 31,3 44,3 14,0 24,-1 33,-2 9,-1 16,-3 24,-5 7,-2 15,-5 20,-7 5,-2 8,-4 1,0 -7,3 -23,11 -43,16 -19,4 -41,5 -60,5 -18,0 -33,-2 -46,-2 -13,0 -26,2 -36,5 -11,2 -20,4 -30,5 -10,1 -21,0 -31,-1 -10,-1 -19,-2 -28,-4 -10,-2 -21,-5 -29,-7 -8,-2 -14,-2 -21,-2 -8,1 -19,3 -28,4 -9,1 -17,0 -28,-1 -11,-1 -24,-2 -32,-5 -9,-2 -13,-6 -21,-10 -7,-4 -18,-8 -13,-7z"/>
-                <path class="fil0" d="M1005 2110c7,0 12,5 12,12 0,7 -5,12 -12,12 -7,0 -12,-5 -12,-12 0,-7 5,-12 12,-12z"/>
-                <path class="fil0 str0" d="M1325 1979c1,-4 10,-12 18,-18 9,-6 18,-10 28,-11 10,-1 21,0 28,2 7,2 12,6 13,11 1,5 -1,10 -4,14 -3,4 -8,7 -13,9 -6,1 -12,2 -19,1 -7,-1 -15,-2 -22,-4 -7,-1 -12,-2 -18,-2 -6,0 -12,2 -11,-2z"/>
-                <path class="fil0 str0" d="M1209 1978c-1,-4 -9,-13 -18,-19 -9,-7 -18,-11 -28,-12 -10,-2 -21,-1 -28,1 -7,2 -12,6 -13,10 -1,5 0,10 3,14 3,4 7,7 13,9 5,2 12,2 19,2 7,0 15,-2 22,-3 7,-1 12,-2 18,-1 6,1 12,2 11,-1z"/>
-                <path class="fil0 str0" d="M1202 1969c4,1 17,10 31,16 13,5 27,7 38,7 11,0 20,-3 27,-5 7,-2 12,-5 18,-7 6,-2 12,-4 16,-6 5,-2 8,-5 12,-8 4,-3 8,-5 6,-3 -2,2 -12,10 -21,17 -9,7 -19,14 -26,19 -8,5 -14,6 -21,7 -7,1 -14,1 -21,0 -7,-1 -14,-3 -21,-5 -7,-2 -12,-4 -17,-8 -5,-3 -9,-8 -13,-14 -5,-6 -11,-12 -7,-11z"/>
-                <path class="fil0 str0" d="M1175 2031c-3,0 -17,0 -31,-3 -14,-3 -27,-10 -37,-19 -10,-9 -18,-20 -21,-29 -3,-9 -1,-16 4,-22 5,-6 12,-11 22,-14 10,-3 21,-4 31,-3 9,1 16,4 17,5 1,1 -4,1 -8,1 -5,0 -9,1 -16,1 -7,0 -16,-2 -23,0 -7,1 -11,5 -15,9 -3,4 -6,9 -7,15 -1,6 0,12 5,20 5,7 13,15 21,22 8,6 16,11 23,13 8,2 15,3 23,3 8,0 16,0 13,0z"/>
-                <path class="fil0 str0" d="M1376 2034c3,0 17,0 31,-3 14,-3 27,-10 37,-19 10,-9 18,-20 21,-29 3,-9 1,-16 -4,-22 -5,-6 -12,-11 -22,-14 -10,-3 -21,-4 -31,-3 -9,1 -16,4 -17,5 -1,1 4,1 8,1 5,0 9,1 16,1 7,0 16,-2 23,0 7,1 11,5 15,9 3,4 6,9 7,15 1,6 0,12 -5,20 -5,7 -13,15 -21,22 -8,6 -16,11 -23,13 -8,2 -15,3 -23,3 -8,0 -16,0 -13,0z"/>
-                <path class="fil0 str0" d="M1461 1961c0,-7 -6,-32 -14,-50 -9,-18 -20,-30 -32,-42 -12,-12 -24,-25 -31,-37 -7,-12 -9,-22 -9,-33 0,-11 0,-22 1,-17 0,5 0,25 4,40 4,15 13,26 21,36 8,10 15,19 21,28 7,10 13,20 18,30 5,10 9,21 14,31 4,10 9,20 9,13z"/>
-                <path class="fil1" d="M1249 1858c14,0 25,11 25,25 0,14 -11,25 -25,25 -14,0 -25,-11 -25,-25 0,-14 11,-25 25,-25z"/>
-                <path class="fil0 str0" d="M1169 1490c0,-19 -20,-51 -38,-74 -17,-23 -32,-37 -52,-46 -20,-10 -45,-15 -70,-19 -25,-4 -51,-6 -77,-7 -26,-1 -51,1 -76,3 -26,2 -51,5 -74,13 -23,7 -42,18 -62,28 -20,10 -41,20 -60,35 -19,15 -37,36 -25,42 11,6 52,-4 107,-6 55,-3 125,1 182,9 57,8 101,19 133,28 32,9 53,16 73,16 20,1 40,-4 39,-23z"/>
-                <path class="fil0 str0" d="M559 1589c-12,-15 -30,-32 -46,-36 -16,-4 -30,4 -40,19 -11,15 -18,38 -21,59 -3,21 -1,41 4,58 5,16 13,30 20,47 7,17 13,39 17,58 4,19 6,36 8,54 2,17 5,35 12,52 7,16 20,30 28,45 8,14 12,29 14,42 2,13 2,26 7,37 5,11 15,21 25,29 10,7 19,12 27,13 8,1 16,-2 10,-7 -6,-5 -24,-11 -37,-26 -13,-16 -20,-40 -24,-58 -4,-18 -5,-29 -9,-39 -4,-9 -10,-17 -14,-24 -4,-7 -5,-15 0,-14 5,1 15,10 24,17 9,7 16,12 17,12 2,0 -1,-4 -8,-11 -7,-7 -16,-17 -24,-26 -8,-9 -13,-18 -17,-29 -4,-11 -7,-25 -8,-38 -2,-13 -3,-25 -2,-37 1,-12 4,-25 8,-31 4,-7 10,-7 16,-5 6,2 12,7 15,8 3,1 2,-3 -1,-9 -3,-6 -10,-15 -16,-21 -6,-6 -12,-8 -18,-6 -6,2 -11,10 -14,14 -3,4 -5,5 -8,1 -2,-4 -6,-13 -9,-23 -3,-10 -6,-22 -7,-37 -1,-15 1,-33 3,-44 2,-11 5,-16 11,-13 6,2 15,11 26,20 11,9 24,17 33,16 9,-1 13,-12 13,-25 0,-12 -4,-25 -16,-40z"/>
-                <path class="fil0 str0" d="M1935 1613c7,-16 22,-28 34,-34 12,-6 21,-7 27,-2 7,6 12,18 14,32 2,14 2,30 -1,44 -4,14 -11,27 -16,41 -5,14 -7,29 -5,45 2,16 7,33 0,65 -6,32 -24,80 -35,108 -11,28 -15,35 -18,47 -2,12 -3,28 -5,41 -2,13 -4,24 -7,35 -3,11 -7,23 -14,32 -7,9 -18,15 -25,19 -7,3 -11,4 -12,-2 -2,-6 -1,-17 3,-24 4,-7 11,-8 18,-14 8,-7 16,-18 22,-32 5,-13 7,-28 7,-42 0,-13 -2,-25 -6,-32 -4,-7 -10,-10 -8,-13 2,-3 12,-7 19,-13 7,-7 12,-16 16,-27 4,-11 7,-24 9,-37 2,-13 2,-25 1,-37 -1,-12 -2,-24 -4,-29 -2,-5 -4,-3 -7,-1 -2,2 -5,6 -7,1 -2,-5 -2,-17 0,-27 2,-10 7,-18 12,-20 5,-2 10,2 13,5 3,2 4,3 4,-1 0,-4 -1,-12 1,-23 2,-11 7,-26 9,-39 2,-14 1,-27 -4,-31 -5,-5 -13,-1 -19,6 -7,7 -12,17 -15,21 -4,4 -6,1 -8,-11 -2,-12 -2,-34 5,-50z"/>
-                <path class="fil0 str0" d="M567 1650c6,62 19,214 37,316 18,103 40,156 62,206 22,49 43,95 82,152 39,57 95,124 143,179 48,54 89,95 129,127 41,33 82,58 122,73 40,15 78,21 120,22 42,1 86,-3 124,-10 37,-7 67,-19 91,-35 24,-16 43,-37 66,-63 23,-26 49,-57 81,-93 31,-36 68,-77 91,-109 23,-32 34,-55 54,-89 21,-34 51,-80 70,-113 19,-33 26,-54 38,-143 13,-89 32,-246 32,-258 1,-12 -17,120 -32,204 -14,83 -25,118 -46,164 -22,46 -55,103 -96,162 -42,59 -92,120 -135,171 -43,51 -78,93 -106,121 -27,28 -47,41 -66,50 -19,9 -39,12 -58,16 -19,3 -38,6 -61,7 -23,2 -50,3 -76,1 -25,-2 -48,-8 -80,-19 -31,-11 -71,-28 -119,-65 -48,-37 -103,-93 -147,-142 -44,-49 -77,-89 -110,-134 -32,-45 -64,-96 -87,-145 -23,-49 -38,-96 -53,-152 -15,-56 -30,-120 -42,-188 -12,-69 -21,-142 -27,-193 -6,-51 -9,-79 -3,-17z"/>
-                <path class="fil1" d="M1227 1582c-4,36 -3,105 -3,145 1,40 2,53 5,59 3,6 9,7 16,7 6,0 13,-1 15,-20 2,-20 0,-59 -1,-100 -1,-41 -2,-84 -3,-107 -2,-23 -5,-26 -10,-25 -6,1 -14,5 -18,42z"/>
-                <path class="fil0" d="M559 1488l4 7c6,12 10,16 13,20l1 0 0 2c5,7 9,16 20,62 43,185 68,253 281,253 173,2 248,-59 286,-197 14,-33 26,-75 46,-100 -2,-2 -3,-5 -3,-9 0,-10 7,-14 12,-17 11,-7 22,-2 25,6 1,0 2,0 3,0 7,-1 15,-1 22,0 9,1 16,5 23,16 7,11 12,31 26,66 6,16 14,36 22,55 44,98 103,179 322,179 230,0 205,-177 239,-278 12,-31 23,-39 32,-49 -3,-33 -6,-63 -10,-91l-526 0c-29,29 -92,48 -166,48 -74,0 -138,-20 -166,-48l-489 0c-7,24 -12,48 -16,74zm1027 27c11,0 21,0 31,0 57,0 95,3 124,6 29,3 49,5 44,7 -6,2 -37,4 -70,6 -34,2 -71,4 -97,8 -27,4 -44,10 -58,17 -14,7 -25,15 -32,23 -12,14 -7,24 -6,39 11,4 24,8 34,12 13,5 22,8 33,12 11,4 26,7 21,11 -4,3 -28,7 -47,11 -19,4 -34,9 -30,21 4,12 27,32 47,46 19,14 35,22 29,24 -6,2 -33,-2 -55,-9 -23,-7 -42,-16 -65,-35 -23,-19 -51,-48 -68,-84 -15,-31 -22,-68 -22,-89 0,-4 0,-8 0,-10 0,-2 1,-4 1,-5 1,-4 3,-5 18,-6 16,-2 47,-3 93,-3 23,0 50,0 76,0zm-576 -5c-55,-6 -191,-1 -265,3 -74,5 -85,10 -87,23 -3,14 4,36 11,65 7,29 14,63 27,90 12,26 29,44 50,56 21,12 46,17 68,17 22,0 40,-6 30,-14 -9,-8 -46,-20 -63,-32 -17,-12 -14,-25 5,-31 19,-6 54,-6 89,-12 35,-6 69,-18 65,-28 -4,-10 -47,-16 -49,-23 -3,-7 34,-13 70,-19 35,-6 69,-12 70,-19 1,-7 -32,-13 -40,-20 -8,-7 9,-14 30,-25 21,-11 46,-27 -9,-32z"/>
-                <path class="fil0" d="M1259 1516c-7,0 -14,0 -21,1 -8,1 -16,3 -22,14 -7,11 -12,31 -26,66 -6,16 -14,36 -22,55 -14,31 -44,82 -66,107l15 -322 11 23c28,12 92,10 131,8l1 46z"/>
-                <path class="fil0" d="M1392 1455c-20,1 -21,3 -17,4 3,1 8,1 17,2l0 -6z"/>
-                <path class="fil0" d="M1024 1453c-90,-2 -245,0 -325,3 -81,2 -87,5 -80,7 7,2 27,3 92,4 65,1 176,1 259,1 83,0 138,0 153,-3 15,-3 -10,-9 -100,-11z"/>
-                <path class="fil0 str0" d="M640 2152c-2,21 3,106 -3,168 -6,62 -23,101 -39,133 -16,31 -31,55 -46,79 -15,24 -31,49 -52,78 -21,29 -49,62 -139,121 -90,59 -242,143 -311,184 -69,40 -55,36 -18,16 36,-20 95,-55 162,-94 67,-39 142,-81 200,-123 58,-42 98,-83 130,-122 32,-39 56,-76 75,-119 20,-44 35,-95 44,-138 9,-44 12,-80 10,-119 -3,-40 -11,-83 -13,-62z"/>
-                <path class="fil0 str0" d="M1584 2638c-17,82 -62,267 -89,383 -27,117 -37,164 -29,130 7,-35 32,-152 51,-240 20,-88 35,-146 44,-192 10,-47 14,-82 22,-111 8,-29 18,-51 1,31z"/>
-                <path class="fil0" d="M1617 2565c-3,4 -12,53 -8,87 5,34 23,54 85,81 62,27 168,61 256,93 88,32 157,61 211,82 53,21 90,35 123,48 33,13 62,26 98,49 35,23 77,57 102,78 25,21 33,31 20,22 -13,-9 -46,-35 -82,-58 -35,-22 -72,-40 -137,-66 -65,-27 -158,-63 -250,-99 -91,-36 -181,-73 -239,-97 -58,-24 -84,-36 -108,-48 -24,-12 -47,-25 -59,-41 -12,-16 -15,-36 -14,-66 1,-30 5,-69 2,-65z"/>
-                <path class="fil2" d="M2413 578l0 799 186 0 0 -396 367 0 0 396 186 0 0 -895 -186 0 0 334 -367 0 0 -334 -93 0c-51,0 -92,45 -92,96zm1133 92c-211,0 -316,120 -316,362 0,240 105,361 316,361 211,0 317,-121 317,-361 0,-242 -107,-362 -317,-362zm0 154c90,0 134,67 134,203 -1,138 -46,209 -136,209 -90,0 -136,-68 -137,-204 0,-138 46,-208 138,-208zm698 0c78,0 117,36 121,108l0 445 176 0 0 -442c1,-72 41,-108 118,-108 78,0 117,36 121,108l0 358c0,55 29,83 87,87l91 0 0 -409c1,-199 -97,-298 -296,-298 -90,0 -158,18 -208,57 -50,-39 -118,-59 -208,-59 -199,0 -299,99 -299,298l0 409 178 0 0 -445c1,-72 41,-108 118,-108zm1431 340l-129 0c-24,0 -43,8 -59,25 -34,33 -72,50 -113,50 -86,0 -132,-54 -138,-161l450 0c13,-273 -91,-408 -312,-408 -212,1 -319,120 -319,357 0,237 105,359 316,366 171,0 266,-82 304,-229zm-304 -350c75,0 118,47 129,140l-262 0c13,-92 58,-140 133,-140zm-2538 1247c167,0 246,126 246,303 0,180 -79,307 -246,307 -167,0 -245,-132 -245,-307 0,-174 78,-303 245,-303zm0 764c273,0 429,-186 429,-461 0,-271 -162,-462 -429,-462 -266,0 -428,188 -428,462 0,274 155,461 428,461zm692 172c0,58 -29,87 -87,87l-88 0 0 -666c9,-208 117,-311 326,-311 216,0 324,117 324,351 0,237 -92,359 -278,366 -87,0 -153,-36 -197,-108l0 280zm149 -329c95,0 143,-67 147,-201 0,-141 -50,-211 -150,-211 -100,0 -147,70 -146,211 5,134 54,201 149,201zm689 -515l0 -38 -105 0 0 -111c0,-46 -38,-88 -84,-88l-91 0 0 761c-1,78 30,118 96,125 66,7 128,7 184,1l0 -133 -54 0c-34,0 -51,-16 -51,-45l0 -386 18 0c49,0 87,-37 87,-87zm100 -237l0 137 175 0 0 -51c1,-57 -26,-86 -84,-86l-91 0zm0 199l0 696 175 0 0 -612c0,-57 -28,-84 -84,-84l-91 0zm889 483l-132 0c-22,0 -42,8 -59,25 -29,33 -65,50 -105,50 -97,1 -146,-68 -146,-207 0,-138 46,-208 138,-208 55,0 92,25 113,72l191 0c-30,-151 -130,-226 -299,-226 -215,4 -321,124 -321,362 5,240 113,361 324,361 162,4 265,-87 296,-229z"/>
-            </svg>
-            <svg id="svg-letter"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path d="M43,6H1C0.447,6,0,6.447,0,7v30c0,0.553,0.447,1,1,1h42c0.552,0,1-0.447,1-1V7C44,6.447,43.552,6,43,6z M42,33.581 L29.612,21.194l-1.414,1.414L41.59,36H2.41l13.392-13.392l-1.414-1.414L2,33.581V8h40V33.581z"/>
-                <path d="M39.979,8L22,25.979L4.021,8H2v0.807L21.293,28.1c0.391,0.391,1.023,0.391,1.414,0L42,8.807V8H39.979z"/>
-            </svg>
-            <svg id="svg-home"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="256 -256 612 612" xml:space="preserve">
-                <path d="M767.1-23.7c-9.9,0-17.6,7.7-17.6,17.7V303H629.4V201.6c0-9.2-7.7-17.3-17-17.3H512c-9.9,0-18,8.1-18,17.3V303H374.2 V-10.1c0-9.3-7.7-17-17.6-17c-9.3,0-17,7.7-17,17v330.8c0,9.3,7.7,17,17,17H512c9.3,0,17-7.7,17-17V219.2h65.8v101.5 c0,9.3,7.7,17,17.6,17h154.7c9.3,0,17-7.7,17-17V-6.1C784.1-16.1,776.4-23.7,767.1-23.7z"/>
-                <path d="M863,58L723.8-81.8v-95.3c0-9.9-8-17.6-18-17.6c-9.3,0-17,7.7-17,17.6v60.3L574-232.2c-3.5-3.6-7.7-5.5-11.9-5.5 c-4.8,0-9,2-12.5,5.5L261.4,56.1c-6.9,6.9-7.4,18,0,24.4c6.4,7.4,17.5,6.9,24.4,0l276.5-275.8L838,83c2.9,2.9,7.1,4.5,12.5,4.5 c4.8,0,9-1.6,12.5-4.5C869.4,76.6,869.9,65,863,58z"/>
-            </svg>
-            <svg id="svg-instagram"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 97.395 97.395" xml:space="preserve">
-                <path d="M12.501,0h72.393c6.875,0,12.5,5.09,12.5,12.5v72.395c0,7.41-5.625,12.5-12.5,12.5H12.501C5.624,97.395,0,92.305,0,84.895 V12.5C0,5.09,5.624,0,12.501,0L12.501,0z M70.948,10.821c-2.412,0-4.383,1.972-4.383,4.385v10.495c0,2.412,1.971,4.385,4.383,4.385 h11.008c2.412,0,4.385-1.973,4.385-4.385V15.206c0-2.413-1.973-4.385-4.385-4.385H70.948L70.948,10.821z M86.387,41.188h-8.572 c0.811,2.648,1.25,5.453,1.25,8.355c0,16.2-13.556,29.332-30.275,29.332c-16.718,0-30.272-13.132-30.272-29.332 c0-2.904,0.438-5.708,1.25-8.355h-8.945v41.141c0,2.129,1.742,3.872,3.872,3.872h67.822c2.13,0,3.872-1.742,3.872-3.872V41.188 H86.387z M48.789,29.533c-10.802,0-19.56,8.485-19.56,18.953c0,10.468,8.758,18.953,19.56,18.953 c10.803,0,19.562-8.485,19.562-18.953C68.351,38.018,59.593,29.533,48.789,29.533z"/>
-            </svg>
-            <svg id="svg-vk"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 57" xml:space="preserve">
-                <path d="M86.2,36.1c3.3,3.2,6.8,6.3,9.8,9.9c1.3,1.6,2.6,3.2,3.5,5.1c1.3,2.6,0.1,5.5-2.2,5.6l-14.6,0 C79,57,76,55.5,73.5,52.9c-2-2.1-3.9-4.2-5.8-6.4c-0.8-0.9-1.6-1.7-2.6-2.3c-2-1.3-3.7-0.9-4.9,1.2c-1.2,2.1-1.4,4.4-1.5,6.8 c-0.2,3.4-1.2,4.3-4.6,4.5c-7.4,0.3-14.4-0.8-20.8-4.5c-5.7-3.3-10.2-7.9-14-13.1C11.6,28.9,5.8,17.7,0.7,6.2 c-1.2-2.6-0.3-4,2.6-4C8,2,12.7,2,17.5,2.1c1.9,0,3.2,1.1,4,3c2.6,6.3,5.7,12.3,9.7,17.9c1.1,1.5,2.1,3,3.7,4 c1.7,1.2,3,0.8,3.8-1.1c0.5-1.2,0.7-2.5,0.8-3.8c0.4-4.4, 0.4-8.8-0.2-13.2c-0.4-2.7-1.9-4.5-4.7-5c-1.4-0.3-1.2-0.8-0.5-1.6 c1.2-1.4,2.3-2.2,4.5-2.2h16.5c2.6,0.5,3.2,1.7,3.5,4.3l0,18.3c0,1,0.5,4,2.3,4.7c1.5,0.5,2.4-0.7,3.3-1.6 c3.9-4.2,6.8-9.1,9.3-14.2c1.1-2.3,2.1-4.6,3-6.9C77,2.9,78.1,2,80,2.1l15.8,0c0.5,0,0.9,0,1.4,0.1c2.7,0.5,3.4,1.6,2.6,4.2 c-1.3,4.1-3.8,7.5-6.3,10.9c-2.6,3.7-5.5,7.2-8.1,10.9C83,31.5,83.2,33.2,86.2,36.1L86.2,36.1z"/>
-            </svg>
-            <svg id="svg-facebook" viewBox="0 0 51 100">
-                <path d="M2,53.3H13v45.1c0,0.9,0.7,1.6,1.6,1.6h18.6c0.9,0,1.6-0.7,1.6-1.6V53.5h12.6 c0.8,0,1.5-0.6,1.6-1.4l1.9-16.6c0-0.5-0.1-0.9-0.4-1.3c-0.3-0.3-0.7-0.5-1.2-0.5H34.8V23.3c0-3.1,1.7-4.7,5-4.7h9.5 c0.9,0,1.6-0.7,1.6-1.6V1.7c0-0.9-0.7-1.6-1.6-1.6H36.2c-0.1,0-0.3,0-0.6,0c-2.3,0-10.1,0.4-16.4,6.2c-6.9,6.3-5.9,13.9-5.7,15.3 v12.2H2c-0.9,0-1.6,0.7-1.6,1.6v16.4C0.4,52.6,1.1,53.3,2,53.3L2,53.3z"/>
-            </svg>
-            <svg id="svg-pinterest" viewBox="0 0 486.392 486.392">
-                <path d="M430.149,135.248C416.865,39.125,321.076-9.818,218.873,1.642 C138.071,10.701,57.512,76.03,54.168,169.447c-2.037,57.029,14.136,99.801,68.399,111.84 c23.499-41.586-7.569-50.676-12.433-80.802C90.222,77.367,252.16-6.718,336.975,79.313c58.732,59.583,20.033,242.77-74.57,223.71 c-90.621-18.179,44.383-164.005-27.937-192.611c-58.793-23.286-90.013,71.135-62.137,118.072 c-16.355,80.711-51.557,156.709-37.3,257.909c46.207-33.561,61.802-97.734,74.57-164.704 c23.225,14.136,35.659,28.758,65.268,31.038C384.064,361.207,445.136,243.713,430.149,135.248z"/>
-            </svg>
-            <svg id="svg-twitter" viewBox="0 0 612 612">
-		        <path d="M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411 c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513 c0,9.828,1.109,19.427,3.251,28.606C197.065,206.32,104.556,156.337,42.641,80.386c-10.823,18.51-16.98,40.078-16.98,63.101 c0,43.559,22.181,81.993,55.835,104.479c-20.575-0.688-39.926-6.348-56.867-15.756v1.568c0,60.806,43.291,111.554,100.693,123.104 c-10.517,2.83-21.607,4.398-33.08,4.398c-8.107,0-15.947-0.803-23.634-2.333c15.985,49.907,62.336,86.199,117.253,87.194 c-42.947,33.654-97.099,53.655-155.916,53.655c-10.134,0-20.116-0.612-29.944-1.721c55.567,35.681,121.536,56.485,192.438,56.485 c230.948,0,357.188-191.291,357.188-357.188l-0.421-16.253C573.872,163.526,595.211,141.422,612,116.258z"/>
-            </svg>
-            <!-- Календарь пока-что нужен только в маленьком слайдере -->
-            <svg id="svg-calendar"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.634 511.634" xml:space="preserve">
-                <path d="M482.513,83.942c-7.225-7.233-15.797-10.85-25.694-10.85h-36.541v-27.41c0-12.56-4.477-23.315-13.422-32.261 C397.906,4.475,387.157,0,374.591,0h-18.268c-12.565,0-23.318,4.475-32.264,13.422c-8.949,8.945-13.422,19.701-13.422,32.261v27.41 h-109.63v-27.41c0-12.56-4.475-23.315-13.422-32.261C178.64,4.475,167.886,0,155.321,0H137.05 c-12.562,0-23.317,4.475-32.264,13.422c-8.945,8.945-13.421,19.701-13.421,32.261v27.41H54.823c-9.9,0-18.464,3.617-25.697,10.85 c-7.233,7.232-10.85,15.8-10.85,25.697v365.453c0,9.89,3.617,18.456,10.85,25.693c7.232,7.231,15.796,10.849,25.697,10.849h401.989 c9.897,0,18.47-3.617,25.694-10.849c7.234-7.234,10.852-15.804,10.852-25.693V109.639 C493.357,99.739,489.743,91.175,482.513,83.942z M137.047,475.088H54.823v-82.23h82.224V475.088z M137.047,374.59H54.823v-91.358 h82.224V374.59z M137.047,264.951H54.823v-82.223h82.224V264.951z M130.627,134.333c-1.809-1.809-2.712-3.946-2.712-6.423V45.686 c0-2.474,0.903-4.617,2.712-6.423c1.809-1.809,3.946-2.712,6.423-2.712h18.271c2.474,0,4.617,0.903,6.423,2.712 c1.809,1.807,2.714,3.949,2.714,6.423v82.224c0,2.478-0.909,4.615-2.714,6.423c-1.807,1.809-3.946,2.712-6.423,2.712H137.05 C134.576,137.046,132.436,136.142,130.627,134.333z M246.683,475.088h-91.365v-82.23h91.365V475.088z M246.683,374.59h-91.365 v-91.358h91.365V374.59z M246.683,264.951h-91.365v-82.223h91.365V264.951z M356.323,475.088h-91.364v-82.23h91.364V475.088z M356.323,374.59h-91.364v-91.358h91.364V374.59z M356.323,264.951h-91.364v-82.223h91.364V264.951z M349.896,134.333 c-1.807-1.809-2.707-3.946-2.707-6.423V45.686c0-2.474,0.9-4.617,2.707-6.423c1.808-1.809,3.949-2.712,6.427-2.712h18.268 c2.478,0,4.617,0.903,6.427,2.712c1.808,1.807,2.707,3.949,2.707,6.423v82.224c0,2.478-0.903,4.615-2.707,6.423 c-1.807,1.809-3.949,2.712-6.427,2.712h-18.268C353.846,137.046,351.697,136.142,349.896,134.333z M456.812,475.088h-82.228v-82.23 h82.228V475.088z M456.812,374.59h-82.228v-91.358h82.228V374.59z M456.812,264.951h-82.228v-82.223h82.228V264.951z"/>
-            </svg>
-            <svg id="svg-heart"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path d="m121.6,40.1c-3.3-16.6-15.1-27.3-30.3-27.3-8.5,0-17.7,3.5-26.7,10.1-9.1-6.8-18.3-10.3-26.9-10.3-15.2,0-27.1,10.8-30.3,27.6-4.8,24.9 10.6,58 55.7,76 0.5,0.2 1,0.3 1.5,0.3 0.5,0 1-0.1 1.5-0.3 45-18.4 60.3-51.4 55.5-76.1zm-57,67.9c-39.6-16.4-53.3-45-49.2-66.3 2.4-12.7 11.2-21 22.3-21 7.5,0 15.9,3.6 24.3,10.5 1.5,1.2 3.6,1.2 5.1,0 8.4-6.7 16.7-10.2 24.2-10.2 11.1,0 19.8,8.1 22.3,20.7 4.1,21.1-9.5,49.6-49,66.3z"/>
-            </svg>
-            <svg id="svg-heart2"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="15 -14 129 129" xml:space="preserve">
-                <path d="M136.6,26.1c-3.3-16.6-15.1-27.3-30.3-27.3c-8.5,0-17.7,3.5-26.7,10.1C70.5,2.1,61.3-1.4,52.7-1.4 c-15.2,0-27.1,10.8-30.3,27.6c-4.8,24.9,10.6,58,55.7,76c0.5,0.2,1,0.3,1.5,0.3s1-0.1,1.5-0.3C126.1,83.8,141.4,50.8,136.6,26.1z"/>
-            </svg>
-            <svg id="svg-compare" viewBox="0 0 17 17">
-                <path d="M14.991 3.022C13.651 1.451 11.975.488 9.961.133v7.604l6.076 4.682A8.408 8.408 0 0 0 17 8.5c0-2.08-.67-3.907-2.009-5.478z"/>
-                <path d="M8.5 0C6.153 0 4.15.83 2.49 2.49.83 4.15 0 6.154 0 8.5c0 2.346.83 4.35 2.49 6.01C4.15 16.17 6.153 17 8.5 17c1.35 0 2.612-.294 3.785-.88a8.415 8.415 0 0 0 2.955-2.44L8.5 8.5V0zm5.18 13.846c-1.439 1.395-3.166 2.092-5.18 2.092-2.059 0-3.813-.725-5.263-2.175-1.45-1.45-2.175-3.204-2.175-5.263 0-1.859.609-3.486 1.826-4.881s2.734-2.225 4.549-2.49V8.5c0 .354.133.631.398.83l5.845 4.516z"/>
-            </svg>
-            <svg id="svg-compare2" viewBox="0 0 100 100">
-                <path d="M87.5,54.2H100V100H87.5V54.2z"/>
-                <path d="M29.2,25h12.5v75H29.2V25z"/>
-                <path d="M58.3,0h12.5v100H58.3V0z"/>
-                <path d="M0,75h12.5v25H0V75z"/>
-            </svg>
-            <svg id="svg-layers"
-                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 319.681 319.681" xml:space="preserve">
-                <path style="fill:#010002;" d="M159.84,195.66L0,100.178L159.84,4.684l159.841,95.488L159.84,195.66z M23.271,100.178 l136.57,81.579l136.57-81.585L159.84,18.587L23.271,100.178z"/>
-                <polygon style="fill:#010002;" points="159.84,255.328 8.574,164.966 14.696,154.721 159.84,241.426 304.985,154.721 311.107,164.966"/>
-                <polygon style="fill:#010002;" points="159.84,314.997 8.574,224.635 14.696,214.39 159.84,301.094 304.985,214.39 311.107,224.635"/>
-            </svg>
-
         </div>
+    </footer>
+    <div style="display: none;">
+        <svg id="svg-logo" fill="#2b2a29"
+            xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 6926 1236" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path class="fil0" d="M0 103l0 835 194 0 0 -414 384 0 0 414 194 0 0 -936 -194 0 0 350 -384 0 0 -350 -98 0c-54,0 -96,47 -96,100zm1185 96c-220,0 -330,125 -330,379 0,251 110,377 330,377 220,0 332,-127 332,-377 0,-253 -111,-379 -332,-379zm0 161c94,0 140,70 140,212 -1,145 -48,219 -142,219 -94,0 -142,-72 -143,-213 0,-145 48,-217 145,-217zm729 0c81,0 122,37 127,113l0 465 184 0 0 -462c1,-76 43,-113 124,-113 81,0 122,37 127,113l0 374c0,58 30,87 91,91l95 0 0 -428c1,-208 -102,-311 -310,-311 -94,0 -165,19 -217,59 -52,-41 -124,-62 -217,-62 -208,0 -312,103 -312,311l0 428 186 0 0 -465c1,-76 43,-113 124,-113zm1496 355l-135 0c-25,0 -45,8 -62,26 -36,34 -76,52 -118,52 -89,0 -138,-56 -145,-168l471 0c14,-285 -95,-427 -326,-427 -222,1 -333,125 -333,373 0,248 110,376 330,383 179,0 278,-85 318,-239zm-318 -366c78,0 124,50 135,146l-274 0c14,-96 61,-146 139,-146z"/>
+            <path class="fil0" d="M4293 167c175,0 257,132 257,317 0,189 -83,321 -257,321 -175,0 -256,-138 -256,-321 0,-182 81,-317 256,-317zm0 798c285,0 449,-194 449,-482 0,-284 -169,-483 -449,-483 -278,0 -447,197 -447,483 0,286 162,482 447,482zm724 180c0,61 -30,91 -91,91l-92 0 0 -696c10,-217 122,-325 341,-325 226,0 339,122 339,367 0,248 -96,376 -290,383 -91,0 -160,-37 -206,-113l0 293zm156 -344c99,0 150,-70 154,-211 0,-147 -52,-220 -157,-220 -105,0 -154,73 -153,220 6,140 56,211 156,211zm720 -538l0 -40 -110 0 0 -116c0,-48 -40,-92 -88,-92l-95 0 0 796c-1,81 32,124 100,131 69,7 134,7 193,1l0 -139 -56 0c-36,0 -54,-17 -54,-47l0 -403 19 0c51,0 91,-39 91,-91zm105 -248l0 143 183 0 0 -54c1,-59 -28,-89 -88,-89l-95 0zm0 208l0 728 183 0 0 -640c0,-59 -29,-88 -88,-88l-95 0zm929 505l-138 0c-23,0 -44,8 -62,26 -30,34 -67,52 -110,52 -102,1 -153,-72 -153,-216 0,-145 48,-217 145,-217 58,0 96,26 118,76l200 0c-32,-158 -136,-237 -312,-237 -224,4 -336,129 -336,379 6,251 118,377 339,377 169,4 277,-91 310,-239z"/>
+        </svg>
+        <svg id="svg-search" 
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 451 451" xml:space="preserve">
+            <path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3 s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4 C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3 s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"/>
+        </svg>
+        <svg id="svg-phone"
+            version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="187 -161.8 448.8 448.8" xml:space="preserve">
+            <path d="M561.5,106.7c-9.7-10.1-21.4-15.5-33.8-15.5c-12.3,0-24.1,5.3-34.2,15.4l-31.6,31.5c-2.6-1.4-5.2-2.7-7.7-4 c-3.6-1.8-7-3.5-9.9-5.3c-29.6-18.8-56.5-43.3-82.3-75c-12.5-15.8-20.9-29.1-27-42.6c8.2-7.5,15.8-15.3,23.2-22.8 c2.8-2.8,5.6-5.7,8.4-8.5c21-21,21-48.2,0-69.2l-27.3-27.3c-3.1-3.1-6.3-6.3-9.3-9.5c-6-6.2-12.3-12.6-18.8-18.6 c-9.7-9.6-21.3-14.7-33.5-14.7c-12.2,0-24,5.1-34,14.7c-0.1,0.1-0.1,0.1-0.2,0.2l-34,34.3c-12.8,12.8-20.1,28.4-21.7,46.5 c-2.4,29.2,6.2,56.4,12.8,74.2c16.2,43.7,40.4,84.2,76.5,127.6c43.8,52.3,96.5,93.6,156.7,122.7c23,10.9,53.7,23.8,88,26 c2.1,0.1,4.3,0.2,6.3,0.2c23.1,0,42.5-8.3,57.7-24.8c0.1-0.2,0.3-0.3,0.4-0.5c5.2-6.3,11.2-12,17.5-18.1c4.3-4.1,8.7-8.4,13-12.9 c9.9-10.3,15.1-22.3,15.1-34.6c0-12.4-5.3-24.3-15.4-34.3L561.5,106.7z M597.3,212C597.2,212,597.2,212.1,597.3,212 c-3.9,4.2-7.9,8-12.2,12.2c-6.5,6.2-13.1,12.7-19.3,20c-10.1,10.8-22,15.9-37.6,15.9c-1.5,0-3.1,0-4.6-0.1 c-29.7-1.9-57.3-13.5-78-23.4C389,209.2,339.3,170.3,298,121c-34.1-41.1-56.9-79.1-72-119.9c-9.3-24.9-12.7-44.3-11.2-62.6 c1-11.7,5.5-21.4,13.8-29.7l34.1-34.1c4.9-4.6,10.1-7.1,15.2-7.1c6.3,0,11.4,3.8,14.6,7c0.1,0.1,0.2,0.2,0.3,0.3 c6.1,5.7,11.9,11.6,18,17.9c3.1,3.2,6.3,6.4,9.5,9.7l27.3,27.3c10.6,10.6,10.6,20.4,0,31c-2.9,2.9-5.7,5.8-8.6,8.6 C330.6-22,322.6-14,313.9-6.2c-0.2,0.2-0.4,0.3-0.5,0.5c-8.6,8.6-7,17-5.2,22.7c0.1,0.3,0.2,0.6,0.3,0.9 c7.1,17.2,17.1,33.4,32.3,52.7l0.1,0.1c27.6,34,56.7,60.5,88.8,80.8c4.1,2.6,8.3,4.7,12.3,6.7c3.6,1.8,7,3.5,9.9,5.3 c0.4,0.2,0.8,0.5,1.2,0.7c3.4,1.7,6.6,2.5,9.9,2.5c8.3,0,13.5-5.2,15.2-6.9l34.2-34.2c3.4-3.4,8.8-7.5,15.1-7.5 c6.2,0,11.3,3.9,14.4,7.3c0.1,0.1,0.1,0.1,0.2,0.2l55.1,55.1C607.5,190.9,607.5,201.4,597.3,212z"/>
+        </svg>
+        <svg id="svg-bag" 
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-66 67.5 33 34" xml:space="preserve">
+            <path d="M-37.7,101h-23.6c-0.1, 0-0.3-0.1-0.4-0.2c-0.1-0.1-0.1-0.2-0.1-0.4l1.1-23.6c0-0.3,0.2-0.5,0.5-0.5h21.4 c0.3,0,0.5,0.2,0.5,0.5l1.1,23.6c0,0.1,0,0.3-0.1,0.4C-37.4,100.9-37.6,101-37.7,101z M-60.8, 100h22.6l-1.1-22.6h-20.4L-60.8,100z"/>
+            <path d="M-44.6,77v-3.1c0-2.7-2.2-4.9-4.9-4.9s-4.9,2.2-4.9, 4.9v2.8h-1v-2.8c0-3.3,2.6-5.9,5.9-5.9s5.9,2.6,5.9,5.9V77 C-43.6,77.3-44.6,77.3-44.6,77z"/>
+        </svg>
+        <svg id="svg-logout"
+            viewBox="0 0 330 330">
+            <path d="M245.608 84.392c-5.856-5.857-15.355-5.858-21.213-.001-5.857 5.858-5.858 15.355 0 21.213L268.789 150H85.002c-8.284 0-15 6.716-15 15s6.716 15 15 15h183.785l-44.392 44.392c-5.858 5.858-5.858 15.355 0 21.213a14.953 14.953 0 0 0 10.607 4.393 14.95 14.95 0 0 0 10.606-4.393l69.998-69.998c5.858-5.857 5.858-15.355 0-21.213l-69.998-70.002z"></path>
+            <path d="M155 330c8.284 0 15-6.716 15-15s-6.716-15-15-15H40V30h115c8.284 0 15-6.716 15-15s-6.716-15-15-15H25c-8.284 0-15 6.716-15 15v300c0 8.284 6.716 15 15 15h130z"></path>
+        </svg>
+        <svg id="svg-user"
+            viewBox="0 0 488.9 488.9">
+            <path d="M477.7 454.8v-26c0-26.5-12.4-52-33.1-68.1-48.2-37.4-97.3-63.5-114.5-72.2v-29.7c3.5-7.8 6.4-16.3 8.6-25.5 12.8-4.6 19.8-23.4 24.5-40 6.3-22.1 5.6-37.6-1.8-46.2 7.8-42.5 4.3-73.8-10.3-93.1-7.7-10.1-16.7-14.4-22.7-16.3-4.3-6-13-16.1-27.7-24.2C285.5 4.5 268.4 0 249.6 0c-3.4 0-6.8.2-9.8.4-8.4.4-16.7 2-24.9 4.7-.1 0-.2.1-.3.1-9 3.1-17.8 7.6-26.3 13.4-9.7 6.2-18.6 13.6-26.3 21.8-15.1 15.5-25.1 33-29.4 51.7-4.1 15.5-4.4 31.1-1 46.4-1.8 1.3-3.4 2.8-4.8 4.6-6.9 9.1-7.2 23.4-1.1 45.1 4.2 15 9.8 30.3 19.3 37.2 2.8 14.4 7.5 27.5 13.8 39.1v24.1c-17.2 8.7-66.3 34.7-114.5 72.2-20.7 16.1-33.1 41.5-33.1 68.1v26c0 18.8 15.3 34 34 34h398.5c18.7 0 34-15.3 34-34.1zm-442.1 0v-26c0-19 8.8-37.2 23.6-48.7 52-40.3 104.9-66.9 115-71.8 5.6-2.7 9.1-8.3 9.1-14.6v-32.5c0-2.2-.6-4.3-1.7-6.2-6.6-11.2-11.2-24.6-13.5-39.9-.8-4.9-4.4-8.8-9.1-10-1.3-1.5-5-6.9-9.7-23.6-3.9-13.8-3.6-20.2-3.2-22.5 3.9.2 7.8-1.6 10.3-4.7 2.6-3.3 3.3-7.7 1.9-11.6-5.2-14.5-5.8-29.4-1.8-44.6 3.4-14.6 11.2-28.2 23.3-40.6 6.5-7 14-13.1 22-18.2.1-.1.3-.2.4-.3 6.7-4.7 13.7-8.2 20.6-10.6.1 0 .2-.1.2-.1 5.9-2 12-3.1 18.4-3.4 17.5-1.5 33.2 1.8 47.1 9.9 15.2 8.4 21.4 19.4 21.4 19.4 1.9 3.9 5.3 6.2 9.7 6.5.3 0 6.8 1 12.4 8.9 5.9 8.4 14.3 30 3.8 80.4-1.2 5.6 1.7 11.2 6.8 13.6.5 1.8 1.3 7.9-3 23.1-3.8 13.4-6.9 19.5-8.7 22.2-2.3-.4-4.7-.2-6.9.8-3.8 1.6-6.6 5.1-7.3 9.1-2.1 12-5.5 22.8-9.9 32-.8 1.7-1.2 3.5-1.2 5.3v37.6c0 6.3 3.5 11.8 9.1 14.6 10.1 4.9 63 31.6 114.9 71.8 14.8 11.5 23.6 29.7 23.6 48.7v26c0 5.2-4.3 9.5-9.5 9.5H45.2c-5.3.1-9.6-4.2-9.6-9.5z"></path>
+        </svg>
+        <svg id="svg-mobile"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.442 27.442" xml:space="preserve">
+            <path d="M19.494,0H7.948C6.843,0,5.951,0.896,5.951,1.999v23.446c0,1.102,0.892,1.997,1.997,1.997h11.546 c1.103,0,1.997-0.895,1.997-1.997V1.999C21.491,0.896,20.597,0,19.494,0z M10.872,1.214h5.7c0.144,0,0.261,0.215,0.261,0.481 s-0.117,0.482-0.261,0.482h-5.7c-0.145,0-0.26-0.216-0.26-0.482C10.612,1.429,10.727,1.214,10.872,1.214z M13.722,25.469 c-0.703,0-1.275-0.572-1.275-1.276s0.572-1.274,1.275-1.274c0.701,0,1.273,0.57,1.273,1.274S14.423,25.469,13.722,25.469z M19.995,21.1H7.448V3.373h12.547V21.1z"/>
+        </svg>
+        <svg id="svg-clock"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" xml:space="preserve">
+            <path d="M30,0.061c-16.542,0-30,13.458-30,30s13.458,29.879,30, 29.879s30-13.337,30-29.879S46.542,0.061,30,0.061z M32,30.939 c0,1.104-0.896,2-2,2H14c-1.104,0-2-0.896-2-2s0.896-2, 2-2h14v-22c0-1.104,0.896-2,2-2s2,0.896,2,2V30.939z"/>
+        </svg>
+        <svg id="svg-footer-logo" fill="#2b2a29"
+            xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 5686 3162" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path class="fil0" d="M562 44c16,9 245,43 340,274 -22,-12 -36,-28 -56,-45 -12,-7 -31,-22 -50,-34 -20,-13 -39,-23 -59,-29 -19,-6 -39,-9 -63,-8 -24,1 -52,5 -72,10 -13,3 -23,6 -30,9 -19,9 -40,20 -58,33 -21,15 -39,32 -48,50l0 0c59,15 103,104 119,178 -71,17 -158,51 -198,103 55,68 55,60 103,171 24,77 31,95 46,172 -63,-17 -102,-35 -133,-52 0,128 63,351 95,470l-8 9 -15 0c17,21 32,44 46,66 36,59 57,119 71,178 -8,-63 -14,-126 -15,-192 -2,-15 -2,-35 2,-57 2,-9 4,-18 6,-26 9,-84 47,-168 71,-252 16,-103 8,-214 79,-248 87,-51 316,77 506,77 150,0 403,-128 506,-77 22,13 36,31 46,52 2,4 4,8 6,14 1,4 3,9 5,15 3,12 8,27 12,44 5,20 10,45 16,69 5,27 13,60 19,87 14,73 30,139 30,223 0,5 0,11 0,16 10,41 19,102 25,145 8,50 13,75 14,98 1,13 0,26 -1,38l1 0c11,-103 44,-194 90,-264 -11,-2 -25,-1 -42,0 40,-128 127,-479 119,-607 -32,43 -47,86 -79,120 0,-86 0,-317 -49,-407 -19,-49 -47,-98 -75,-138 -3,-5 -7,-10 -10,-14 -41,-56 -88,-106 -119,-125 24,94 142,256 119,368 -95,-188 -229,-393 -491,-376l24 68c-55,-86 -63,-94 -142,-154 -269,-180 -633,-51 -704,-51zm52 1700l-1 -7c0,2 0,4 0,6l1 1z"/>
+            <path class="fil0 str0" d="M1319 1486c0,-19 20,-51 38,-74 17,-23 32,-37 52,-46 20,-10 45,-15 70,-19 25,-4 51,-6 77,-7 26,-1 51,1 76,3 26,2 51,5 74,13 23,7 42,18 62,28 20,10 41,20 60,35 19,15 37,36 25,42 -11,6 -52,-4 -107,-6 -55,-3 -125,1 -182,9 -57,8 -101,19 -133,28 -32,9 -53,16 -73,16 -20,1 -40,-4 -39,-23z"/>
+            <path class="fil0 str0" d="M1247 2194c-12,-4 -28,-14 -47,-18 -19,-5 -39,-4 -58,-1 -19,2 -38,7 -53,11 -15,4 -27,8 -36,11 -9,3 -16,5 -22,6 -7,1 -14,1 -19,1 -5,0 -9,0 -12,-2 -3,-1 -6,-3 -9,-5 -3,-2 -7,-6 -11,-8 -4,-2 -7,-3 -4,0 3,3 9,9 20,15 0,0 0,1 0,1 0,7 20,33 43,56 23,23 48,43 76,58 28,16 59,27 88,33 28,6 53,7 79,5 26,-2 52,-6 75,-12 24,-6 45,-15 65,-24 20,-10 39,-21 53,-31 14,-10 24,-20 32,-29 9,-9 16,-19 21,-28 5,-9 6,-17 7,-21 0,-1 0,-2 0,-3 1,-1 1,-1 1,-1 0,-1 -11,1 -21,3 -10,2 -20,3 -31,2 -12,-1 -25,-4 -38,-7 -12,-4 -23,-9 -35,-14 -12,-5 -26,-10 -37,-13 -11,-3 -21,-3 -30,-4 -9,0 -18,0 -26,1 -7,1 -13,3 -18,5 -5,2 -9,5 -14,7 -5,2 -10,5 -16,7 -6,2 -12,4 -24,0zm-196 34c5,2 26,9 44,13 18,3 35,2 51,2 17,-1 34,-2 48,0 13,1 23,5 35,7 12,2 27,3 39,3 12,0 22,-1 30,-2 9,-1 16,-2 22,-4 6,-1 10,-2 13,-3 3,-1 6,-2 13,-2 6,0 16,1 30,2 14,1 31,3 44,3 14,0 24,-1 33,-2 9,-1 16,-3 24,-5 7,-2 15,-5 20,-7 5,-2 8,-4 1,0 -7,3 -23,11 -43,16 -19,4 -41,5 -60,5 -18,0 -33,-2 -46,-2 -13,0 -26,2 -36,5 -11,2 -20,4 -30,5 -10,1 -21,0 -31,-1 -10,-1 -19,-2 -28,-4 -10,-2 -21,-5 -29,-7 -8,-2 -14,-2 -21,-2 -8,1 -19,3 -28,4 -9,1 -17,0 -28,-1 -11,-1 -24,-2 -32,-5 -9,-2 -13,-6 -21,-10 -7,-4 -18,-8 -13,-7z"/>
+            <path class="fil0" d="M1005 2110c7,0 12,5 12,12 0,7 -5,12 -12,12 -7,0 -12,-5 -12,-12 0,-7 5,-12 12,-12z"/>
+            <path class="fil0 str0" d="M1325 1979c1,-4 10,-12 18,-18 9,-6 18,-10 28,-11 10,-1 21,0 28,2 7,2 12,6 13,11 1,5 -1,10 -4,14 -3,4 -8,7 -13,9 -6,1 -12,2 -19,1 -7,-1 -15,-2 -22,-4 -7,-1 -12,-2 -18,-2 -6,0 -12,2 -11,-2z"/>
+            <path class="fil0 str0" d="M1209 1978c-1,-4 -9,-13 -18,-19 -9,-7 -18,-11 -28,-12 -10,-2 -21,-1 -28,1 -7,2 -12,6 -13,10 -1,5 0,10 3,14 3,4 7,7 13,9 5,2 12,2 19,2 7,0 15,-2 22,-3 7,-1 12,-2 18,-1 6,1 12,2 11,-1z"/>
+            <path class="fil0 str0" d="M1202 1969c4,1 17,10 31,16 13,5 27,7 38,7 11,0 20,-3 27,-5 7,-2 12,-5 18,-7 6,-2 12,-4 16,-6 5,-2 8,-5 12,-8 4,-3 8,-5 6,-3 -2,2 -12,10 -21,17 -9,7 -19,14 -26,19 -8,5 -14,6 -21,7 -7,1 -14,1 -21,0 -7,-1 -14,-3 -21,-5 -7,-2 -12,-4 -17,-8 -5,-3 -9,-8 -13,-14 -5,-6 -11,-12 -7,-11z"/>
+            <path class="fil0 str0" d="M1175 2031c-3,0 -17,0 -31,-3 -14,-3 -27,-10 -37,-19 -10,-9 -18,-20 -21,-29 -3,-9 -1,-16 4,-22 5,-6 12,-11 22,-14 10,-3 21,-4 31,-3 9,1 16,4 17,5 1,1 -4,1 -8,1 -5,0 -9,1 -16,1 -7,0 -16,-2 -23,0 -7,1 -11,5 -15,9 -3,4 -6,9 -7,15 -1,6 0,12 5,20 5,7 13,15 21,22 8,6 16,11 23,13 8,2 15,3 23,3 8,0 16,0 13,0z"/>
+            <path class="fil0 str0" d="M1376 2034c3,0 17,0 31,-3 14,-3 27,-10 37,-19 10,-9 18,-20 21,-29 3,-9 1,-16 -4,-22 -5,-6 -12,-11 -22,-14 -10,-3 -21,-4 -31,-3 -9,1 -16,4 -17,5 -1,1 4,1 8,1 5,0 9,1 16,1 7,0 16,-2 23,0 7,1 11,5 15,9 3,4 6,9 7,15 1,6 0,12 -5,20 -5,7 -13,15 -21,22 -8,6 -16,11 -23,13 -8,2 -15,3 -23,3 -8,0 -16,0 -13,0z"/>
+            <path class="fil0 str0" d="M1461 1961c0,-7 -6,-32 -14,-50 -9,-18 -20,-30 -32,-42 -12,-12 -24,-25 -31,-37 -7,-12 -9,-22 -9,-33 0,-11 0,-22 1,-17 0,5 0,25 4,40 4,15 13,26 21,36 8,10 15,19 21,28 7,10 13,20 18,30 5,10 9,21 14,31 4,10 9,20 9,13z"/>
+            <path class="fil1" d="M1249 1858c14,0 25,11 25,25 0,14 -11,25 -25,25 -14,0 -25,-11 -25,-25 0,-14 11,-25 25,-25z"/>
+            <path class="fil0 str0" d="M1169 1490c0,-19 -20,-51 -38,-74 -17,-23 -32,-37 -52,-46 -20,-10 -45,-15 -70,-19 -25,-4 -51,-6 -77,-7 -26,-1 -51,1 -76,3 -26,2 -51,5 -74,13 -23,7 -42,18 -62,28 -20,10 -41,20 -60,35 -19,15 -37,36 -25,42 11,6 52,-4 107,-6 55,-3 125,1 182,9 57,8 101,19 133,28 32,9 53,16 73,16 20,1 40,-4 39,-23z"/>
+            <path class="fil0 str0" d="M559 1589c-12,-15 -30,-32 -46,-36 -16,-4 -30,4 -40,19 -11,15 -18,38 -21,59 -3,21 -1,41 4,58 5,16 13,30 20,47 7,17 13,39 17,58 4,19 6,36 8,54 2,17 5,35 12,52 7,16 20,30 28,45 8,14 12,29 14,42 2,13 2,26 7,37 5,11 15,21 25,29 10,7 19,12 27,13 8,1 16,-2 10,-7 -6,-5 -24,-11 -37,-26 -13,-16 -20,-40 -24,-58 -4,-18 -5,-29 -9,-39 -4,-9 -10,-17 -14,-24 -4,-7 -5,-15 0,-14 5,1 15,10 24,17 9,7 16,12 17,12 2,0 -1,-4 -8,-11 -7,-7 -16,-17 -24,-26 -8,-9 -13,-18 -17,-29 -4,-11 -7,-25 -8,-38 -2,-13 -3,-25 -2,-37 1,-12 4,-25 8,-31 4,-7 10,-7 16,-5 6,2 12,7 15,8 3,1 2,-3 -1,-9 -3,-6 -10,-15 -16,-21 -6,-6 -12,-8 -18,-6 -6,2 -11,10 -14,14 -3,4 -5,5 -8,1 -2,-4 -6,-13 -9,-23 -3,-10 -6,-22 -7,-37 -1,-15 1,-33 3,-44 2,-11 5,-16 11,-13 6,2 15,11 26,20 11,9 24,17 33,16 9,-1 13,-12 13,-25 0,-12 -4,-25 -16,-40z"/>
+            <path class="fil0 str0" d="M1935 1613c7,-16 22,-28 34,-34 12,-6 21,-7 27,-2 7,6 12,18 14,32 2,14 2,30 -1,44 -4,14 -11,27 -16,41 -5,14 -7,29 -5,45 2,16 7,33 0,65 -6,32 -24,80 -35,108 -11,28 -15,35 -18,47 -2,12 -3,28 -5,41 -2,13 -4,24 -7,35 -3,11 -7,23 -14,32 -7,9 -18,15 -25,19 -7,3 -11,4 -12,-2 -2,-6 -1,-17 3,-24 4,-7 11,-8 18,-14 8,-7 16,-18 22,-32 5,-13 7,-28 7,-42 0,-13 -2,-25 -6,-32 -4,-7 -10,-10 -8,-13 2,-3 12,-7 19,-13 7,-7 12,-16 16,-27 4,-11 7,-24 9,-37 2,-13 2,-25 1,-37 -1,-12 -2,-24 -4,-29 -2,-5 -4,-3 -7,-1 -2,2 -5,6 -7,1 -2,-5 -2,-17 0,-27 2,-10 7,-18 12,-20 5,-2 10,2 13,5 3,2 4,3 4,-1 0,-4 -1,-12 1,-23 2,-11 7,-26 9,-39 2,-14 1,-27 -4,-31 -5,-5 -13,-1 -19,6 -7,7 -12,17 -15,21 -4,4 -6,1 -8,-11 -2,-12 -2,-34 5,-50z"/>
+            <path class="fil0 str0" d="M567 1650c6,62 19,214 37,316 18,103 40,156 62,206 22,49 43,95 82,152 39,57 95,124 143,179 48,54 89,95 129,127 41,33 82,58 122,73 40,15 78,21 120,22 42,1 86,-3 124,-10 37,-7 67,-19 91,-35 24,-16 43,-37 66,-63 23,-26 49,-57 81,-93 31,-36 68,-77 91,-109 23,-32 34,-55 54,-89 21,-34 51,-80 70,-113 19,-33 26,-54 38,-143 13,-89 32,-246 32,-258 1,-12 -17,120 -32,204 -14,83 -25,118 -46,164 -22,46 -55,103 -96,162 -42,59 -92,120 -135,171 -43,51 -78,93 -106,121 -27,28 -47,41 -66,50 -19,9 -39,12 -58,16 -19,3 -38,6 -61,7 -23,2 -50,3 -76,1 -25,-2 -48,-8 -80,-19 -31,-11 -71,-28 -119,-65 -48,-37 -103,-93 -147,-142 -44,-49 -77,-89 -110,-134 -32,-45 -64,-96 -87,-145 -23,-49 -38,-96 -53,-152 -15,-56 -30,-120 -42,-188 -12,-69 -21,-142 -27,-193 -6,-51 -9,-79 -3,-17z"/>
+            <path class="fil1" d="M1227 1582c-4,36 -3,105 -3,145 1,40 2,53 5,59 3,6 9,7 16,7 6,0 13,-1 15,-20 2,-20 0,-59 -1,-100 -1,-41 -2,-84 -3,-107 -2,-23 -5,-26 -10,-25 -6,1 -14,5 -18,42z"/>
+            <path class="fil0" d="M559 1488l4 7c6,12 10,16 13,20l1 0 0 2c5,7 9,16 20,62 43,185 68,253 281,253 173,2 248,-59 286,-197 14,-33 26,-75 46,-100 -2,-2 -3,-5 -3,-9 0,-10 7,-14 12,-17 11,-7 22,-2 25,6 1,0 2,0 3,0 7,-1 15,-1 22,0 9,1 16,5 23,16 7,11 12,31 26,66 6,16 14,36 22,55 44,98 103,179 322,179 230,0 205,-177 239,-278 12,-31 23,-39 32,-49 -3,-33 -6,-63 -10,-91l-526 0c-29,29 -92,48 -166,48 -74,0 -138,-20 -166,-48l-489 0c-7,24 -12,48 -16,74zm1027 27c11,0 21,0 31,0 57,0 95,3 124,6 29,3 49,5 44,7 -6,2 -37,4 -70,6 -34,2 -71,4 -97,8 -27,4 -44,10 -58,17 -14,7 -25,15 -32,23 -12,14 -7,24 -6,39 11,4 24,8 34,12 13,5 22,8 33,12 11,4 26,7 21,11 -4,3 -28,7 -47,11 -19,4 -34,9 -30,21 4,12 27,32 47,46 19,14 35,22 29,24 -6,2 -33,-2 -55,-9 -23,-7 -42,-16 -65,-35 -23,-19 -51,-48 -68,-84 -15,-31 -22,-68 -22,-89 0,-4 0,-8 0,-10 0,-2 1,-4 1,-5 1,-4 3,-5 18,-6 16,-2 47,-3 93,-3 23,0 50,0 76,0zm-576 -5c-55,-6 -191,-1 -265,3 -74,5 -85,10 -87,23 -3,14 4,36 11,65 7,29 14,63 27,90 12,26 29,44 50,56 21,12 46,17 68,17 22,0 40,-6 30,-14 -9,-8 -46,-20 -63,-32 -17,-12 -14,-25 5,-31 19,-6 54,-6 89,-12 35,-6 69,-18 65,-28 -4,-10 -47,-16 -49,-23 -3,-7 34,-13 70,-19 35,-6 69,-12 70,-19 1,-7 -32,-13 -40,-20 -8,-7 9,-14 30,-25 21,-11 46,-27 -9,-32z"/>
+            <path class="fil0" d="M1259 1516c-7,0 -14,0 -21,1 -8,1 -16,3 -22,14 -7,11 -12,31 -26,66 -6,16 -14,36 -22,55 -14,31 -44,82 -66,107l15 -322 11 23c28,12 92,10 131,8l1 46z"/>
+            <path class="fil0" d="M1392 1455c-20,1 -21,3 -17,4 3,1 8,1 17,2l0 -6z"/>
+            <path class="fil0" d="M1024 1453c-90,-2 -245,0 -325,3 -81,2 -87,5 -80,7 7,2 27,3 92,4 65,1 176,1 259,1 83,0 138,0 153,-3 15,-3 -10,-9 -100,-11z"/>
+            <path class="fil0 str0" d="M640 2152c-2,21 3,106 -3,168 -6,62 -23,101 -39,133 -16,31 -31,55 -46,79 -15,24 -31,49 -52,78 -21,29 -49,62 -139,121 -90,59 -242,143 -311,184 -69,40 -55,36 -18,16 36,-20 95,-55 162,-94 67,-39 142,-81 200,-123 58,-42 98,-83 130,-122 32,-39 56,-76 75,-119 20,-44 35,-95 44,-138 9,-44 12,-80 10,-119 -3,-40 -11,-83 -13,-62z"/>
+            <path class="fil0 str0" d="M1584 2638c-17,82 -62,267 -89,383 -27,117 -37,164 -29,130 7,-35 32,-152 51,-240 20,-88 35,-146 44,-192 10,-47 14,-82 22,-111 8,-29 18,-51 1,31z"/>
+            <path class="fil0" d="M1617 2565c-3,4 -12,53 -8,87 5,34 23,54 85,81 62,27 168,61 256,93 88,32 157,61 211,82 53,21 90,35 123,48 33,13 62,26 98,49 35,23 77,57 102,78 25,21 33,31 20,22 -13,-9 -46,-35 -82,-58 -35,-22 -72,-40 -137,-66 -65,-27 -158,-63 -250,-99 -91,-36 -181,-73 -239,-97 -58,-24 -84,-36 -108,-48 -24,-12 -47,-25 -59,-41 -12,-16 -15,-36 -14,-66 1,-30 5,-69 2,-65z"/>
+            <path class="fil2" d="M2413 578l0 799 186 0 0 -396 367 0 0 396 186 0 0 -895 -186 0 0 334 -367 0 0 -334 -93 0c-51,0 -92,45 -92,96zm1133 92c-211,0 -316,120 -316,362 0,240 105,361 316,361 211,0 317,-121 317,-361 0,-242 -107,-362 -317,-362zm0 154c90,0 134,67 134,203 -1,138 -46,209 -136,209 -90,0 -136,-68 -137,-204 0,-138 46,-208 138,-208zm698 0c78,0 117,36 121,108l0 445 176 0 0 -442c1,-72 41,-108 118,-108 78,0 117,36 121,108l0 358c0,55 29,83 87,87l91 0 0 -409c1,-199 -97,-298 -296,-298 -90,0 -158,18 -208,57 -50,-39 -118,-59 -208,-59 -199,0 -299,99 -299,298l0 409 178 0 0 -445c1,-72 41,-108 118,-108zm1431 340l-129 0c-24,0 -43,8 -59,25 -34,33 -72,50 -113,50 -86,0 -132,-54 -138,-161l450 0c13,-273 -91,-408 -312,-408 -212,1 -319,120 -319,357 0,237 105,359 316,366 171,0 266,-82 304,-229zm-304 -350c75,0 118,47 129,140l-262 0c13,-92 58,-140 133,-140zm-2538 1247c167,0 246,126 246,303 0,180 -79,307 -246,307 -167,0 -245,-132 -245,-307 0,-174 78,-303 245,-303zm0 764c273,0 429,-186 429,-461 0,-271 -162,-462 -429,-462 -266,0 -428,188 -428,462 0,274 155,461 428,461zm692 172c0,58 -29,87 -87,87l-88 0 0 -666c9,-208 117,-311 326,-311 216,0 324,117 324,351 0,237 -92,359 -278,366 -87,0 -153,-36 -197,-108l0 280zm149 -329c95,0 143,-67 147,-201 0,-141 -50,-211 -150,-211 -100,0 -147,70 -146,211 5,134 54,201 149,201zm689 -515l0 -38 -105 0 0 -111c0,-46 -38,-88 -84,-88l-91 0 0 761c-1,78 30,118 96,125 66,7 128,7 184,1l0 -133 -54 0c-34,0 -51,-16 -51,-45l0 -386 18 0c49,0 87,-37 87,-87zm100 -237l0 137 175 0 0 -51c1,-57 -26,-86 -84,-86l-91 0zm0 199l0 696 175 0 0 -612c0,-57 -28,-84 -84,-84l-91 0zm889 483l-132 0c-22,0 -42,8 -59,25 -29,33 -65,50 -105,50 -97,1 -146,-68 -146,-207 0,-138 46,-208 138,-208 55,0 92,25 113,72l191 0c-30,-151 -130,-226 -299,-226 -215,4 -321,124 -321,362 5,240 113,361 324,361 162,4 265,-87 296,-229z"/>
+        </svg>
+        <svg id="svg-letter"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M43,6H1C0.447,6,0,6.447,0,7v30c0,0.553,0.447,1,1,1h42c0.552,0,1-0.447,1-1V7C44,6.447,43.552,6,43,6z M42,33.581 L29.612,21.194l-1.414,1.414L41.59,36H2.41l13.392-13.392l-1.414-1.414L2,33.581V8h40V33.581z"/>
+            <path d="M39.979,8L22,25.979L4.021,8H2v0.807L21.293,28.1c0.391,0.391,1.023,0.391,1.414,0L42,8.807V8H39.979z"/>
+        </svg>
+        <svg id="svg-home"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="256 -256 612 612" xml:space="preserve">
+            <path d="M767.1-23.7c-9.9,0-17.6,7.7-17.6,17.7V303H629.4V201.6c0-9.2-7.7-17.3-17-17.3H512c-9.9,0-18,8.1-18,17.3V303H374.2 V-10.1c0-9.3-7.7-17-17.6-17c-9.3,0-17,7.7-17,17v330.8c0,9.3,7.7,17,17,17H512c9.3,0,17-7.7,17-17V219.2h65.8v101.5 c0,9.3,7.7,17,17.6,17h154.7c9.3,0,17-7.7,17-17V-6.1C784.1-16.1,776.4-23.7,767.1-23.7z"/>
+            <path d="M863,58L723.8-81.8v-95.3c0-9.9-8-17.6-18-17.6c-9.3,0-17,7.7-17,17.6v60.3L574-232.2c-3.5-3.6-7.7-5.5-11.9-5.5 c-4.8,0-9,2-12.5,5.5L261.4,56.1c-6.9,6.9-7.4,18,0,24.4c6.4,7.4,17.5,6.9,24.4,0l276.5-275.8L838,83c2.9,2.9,7.1,4.5,12.5,4.5 c4.8,0,9-1.6,12.5-4.5C869.4,76.6,869.9,65,863,58z"/>
+        </svg>
+        <svg id="svg-instagram"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 97.395 97.395" xml:space="preserve">
+            <path d="M12.501,0h72.393c6.875,0,12.5,5.09,12.5,12.5v72.395c0,7.41-5.625,12.5-12.5,12.5H12.501C5.624,97.395,0,92.305,0,84.895 V12.5C0,5.09,5.624,0,12.501,0L12.501,0z M70.948,10.821c-2.412,0-4.383,1.972-4.383,4.385v10.495c0,2.412,1.971,4.385,4.383,4.385 h11.008c2.412,0,4.385-1.973,4.385-4.385V15.206c0-2.413-1.973-4.385-4.385-4.385H70.948L70.948,10.821z M86.387,41.188h-8.572 c0.811,2.648,1.25,5.453,1.25,8.355c0,16.2-13.556,29.332-30.275,29.332c-16.718,0-30.272-13.132-30.272-29.332 c0-2.904,0.438-5.708,1.25-8.355h-8.945v41.141c0,2.129,1.742,3.872,3.872,3.872h67.822c2.13,0,3.872-1.742,3.872-3.872V41.188 H86.387z M48.789,29.533c-10.802,0-19.56,8.485-19.56,18.953c0,10.468,8.758,18.953,19.56,18.953 c10.803,0,19.562-8.485,19.562-18.953C68.351,38.018,59.593,29.533,48.789,29.533z"/>
+        </svg>
+        <svg id="svg-vk"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 57" xml:space="preserve">
+            <path d="M86.2,36.1c3.3,3.2,6.8,6.3,9.8,9.9c1.3,1.6,2.6,3.2,3.5,5.1c1.3,2.6,0.1,5.5-2.2,5.6l-14.6,0 C79,57,76,55.5,73.5,52.9c-2-2.1-3.9-4.2-5.8-6.4c-0.8-0.9-1.6-1.7-2.6-2.3c-2-1.3-3.7-0.9-4.9,1.2c-1.2,2.1-1.4,4.4-1.5,6.8 c-0.2,3.4-1.2,4.3-4.6,4.5c-7.4,0.3-14.4-0.8-20.8-4.5c-5.7-3.3-10.2-7.9-14-13.1C11.6,28.9,5.8,17.7,0.7,6.2 c-1.2-2.6-0.3-4,2.6-4C8,2,12.7,2,17.5,2.1c1.9,0,3.2,1.1,4,3c2.6,6.3,5.7,12.3,9.7,17.9c1.1,1.5,2.1,3,3.7,4 c1.7,1.2,3,0.8,3.8-1.1c0.5-1.2,0.7-2.5,0.8-3.8c0.4-4.4, 0.4-8.8-0.2-13.2c-0.4-2.7-1.9-4.5-4.7-5c-1.4-0.3-1.2-0.8-0.5-1.6 c1.2-1.4,2.3-2.2,4.5-2.2h16.5c2.6,0.5,3.2,1.7,3.5,4.3l0,18.3c0,1,0.5,4,2.3,4.7c1.5,0.5,2.4-0.7,3.3-1.6 c3.9-4.2,6.8-9.1,9.3-14.2c1.1-2.3,2.1-4.6,3-6.9C77,2.9,78.1,2,80,2.1l15.8,0c0.5,0,0.9,0,1.4,0.1c2.7,0.5,3.4,1.6,2.6,4.2 c-1.3,4.1-3.8,7.5-6.3,10.9c-2.6,3.7-5.5,7.2-8.1,10.9C83,31.5,83.2,33.2,86.2,36.1L86.2,36.1z"/>
+        </svg>
+        <svg id="svg-facebook" viewBox="0 0 51 100">
+            <path d="M2,53.3H13v45.1c0,0.9,0.7,1.6,1.6,1.6h18.6c0.9,0,1.6-0.7,1.6-1.6V53.5h12.6 c0.8,0,1.5-0.6,1.6-1.4l1.9-16.6c0-0.5-0.1-0.9-0.4-1.3c-0.3-0.3-0.7-0.5-1.2-0.5H34.8V23.3c0-3.1,1.7-4.7,5-4.7h9.5 c0.9,0,1.6-0.7,1.6-1.6V1.7c0-0.9-0.7-1.6-1.6-1.6H36.2c-0.1,0-0.3,0-0.6,0c-2.3,0-10.1,0.4-16.4,6.2c-6.9,6.3-5.9,13.9-5.7,15.3 v12.2H2c-0.9,0-1.6,0.7-1.6,1.6v16.4C0.4,52.6,1.1,53.3,2,53.3L2,53.3z"/>
+        </svg>
+        <svg id="svg-pinterest" viewBox="0 0 486.392 486.392">
+            <path d="M430.149,135.248C416.865,39.125,321.076-9.818,218.873,1.642 C138.071,10.701,57.512,76.03,54.168,169.447c-2.037,57.029,14.136,99.801,68.399,111.84 c23.499-41.586-7.569-50.676-12.433-80.802C90.222,77.367,252.16-6.718,336.975,79.313c58.732,59.583,20.033,242.77-74.57,223.71 c-90.621-18.179,44.383-164.005-27.937-192.611c-58.793-23.286-90.013,71.135-62.137,118.072 c-16.355,80.711-51.557,156.709-37.3,257.909c46.207-33.561,61.802-97.734,74.57-164.704 c23.225,14.136,35.659,28.758,65.268,31.038C384.064,361.207,445.136,243.713,430.149,135.248z"/>
+        </svg>
+        <svg id="svg-twitter" viewBox="0 0 612 612">
+            <path d="M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411 c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513 c0,9.828,1.109,19.427,3.251,28.606C197.065,206.32,104.556,156.337,42.641,80.386c-10.823,18.51-16.98,40.078-16.98,63.101 c0,43.559,22.181,81.993,55.835,104.479c-20.575-0.688-39.926-6.348-56.867-15.756v1.568c0,60.806,43.291,111.554,100.693,123.104 c-10.517,2.83-21.607,4.398-33.08,4.398c-8.107,0-15.947-0.803-23.634-2.333c15.985,49.907,62.336,86.199,117.253,87.194 c-42.947,33.654-97.099,53.655-155.916,53.655c-10.134,0-20.116-0.612-29.944-1.721c55.567,35.681,121.536,56.485,192.438,56.485 c230.948,0,357.188-191.291,357.188-357.188l-0.421-16.253C573.872,163.526,595.211,141.422,612,116.258z"/>
+        </svg>
+        <!-- Календарь пока-что нужен только в маленьком слайдере -->
+        <svg id="svg-calendar"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.634 511.634" xml:space="preserve">
+            <path d="M482.513,83.942c-7.225-7.233-15.797-10.85-25.694-10.85h-36.541v-27.41c0-12.56-4.477-23.315-13.422-32.261 C397.906,4.475,387.157,0,374.591,0h-18.268c-12.565,0-23.318,4.475-32.264,13.422c-8.949,8.945-13.422,19.701-13.422,32.261v27.41 h-109.63v-27.41c0-12.56-4.475-23.315-13.422-32.261C178.64,4.475,167.886,0,155.321,0H137.05 c-12.562,0-23.317,4.475-32.264,13.422c-8.945,8.945-13.421,19.701-13.421,32.261v27.41H54.823c-9.9,0-18.464,3.617-25.697,10.85 c-7.233,7.232-10.85,15.8-10.85,25.697v365.453c0,9.89,3.617,18.456,10.85,25.693c7.232,7.231,15.796,10.849,25.697,10.849h401.989 c9.897,0,18.47-3.617,25.694-10.849c7.234-7.234,10.852-15.804,10.852-25.693V109.639 C493.357,99.739,489.743,91.175,482.513,83.942z M137.047,475.088H54.823v-82.23h82.224V475.088z M137.047,374.59H54.823v-91.358 h82.224V374.59z M137.047,264.951H54.823v-82.223h82.224V264.951z M130.627,134.333c-1.809-1.809-2.712-3.946-2.712-6.423V45.686 c0-2.474,0.903-4.617,2.712-6.423c1.809-1.809,3.946-2.712,6.423-2.712h18.271c2.474,0,4.617,0.903,6.423,2.712 c1.809,1.807,2.714,3.949,2.714,6.423v82.224c0,2.478-0.909,4.615-2.714,6.423c-1.807,1.809-3.946,2.712-6.423,2.712H137.05 C134.576,137.046,132.436,136.142,130.627,134.333z M246.683,475.088h-91.365v-82.23h91.365V475.088z M246.683,374.59h-91.365 v-91.358h91.365V374.59z M246.683,264.951h-91.365v-82.223h91.365V264.951z M356.323,475.088h-91.364v-82.23h91.364V475.088z M356.323,374.59h-91.364v-91.358h91.364V374.59z M356.323,264.951h-91.364v-82.223h91.364V264.951z M349.896,134.333 c-1.807-1.809-2.707-3.946-2.707-6.423V45.686c0-2.474,0.9-4.617,2.707-6.423c1.808-1.809,3.949-2.712,6.427-2.712h18.268 c2.478,0,4.617,0.903,6.427,2.712c1.808,1.807,2.707,3.949,2.707,6.423v82.224c0,2.478-0.903,4.615-2.707,6.423 c-1.807,1.809-3.949,2.712-6.427,2.712h-18.268C353.846,137.046,351.697,136.142,349.896,134.333z M456.812,475.088h-82.228v-82.23 h82.228V475.088z M456.812,374.59h-82.228v-91.358h82.228V374.59z M456.812,264.951h-82.228v-82.223h82.228V264.951z"/>
+        </svg>
+        <svg id="svg-heart"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="m121.6,40.1c-3.3-16.6-15.1-27.3-30.3-27.3-8.5,0-17.7,3.5-26.7,10.1-9.1-6.8-18.3-10.3-26.9-10.3-15.2,0-27.1,10.8-30.3,27.6-4.8,24.9 10.6,58 55.7,76 0.5,0.2 1,0.3 1.5,0.3 0.5,0 1-0.1 1.5-0.3 45-18.4 60.3-51.4 55.5-76.1zm-57,67.9c-39.6-16.4-53.3-45-49.2-66.3 2.4-12.7 11.2-21 22.3-21 7.5,0 15.9,3.6 24.3,10.5 1.5,1.2 3.6,1.2 5.1,0 8.4-6.7 16.7-10.2 24.2-10.2 11.1,0 19.8,8.1 22.3,20.7 4.1,21.1-9.5,49.6-49,66.3z"/>
+        </svg>
+        <svg id="svg-heart2"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="15 -14 129 129" xml:space="preserve">
+            <path d="M136.6,26.1c-3.3-16.6-15.1-27.3-30.3-27.3c-8.5,0-17.7,3.5-26.7,10.1C70.5,2.1,61.3-1.4,52.7-1.4 c-15.2,0-27.1,10.8-30.3,27.6c-4.8,24.9,10.6,58,55.7,76c0.5,0.2,1,0.3,1.5,0.3s1-0.1,1.5-0.3C126.1,83.8,141.4,50.8,136.6,26.1z"/>
+        </svg>
+        <svg id="svg-compare" viewBox="0 0 17 17">
+            <path d="M14.991 3.022C13.651 1.451 11.975.488 9.961.133v7.604l6.076 4.682A8.408 8.408 0 0 0 17 8.5c0-2.08-.67-3.907-2.009-5.478z"/>
+            <path d="M8.5 0C6.153 0 4.15.83 2.49 2.49.83 4.15 0 6.154 0 8.5c0 2.346.83 4.35 2.49 6.01C4.15 16.17 6.153 17 8.5 17c1.35 0 2.612-.294 3.785-.88a8.415 8.415 0 0 0 2.955-2.44L8.5 8.5V0zm5.18 13.846c-1.439 1.395-3.166 2.092-5.18 2.092-2.059 0-3.813-.725-5.263-2.175-1.45-1.45-2.175-3.204-2.175-5.263 0-1.859.609-3.486 1.826-4.881s2.734-2.225 4.549-2.49V8.5c0 .354.133.631.398.83l5.845 4.516z"/>
+        </svg>
+        <svg id="svg-compare2" viewBox="0 0 100 100">
+            <path d="M87.5,54.2H100V100H87.5V54.2z"/>
+            <path d="M29.2,25h12.5v75H29.2V25z"/>
+            <path d="M58.3,0h12.5v100H58.3V0z"/>
+            <path d="M0,75h12.5v25H0V75z"/>
+        </svg>
+        <svg id="svg-layers"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 319.681 319.681" xml:space="preserve">
+            <path style="fill:#010002;" d="M159.84,195.66L0,100.178L159.84,4.684l159.841,95.488L159.84,195.66z M23.271,100.178 l136.57,81.579l136.57-81.585L159.84,18.587L23.271,100.178z"/>
+            <polygon style="fill:#010002;" points="159.84,255.328 8.574,164.966 14.696,154.721 159.84,241.426 304.985,154.721 311.107,164.966"/>
+            <polygon style="fill:#010002;" points="159.84,314.997 8.574,224.635 14.696,214.39 159.84,301.094 304.985,214.39 311.107,224.635"/>
+        </svg>
+
     </div>
+</div>
 </template>
 
 <script>

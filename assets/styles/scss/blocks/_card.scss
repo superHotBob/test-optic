@@ -99,7 +99,7 @@
         padding: 6px 5px;
         font-size: 13px;
         color: #fff;
-        background-color: #e74c3c;
+        background-color: $red;
         border: none;
         border-radius: 0;
         cursor: pointer;
@@ -288,7 +288,7 @@
                 margin: 0;
                 font-size: 16px;
                 line-height: 24px;
-                color: #e74c3c;
+                color: $red;
             }
         }
     }
@@ -305,38 +305,11 @@
                 margin: 0;
                 font-size: 16px;
                 line-height: 24px;
-                color: #e74c3c;
+                color: $red;
             }
         }
         span {
-            color: #e74c3c;
-        }
-    }
-    &__slider {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        p {
-            position: relative;
-            width: auto;
-            margin: 0;
-            padding: 5px 0;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #4a4a4a;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-            transition: color 150ms, border-color 150ms;
-            &:not(:last-of-type) {
-                margin-right: 25px;
-            }
-            &.active {
-                color: #000;
-                border-color: #000;
-            }
+            color: $red;
         }
     }
 }

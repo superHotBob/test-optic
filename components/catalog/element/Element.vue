@@ -114,36 +114,7 @@
     <div class="card__workshop">
         
     </div>
-    <div class="card__tabs card-tabs">
-        <div class="card__slider" v-swiper:card__tabs="tabsOptions">
-            <div class="swiper-wrapper">
-                <p class="swiper-slide"
-                    :class="{'active': tabs[1] == true}"
-                    @click="toggleTab(1)"
-                >Описание</p>
-                <p class="swiper-slide"
-                    :class="{'active': tabs[2] == true}"
-                    @click="toggleTab(2)"
-                >Характеристики</p>
-                <p class="swiper-slide"
-                    :class="{'active': tabs[3] == true}"
-                    @click="toggleTab(3)"
-                >Мультипокрытие</p>
-                <p class="swiper-slide"
-                    :class="{'active': tabs[4] == true}"
-                    @click="toggleTab(4)"
-                >Доп. возможности</p>
-                <p class="swiper-slide"
-                    :class="{'active': tabs[5] == true}"
-                    @click="toggleTab(5)"
-                >Задать вопрос</p>
-                <p class="swiper-slide"
-                    :class="{'active': tabs[6] == true}"
-                    @click="toggleTab(6)"
-                >Отзывы</p>
-            </div>
-        </div>
-    </div>
+    <card-tabs class="card__tabs" />
     <div class="card__usp"></div>
 
     <div class="item-name" hidden>
@@ -187,6 +158,7 @@
 import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
 import Star from '~/components/catalog/star/star.vue'
+import CardTabs from '~/components/catalog/element/CardTabs.vue'
 
 export default {
     mixins: [offers, item],
@@ -202,26 +174,11 @@ export default {
                 }
             },
             rating: 4.4,
-            tabs: {
-                1: true,
-                2: false,
-                3: false,
-                4: false,
-                5: false,
-                6: false,
-            },
-            tabsOptions: {
-                roundLengths: true,
-                speed: 500,
-                loop: false,
-                slidesPerView: 'auto',
-                spaceBetween: 0,
-                freeMode: true,
-            },
         }
     },
     components: {
         Star,
+        CardTabs,
     },
     methods: {
         counterMinus() {
@@ -231,15 +188,6 @@ export default {
                 this.itemAmount--;
             }
         },
-        toggleTab(tabNum) {
-            for (let [key, tab] in this.tabs) {
-                if (tabNum == key) {
-                    this.tabs[key] = true
-                } else {
-                    this.tabs[key] = false
-                }
-            }
-        }
     },
 }
 </script>

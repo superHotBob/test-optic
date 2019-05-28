@@ -116,7 +116,7 @@ export default {
             result: response.result,
             pagen: response.pagen,
         }
-},
+    },
     validate ({ params }) {
         if (params.pagen)
             return /^\d+$/.test(params.pagen)

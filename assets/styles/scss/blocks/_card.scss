@@ -126,8 +126,7 @@
         }
     }
     &__top,
-    &__lenses,
-    &__workshop,
+    &__lense-form,
     &__tabs,
     &__usp {
         width: calc(100% - 270px);
@@ -135,6 +134,7 @@
     &__top {
         display: flex;
         margin-top: 40px;
+        margin-bottom: 10px;
         img {
             display: block;
             max-width: 100%;
@@ -311,6 +311,9 @@
         span {
             color: $red;
         }
+    }
+    &__lense-form {
+        padding-right: 30px;
     }
 }
 

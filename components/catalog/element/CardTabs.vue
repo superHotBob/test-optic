@@ -195,7 +195,7 @@ export default {
         return {
             tabs: {
                 1: {
-                    show: false,
+                    show: true,
                     has: true,
                 },
                 2: {
@@ -215,7 +215,7 @@ export default {
                     has: true,
                 },
                 6: {
-                    show: true,
+                    show: false,
                     has: true,
                 },
             },

@@ -107,13 +107,110 @@
             Купить в один клик
         </button>
     </div>
-    <div class="card__lenses"></div>
-    <div class="card__workshop">
-        
-    </div>
-    <div class="card__workshop">
-        
-    </div>
+    <form class="card__lense-form" v-if="itsaLense">
+        <div class="card-lense">
+            <p class="card-lense__heading">Выберите параметры Вашего  зрения, и мы подберем для Вас наилучший вариант линз:</p>
+            <div class="card-lense__lense" v-for="lense in ['right', 'left']" :key="lense">
+                <div class="card-lense__img" v-if="lense == 'right'">
+                    <span>Правая линза (OD)</span>
+                    <img src="~assets/images/card/lense-right.png" alt="">
+                </div>
+                <div class="card-lense__img" v-else>
+                    <span>Левая линза (OD)</span>
+                    <img src="~assets/images/card/lense-left.png" alt="">
+                </div>
+                <div class="card-lense__props">
+                    <div class="card-lense__prop">
+                        <span>Сфера (sph)</span>
+                        <select :name="lense+'-sph'">
+                            <option
+                                v-for="(value, index) in 64"
+                                :key="index"
+                                :value="'+' + (16 - index*0.25).toFixed(2)">
+                                {{'+' + (16 - index*0.25).toFixed(2) + ' дпт.'}}
+                            </option>
+                            <option value="0.00" selected>0.00 дпт.</option>
+                            <option
+                                v-for="(value, index) in 64"
+                                :key="index"
+                                :value="(-0.25 - index*0.25).toFixed(2)">
+                                {{(-0.25 - index*0.25).toFixed(2) + ' дпт.'}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="card-lense__prop">
+                        <span>Цилиндр (cyl)</span>
+                        <select :name="lense+'-cyl'">
+                            <option
+                                v-for="(value, index) in 16"
+                                :key="index"
+                                :value="'+' + (4 - index*0.25).toFixed(2)">
+                                {{'+' + (4 - index*0.25).toFixed(2) + ' дпт.'}}
+                            </option>
+                            <option value="0.00" selected>0.00 дпт.</option>
+                            <option
+                                v-for="(value, index) in 16"
+                                :key="index"
+                                :value="(-0.25 - index*0.25).toFixed(2)">
+                                {{(-0.25 - index*0.25).toFixed(2) + ' дпт.'}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="card-lense__prop">
+                        <span>Аксис (ax)</span>
+                        <select :name="lense+'-ax'">
+                            <option value="0.00" selected>0°</option>
+                            <option
+                                v-for="value in 180"
+                                :key="value"
+                                :value="value">
+                                {{ value + '°' }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="card-lense__prop" v-if="officeLenses">
+                        <span>Аддидация (add)</span>
+                        <select :name="lense+'-add'">
+                            <option value="0.00" selected>0.00 дпт.</option>
+                            <option
+                                v-for="value in 16"
+                                :key="value"
+                                :value="(value*0.25).toFixed(2)">
+                                {{(value*0.25).toFixed(2) + ' дпт.'}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="card-lense__prop" v-if="progressiveLenses || accomodationLenses">
+                        <span>Дегрессия (deg)</span>
+                        <select :name="lense+'-deg'">
+                            <option value="0.00" selected>0.00 дпт.</option>
+                            <option
+                                v-for="value in 16"
+                                :key="value"
+                                :value="(value*0.25).toFixed(2)">
+                                {{(value*0.25).toFixed(2) + ' дпт.'}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="card-lense__btns">
+                <label class="button card-lense__upload-recepie">
+                    <input type="file" name="lense-recepite" hidden>
+                    Загрузить рецепт »
+                </label>
+                <p class="card-lense__recepie">Не волнуйтесь и продолжайте оформлять заказ! Мы с вами свяжемся для уточнения параметров линз.</p>
+                
+                <label class="checkbox">
+                    <input type="checkbox" name="no-recipe">
+                    <i class="checkbox-indicator"></i>
+                    Я не знаю своего рецепта
+                </label>
+            </div>
+        </div>
+        <div class="card__workshop"></div>
+    </form>
+
     <card-tabs class="card__tabs" />
     <div class="card__usp"></div>
 
@@ -174,6 +271,12 @@ export default {
                 }
             },
             rating: 4.4,
+
+            // descriptive dev-only properties:
+            itsaLense: true,
+            officeLenses: true,
+            progressiveLenses: false,
+            accomodationLenses: false
         }
     },
     components: {

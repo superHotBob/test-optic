@@ -49,21 +49,25 @@
             font-weight: 400;
             color: #4a4a4a;
             background-color: #fff;
-            border: 1px solid #e6e6e6;
-            border-radius: 0;
-
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-
             background-image: url('~assets/images/icons/triangle-down.svg');
             background-size: 9px 6px;
             background-position: right -4px center;
             background-origin: content-box;
             background-repeat: no-repeat;
+            border: 1px solid #e6e6e6;
+            border-radius: 0;
+            cursor: pointer;
+
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
             &:hover,
             &:focus {
                 outline: none;
+            }
+            &:disabled {
+                background-color: #f0f0f0;
+                cursor: default;
             }
         }
         option {
@@ -73,17 +77,16 @@
     &__btns {
         width: 340px;
         margin: 0 auto;
-        label {
-            margin: 0;
-        }
     }
-    &__upload-recepie {
+    &__upload-recipe {
+        display: block;
         width: 100%;
+        margin-bottom: 16px;
         font-size: 16px;
         text-transform: none;
         cursor: pointer;
     }
-    &__recepie {
+    &__recipe {
         padding: 15px;
         font-size: 13px;
         line-height: 22px;

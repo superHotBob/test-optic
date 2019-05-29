@@ -130,7 +130,6 @@ export default {
             this.$root.$emit('login/logout');
         },
         validateForm(scope) {
-            console.log('- - - VALIDATION - - -')
             this.$validator.validateAll(scope).then((result) => {
                 if (result && (scope == 'form-login')) {
                     this.login();

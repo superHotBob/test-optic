@@ -124,17 +124,11 @@
                         <span>Сфера (sph)</span>
                         <select :name="lense+'-sph'">
                             <option
-                                v-for="(value, index) in 64"
-                                :key="index"
-                                :value="'+' + (16 - index*0.25).toFixed(2)">
-                                {{'+' + (16 - index*0.25).toFixed(2) + ' дпт.'}}
-                            </option>
-                            <option value="0.00" selected>0.00 дпт.</option>
-                            <option
-                                v-for="(value, index) in 64"
-                                :key="index"
-                                :value="(-0.25 - index*0.25).toFixed(2)">
-                                {{(-0.25 - index*0.25).toFixed(2) + ' дпт.'}}
+                                :selected="(16.25 - value*0.25).toFixed(2) == '0.00'"
+                                v-for="value in 129"
+                                :key="value"
+                                :value="((value > 64) ? '' : '+') + (16.25 - value*0.25).toFixed(2)">
+                                {{((value > 64) ? '' : '+') + (16.25 - value*0.25).toFixed(2) + ' дпт.'}}
                             </option>
                         </select>
                     </div>
@@ -142,17 +136,11 @@
                         <span>Цилиндр (cyl)</span>
                         <select :name="lense+'-cyl'">
                             <option
-                                v-for="(value, index) in 16"
-                                :key="index"
-                                :value="'+' + (4 - index*0.25).toFixed(2)">
-                                {{'+' + (4 - index*0.25).toFixed(2) + ' дпт.'}}
-                            </option>
-                            <option value="0.00" selected>0.00 дпт.</option>
-                            <option
-                                v-for="(value, index) in 16"
-                                :key="index"
-                                :value="(-0.25 - index*0.25).toFixed(2)">
-                                {{(-0.25 - index*0.25).toFixed(2) + ' дпт.'}}
+                                :selected="(4.25 - value*0.25).toFixed(2) == '0.00'"
+                                v-for="value in 33"
+                                :key="value"
+                                :value="((value > 16) ? '' : '+') + (4.25 - value*0.25).toFixed(2)">
+                                {{((value > 16) ? '' : '+') + (4.25 - value*0.25).toFixed(2) + ' дпт.'}}
                             </option>
                         </select>
                     </div>
@@ -195,20 +183,91 @@
                 </div>
             </div>
             <div class="card-lense__btns">
-                <label class="button card-lense__upload-recepie">
+                <p class="card-lense__recipe" v-if="noRecipe">Не волнуйтесь и продолжайте оформлять заказ! Мы с вами свяжемся для уточнения параметров линз.</p>
+                <label class="button card-lense__upload-recipe" v-else>
                     <input type="file" name="lense-recepite" hidden>
                     Загрузить рецепт »
                 </label>
-                <p class="card-lense__recepie">Не волнуйтесь и продолжайте оформлять заказ! Мы с вами свяжемся для уточнения параметров линз.</p>
-                
                 <label class="checkbox">
-                    <input type="checkbox" name="no-recipe">
-                    <i class="checkbox-indicator"></i>
+                    <input type="checkbox" name="no-recipe" v-model="noRecipe">
+                    <i class="checkbox__indicator"></i>
                     Я не знаю своего рецепта
                 </label>
             </div>
         </div>
-        <div class="card__workshop"></div>
+        <div class="card-workshop">
+            <label class="card-workshop__top checkbox">
+                <input type="checkbox" name="order-workshop" v-model="orderWorkshop">
+                <i class="checkbox__indicator"></i>
+                Закажите работу оптической мастерской<br>
+                по обработке и установке линз в оправу
+                <img src="~assets/images/card/workshop.png" alt="">
+            </label>
+            <div v-show="orderWorkshop">
+                <div class="card-workshop__option">
+                    <p class="card-workshop__option-name">Межцентровое расстояние РЦ (PD):</p>
+                    <label class="checkbox">
+                        <input type="checkbox" name="order-workshop" v-model="centerDistance">
+                        <i class="checkbox__indicator"></i>
+                        <span>Мое межцентровое расстояние</span>
+                        <div class="card-lense__prop">
+                            <select name="center-distance-right" :disabled="!centerDistance">
+                                <option value="-" selected>Правый</option>
+                                <option
+                                    v-for="(value, index) in 53"
+                                    :key="index"
+                                    :value="(24.75 + value*0.25).toFixed(2)">
+                                    {{(24.75 + value*0.25).toFixed(2) + ' мм'}}
+                                </option>
+                            </select>
+                            <select name="center-distance-right" :disabled="!centerDistance">
+                                <option value="-" selected>Левый</option>
+                                <option
+                                    v-for="(value, index) in 53"
+                                    :key="index"
+                                    :value="(24.75 + value*0.25).toFixed(2)">
+                                    {{(24.75 + value*0.25).toFixed(2) + ' мм'}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="checkbox__bg"></div>
+                    </label>
+                </div>
+                <div class="card-workshop__option">
+                    <p class="card-workshop__option-name">Стоимость устоновки линз:</p>
+                    <label class="radio">
+                        <input type="radio" name="workshop-lense" value="obodkovaya">
+                        <i class="radio__indicator"></i>
+                        <span>Установка линз "Ободковая"</span>
+                        <div class="card-workshop__info">
+                            <img src="~assets/images/card/workshop-obodkovaya.png" alt="">
+                            <span>+590 Р</span>
+                        </div>
+                        <div class="checkbox__bg"></div>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="workshop-lense" value="poluobodkovaya">
+                        <i class="radio__indicator"></i>
+                        <span>Установка линз "Полуободковая"</span>
+                        <div class="card-workshop__info">
+                            <img src="~assets/images/card/workshop-poluobodkovaya.png" alt="">
+                            <span>+690 Р</span>
+                        </div>
+                        <div class="checkbox__bg"></div>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="workshop-lense" value="bezobodkovaya">
+                        <i class="radio__indicator"></i>
+                        <span>Установка линз "Безободковая"</span>
+                        <div class="card-workshop__info">
+                            <img src="~assets/images/card/workshop-bezobodkovaya.png" alt="">
+                            <span>+990 Р</span>
+                        </div>
+                        <div class="checkbox__bg"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
     </form>
 
     <card-tabs class="card__tabs" />
@@ -271,6 +330,11 @@ export default {
                 }
             },
             rating: 4.4,
+
+            // lense checkboxes:
+            noRecipe: false,
+            orderWorkshop: false,
+            centerDistance: false,
 
             // descriptive dev-only properties:
             itsaLense: true,

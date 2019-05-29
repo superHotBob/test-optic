@@ -74,7 +74,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="card__lense-production-wrapper">
+            <div class="card__lense-production-wrapper" v-if="itsaLense">
                 <div class="card__lense-production">
                     <p>Линзы изготавливаются на заказ.</p>
                     <p>Срок изготовления 10 рабочих дней.</p>
@@ -269,11 +269,10 @@
             </div>
         </div>
     </form>
-
     <card-tabs class="card__tabs" />
     <div class="card__usp"></div>
 
-    <div class="item-name" hidden>
+    <!-- <div class="item-name" hidden>
         <p>
             <nuxt-link :to="{ name: 'element', params: {element: item.CODE }}">
                 {{item.CURRENT.NAME}}
@@ -293,7 +292,7 @@
             {{price.PRINT_RATIO_PRICE}}
         </p>
         <button class="btn btn-primary" v-on:click.stop.prevent="addToBasket(item.CURRENT.ADD_URL)">Купить</button>
-    </div>
+    </div> -->
     <div style="display: none;">
         <svg id="svg-click"
             version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.043 512.043" xml:space="preserve">
@@ -330,17 +329,17 @@ export default {
                 }
             },
             rating: 4.4,
+            itsaLense: true,        // показывает блоки, если товар - линза (а не оправа)
 
-            // lense checkboxes:
-            noRecipe: false,
-            orderWorkshop: false,
-            centerDistance: false,
+            // чекбоксы линз:
+            noRecipe: false,        // загрузка своего рецепта
+            orderWorkshop: false,   // показать окно с мастерской
+            centerDistance: false,  // включить селекты в мастерской
 
-            // descriptive dev-only properties:
-            itsaLense: true,
+            // дополнительные селекты, если линза попадает под одну из категорий:
             officeLenses: true,
             progressiveLenses: false,
-            accomodationLenses: false
+            accomodationLenses: false,
         }
     },
     components: {

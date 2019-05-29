@@ -4,10 +4,8 @@
         <div class="card__img">
             <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
             <div class="item__flags">
-                <!-- <span v-if="labelNew" class="item__flag left">NEW</span>
-                <span v-if="labelSale" class="item__flag right red">SALE</span> -->
-                <span class="item__flag left">NEW</span>
-                <span class="item__flag right red">SALE</span>
+                <span v-if="labelNew" class="item__flag left">NEW</span>
+                <span v-if="labelSale" class="item__flag right red">SALE</span>
             </div>
         </div>
         <div class="card__info">
@@ -45,8 +43,10 @@
                 <button>Добавить отзыв</button>
             </div>
             <div class="card__available">
-                <svg width="15" height="15" fill="#000"><use href="#svg-layers"/></svg>
-                Доступно Много
+                <span>
+                    <svg width="15" height="15" fill="#000"><use href="#svg-layers"/></svg>
+                    Доступно Много
+                </span>
                 <button>
                     <svg width="15" height="15" fill="#000"><use href="#svg-compare2"/></svg>
                     Добавить к сравнению
@@ -92,8 +92,10 @@
     <div class="card__price">
         <div class="card__price-inner"> 
             <h3>Цена</h3>
-            <p class="card__old-price">10 039.40 руб.</p>
-            <p class="card__current-price">9 035.46 руб.</p>
+            <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
+                <p class="card__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
+                <p class="card__current-price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
+            </template>
             <div class="card__counter counter">
                 <button @click="counterMinus">-</button>
                 <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
@@ -199,8 +201,7 @@
             <label class="card-workshop__top checkbox">
                 <input type="checkbox" name="order-workshop" v-model="orderWorkshop">
                 <i class="checkbox__indicator"></i>
-                Закажите работу оптической мастерской<br>
-                по обработке и установке линз в оправу
+                <p>Закажите работу оптической мастерской по обработке и установке линз в оправу</p>
                 <img src="~assets/images/card/workshop.png" alt="">
             </label>
             <div v-show="orderWorkshop">
@@ -270,7 +271,20 @@
         </div>
     </form>
     <card-tabs class="card__tabs" />
-    <div class="card__usp"></div>
+    <ul class="card__usp">
+        <li class="card__usp-item">
+            <i></i>
+            <span>Вышлем товар через 1 день</span>
+        </li>
+        <li class="card__usp-item">
+            <i></i>
+            <span>Звоните для большей информации</span>
+        </li>
+        <li class="card__usp-item">
+            <i></i>
+            <span>Возврат денег гарантирован</span>
+        </li>
+    </ul>
 
     <!-- <div class="item-name" hidden>
         <p>
@@ -329,7 +343,7 @@ export default {
                 }
             },
             rating: 4.4,
-            itsaLense: true,        // показывает блоки, если товар - линза (а не оправа)
+            itsaLense: true,    // показывает блоки, если товар - линза (а не оправа)
 
             // чекбоксы линз:
             noRecipe: false,        // загрузка своего рецепта
@@ -355,11 +369,19 @@ export default {
             }
         },
     },
+    computed: {
+        labelNew() {
+            if (this.item.CURRENT.DISPLAY_PROPERTIES.new)
+                return true;
+            return false;
+        },
+        labelSale() {
+            var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
+
+            if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
+                return true;
+            return false;
+        },
+    },
 }
 </script>
-
-<style>
-    .sku-props .selected {
-        color: #007bff;
-    }
-</style>

@@ -3,6 +3,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
+
+    margin-bottom: -30px;
+
     border: none;
     border-radius: none;
     &__price {
@@ -138,6 +141,7 @@
         img {
             display: block;
             max-width: 100%;
+            max-height: 100%;
             margin: 0 auto;
         }
         .item__flags {
@@ -218,7 +222,6 @@
         }
     }
     &__available {
-        margin-top: 17px;
         padding-bottom: 21px;
         font-size: 13px;
         color: #000;
@@ -226,8 +229,15 @@
         svg {
             margin-right: 10px;
         }
+        span,
         button {
-            margin-left: 20px;
+            margin-top: 20px;
+        }
+        span {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        button {
             padding: 0;
             font-size: 13px;
             color: #000;
@@ -319,6 +329,52 @@
         margin-top: 30px;
         margin-bottom: 20px;
     }
+    &__usp {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        margin: 0;
+        padding: 30px;
+        padding-left: 0;
+    }
+    &__usp-item {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        padding-right: 25px;
+        max-width: 250px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #4a4a4a;
+        i {
+            display: block;
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            margin-right: 20px;
+            background: #f0f0f0 no-repeat center;
+            background-size: 20px;
+        }
+        &:nth-of-type(1) {
+            i {
+                background-image: url('~assets/images/card/card-utp-1.svg');
+            }
+
+        }
+        &:nth-of-type(2) {
+            i {
+                background-image: url('~assets/images/card/card-utp-2.svg');
+            }
+        }
+        &:nth-of-type(3) {
+            i {
+                background-image: url('~assets/images/card/card-utp-3.svg');
+            }
+        }
+        &:last-of-type {
+            padding-right: 0;
+        }
+    }
 }
 
 @media (min-width: 769px) {
@@ -340,8 +396,72 @@
         }
     }
 }
+@media (max-width: 1000px) {
+    .card {
+        &__img {
+            width: calc(100% - 390px);
+        }
+        &__info {
+            width: 390px;
+            padding: 0 10px;
+        }
+        &__usp-item {
+            padding-right: 15px;
+            i {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+@media (max-width: 900px) {
+    .card {
+        &__top {
+            flex-wrap: wrap;
+            padding-right: 30px;
+        }
+        &__img {
+            max-height: 400px;
+            width: 100%;
+        }
+        &__info {
+            width: 100%;
+            padding: 0;
+        }
+        &__social {
+            right: 0;
+        }
+        &__usp {
+            flex-wrap: wrap;
+            padding-left: 25px;
+            padding-top: 0;
+        }
+        &__usp-item {
+            width: 100%;
+            max-width: none;
+            margin-top: 30px;
+            padding: 0;
+        }
+    }
+}
 @media (max-width: 768px) {
     .card {
+        &__top {
+            flex-wrap: wrap;
+        }
+        &__top,
+        &__lense-form,
+        &__tabs,
+        &__usp {
+            padding-right: 10px;
+        }
+        &__lense-production {
+            margin-top: 30px;
+            padding-left: 50px;
+            padding-right: 5px;
+            &::before {
+                left: 8px;
+            }
+        }
         &__price {
             top: 45px;
         }
@@ -369,6 +489,37 @@
         }
         &__buy-one-click {
             margin-top: 10px;
+        }
+        &__guarantee {
+            p {
+                line-height: 18px;
+                &:first-of-type {
+                    line-height: 20px;
+                }
+            }
+        }
+        .card-workshop {
+            margin-bottom: 40px;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .card {
+        &__price {
+            top: auto;
+            position: relative;
+            margin: 0 auto;
+            margin-bottom: 60px;
+        }
+        &__top,
+        &__lense-form,
+        &__tabs,
+        &__usp {
+            width: 100%;
+            padding-right: 0;
+        }
+        &__guarantee {
+            padding-bottom: 10px;
         }
     }
 }

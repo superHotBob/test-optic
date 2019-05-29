@@ -129,8 +129,7 @@ export default {
             if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
                 return true;
             return false;
-        }
-    },
-
+        },
+    }
 }
 </script>

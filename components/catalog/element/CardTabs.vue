@@ -148,7 +148,7 @@
             •&nbsp;&nbsp;&nbsp;&nbsp;Линзы с мультипокрытием Crizal Prevencia - это первые прозрачные линзы, которые предотвращает долгосрочное повреждение ваших глаз. Защищают от вредного сине-фиолетового света экранов электронных устройств.<br>
             Технология Light Scan, реализованная в покрытии Crizal Prevencia, избирательно фильтрует опасный сине-фиолетовый свет, позволяя полезному сине-голубому свету беспрепятственно проходить через линзу. При этом длительная работа за компьютером не вызывает усталости, и надолго сохраняется здоровье глаз.
         </div>
-        <div class="card-tabs__tab" v-if="tabs[5].has" v-show="tabs[5].show">
+        <div class="card-tabs__tab no-mob-padding" v-if="tabs[5].has" v-show="tabs[5].show">
             <form @submit.prevent="validateForm('form-question')" data-vv-scope="form-question" ref="form-question">
                 <label class="textfield half">
                     <input name="name" type="text" placeholder="Ваше имя">
@@ -163,7 +163,7 @@
                 <button class="button black submit" type="submit">Отправить</button>
             </form>
         </div>
-        <div class="card-tabs__tab" v-if="tabs[6].has" v-show="tabs[6].show">
+        <div class="card-tabs__tab no-mob-padding" v-if="tabs[6].has" v-show="tabs[6].show">
             <p v-if="!isLogged">
                 Чтобы оставить комментарий,
                 <button class="btn-simple" @click="$bvModal.show('auth-modal')">авторизируйтесь</button>.

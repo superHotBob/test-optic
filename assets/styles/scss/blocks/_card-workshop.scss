@@ -19,9 +19,13 @@
         img {
             display: block;
             max-width: 120px;
+            margin-left: auto;
+        }
+        p {
+            margin: 0;
+            max-width: 290px;
         }
     }
-    // &__bottom {}
     &__option-name {
         margin: 20px 0;
         font-size: 19px;
@@ -64,6 +68,12 @@
         .card-lense__prop {
             margin: 0;
         }
+        select {
+            display: block;
+            &:not(:last-of-type) {
+                margin-bottom: 6px;
+            }
+        }
     }
     &__info {
         img {
@@ -76,5 +86,73 @@
             font-size: 18px;
         }
     }
-    
+}
+
+@media (max-width: 768px) {
+    .card-workshop {
+        &__top {
+            padding-left: 40px;
+            padding-right: 7px;
+            line-height: 20px;
+            .checkbox {
+                &__indicator {
+                    left: 10px;
+                    top: 30px;
+                    transform: none;
+                }
+            }
+            p {
+                margin-right: 10px;
+            }
+            img {
+                max-height: 38px;
+            }
+        }
+        &__option-name {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        &__option {
+            .checkbox,
+            .radio {
+                padding-left: 40px;
+                padding-right: 7px;
+                line-height: 20px;
+                &__indicator {
+                    left: 10px;
+                }
+            }
+            span {
+                display: inline-block;
+                margin-right: 10px;
+            }
+        }
+        &__info {
+            max-width: 100px;
+            img {
+                display: block;
+                max-width: 100%;
+                margin: 0;
+                margin-bottom: 6px;
+            }
+            span {
+                display: block;
+                margin: 0;
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+    }
+}
+@media (max-width: 400px) {
+    .card-workshop {
+        &__top {
+            flex-wrap: wrap;
+            padding-bottom: 15px;
+            p {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    }
 }

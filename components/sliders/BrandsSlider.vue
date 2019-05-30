@@ -2,35 +2,35 @@
 <div class="brands-slider" v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/brendel.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/brendel.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/essilor.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/essilor.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/fineline.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/fineline.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/freigeist.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/freigeist.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/humphreys.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/humphreys.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/jos.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/jos.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/marcopolo.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/marcopolo.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
         <nuxt-link class="swiper-slide" to="#0">
-            <img class="swiper-lazy" alt="" src="~/assets/images/brands/mekk.jpg">
+            <img class="swiper-lazy" src="~/assets/images/brands/mekk.jpg" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
     </div>
@@ -41,7 +41,7 @@
 <script>
 
 export default {
-    props: ['items', 'breakpoints', 'date'],
+    props: ['breakpoints'],
     data () {
         return {
             swiperOption: {

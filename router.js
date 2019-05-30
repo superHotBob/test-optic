@@ -10,6 +10,7 @@ const element = () => import('~/pages/section/_element').then(m => m.default || 
 const order = () => import('~/pages/order/index').then(m => m.default || m)
 const basket = () => import('~/pages/basket/index').then(m => m.default || m)
 const favorites = () => import('~/pages/favorites/index').then(m => m.default || m)
+const brands = () => import('~/pages/brands/index').then(m => m.default || m)
 const advantages = () => import('~/pages/company/advantages/index').then(m => m.default || m)
 const about = () => import('~/pages/company/about/index').then(m => m.default || m)
 const reviews = () => import('~/pages/company/reviews/index').then(m => m.default || m)
@@ -41,6 +42,11 @@ export function createRouter () {
                 path: '/favorites',
                 name: 'favorites',
                 component: favorites,
+            },
+            {
+                path: '/brands',
+                name: 'brands',
+                component: brands,
             },
             {
                 path: '/company/our-advantages',

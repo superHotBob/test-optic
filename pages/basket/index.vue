@@ -1,8 +1,7 @@
 <template>
-    <div>
-        <basket/>
-        <nuxt-link active-class="active" :to="{ name: 'order'}">Оформить заказ</nuxt-link>
-    </div>
+<div>
+    <basket />
+</div>
 </template>
 
 <script>

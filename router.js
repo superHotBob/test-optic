@@ -9,7 +9,6 @@ const section = () => import('~/pages/section/_section').then(m => m.default || 
 const element = () => import('~/pages/section/_element').then(m => m.default || m)
 const order = () => import('~/pages/order/index').then(m => m.default || m)
 const basket = () => import('~/pages/basket/index').then(m => m.default || m)
-const cart = () => import('~/pages/cart/index').then(m => m.default || m)
 const favorites = () => import('~/pages/favorites/index').then(m => m.default || m)
 const brands = () => import('~/pages/brands/index').then(m => m.default || m)
 const news = () => import('~/pages/news/index').then(m => m.default || m)
@@ -135,11 +134,6 @@ export function createRouter () {
                 path: '/basket',
                 name: 'basket',
                 component: basket,
-            },
-            {
-                path: '/cart',
-                name: 'cart',
-                component: cart,
             },
             {   
                 path: '/:section',

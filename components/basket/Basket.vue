@@ -1,58 +1,75 @@
 <template>
-<div>
-    {{getBasket.BASKET_ITEMS_COUNT}}
-    <div class="basket-item" v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID">
-        <img v-if="arItem.PREVIEW_PICTURE_SRC" :src="'http://home-optic.proj' + arItem.PREVIEW_PICTURE_SRC"/>
-        <div>
-            <span>{{arItem.NAME}}</span>
-            <div>
-                <div class="sku-props" v-for="prop in arItem.SKU_BLOCK_LIST" :key="prop.ID">
-                    <div>{{prop.NAME}}</div>
-                    <ul>
-                        <li v-on:click="changeOffer(arItem.ID, prop.CODE, value.VALUE_ID)" v-for="value in prop.SKU_VALUES_LIST" :key="value.ID" 
-                            v-bind:class="{ 'selected': value.SELECTED, 'not-available':value.NOT_AVAILABLE_OFFER }">
-                            {{value.NAME}}
-                        </li>
-                    </ul>
-                </div>
+<div class="cart main-container">
+    <div class="cart__controls">
+        <button :class="{'active': postponed == false}" @click="postponed = false">Товары в корзине (n)</button>
+        <button :class="{'active': postponed == true}" @click="postponed = true">Отложенные товары (z)</button>
+    </div>
+    <div class="cart__heading">
+        <b class="cart__info">Товары</b>
+        <b class="cart__price">Цена</b>
+        <b class="cart__discount" v-if="postponed">Скидка</b>
+        <b class="cart__summ">Сумма</b>
+        <b class="cart__actions">Количество</b>
+    </div>
+    <div class="cart__items" v-if="getBasket.GRID">
+        <basket-item class="cart__item" v-for="item in getBasket.GRID.ROWS" :key="item.ID" :item="item" :postponed="postponed"/>
+    </div>
+    <div class="cart__bottom">
+        <div class="cart__promocode">
+            <label class="textfield">
+                <input name="promocode" type="text" placeholder="Код купона для скидки">
+            </label>
+            <button class="button black">Применить</button>
+        </div>
+        <div class="cart__summary">
+            <p>
+                <span>Товаров на:</span>
+                <b>{{getBasket.allSum_FORMATED}}</b>
+            </p>
+            <p>
+                <span>Без скидки:</span>
+                <b>{{getBasket.PRICE_WITHOUT_DISCOUNT}}</b>
+            </p>
+            <p>
+                <span>Скидка:</span>
+                <b>{{getBasket.DISCOUNT_PRICE_ALL_FORMATED}}</b>
+            </p>
+            <p>
+                <span>Итого:</span>
+                <b>{{getBasket.allSum_FORMATED}}</b>
+            </p>
+            <div class="cart__summary-buttons">
+                <button class="button">Продолжить покупки</button>
+                <nuxt-link class="button black" :to="{ name: 'order'}">Оформить заказ</nuxt-link>
             </div>
         </div>
-        <span>Цена: {{arItem.PRICE_FORMATED}}</span>
-        <quantity v-bind:id="arItem.ID"/>
-        <span>Сумма: {{arItem.SUM_FULL_PRICE_FORMATED}}</span>
-        <button v-on:click="deleteItem(arItem.ID)" type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
-    <div>
-        Итого: {{getBasket.allSum_FORMATED}}
-    </div>
-</div>
+    <item-slider class="cart__slider" items="recommended"/>
+</div>    
 </template>
 
 <script>
-
 import basket from '~/mixins/basket/basket.js'
-import Quantity from '~/components/basket/Quantity.vue'
+
+import BasketItem from '~/components/basket/BasketItem.vue'
+import ItemSlider from '~/components/sliders/ItemSlider.vue'
 
 export default {
     mixins: [basket],
+    data() {
+        return {
+            postponed: false,
+        }
+    },
     components: {
-        Quantity
-    }
+        BasketItem,
+        ItemSlider,
+    },
+    computed: {
+
+    },
+    methods: {
+
+    },
 }
 </script>
-  
-<style scoped>
-    .basket-item {
-        min-height: 50px;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .sku-props .selected {
-        color: #007bff;
-    }
-</style>
-

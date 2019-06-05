@@ -59,9 +59,14 @@
 @import "blocks/news-item.scss";
 @import "blocks/news.scss";
 
-// cart, basket pages
+// basket, order pages
 @import "blocks/basket-item.scss";
 @import "blocks/cart.scss";
+@import "blocks/delivery.scss";
+@import "blocks/person-type.scss";
+@import "blocks/pay-system.scss";
+@import "blocks/total.scss";
+@import "blocks/order.scss";
 
 // pages
 @import "blocks/p-brands.scss";

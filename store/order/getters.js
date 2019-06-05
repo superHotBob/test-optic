@@ -29,11 +29,15 @@ export default {
     
   },
   getLocationName: (state) => (payload) => {
+    if (!state.locations)
+      return false;
     var locations = state.locations[payload.id].output;
 
     for (let key in locations) {
-      if (locations[key].VALUE == payload.code)
-        return locations[key].LOCATION.NAME;
+      // if (locations[key].VALUE == payload.code)
+        if (locations[key].LOCATION.NAME)
+          return locations[key].LOCATION.NAME;
+        return false;
     }
   },
   getLocationList: (state) => {

@@ -1,0 +1,43 @@
+.pay-system {
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -20px;
+    }
+    .o-radio {
+        width: calc(33% - 20px);
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .pay-system {
+        .o-radio {
+            width: calc(50% - 20px);
+        }
+    }
+}
+@media (max-width: 768px) {
+    .pay-system {
+        &__wrapper {
+            margin-left: -10px;
+        }
+        .o-radio {
+            width: calc(50% - 10px);
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .pay-system {
+        &__wrapper {
+            margin-left: 0;
+        }
+        .o-radio {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}

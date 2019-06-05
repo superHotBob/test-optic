@@ -19,7 +19,7 @@
         <div class="hidden-mobile" v-if="getBasket.GRID">
             <basket-item v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID" :arItem="arItem"/>
             <div class="basket__footer">
-                <button class="button black">Оформить заказ</button>
+                <nuxt-link class="button black" :to="{ name: 'basket'}">Оформить заказ</nuxt-link>
                 <span>Всего {{getBasket.BASKET_ITEMS_COUNT}} {{wording(getBasket.BASKET_ITEMS_COUNT)}}</span>
                 <b>{{getBasket.allSum_FORMATED}}</b>
             </div>

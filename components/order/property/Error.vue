@@ -7,22 +7,11 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import orderErrors from '~/mixins/order-errors.js'
 
 export default {
+    mixins: [orderErrors],
     props: ['id'],
-    computed: {
-        ...mapGetters({
-            getError: 'order/getErrorProperty' 
-        }),
-        message() {
-            let new_message, message = false;
-            
-            if (new_message = this.getError(this.id)) 
-                message = new_message;
-            
-            return message;
-        }
-    },
 }
 </script>
 

@@ -1,0 +1,122 @@
+.order {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 40px;
+    > form {
+        width: calc(100% - 270px);
+        padding-right: 30px;
+    }
+    &__heading {
+        display: flex;
+        width: 100%;
+        min-height: 50px;
+        margin: 10px 0;
+        padding: 10px;
+        padding-left: 20px;
+        font-weight: 700;
+        border: none;
+        background-color: #f7f7f7;
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+    }
+    &__next,
+    &__submit {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            height: 40px;
+            padding: 0 15px;
+            font-weight: 700;
+        }
+    }
+    .collapse,
+    .collapsing {
+        &.show {
+            + .order__short-info {
+                display: none;
+            }
+        }
+        + .order__short-info {
+            display: block;
+        }
+    }
+    &__short-info {
+        display: none;
+    }
+    .o-prop-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin-left: -20px;
+    }
+    .o-prop {
+        width: calc(50% - 20px);
+        margin-left: 20px;
+        margin-bottom: 15px;
+        &__input {
+            height: 40px;
+            width: 100%;
+        }
+        &--100 {
+            width: 100%;
+            margin-left: 0;
+            textarea {
+                height: auto;
+                padding: 5px 10px;
+            }
+        }
+    }
+    &__total {
+        position: sticky;
+        top: 0;
+        right: 0;
+        width: 270px;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .order {
+        > form {
+            padding-right: 15px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .order {
+        flex-wrap: wrap;
+        > form {
+            width: 100%;
+            padding-right: 0;
+        }
+        .o-prop-wrap {
+            margin-left: -10px;
+        }
+        .o-prop {
+            width: calc(50% - 10px);
+            margin-left: 10px;
+            &--100 {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+        &__total {
+            position: static;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .order {
+        .o-prop-wrap {
+            margin-left: 0;
+        }
+        .o-prop {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}

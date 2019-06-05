@@ -1,12 +1,12 @@
 <template>
-    <div class="form-group">
-        <textarea 
-        class="form-control" 
-        rows="3" 
-        name="ORDER_DESCRIPTION" 
-        placeholder="Коментарий"
-        v-model="comment"/>
-    </div>
+<label class="o-prop o-prop--100 textfield">
+    <p>Комментарий</p>
+    <textarea 
+    rows="5" 
+    name="ORDER_DESCRIPTION" 
+    placeholder="Коментарий"
+    v-model="comment"/>
+</label>
 </template>
 
 <script>

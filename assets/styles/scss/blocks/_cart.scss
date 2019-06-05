@@ -166,6 +166,11 @@
 }
 @media (max-width: 600px) {
     .cart {
+        &__controls {
+            button {
+                padding: 10px 0;
+            }
+        }
         &__items {
             display: block;
             margin-left: 0;
@@ -181,6 +186,14 @@
 }
 @media (max-width: 400px) {
     .cart {
+        &__controls {
+            button {
+                font-size: 11px;
+                &:not(:last-of-type) {
+                    margin-right: 10px;
+                }
+            }
+        }
         &__promocode {
             justify-content: center;
             padding: 20px 10px;

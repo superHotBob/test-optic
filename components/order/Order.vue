@@ -1,38 +1,80 @@
 <template>
-    <form ref="form">
-        <input type="hidden" name="sessid" :value="getSessid">
-        <input type="hidden" name="BUYER_STORE" value="0">
-        <div v-if="orderId">
-            Заказ №{{orderId}} оформлен
+    <div class="order main-container">
+        <form ref="form">
+            <input type="hidden" name="sessid" :value="getSessid">
+            <input type="hidden" name="BUYER_STORE" value="0">
+            <div v-if="orderId">
+                Заказ №{{orderId}} оформлен
+            </div>
+            <div v-else role="tablist">
+                <!-- <order-items /> -->
+                <person-type v-bind:personType="order.PERSON_TYPE" />
+                <delivery v-bind:delivery="order.DELIVERY" />
+                <pay-system class="order__pay-system" v-bind:paysystem="order.PAY_SYSTEM" />
+                <properties />
+                <div class="order__submit">
+                    <button type="button" class="button black" v-on:click="save">Оформить заказ</button>
+                </div>
+            </div>
+        </form>
+        <div class="order__total total">
+            <div class="total__row">
+                <div>
+                    Товаров на:
+                </div>
+                <div class="total__value" v-if="getOrder.TOTAL">
+                    <p>{{getOrder.TOTAL.ORDER_PRICE_FORMATED}}</p>
+                    <p v-if="getOrder.TOTAL.DISCOUNT_PRICE > 0">{{getOrder.TOTAL.PRICE_WITHOUT_DISCOUNT}}</p>
+                </div>
+            </div>
+            <div class="total__row">
+                <div>
+                    Доставка:
+                </div>
+                <div class="total__value" v-if="getOrder.TOTAL">
+                    <p>{{getOrder.TOTAL.DELIVERY_PRICE_FORMATED}}</p>
+                </div>
+            </div>
+            <div class="total__row" v-if="getOrder.TOTAL && getOrder.TOTAL.DISCOUNT_PRICE > 0">
+                <div>
+                    Экономия:
+                </div>
+                <div class="total__value" v-if="getOrder.TOTAL">
+                    <p>{{getOrder.TOTAL.DISCOUNT_PRICE_FORMATED}}</p>
+                </div>
+            </div>
+            <div class="total__row total__row--total">
+                <div>
+                    Итого:
+                </div>
+                <div class="total__value" v-if="getOrder.TOTAL">
+                    <p>{{getOrder.TOTAL.ORDER_TOTAL_PRICE_FORMATED}}</p>
+                </div>
+            </div>
         </div>
-        <div v-else>
-            <person v-bind:personType="order.PERSON_TYPE"/>
-            <delivery v-bind:delivery="order.DELIVERY"/>
-            <pay-system v-bind:paysystem="order.PAY_SYSTEM"/>
-            <properties/>
-            <comment/>
-            <button type="button" class="btn btn-primary" v-on:click="save">to issue</button>
-            <p>Итого: {{getPrice}}</p>
-        </div>
-    </form>
+    </div>
 </template>
 
 <script>
-
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
+import OrderItems from '~/components/order/OrderItems.vue'
 import PaySystem from '~/components/order/PaySystem.vue'
 import Delivery from '~/components/order/Delivery.vue'
-import Person from '~/components/order/PersonType.vue'
+import PersonType from '~/components/order/PersonType.vue'
 import Properties from '~/components/order/Properties.vue'
-import Comment from '~/components/order/property/Comment.vue'
+
+import basket from '~/mixins/basket/basket.js'
+import BasketItem from '~/components/basket/BasketItem.vue'
 
 export default {
+    mixins: [basket],
     components: {
+        OrderItems,
         PaySystem,
         Delivery,
-        Person,
+        PersonType,
         Properties,
-        Comment
+        BasketItem
     },
     data() {
         return {
@@ -96,7 +138,7 @@ export default {
         ...mapGetters({
             getSessid: 'order/getSessid',
             getOrder: 'order/getOrder',
-            getPrice: 'order/getTotalPrice',
+            // getPrice: 'order/getTotalPrice',
             isEmptyBasket: 'order/isEmptyBasket',
             isLogged: 'user/isLogged'
         }),

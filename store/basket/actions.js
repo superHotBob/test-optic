@@ -8,6 +8,33 @@ export default {
         })
     },
 
+    async ADD_COUPON({commit, getters}, coupon)
+    {
+        var post = {
+            'basketAction':'recalculateAjax',
+            'via_ajax':'Y',
+            'lastAppliedDiscounts': 1,
+            'basket[coupon]':coupon,
+            'site_id':'s1'
+        };
+
+        let response = await this.$axios.post(getters.getEndpoint, qs.stringify(post));
+        commit('setBasket', response.data.BASKET_DATA);
+    },
+
+    async DELETE_CPUPON({commit, getters}, coupon)
+    {   
+        var param = 'basket[delete_coupon][' + coupon + ']'
+        var post = {
+            'basketAction':'recalculateAjax',
+            'via_ajax':'Y',
+            param:coupon
+        };
+
+        let response = await this.$axios.post(getters.getEndpoint, qs.stringify(post));
+        commit('setBasket', response.data.BASKET_DATA);
+    },
+
     async delete({commit, getters}, payload) {
         var post = {};
 

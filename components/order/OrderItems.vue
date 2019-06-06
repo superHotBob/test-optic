@@ -9,7 +9,7 @@
                     <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
                 </div>
                 <div class="basket-item__offers">
-                    <nuxt-link class="basket-item__name" to="#0" :class="{'mt-0': (postponed == true || !item.SKU_BLOCK_LIST)}">{{item.NAME}}</nuxt-link>
+                    <nuxt-link class="basket-item__name" to="#0" :class="{'mt-0': !item.SKU_BLOCK_LIST}">{{item.NAME}}</nuxt-link>
                     <div
                         class="item__offers"
                         v-for="prop in item.SKU_BLOCK_LIST"

@@ -25,7 +25,7 @@
                                     @click.prevent="changeOffer(item.ID, prop.CODE, value.VALUE_ID)"
                                     v-if="value.SELECTED"
                                     :key="value.ID"
-                                    :class="{'img': value.PICT, 'selected': value.SELECTED, 'not-available':value.NOT_AVAILABLE_OFFER}"
+                                    :class="{'img': value.PICT}"
                                 >
                                     <img v-if="value.PICT && value.PICT.ID !== 0" :src="'http://14.esobolev.ru/' + value.PICT" alt="" :title="value.NAME">
                                     <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>

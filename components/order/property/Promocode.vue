@@ -2,7 +2,10 @@
 <div class="promocode">
     <label class="o-prop textfield promofield">
         <span>Применить купон:</span>
-        <input type="text" @keydown.prevent.enter="addPromocode" v-model="code">
+        <div class="promofield__wrapper">
+            <input type="text" @keydown.prevent.enter="addPromocode" v-model="code">
+            <span class="promofield__button" @click="addPromocode"></span>
+        </div>
     </label>
     <ul v-if="promocode.length">
         <li v-for="(code, index) in promocode" :key="index">{{code}}<span class="delete" @click="delPromo(code)"></span>
@@ -21,7 +24,8 @@ export default {
     },
     methods: {
         addPromocode() {
-            this.promocode.push(this.code)
+            if (this.code != '')
+                this.promocode.push(this.code)
         },
         delPromo(text) {
             let index = this.promocode.indexOf(text)
@@ -75,6 +79,33 @@ export default {
     .promofield {
         margin: 0;
         width: 200px;
+        input {
+            width: 100%;
+        }
+        &__wrapper {
+            position: relative;
+        }
+        &__button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            margin: 0;
+            background-color: transparent;
+            cursor: pointer;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 6px;
+                width: 10px;
+                height: 10px;
+                border-right: 2px solid #000;
+                border-bottom: 2px solid #000;
+                transform: translateY(-50%) rotate(-45deg);
+            }
+        }
     }
 }
 </style>

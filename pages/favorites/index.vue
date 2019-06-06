@@ -1,5 +1,5 @@
 <template>
-    <section-elements v-bind:items="items"></section-elements>
+    <section-elements class="main-container catalog__items" :items="items"></section-elements>
 </template>
 
 <script>

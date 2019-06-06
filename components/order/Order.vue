@@ -7,7 +7,7 @@
                 Заказ №{{orderId}} оформлен
             </div>
             <div v-else role="tablist">
-                <!-- <order-items /> -->
+                <order-items />
                 <person-type :personType="order.PERSON_TYPE" :promocode="promocode"/>
                 <delivery :delivery="order.DELIVERY" :promocode="promocode" />
                 <pay-system class="order__pay-system" :paysystem="order.PAY_SYSTEM" :promocode="promocode" />

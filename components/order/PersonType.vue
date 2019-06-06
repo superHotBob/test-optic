@@ -1,6 +1,6 @@
 <template>
 <div class="person-type">
-    <button class="order__heading" :class="{'error': hasErrors(3)}" type="button" v-b-toggle.accordion-2 role="tab">
+    <button class="order__heading mt-0" :class="{'error': hasErrors(3)}" type="button" v-b-toggle.accordion-2 role="tab">
         <b>2. Регион доставки</b>
         <span>Изменить</span>
     </button>

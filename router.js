@@ -27,6 +27,10 @@ const confidentiality = () => import('~/pages/company/confidentiality/index').th
 const original = () => import('~/pages/company/original/index').then(m => m.default || m)
 const bestprice = () => import('~/pages/company/bestprice/index').then(m => m.default || m)
 
+const personal = () => import('~/pages/personal/index').then(m => m.default || m)
+const profile = () => import('~/pages/personal/profile').then(m => m.default || m)
+const subscribe = () => import('~/pages/personal/subscribe').then(m => m.default || m)
+
 
 export function createRouter () {
     return new Router({
@@ -39,6 +43,21 @@ export function createRouter () {
                 path: '',
                 name: 'main',
                 component: main,
+            },
+            {
+                path: '/personal',
+                name: 'personal',
+                component: personal,
+            },
+            {
+                path: '/personal/profile',
+                name: 'profile',
+                component: profile,
+            },
+            {
+                path: '/personal/subscribe',
+                name: 'subscribe',
+                component: subscribe,
             },
             {
                 path: '/favorites',

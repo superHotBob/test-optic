@@ -24,12 +24,12 @@ export default {
     },
     methods: {
         addPromocode() {
-            if (this.code != '')
-                this.promocode.push(this.code)
+            if (this.code != '') {
+                this.$store.dispatch('basket/ADD_COUPON', this.code);
+            }     
         },
         delPromo(text) {
-            let index = this.promocode.indexOf(text)
-            this.promocode.splice(index, 1)
+            this.$store.dispatch('basket/ADD_COUPON', text);
         }
     }
 }

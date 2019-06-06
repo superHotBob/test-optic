@@ -1,6 +1,9 @@
 <template>
 <div class="person-type">
-    <button class="order__heading" type="button" v-b-toggle.accordion-2 role="tab">2. Регион доставки</button>
+    <button class="order__heading" :class="{'error': hasErrors(3)}" type="button" v-b-toggle.accordion-2 role="tab">
+        <b>2. Регион доставки</b>
+        <span>Изменить</span>
+    </button>
     <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
         <div>
             <span class="person-type__label">Тип плательщика:</span>
@@ -16,14 +19,15 @@
                 <location v-if="prop.TYPE === 'LOCATION'" v-bind:property="prop" :key="prop.ID"/>
             </template>
         </div>
-        <div class="order__next">
+        <div class="order__next mt-3">
+            <promocode :promocode="promocode" @input="promocode = $event" />
             <button class="button black" type="button" v-b-toggle.accordion-2.accordion-3>Далее</button>
         </div>
     </b-collapse>
     <div class="order__short-info">
         <template v-for="prop in getProps">
             <p v-if="prop.CODE == 'location'" :key="prop.ID">
-                <b>Местоположение:</b>
+                <b>{{prop.NAME}}:</b>
                 <span>{{getLocationName({'id':1})}}</span>
             </p>
 
@@ -43,31 +47,29 @@
 import { mapGetters } from 'vuex'
 import String from '~/components/order/property/String.vue'
 import Location from '~/components/order/property/Location.vue'
+import Promocode from '~/components/order/property/Promocode.vue'
 import Error from '~/components/order/property/Error.vue'
 
+
 export default {
-    props: ['personType'],
+    props: ['personType', 'promocode'],
     components: {
         String,
         Location,
+        Promocode,
         Error,
     },
     methods: {
         change() {
             this.$root.$emit('refresh')
-        }
+        },
     },
     computed: {
         ...mapGetters({
             getProps: 'order/getProperties',
             getLocationName: 'order/getLocationName',
+            hasErrors: 'order/groupHasErrors',
         }),
     },
-    mounted() {
-        this.$root.$on('locationChange', function(name) {
-            console.log('name = ' + name);
-        })
-    }
-
 }
 </script>

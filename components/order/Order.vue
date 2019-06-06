@@ -8,13 +8,13 @@
             </div>
             <div v-else role="tablist">
                 <!-- <order-items /> -->
-                <person-type v-bind:personType="order.PERSON_TYPE" />
-                <delivery v-bind:delivery="order.DELIVERY" />
-                <pay-system class="order__pay-system" v-bind:paysystem="order.PAY_SYSTEM" />
+                <person-type :personType="order.PERSON_TYPE" :promocode="promocode"/>
+                <delivery :delivery="order.DELIVERY" :promocode="promocode" />
+                <pay-system class="order__pay-system" :paysystem="order.PAY_SYSTEM" :promocode="promocode" />
                 <properties />
-                <div class="order__submit">
-                    <button type="button" class="button black" v-on:click="save">Оформить заказ</button>
-                </div>
+            </div>
+            <div class="order__submit hidden-mobile">
+                <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
             </div>
         </form>
         <div class="order__total total">
@@ -52,6 +52,9 @@
                 </div>
             </div>
         </div>
+        <div class="order__submit hidden-desktop">
+            <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
+        </div>
     </div>
 </template>
 
@@ -78,7 +81,8 @@ export default {
     },
     data() {
         return {
-            orderId:false,
+            orderId: false,
+            promocode: [],
         }
     },
     methods: {
@@ -127,7 +131,7 @@ export default {
                     'via_ajax':'Y',
                 }
             );
-        }
+        },
     },
     mounted() {
         this.$root.$on('refresh', value => { 

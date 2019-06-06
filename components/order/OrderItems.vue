@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button class="order__heading" type="button">1. Товары</button>
+    <button class="order__heading mt-0" type="button">1. Товары</button>
     <template v-if="getBasket.GRID">
         <div class="basket-item basket-item--order" v-for="item in getBasket.GRID.ROWS" :key="item.ID" :item="item">
             <div class="basket-item__info">

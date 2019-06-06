@@ -26,7 +26,6 @@ export default {
     if (state.order.hasOwnProperty('ORDER_PROP')) {
       return state.order.ORDER_PROP.properties;
     }
-    
   },
   getLocationName: (state) => (payload) => {
     if (!state.locations)
@@ -47,14 +46,41 @@ export default {
     return state.locationShow;
   },
   getErrorProperty: (state) => (id) => {
-    
     var error = state.order.ERROR;
+    if (!error)
+      return false;
 
     if (error.hasOwnProperty('PROPERTY')) {
       for (let key in error.PROPERTY) {
         if (error.PROPERTY[key].code === 'PROPERTIES[' + id + ']') {
           return error.PROPERTY[key].message;
         }
+      }
+    }
+  },
+  groupHasErrors: (state) => (groupId) => {
+    if (!state.order.ORDER_PROP)
+      return false;
+
+    var properties = state.order.ORDER_PROP.properties
+    var groupProps = [];
+    for (let el in properties) {
+      if (properties[el].PROPS_GROUP_ID == groupId) {
+        groupProps.push(properties[el].ID);
+      }
+    }
+
+    var error = state.order.ERROR;
+    if (!error)
+      return false;
+    
+    if (error.hasOwnProperty('PROPERTY')) {
+      for (let el in groupProps) {
+        for (let key in error.PROPERTY) {
+          if (error.PROPERTY[key].code === 'PROPERTIES[' + groupProps[el] + ']') {
+            return true;
+          }
+        }        
       }
     }
   },

@@ -4,7 +4,6 @@
     <textarea 
     rows="5" 
     name="ORDER_DESCRIPTION" 
-    placeholder="Коментарий"
     v-model="comment"/>
 </label>
 </template>

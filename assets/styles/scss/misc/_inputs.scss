@@ -89,10 +89,11 @@
     &.error {
         input,
         textarea {
-            border-color: #f00;
+            border-color: #ff6c6c;
         }
-        span {
-            color: #f00;
+        span,
+        p {
+            color: #ff6c6c;
         }
     }
 }
@@ -179,10 +180,6 @@
         border: 1px solid #e6e6e6;
         border-radius: 0;
         transition: border-color 150ms;
-        &:hover,
-        &:focus {
-            border-color: #000;
-        }
     }
 }
 

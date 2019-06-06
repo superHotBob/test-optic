@@ -1,6 +1,9 @@
 <template>
 <div class="delivery">
-    <button class="order__heading" type="button" v-b-toggle.accordion-3 role="tab">3. Доставка</button>
+    <button class="order__heading" type="button" v-b-toggle.accordion-3 role="tab">
+        <b>3. Доставка</b>
+        <span>Изменить</span>
+    </button>
     <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
         <div class="delivery__wrapper">
             <div class="delivery__options">
@@ -28,16 +31,29 @@
             </template>
         </div>
         <div class="order__next">
+            <promocode :promocode="promocode" @input="promocode = $event" />
             <button class="button black" type="button" v-b-toggle.accordion-3.accordion-4>Далее</button>
         </div>
     </b-collapse>
+    <div class="order__short-info">
+        <template v-for="deliver in delivery">
+            <p v-if="deliver.CHECKED" :key="deliver.ID">
+                <img v-if="deliver.LOGOTIP_SRC" :src="'http://14.esobolev.ru/' + deliver.LOGOTIP_SRC" alt="">
+                <b>{{deliver.NAME}}</b>
+            </p>
+        </template>
+    </div>
 </div>
 </template>
 
 <script>
+import Promocode from '~/components/order/property/Promocode.vue'
 
 export default {
-    props: ['delivery'],
+    props: ['delivery', 'promocode'],
+    components: {
+        Promocode,
+    },
     methods: {
         change() {
             this.$root.$emit('refresh')

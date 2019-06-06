@@ -1,4 +1,14 @@
 <template>
+<div>
+    <div class="content-header">
+        <div class="main-container">
+            <h2>Оформление заказа</h2>
+            <ul class="breadcrumbs">
+                <li><nuxt-link to="/">Главная</nuxt-link></li>
+                <li><a>Оформление заказа</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="order main-container">
         <form ref="form">
             <input type="hidden" name="sessid" :value="getSessid">
@@ -56,6 +66,7 @@
             <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
         </div>
     </div>
+</div>
 </template>
 
 <script>

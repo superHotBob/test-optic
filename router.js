@@ -53,16 +53,7 @@ export function createRouter () {
                 name: 'personal',
                 component: personal,
             },
-            {
-                path: '/personal/orders',
-                name: 'orders',
-                component: orders,
-            },
-            {
-                path: '/personal/orders/order',
-                name: 'userOrder',
-                component: userOrder,
-            },
+
             {
                 path: '/personal/user-profile',
                 name: 'userProfile',
@@ -177,6 +168,16 @@ export function createRouter () {
                 path: '/basket',
                 name: 'basket',
                 component: basket,
+            },
+            {
+                path: '/personal/orders',
+                name: 'orders',
+                component: orders,
+            },
+            {
+                path: '/personal/orders/:id(\\d+)',
+                name: 'userOrder',
+                component: userOrder,
             },
             {   
                 path: '/:section',

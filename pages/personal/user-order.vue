@@ -97,6 +97,7 @@
 
 <script>
 export default {
+    middleware: 'auth',
     data() {
         return {
             showInfo: false,

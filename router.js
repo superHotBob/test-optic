@@ -28,6 +28,7 @@ const original = () => import('~/pages/company/original/index').then(m => m.defa
 const bestprice = () => import('~/pages/company/bestprice/index').then(m => m.default || m)
 
 const personal = () => import('~/pages/personal/index').then(m => m.default || m)
+const userOrder = () => import('~/pages/personal/user-order').then(m => m.default || m)
 const orders = () => import('~/pages/personal/orders').then(m => m.default || m)
 const userProfile = () => import('~/pages/personal/user-profile').then(m => m.default || m)
 const profiles = () => import('~/pages/personal/profiles').then(m => m.default || m)
@@ -56,6 +57,11 @@ export function createRouter () {
                 path: '/personal/orders',
                 name: 'orders',
                 component: orders,
+            },
+            {
+                path: '/personal/orders/order',
+                name: 'userOrder',
+                component: userOrder,
             },
             {
                 path: '/personal/user-profile',

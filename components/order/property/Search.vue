@@ -28,40 +28,40 @@ export default {
 </script>
 
 <style lang="scss">
-    .v-search {
-        position: absolute;
-        bottom: 0;
-        transform: translateY(100%);
-        width: 100%;
-        background-color: #fff;
-        border-left: 1px solid #e6e6e6;
-        border-right: 1px solid #e6e6e6;
-        z-index: 5;
-        span {
-            display: block;
+.v-search {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    width: 100%;
+    background-color: #fff;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    z-index: 5;
+    span {
+        display: block;
+        margin-bottom: 0;
+        padding: 2px 0;
+        padding-right: 16px;
+        padding-left: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #e6e6e6;
+        cursor: pointer;
+        &:first-of-type {
+            border-top: 1px solid #e6e6e6;
+        }
+        &:last-of-type {
             margin-bottom: 0;
-            padding: 2px 0;
-            padding-right: 16px;
-            padding-left: 10px;
-            font-size: 14px;
-            border-bottom: 1px solid #e6e6e6;
-            cursor: pointer;
-            &:first-of-type {
-                border-top: 1px solid #e6e6e6;
-            }
-            &:last-of-type {
-                margin-bottom: 0;
+        }
+    }
+}
+@media (min-width: 769px) {
+    .v-search {
+        span {
+            &:hover,
+            &:focus {
+                color: #000;
             }
         }
     }
-    @media (min-width: 769px) {
-        .v-search {
-            span {
-                &:hover,
-                &:focus {
-                    color: #000;
-                }
-            }
-        }
-    }
+}
 </style>

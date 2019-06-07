@@ -37,7 +37,7 @@
                 </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="#0">
+                <nuxt-link :to="{path: '/personal/orders', query: { filter_history: 'Y' }}">
                     <svg viewBox="0 0 421.021 421.021" id="svg-icon-choise" width="35px" height="35px">
                         <rect x="178.9" y="110.08" width="116.53" height="15"></rect>
                         <rect x="178.9" y="147.6" width="116.53" height="15"></rect>

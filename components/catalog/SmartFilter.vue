@@ -16,7 +16,7 @@
             </b-collapse>
         </div>
         <template v-for="(item, itemIndex) in items">
-            <div class="filter__slider" v-if="item.price" :key="item.CODE">
+            <div class="filter__slider" v-if="item.price && item.values.min !== item.values.max" :key="item.CODE">
                 <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">Цена</button>
                 <b-collapse :id="'collapse-'+itemIndex">
                     <vue-slider
@@ -35,7 +35,7 @@
             </div>
         </template>
         <template v-for="(item, itemIndex) in items">
-            <div v-if="!item.price" :key="item.CODE">
+            <div v-if="!item.price && item.values" :key="item.CODE">
                 <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
                 <b-collapse :id="'collapse-'+itemIndex">
                     <ul class="filter__square" v-if="item.display_type === 'F'">

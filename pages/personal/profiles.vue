@@ -36,6 +36,12 @@
 </div>
 </template>
 
+<script>
+export default {
+  middleware: 'auth'
+}
+</script>
+
 <style lang="scss">
 .profiles {
     margin-top: 40px;

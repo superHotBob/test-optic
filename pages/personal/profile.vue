@@ -74,6 +74,7 @@ import { mapGetters } from 'vuex'
 import Location from '~/components/order/property/Location.vue'
 
 export default {
+    middleware: 'auth',
     components: {
         Location,
     },

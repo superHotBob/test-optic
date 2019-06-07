@@ -128,6 +128,7 @@ export default {
         async login() {
             let response = await this.$store.dispatch('user/login',{'username':this.username, 'password':this.password, 'remember':this.remember});
             this.$root.$emit('login/logout');
+            this.$router.push({ name: 'main'});
         },
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {

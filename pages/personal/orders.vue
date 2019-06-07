@@ -57,7 +57,7 @@
                         <nuxt-link class="s-orders__repeat" to="#0">Повторить заказ</nuxt-link>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div v-else>
@@ -74,6 +74,7 @@
 import CurrentOrder from '~/components/personal/CurrentOrder.vue'
 
 export default {
+    middleware: 'auth',
     components: {
         CurrentOrder,
     }

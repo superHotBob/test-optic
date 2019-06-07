@@ -91,6 +91,7 @@
 
 <script>
 export default {
+    middleware: 'auth',
     methods: {
         async logout() {
             let response = await this.$store.dispatch('user/logout');

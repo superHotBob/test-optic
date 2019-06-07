@@ -389,7 +389,6 @@ export default {
         })
     },
     created() {
-        this.$store.dispatch('user/STATE');
         this.$store.dispatch('catalog/GET_FAVORITES');
     },
     mounted() {

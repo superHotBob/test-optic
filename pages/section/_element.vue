@@ -5,7 +5,6 @@
             <h2>{{element.CURRENT.NAME}}</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>? ? ?</a></li>
             </ul>
         </div>
     </div>

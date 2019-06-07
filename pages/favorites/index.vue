@@ -5,7 +5,6 @@
             <h2>Список желаемого</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>Список желаемого</a></li>
             </ul>
         </div>
     </div>

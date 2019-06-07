@@ -5,7 +5,6 @@
             <h2>Мой кабинет</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>Мой кабинет</a></li>
             </ul>
         </div>
     </div>

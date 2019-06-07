@@ -5,7 +5,6 @@
             <h2>Новости</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>Новости</a></li>
             </ul>
         </div>
     </div>

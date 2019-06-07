@@ -5,7 +5,6 @@
             <h2>{{result.seometa.title}}</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>Женщинам</a></li>
             </ul>
         </div>
     </div>

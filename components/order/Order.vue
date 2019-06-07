@@ -5,7 +5,6 @@
             <h2>Оформление заказа</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>Оформление заказа</a></li>
             </ul>
         </div>
     </div>

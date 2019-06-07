@@ -6,7 +6,6 @@
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
                 <li><nuxt-link to="/personal">Мой кабинет</nuxt-link></li>
-                <li><a>Профили</a></li>
             </ul>
         </div>
     </div>

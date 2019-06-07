@@ -4,7 +4,7 @@
         <div class="main-container">
             <h2>Бренды</h2>
             <ul class="breadcrumbs">
-                <li><a>Бренды</a></li>
+                <li><nuxt-link to="/">Главная</nuxt-link></li>
             </ul>
         </div>
     </div>

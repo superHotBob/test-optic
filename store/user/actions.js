@@ -1,23 +1,22 @@
 import qs from 'qs';
-import { cacheAction } from 'vuex-cache';
 
 export default {
-    // 'nuxtServerInit': cacheAction(
-    //     ({ cache, commit }, response) => (
-    //       cache.dispatch({
-    //         type:'userInit',
-    //         payload:response
-    //       })
-    //         .then((user) => {                
-    //             commit('setUser', user);
-    //         })
-    //     )
-    // ),
     STATE ({commit, getters}) {
         return this.$axios.$get(getters.getEndpointUser)
                 .then((user) => {                
                     commit('setUser', user);
                 })
+    },
+
+    async UPDATE({commit, getters}, payload) {
+        let response = this.$axios.$post(getters.getEndpointUpdate,
+            qs.stringify(payload)
+        );
+
+        if (response['status'] == 'OK')
+            commit('setUser', response['user']);
+
+        return response;
     },
 
     async login({commit, getters}, payload) {
@@ -31,7 +30,6 @@ export default {
                 'TYPE':'AUTH'
             })
         );
-
         commit('setUser', user.data);
         return user;
     },

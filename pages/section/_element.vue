@@ -5,6 +5,7 @@
             <h2>{{element.CURRENT.NAME}}</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
+                <li><nuxt-link :to="'/' + element.SECTION_CODE">{{element.SECTION_NAME}}</nuxt-link></li>
             </ul>
         </div>
     </div>
@@ -21,7 +22,7 @@ export default {
         Detail
     },
     asyncData({ params, $axios, error }) {
-        return $axios.get(`/api/v1/catalog/detail/${params.element}/`).then((response) => {
+        return $axios.get(`/api/v1/catalog/${params.section}/${params.element}/`).then((response) => {
             console.log(response.data)
             return {
                 element:response.data.element

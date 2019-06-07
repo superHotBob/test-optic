@@ -128,7 +128,7 @@ export default {
                 this.orderId = result.order.ID;
 
                 if (this.orderId) 
-                    this.$root.$emit('order'); 
+                    this.$root.$emit('order');
             } 
         },
         async refresh() {

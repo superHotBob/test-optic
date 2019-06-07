@@ -87,7 +87,11 @@
             <div class="user-order__header">Параметры оплаты</div>
             <div class="user-order__body">
                 <div class="user-order__heading">
-
+                    <div class="user-order__payment-icon"></div>
+                    <div>
+                        <p>Заказ №37 от 06.06.2019, Принят, ожидается оплата</p>
+                        <p>Сумма заказа: 9 535.46 руб.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -210,6 +214,12 @@ export default {
                 color: #000;
             }
         }
+    }
+    &__payment-icon {
+        display: inline-block;
+        width: 46px;
+        height: 54px;
+        background: url('~assets/images/icons/sale-personal-order-payment-options.svg') no-repeat center;
     }
 }
 

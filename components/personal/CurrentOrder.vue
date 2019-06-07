@@ -61,7 +61,7 @@
             <i></i>
         </div>
         <div class="s-orders__buttons">
-            <nuxt-link class="s-orders__detail mr-4" to="/personal/orders/order">Подробнее о заказе</nuxt-link>
+            <nuxt-link class="s-orders__detail mr-4" to="/personal/orders/1">Подробнее о заказе</nuxt-link>
             <nuxt-link class="s-orders__repeat mr-3" to="#0">Повторить заказ</nuxt-link>
             <nuxt-link class="s-orders__cancel" to="#0">Отменить заказ</nuxt-link>
         </div>

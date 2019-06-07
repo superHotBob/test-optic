@@ -36,6 +36,7 @@ export default {
         background-color: #fff;
         border-left: 1px solid #e6e6e6;
         border-right: 1px solid #e6e6e6;
+        z-index: 5;
         span {
             display: block;
             margin-bottom: 0;

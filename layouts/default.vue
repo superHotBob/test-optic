@@ -110,7 +110,7 @@
                         <logout-button />
                     </p>
                     <p v-if="isLogged">
-                        <nuxt-link class="header-panel__icon" to="#0">
+                        <nuxt-link class="header-panel__icon" to="/personal">
                             <svg width="15" height="15" fill="#999"><use href="#svg-user"/></svg>
                             Профиль
                         </nuxt-link>

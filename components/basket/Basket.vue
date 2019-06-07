@@ -5,7 +5,6 @@
             <h2>Корзина</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><a>Корзина</a></li>
             </ul>
         </div>
     </div>

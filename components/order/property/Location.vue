@@ -1,7 +1,7 @@
 <template>
 <label class="o-prop textfield">
     <error v-bind:id="property.ID"/>
-    <p>{{property.NAME}} *</p>
+    <p>{{property.NAME}} <i>*</i></p>
     <input type="hidden" name="location_type" value="code">
     <div v-for="(value, index) in property.VALUE" :key="index" >
         <input type="hidden" :name="'ORDER_PROP_' + property.ID" :value="value">

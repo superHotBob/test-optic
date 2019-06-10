@@ -101,8 +101,22 @@
                 <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
                 <button @click="itemAmount++">+</button>
             </div>
-            <button class="card__promo">Доп скидка 10% по промокоду</button>
+            <button class="card__promo-btn" @click="promo.shown = !promo.shown">Доп скидка 10% по промокоду</button>
             <button class="card__add-to-cart button black">В корзину</button>
+        </div>
+        <div class="card__promo" v-show="promo.shown == true">
+            <span>18 471.06 руб.</span>
+            <p>Цена с доп. скидкой 10% по промокоду <b>HOMEOPTIC</b></p>
+            <button
+                class="button black"
+                type="button"
+                v-if="promo.applied == false"
+                @click="promo.applied = true; promo.shown = false"
+            >
+                Применить купон в корзине
+            </button>
+            <p v-else>Купон применён</p>
+            <button class="card__promo-close" @click="promo.shown = false">Закрыть</button>
         </div>
         <button class="card__buy-one-click button">
             <svg width="22" height="22" fill="#000"><use href="#svg-click"/></svg>
@@ -343,7 +357,11 @@ export default {
                 }
             },
             rating: 4.4,
-            itsaLense: true,    // показывает блоки, если товар - линза (а не оправа)
+            promo: {
+                shown: false,
+                applied: false,
+            },
+            itsaLense: true,    // показывает блоки если товар - линза (а не оправа)
 
             // чекбоксы линз:
             noRecipe: false,        // загрузка своего рецепта

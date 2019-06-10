@@ -4,19 +4,12 @@
     :class="{'item--wide': wideItem}"
     :to="{path: item.URL}"
 >
-    <button
-        class="item__preview"
-        v-if="!wideItem"
-        @click.prevent="showModal"
-    >
-        Быстрый просмотр
-    </button>
     <div class="item__wide-left">
         <div class="item__img">
-            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
+            <!-- <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"> -->
         </div>
         <div class="item__flags">
-            <span v-if="labelNew" class="item__flag left">NEW</span>
+            <!-- <span v-if="labelNew" class="item__flag left">NEW</span> -->
             <span v-if="labelSale" class="item__flag right red">SALE</span>
         </div>
         <div class="counter" v-if="wideItem" @click.prevent>
@@ -39,35 +32,28 @@
             />
             <span>(35)</span>
         </div>
-        <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
+        <p class="item__name" v-if="wideItem">{{item.NAME}}</p>
         <div class="item__wide-offers">
             <div
                 class="item__offers"
-                v-for="prop in item.SKU_PROPS"
-                :key="prop.ID"
-                ref="sku_line_block"
+                v-for="(prop, index) in item.OFFER_DISPLAY_PROPERTIES"
+                :key="index"
             >
-                <p v-if="wideItem">{{prop.NAME}}</p>
+                <p>{{prop.name}}</p>
                 <ul>
-                    <li
-                        :data-value="value.ID"
-                        @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
-                        v-for="value in prop.VALUES"
-                        :key="value.ID"
-                        :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
-                    >
-                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
-                        <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
+                    <li>
+                        <span>{{prop.value}}</span>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="item__wide-bottom">
+            
             <div class="item__info">
-                <p class="item__name" v-if="!wideItem">{{item.CURRENT.NAME}}</p>
-                <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
-                    <p class="item__price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
-                    <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
+                <p class="item__name" v-if="!wideItem">{{item.NAME}}</p>
+                <template v-for="(price, index) in item.PRICES">
+                    <p class="item__price" :key="price.ID">{{price.PRINT_DISCOUNT_VALUE}}</p>
+                    <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_VALUE}}</p>
                 </template>
                 <p class="item__sale">Еще -10% по акции</p>
             </div>
@@ -79,7 +65,7 @@
                 </div>
                 <button
                     class="item__add-to-cart"
-                    @click.prevent="addToBasket(item.CURRENT.ADD_URL)"
+                    @click.prevent="addToBasket(item.ADD_URL)"
                 >
                     В корзину
                 </button>
@@ -116,7 +102,7 @@ import { mapGetters } from 'vuex'
 import Star from '~/components/catalog/star/star.vue'
 
 export default {
-    mixins: [offers, item],
+    mixins: [item],
     props: {
         item: Object,
         wideItem: {
@@ -184,16 +170,11 @@ export default {
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
-        labelNew() {
-            if (this.item.DISPLAY_PROPERTIES.new)
-                return true;
-            return false;
-        },
         labelSale() {
-            var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
-
-            if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
-                return true;
+            for (let key in this.item.PRICES) {
+                if (this.item.PRICES[key].DISCOUNT_DIFF)
+                    return true;
+            }
             return false;
         }
     },

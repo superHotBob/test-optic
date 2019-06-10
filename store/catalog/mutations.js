@@ -12,4 +12,8 @@ export default {
         state.favorites.items = payload.items;
         state.favorites.count = payload.count;
     },
+    setCompare(state, payload) {
+        state.compare.items = payload.items;
+        state.compare.count = payload.count;
+    },
 }

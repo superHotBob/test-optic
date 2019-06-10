@@ -22,6 +22,13 @@ export default {
         )
     ),
 
+    GET_COMPARE ({ commit, getters }) {
+        return this.$axios.$get(getters.getEndpointCompare)
+                .then((result) => {
+                    commit('setCompare', result);
+                });
+    },
+
     GET_FAVORITES ({ commit, getters }) {
         return this.$axios.$get(getters.getEndpointFavorites)
                 .then((result) => {

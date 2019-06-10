@@ -19,6 +19,22 @@ export default {
         return response;
     },
 
+    async REGISTER({commit, getters}, payload) {
+        let user = await this.$axios.post(
+            getters.getEndpointRegister,
+            qs.stringify({
+                'REGISTER[NAME]':payload.name,
+                'REGISTER[LOGIN]':payload.username,
+                'REGISTER[PASSWORD]':payload.password,
+                'REGISTER[CONFIRM_PASSWORD]':payload.password1,
+                'REGISTER[EMAIL]':payload.email,
+                'REGISTER[PERSONAL_PHONE]':payload.phone,
+                'register_submit_button0':'Y'
+            })
+        );
+        return user;
+    },
+
     async login({commit, getters}, payload) {
         let user = await this.$axios.post(
             getters.getEndpointLogin,

@@ -8,8 +8,13 @@
             </ul>
         </div>
     </div>
-    <section-elements class="main-container catalog__items" :items="items"></section-elements>
-    <item-preview />
+    <template v-if="items.length">
+        <section-elements class="main-container catalog__items" :items="items"></section-elements>
+        <item-preview />
+    </template>
+    <div v-else>
+        Список желаемого пуст
+    </div>
 </div>
 </template>
 
@@ -25,7 +30,11 @@ export default {
     },
     computed: {
         items() {
-            return JSON.parse(JSON.stringify(this.$store.state.catalog.favorites.items));
+            var items = this.$store.state.catalog.favorites.items;
+            
+            if (items)
+                return JSON.parse(JSON.stringify(items));
+            return false;
         }
     },
 }

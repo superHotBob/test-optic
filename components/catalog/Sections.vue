@@ -13,7 +13,6 @@
               <p>Категории</p>
               <ul>
                   <li v-for="(category, index) in section['SECTIONS']" :key="index"><nuxt-link to="#0">{{category.UF_NAME}}</nuxt-link></li>
-                  <li><nuxt-link class="header-categories__view-all" to="#0">... смотреть все категории</nuxt-link></li>
               </ul>
           </div>
           <div class="header-categories__col col2">

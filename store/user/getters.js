@@ -8,6 +8,9 @@ export default {
     getEndpointUser: (state) => {
       return state.endpoint.user;
     },
+    getEndpointRegister: (state) => {
+      return state.endpoint.register;
+    },
     getEndpointUpdate: (state) => {
       return state.endpoint.update;
     },

@@ -91,8 +91,9 @@
                 <sections/>
                 <div class="header-panel">
                     <p>
-                        <nuxt-link to="#0">
+                        <nuxt-link to="/compare">
                             <span>Сравнение</span>
+                            <span v-if="compareCount > 0">{{compareCount}}</span>
                         </nuxt-link>
                     </p>
                     <p>
@@ -385,11 +386,16 @@ export default {
     computed: {
         ...mapGetters({
             isLogged: 'user/isLogged',
-            favoritesCount: 'catalog/getCountFavorites'
+            favoritesCount: 'catalog/getCountFavorites',
+            compareCount: 'catalog/getCountCompare'
         })
     },
     created() {
-        this.$store.dispatch('catalog/GET_FAVORITES');
+        Promise.all([
+            this.$store.dispatch('catalog/GET_FAVORITES'),
+            this.$store.dispatch('catalog/GET_COMPARE')
+        ])
+        
     },
     mounted() {
         window.addEventListener('click', this.documentClick)

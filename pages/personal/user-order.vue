@@ -11,7 +11,8 @@
         </div>
     </div>
     <div class="user-order main-container">
-        <h1>Мой заказ №37, создан 06.06.2019</h1>
+        <h2>Мой заказ №37, создан 06.06.2019</h2>
+        <nuxt-link class="user-order__back mb-3" to="/personal/orders">← Вернуться в список заказов</nuxt-link>
         <div class="user-order__block">
             <div class="user-order__header small">
                 Заказ №37 от 06.06.2019, 1 товар на сумму {{paymentInfo.orderSumm}}
@@ -87,6 +88,19 @@
             <order-delivery :info="deliveryInfo" :items="getBasket.GRID.ROWS"/>
             <order-content :items="getBasket.GRID.ROWS"/>
         </template>
+        <div class="user-order__summary">
+            <div>
+                <p>Товар на:</p>
+                <p>Стоимость доставки:</p>
+                <p>Итого:</p>
+            </div>
+            <div class="ml-3">
+                <p>9 035.46 руб.</p>
+                <p>500 руб.</p>
+                <p>9 535.46 руб.</p>
+            </div>
+        </div>
+        <nuxt-link class="user-order__back mt-3" to="/personal/orders">← Вернуться в список заказов</nuxt-link>
     </div>
 </div>
 </template>
@@ -156,8 +170,23 @@ export default {
 .user-order {
     margin-top: 40px;
     font-size: 13px;
+    > h2 {
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
     a {
         display: inline-block;
+    }
+    &__back {
+        text-decoration: none;
+        color: #000;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: #000;
+        }
     }
     &__block {
         margin-bottom: 20px;
@@ -313,6 +342,16 @@ export default {
     }
     .basket-item__actions {
         justify-content: center;
+    }
+    &__summary {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 15px;
+        text-align: right;
+        p {
+            margin: 0;
+            margin-bottom: 5px;
+        }
     }
 }
 

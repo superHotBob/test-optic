@@ -94,7 +94,7 @@
                 </button>
                 <button 
                     class="item__compare" 
-                     :class="{'active':isCompare(item.ID)}"
+                     :class="{'active':isCompare(item.CURRENT.ID)}"
                     @click.prevent="addCompare(item.CURRENT.COMPARE_URL)"
                 >
                     <svg width="18" height="18" fill="#000"><use href="#svg-compare" /></svg>

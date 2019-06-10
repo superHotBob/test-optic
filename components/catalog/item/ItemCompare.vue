@@ -81,7 +81,7 @@
                 <button 
                     class="item__compare" 
                      :class="{'active':isCompare(item.ID)}"
-                    @click.prevent="addCompare(item.CURRENT.COMPARE_URL)"
+                    @click.prevent="addCompare(item.COMPARE_URL)"
                 >
                     <svg width="18" height="18" fill="#000"><use href="#svg-compare" /></svg>
                     В сравнение

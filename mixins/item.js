@@ -5,7 +5,18 @@ export default {
             this.$store.dispatch('basket/STATE');
         },
         async addCompare(url) {
-            let response = await this.$axios.get(url);
+
+            var response;
+
+            if (this.isCompare(this.item.ID) || this.isCompare(this.item.CURRENT.ID)) {  
+                if (this.item.CURRENT)
+                    response = await this.$axios.get(this.item.CURRENT.COMPARE_DELETE);
+                else 
+                    response = await this.$axios.get(this.item.COMPARE_DELETE);
+            } else {
+                response = await this.$axios.get(url);
+            }
+
             this.$store.dispatch('catalog/GET_COMPARE');
         },
     },

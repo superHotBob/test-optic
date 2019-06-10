@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="s-orders__body p-20">
-                        <nuxt-link class="s-orders__detail mr-auto" to="/personal/orders/order">Подробнее о заказе</nuxt-link>
+                        <nuxt-link class="s-orders__detail mr-auto" to="/personal/orders/1">Подробнее о заказе</nuxt-link>
                         <nuxt-link class="s-orders__repeat" to="#0">Повторить заказ</nuxt-link>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="s-orders__body p-20">
-                        <nuxt-link class="s-orders__detail mr-auto" to="/personal/orders/order">Подробнее о заказе</nuxt-link>
+                        <nuxt-link class="s-orders__detail mr-auto" to="/personal/orders/1">Подробнее о заказе</nuxt-link>
                         <nuxt-link class="s-orders__repeat" to="#0">Повторить заказ</nuxt-link>
                     </div>
                 </div>

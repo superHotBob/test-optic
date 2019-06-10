@@ -9,8 +9,11 @@
         </div>
     </div>
     <div class="main-container catalog__items">
-        <div class="items">
+        <div v-if="items" class="items">
             <item v-for="(item, index) in items" :key="index" :item="item" :wideItem="wideItem" />
+        </div>
+        <div v-else>
+            Список сравнение пуст
         </div>
     </div>
 </div>
@@ -32,7 +35,11 @@ export default {
     },
     computed: {
         items() {
-            return JSON.parse(JSON.stringify(this.$store.state.catalog.compare.items));
+            var items = this.$store.state.catalog.compare.items;
+            
+            if (items)
+                return JSON.parse(JSON.stringify(items));
+            return false;
         }
     },
 }

@@ -32,6 +32,10 @@ export default {
     return false;
   },
   isCompare: (state) => (id) => {
+
+    if (!state.compare.items)
+      return false
+
     if (state.compare.items.hasOwnProperty(id))
       return true;
     return false;

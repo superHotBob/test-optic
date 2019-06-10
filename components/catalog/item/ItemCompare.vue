@@ -6,7 +6,7 @@
 >
     <div class="item__wide-left">
         <div class="item__img">
-            <!-- <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"> -->
+            <img alt="" v-lazy="item.IMAGE">
         </div>
         <div class="item__flags">
             <!-- <span v-if="labelNew" class="item__flag left">NEW</span> -->

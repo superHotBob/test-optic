@@ -40,7 +40,7 @@
                     :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
                 />
                 <span class="card__replies">0 отзывов</span>
-                <button>Добавить отзыв</button>
+                <button type="button" v-scroll-to="'#cardTabs'" @click="addFeedback">Добавить отзыв</button>
             </div>
             <div class="card__available">
                 <span>
@@ -284,7 +284,7 @@
             </div>
         </div>
     </form>
-    <card-tabs class="card__tabs" />
+    <card-tabs class="card__tabs" id="cardTabs"/>
     <ul class="card__usp">
         <li class="card__usp-item">
             <i></i>
@@ -300,27 +300,6 @@
         </li>
     </ul>
 
-    <!-- <div class="item-name" hidden>
-        <p>
-            <nuxt-link :to="{ name: 'element', params: {element: item.CODE }}">
-                {{item.CURRENT.NAME}}
-            </nuxt-link>
-        </p>
-        <div v-if="item.JS_OFFERS">
-            <div v-for="prop in item.SKU_PROPS" :key="prop.ID" ref="sku_line_block">
-                <div>{{prop.NAME}}</div>
-                <ul class="sku-props">
-                    <li :data-value="value.ID" v-on:click="selectOfferProp(prop.ID, value.ID, $event)" v-for="value in prop.VALUES" :key="value.ID">
-                        {{value.NAME}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <p v-for="price in item.CURRENT.ITEM_PRICES" :key="price.ID">
-            {{price.PRINT_RATIO_PRICE}}
-        </p>
-        <button class="btn btn-primary" v-on:click.stop.prevent="addToBasket(item.CURRENT.ADD_URL)">Купить</button>
-    </div> -->
     <div style="display: none;">
         <svg id="svg-click"
             version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.043 512.043" xml:space="preserve">
@@ -386,6 +365,9 @@ export default {
             } else {
                 this.itemAmount--;
             }
+        },
+        addFeedback() {
+            this.$root.$emit('addFeedback');
         },
     },
     computed: {

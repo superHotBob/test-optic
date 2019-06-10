@@ -5,7 +5,7 @@ export default () => ({
         register:'/api/v1/user/register/',
         forgotpassword:'/api/v1/user/forgotpassword/',
         changepassword:'/api/v1/user/changepassword/',
-        logout:'/api/v1/user/?logout=yes',
+        logout:'/api/v1/user/logout/',
         update:'/api/v1/user/update/'
     },
     logged: false,

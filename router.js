@@ -12,6 +12,7 @@ const basket = () => import('~/pages/basket/index').then(m => m.default || m)
 const favorites = () => import('~/pages/favorites/index').then(m => m.default || m)
 const compare = () => import('~/pages/compare/index').then(m => m.default || m)
 const brands = () => import('~/pages/brands/index').then(m => m.default || m)
+const search = () => import('~/pages/search/index').then(m => m.default || m)
 const news = () => import('~/pages/news/index').then(m => m.default || m)
 const newsItem = () => import('~/pages/news/item/index').then(m => m.default || m)
 const advantages = () => import('~/pages/company/advantages/index').then(m => m.default || m)
@@ -53,6 +54,11 @@ export function createRouter () {
                 path: '/personal',
                 name: 'personal',
                 component: personal,
+            },
+            {
+                path: '/search/:pagen(\\d+)?',
+                name: 'search',
+                component: search,
             },
             {
                 path: '/compare',

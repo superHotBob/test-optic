@@ -67,6 +67,37 @@ export default {
         return promise;
     },
 
+    LOAD_SEARCH ({ state }, payload) {
+        var items = false,
+            pagen = 1,
+            pagen_count = 1;
+
+            if (payload.params.pagen)
+                pagen = Number(payload.params.pagen);
+        
+        return this.$axios.get(`/api/v1/catalog/?PAGEN_2=${pagen}&q=${encodeURI(payload.query['q'])}`)
+        .then((response) => {
+
+            if (response.data.section.items) {
+                items = response.data.section.items
+                pagen_count = response.data.section.pagen.count;
+            }
+
+            return {
+                items:items,
+                pagen_count:pagen_count,
+                pagen:pagen
+            }
+        }).catch((e) => {
+            if (e.response.status === 404) {
+                return {
+                    error: e,
+                    statusCode: 404
+                }
+            }
+        })
+    },
+
     LOAD_SECTION ({ state }, payload) {
         var url,
             pagen = 1,

@@ -5,7 +5,7 @@
         Поиск
     </button>
     <label @click="showSearch = true" ref="input" class="textfield light" :class="{'active': showSearch}">
-        <input @input="search($event.target.value)" type="text" placeholder="Поиск...">
+        <input @input="search($event.target.value)" name="q" type="text" placeholder="Поиск...">
         <button class="textfield__icon" type="button">
             <svg width="15" height="15"><use href="#svg-search"/></svg>
             Поиск
@@ -14,13 +14,13 @@
     <ul ref="result" v-show="(showSearch && count)" class="page-header__search-list">
         <li v-for="(item, index) in items" :key="index">
             <nuxt-link
-                :to="{ name: 'element', params: {section: item.SECTION_CODE, element: item.CODE }}"
+                :to="item.URL"
                 v-html="item.CURRENT.NAME"
                 @click.native.prevent="showSearch = false"
             ></nuxt-link>
         </li>
         <li v-if="count > 5" class="page-header__all-results">
-            <nuxt-link to="#0">Все результаты</nuxt-link>
+            <nuxt-link :to="'/search?q='+string">Все результаты</nuxt-link>
         </li>
     </ul>
 </form>
@@ -33,6 +33,7 @@ export default {
         return {
             items: {},
             timer:null,
+            string:'',
             headerSearch: false,
             showSearch: false,
             count: 0
@@ -61,6 +62,7 @@ export default {
             let response = await this.$axios.$get(`/api/v1/catalog/?count=5&q=${search}`);
             this.count = response.section.count;
             this.formatSearch(response.section.items, search);
+            this.string = search;
             this.showSearch = true;
         },
         documentClick(e) {

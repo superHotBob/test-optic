@@ -29,7 +29,7 @@ export default {
                 'REGISTER[CONFIRM_PASSWORD]':payload.password1,
                 'REGISTER[EMAIL]':payload.email,
                 'REGISTER[PERSONAL_PHONE]':payload.phone,
-                'register_submit_button0':'Y'
+                'register_submit_button':'Y'
             })
         );
         return user;

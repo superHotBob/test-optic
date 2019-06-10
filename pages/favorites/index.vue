@@ -8,7 +8,7 @@
             </ul>
         </div>
     </div>
-    <template v-if="items.length">
+    <template v-if="items.length !== 0">
         <section-elements class="main-container catalog__items" :items="items"></section-elements>
         <item-preview />
     </template>

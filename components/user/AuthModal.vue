@@ -53,10 +53,12 @@
         </form>
 
         <form 
+            method="POST"
             ref="form-register"
             v-if="!loginShown && !passwordRecovery"
             @submit.prevent="validateForm('form-register')"
             data-vv-scope="form-register">
+            <div v-if="showErrors" v-html="showErrors" class="alert-danger order-error mb-1"></div>   
             <label class="textfield">
                 <span>Логин</span>
                 <input
@@ -118,7 +120,7 @@
                     data-vv-as="Повторите пароль">
                 <span v-show="errors.has('form-register.password_confirmation')" class="error">{{ errors.first('form-register.password_confirmation') }}</span>
             </label>
-            <button class="auth-modal__submit button black" type="submit">Зарегистрироваться</button>
+            <button class="auth-modal__submit button black" @click.prevent="register" type="submit">Зарегистрироваться</button>
         </form>
 
         <form
@@ -143,6 +145,9 @@
 </template>
 
 <script>
+
+import { Validator } from "vee-validate";
+
 export default {
     data() {
         return {
@@ -154,8 +159,12 @@ export default {
             phone:'',
             remember: false,
             loginShown: true,
-            passwordRecovery: false
+            passwordRecovery: false,
+            showErrors:false
         }
+    },
+    mounted(){
+        
     },
     methods: {
         async login() {
@@ -182,7 +191,15 @@ export default {
                     'phone':this.phone
                 }
             );
-            console.log(response);
+
+            if (response.data.ERRORS) {
+                this.showErrors = response.data.ERRORS;
+            } else {
+                this.showErrors = false;
+                this.$store.dispatch('user/STATE');
+            }
+                
+                
         },
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {

@@ -1,12 +1,12 @@
 <template>
-<form class="page-header__search" aria-label="Поиск">
+<form @submit.prevent="submit($event)" class="page-header__search" aria-label="Поиск" action="/search">
     <button class="btn-icon hidden-desktop" type="button" @click="btnClick" ref="btn">
         <svg width="15" height="15"><use href="#svg-search"/></svg>
         Поиск
     </button>
     <label @click="showSearch = true" ref="input" class="textfield light" :class="{'active': showSearch}">
         <input @input="search($event.target.value)" name="q" type="text" placeholder="Поиск...">
-        <button class="textfield__icon" type="button">
+        <button class="textfield__icon" type="submit">
             <svg width="15" height="15"><use href="#svg-search"/></svg>
             Поиск
         </button>
@@ -40,6 +40,11 @@ export default {
         }
     },
     methods: {
+        submit($event) {
+            var q = $event.target.elements.q.value
+            this.$router.push('/search?q=' + q);
+            this.showSearch = true;
+        },
         search(value) {
             
             if (!!this.timer)
@@ -52,9 +57,10 @@ export default {
         },
         formatSearch(items, input) {
             for (const key in items) {
-                items[key].CURRENT.NAME = items[key].CURRENT.NAME.replace(
-                    new RegExp(input, 'gi'), str => `<span>${str}</span>`
-                )
+                if (items[key].CURRENT)
+                    items[key].CURRENT.NAME = items[key].CURRENT.NAME.replace(
+                        new RegExp(input, 'gi'), str => `<span>${str}</span>`
+                    )
             }
             this.items = items;
         },

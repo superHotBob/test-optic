@@ -47,7 +47,7 @@
                     <svg width="15" height="15" fill="#000"><use href="#svg-layers"/></svg>
                     Доступно Много
                 </span>
-                <button>
+                <button @click="addCompare(item.CURRENT.COMPARE_URL)">
                     <svg width="15" height="15" fill="#000"><use href="#svg-compare2"/></svg>
                     Добавить к сравнению
                 </button>
@@ -102,7 +102,7 @@
                 <button @click="itemAmount++">+</button>
             </div>
             <button class="card__promo-btn" @click="promo.shown = !promo.shown">Доп скидка 10% по промокоду</button>
-            <button class="card__add-to-cart button black">В корзину</button>
+            <button class="card__add-to-cart button black" @click="addToBasket(item.CURRENT.ADD_URL)">В корзину</button>
         </div>
         <div class="card__promo" v-show="promo.shown == true">
             <span>18 471.06 руб.</span>
@@ -342,6 +342,7 @@ import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
 import Star from '~/components/catalog/star/star.vue'
 import CardTabs from '~/components/catalog/element/CardTabs.vue'
+import { mapGetters } from 'vuex'
 
 export default {
     mixins: [offers, item],
@@ -388,6 +389,9 @@ export default {
         },
     },
     computed: {
+        ...mapGetters({
+            isCompare: 'catalog/isCompare'
+        }),
         labelNew() {
             if (this.item.CURRENT.DISPLAY_PROPERTIES.new)
                 return true;

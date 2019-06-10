@@ -20,7 +20,7 @@
             ></nuxt-link>
         </li>
         <li v-if="count > 5" class="page-header__all-results">
-            <nuxt-link :to="'/search?q='+string">Все результаты</nuxt-link>
+            <nuxt-link @click.native.prevent="showSearch = false" :to="'/search?q='+string">Все результаты</nuxt-link>
         </li>
     </ul>
 </form>

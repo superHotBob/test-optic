@@ -20,7 +20,7 @@
 
         <form
             ref="form-login"
-            v-if="loginShown && !passwordRecovery"
+            v-show="loginShown && !passwordRecovery"
             @submit.prevent="validateForm('form-login')"
             data-vv-scope="form-login">
             <label class="textfield">
@@ -54,7 +54,7 @@
 
         <form 
             ref="form-register"
-            v-if="!loginShown && !passwordRecovery"
+            v-show="!loginShown && !passwordRecovery"
             @submit.prevent="validateForm('form-register')"
             data-vv-scope="form-register">
             <label class="textfield">
@@ -123,7 +123,7 @@
 
         <form
             ref="form-recovery"
-            v-if="passwordRecovery"
+            v-show="passwordRecovery"
             @submit.prevent="validateForm('form-recovery')"
             data-vv-scope="form-recovery">
             <label class="textfield">

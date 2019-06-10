@@ -11,12 +11,13 @@
         </div>
     </div>
     <div class="user-order main-container">
+        <h2>Мой заказ №37, создан 06.06.2019</h2>
+        <nuxt-link class="user-order__back mb-3" to="/personal/orders">← Вернуться в список заказов</nuxt-link>
         <div class="user-order__block">
             <div class="user-order__header small">
-                Заказ №37 от 06.06.2019, 1 товар на сумму 9 535.46 руб.
+                Заказ №37 от 06.06.2019, 1 товар на сумму {{paymentInfo.orderSumm}}
             </div>
         </div>
-
         <div class="user-order__block">
             <div class="user-order__header">Информация о заказе</div>
             <div class="user-order__body">
@@ -30,7 +31,7 @@
                     <div class="user-order__info-row">
                         <div><b>vladimir</b></div>
                         <div><b>Принят, ожидается оплата</b></div>
-                        <div><b>9 535.46 руб.</b></div>
+                        <div><b>{{paymentInfo.paySumm}}</b></div>
                         <div>
                             <button class="user-order__repeat btn-simple hidden-desktop mr-2">Повторить заказ</button>
                             <button class="user-order__cancel btn-simple">Отменить</button>
@@ -82,31 +83,86 @@
                 </div>
             </div>
         </div>
-
-        <div class="user-order__block">
-            <div class="user-order__header">Параметры оплаты</div>
-            <div class="user-order__body">
-                <div class="user-order__heading">
-                    <div class="user-order__payment-icon"></div>
-                    <div>
-                        <p>Заказ №37 от 06.06.2019, Принят, ожидается оплата</p>
-                        <p>Сумма заказа: 9 535.46 руб.</p>
-                    </div>
-                </div>
+        <order-payment :info="paymentInfo"/>
+        <template v-if="getBasket.GRID">
+            <order-delivery :info="deliveryInfo" :items="getBasket.GRID.ROWS"/>
+            <order-content :items="getBasket.GRID.ROWS"/>
+        </template>
+        <div class="user-order__summary">
+            <div>
+                <p>Товар на:</p>
+                <p>Стоимость доставки:</p>
+                <p>Итого:</p>
+            </div>
+            <div class="ml-3">
+                <p>9 035.46 руб.</p>
+                <p>500 руб.</p>
+                <p>9 535.46 руб.</p>
             </div>
         </div>
+        <nuxt-link class="user-order__back mt-3" to="/personal/orders">← Вернуться в список заказов</nuxt-link>
     </div>
 </div>
 </template>
 
 <script>
+import OrderPayment from '~/components/personal/OrderPayment.vue'
+import OrderDelivery from '~/components/personal/OrderDelivery.vue'
+import OrderContent from '~/components/personal/OrderContent.vue'
+
+import basket from '~/mixins/basket/basket.js' // для примера данных предметов
+
 export default {
     middleware: 'auth',
+    mixins: [basket],
     data() {
         return {
             showInfo: false,
+            paymentInfo: {
+                systems: {
+                    0: {
+                        name: 'PayPal',
+                        img: 'http://14.esobolev.ru//upload/sale/paysystem/logotip/569/56957ce1e60b58571eaccb8554657f20.png',
+                        value: 2,
+                        selected: true,
+                    },
+                    1: {
+                        name: 'WebMoney',
+                        img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/890/300_300_1/89021eff8040b03e19c72a2370b83dc0.png',
+                        value: 4,
+                        selected: false,
+                    },
+                    2: {
+                        name: 'Наличный расчет',
+                        img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/2a3/300_300_1/2a3a6059c18ace49d72a524f19ea1744.png',
+                        value: 3,
+                        selected: false,
+                    },
+                },
+                paid: false,
+                orderSumm: '9 535.46 руб.',
+                paySumm: '9 535.46 руб.',
+            },
+            deliveryInfo: {
+                cost: '500 руб.',
+                system: {
+                    name: 'Доставка курьером',
+                    img: 'https://home-optic.ru/upload/sale/delivery/logotip/138/1382eb4390d1fcf8e248af9508c52f7b.png',
+                },
+                status: 'Ожидает обрабоки',
+            },
+            items: {
+                0: {
+                    name: 'Оправа Brendel 902145-50',
+                }
+            }
         }
-    }
+    },
+    components: {
+        OrderPayment,
+        OrderDelivery,
+        OrderContent,
+    },
 }
 </script>
 
@@ -114,8 +170,23 @@ export default {
 .user-order {
     margin-top: 40px;
     font-size: 13px;
+    > h2 {
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
     a {
         display: inline-block;
+    }
+    &__back {
+        text-decoration: none;
+        color: #000;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: #000;
+        }
     }
     &__block {
         margin-bottom: 20px;
@@ -215,11 +286,72 @@ export default {
             }
         }
     }
+    &__heading {
+        display: flex;
+        align-items: center;
+        p {
+            margin: 0;
+            font-size: 15px;
+        }
+    }
     &__payment-icon {
-        display: inline-block;
+        flex-shrink: 0;
         width: 46px;
         height: 54px;
+        margin-right: 5px;
         background: url('~assets/images/icons/sale-personal-order-payment-options.svg') no-repeat center;
+    }
+    &__info {
+        display: flex;
+        width: 100%;
+        margin: 20px 0;
+        img {
+            align-self: center;
+            flex-shrink: 0;
+            width: 170px;
+            height: 50px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        p {
+            margin-bottom: 0;
+            color: #4a4a4a;
+        }
+        b {
+            margin-right: 6px;
+            font-size: 14px;
+            color: #000;
+        }
+        .s-orders__status {
+            margin: 0;
+        }
+    }
+    .cart__heading {
+        margin-top: 0;
+    }
+    .cart__items {
+        margin-bottom: 10px;
+    }
+    .s-orders__change,
+    .btn-simple {
+        text-decoration: underline;
+    }
+    .basket-item__actions,
+    .cart__actions {
+        width: 100px;
+    }
+    .basket-item__actions {
+        justify-content: center;
+    }
+    &__summary {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 15px;
+        text-align: right;
+        p {
+            margin: 0;
+            margin-bottom: 5px;
+        }
     }
 }
 
@@ -266,6 +398,33 @@ export default {
                     padding: 0;
                     text-align: right;
                 }
+            }
+        }
+        .basket-item__actions,
+        .cart__actions {
+            width: 100%;
+        }
+        .basket-item__actions {
+            justify-content: flex-start;
+        }
+    }
+}
+@media (max-width: 500px) {
+    .user-order {
+        &__heading {
+            p {
+                font-size: 14px;
+            }
+        }
+        &__info {
+            margin: 10px 0;
+            img {
+                margin: 0;
+                margin-bottom: 10px;
+            }
+            flex-wrap: wrap;
+            p {
+                width: 100%;
             }
         }
     }

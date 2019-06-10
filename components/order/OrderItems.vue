@@ -21,8 +21,6 @@
                             <template v-for="value in prop.SKU_VALUES_LIST">
                                 <li
                                     :data-value="value.ID"
-                                    
-                                    @click.prevent="changeOffer(item.ID, prop.CODE, value.VALUE_ID)"
                                     v-if="value.SELECTED"
                                     :key="value.ID"
                                     :class="{'img': value.PICT}"

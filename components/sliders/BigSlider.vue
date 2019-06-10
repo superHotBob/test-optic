@@ -34,6 +34,7 @@ export default {
                 loop: true,
                 slidesPerView: 2,
                 spaceBetween: 0,
+                preventClicks: false,
                 autoplay: {
                     delay: 5000,
                 },

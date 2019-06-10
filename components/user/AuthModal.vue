@@ -26,12 +26,12 @@
             <label class="textfield">
                 <span>Логин</span>
                 <input
-                    name="name"
+                    name="username"
                     type="text"
                     v-model="username"
                     v-validate="'required'"
                     data-vv-as="Логин">
-                <span v-show="errors.has('form-login.name')" class="error">{{ errors.first('form-login.name') }}</span>
+                <span v-show="errors.has('form-login.username')" class="error">{{ errors.first('form-login.username') }}</span>
             </label>
             <label class="textfield">
                 <span>Пароль</span>
@@ -62,10 +62,40 @@
                 <input
                     v-validate="'required'"
                     v-model="username"
-                    name="name"
+                    name="username"
                     type="text"
                     data-vv-as="Логин">
+                <span v-show="errors.has('form-register.username')" class="error">{{ errors.first('form-register.username') }}</span>
+            </label>
+            <label class="textfield">
+                <span>Имя</span>
+                <input
+                    v-validate="'required'"
+                    v-model="name"
+                    name="name"
+                    type="text"
+                    data-vv-as="Имя">
                 <span v-show="errors.has('form-register.name')" class="error">{{ errors.first('form-register.name') }}</span>
+            </label>
+            <label class="textfield">
+                <span>E-mail</span>
+                <input
+                    v-validate="'required'"
+                    v-model="email"
+                    name="email"
+                    type="text"
+                    data-vv-as="E-mail">
+                <span v-show="errors.has('form-register.email')" class="error">{{ errors.first('form-register.email') }}</span>
+            </label>
+            <label class="textfield">
+                <span>Телефон</span>
+                <input
+                    v-validate="'required'"
+                    v-model="phone"
+                    name="phone"
+                    type="text"
+                    data-vv-as="Телефон">
+                <span v-show="errors.has('form-register.phone')" class="error">{{ errors.first('form-register.phone') }}</span>
             </label>
             <label class="textfield">
                 <span>Пароль</span>
@@ -121,6 +151,7 @@ export default {
             passwordConfirmation: '',
             email:'',
             name:'',
+            phone:'',
             remember: false,
             loginShown: true,
             passwordRecovery: false

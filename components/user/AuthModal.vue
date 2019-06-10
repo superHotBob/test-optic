@@ -119,6 +119,8 @@ export default {
             username: '',
             password: '',
             passwordConfirmation: '',
+            email:'',
+            name:'',
             remember: false,
             loginShown: true,
             passwordRecovery: false
@@ -126,9 +128,30 @@ export default {
     },
     methods: {
         async login() {
-            let response = await this.$store.dispatch('user/login',{'username':this.username, 'password':this.password, 'remember':this.remember});
+            let response = await this.$store.dispatch(
+                'user/login',
+                {
+                    'username':this.username, 
+                    'password':this.password, 
+                    'remember':this.remember
+                }
+            );
             this.$root.$emit('login/logout');
             this.$router.push({ name: 'main'});
+        },
+        async register() {
+            let response = await this.$store.dispatch(
+                'user/REGISTER',
+                {
+                    'username':this.username, 
+                    'name':this.name,
+                    'password':this.password, 
+                    'password1':this.passwordConfirmation,
+                    'email':this.email,
+                    'phone':this.phone
+                }
+            );
+            console.log(response);
         },
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {

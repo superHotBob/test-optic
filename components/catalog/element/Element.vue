@@ -27,7 +27,7 @@
                     Твиттер
                 </a>
             </div>
-            <p class="card__article">Артикул: {{item.DISPLAY_PROPERTIES.articul.VALUE}}</p>
+            <p v-if="item.DISPLAY_PROPERTIES.articul" class="card__article">Артикул: {{item.DISPLAY_PROPERTIES.articul.VALUE}}</p>
             <div class="card__rating">
                 <star
                     class="rating"

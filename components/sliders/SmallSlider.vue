@@ -11,9 +11,9 @@
             <div class="swiper-lazy-preloader"></div>
             <div class="banner-card__over">
                 <p>{{item.name}}</p>
-                <span v-if="date">
+                <span v-if="item.date">
                     <svg width="13" height="13"><use href="#svg-calendar"/></svg>
-                    03/08/2016
+                    {{item.date}}
                 </span>
             </div>
         </nuxt-link>

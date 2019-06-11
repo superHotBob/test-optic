@@ -1,9 +1,29 @@
 <template>
-<div class="main-container custom-page">
+<div>
+  <div class="content-header">
+      <div class="main-container">
+          <h2>Оригинальная продукция</h2>
+          <ul class="breadcrumbs">
+              <li><nuxt-link to="/">Главная</nuxt-link></li>
+          </ul>
+      </div>
+  </div>
+  <div class="main-container custom-page">
     <p>
       Мы представляем только оригинальную продукцию мировых брендов. Оригинальность товаров каждого бренда подтверждена сертификатами соответствия, регистрационными удостоверениями и декларациями о соответствии, которые Вы можете запросить у нас, обратившись на почту
       <a href="mailto:info@home-optic.ru">info@home-optic.ru</a>, или посетив наш салон оптики.
     </p>
     <p>Вы можете быть абсолютно уверены, что у нас нет подделок. Вы приобретете оригинальный товар именно того бренда, который заявлен в информации на нашем сайте.</p>
+  </div>
 </div>
 </template>
+
+<script>
+export default {
+    head() {
+        return {
+            title: 'Оригинальная продукция'
+        }
+    }
+}
+</script>

@@ -95,14 +95,14 @@
 
 <script>
 
-import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
+import util from '~/mixins/util.js'
 import { mapGetters } from 'vuex'
 
 import Star from '~/components/catalog/star/star.vue'
 
 export default {
-    mixins: [item],
+    mixins: [item,util],
     props: {
         item: Object,
         wideItem: {

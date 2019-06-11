@@ -1,13 +1,16 @@
 <template>
 <div class="news-preview">
-    <a class="news-preview__top-link" href="/news/item">
+     <nuxt-link v-if="item.code"
+        class="news-preview__top-link"
+        :to="{path: '/news/' + item.code}"
+    >
         <div class="news-preview__img">
-            <img :src="item.imgUrl" alt="">
+            <img :src="item.src" alt="">
         </div>
         <b>{{item.name}}</b>
-    </a>
+    </nuxt-link>
     <div class="news-preview__stats">
-        <span class="news-preview__stat">
+        <span v-if="item.date" class="news-preview__stat">
             <svg width="12" height="12"><use href="#svg-calendar"/></svg>
             {{item.date}}
         </span>
@@ -16,11 +19,14 @@
             {{item.comments}}
         </span>
     </div>
-    <p>{{item.shortDesc}}</p>
-    <a class="news-preview__read-more" href="#0">
+    <p>{{item.description}}</p>
+    <nuxt-link v-if="item.code"
+        class="news-preview__read-more"
+        :to="{path: '/news/' + item.code}"
+    >
         Читать далее
         <svg width="15" height="8"><use href="#svg-arrow-right"/></svg>
-    </a>
+    </nuxt-link>
 </div>
 </template>
 

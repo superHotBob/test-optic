@@ -5,7 +5,7 @@
             class="swiper-slide banner-card"
             v-for="(item, index) in items" :key="index"
             :class="{'s-date': date}"
-            :to="{ path: item.properties.link.value }"
+            :to="{ path: getUrl(index) }"
         >
             <img class="swiper-lazy" alt="" :data-src="item.src">
             <div class="swiper-lazy-preloader"></div>
@@ -47,6 +47,14 @@ export default {
                 },
                 breakpoints: this.$props.breakpoints,
             }
+        }
+    },
+    methods: {
+        getUrl(index) {
+            if (this.items[index].properties)
+                if (this.items[index].properties.link)
+                    return this.items[index].properties.link.value;
+            return '/news/' + this.items[index].code;
         }
     },
 }

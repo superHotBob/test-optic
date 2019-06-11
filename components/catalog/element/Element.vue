@@ -27,7 +27,7 @@
                     Твиттер
                 </a>
             </div>
-            <p class="card__article">Артикул: 18000</p>
+            <p class="card__article">Артикул: {{item.DISPLAY_PROPERTIES.articul.VALUE}}</p>
             <div class="card__rating">
                 <star
                     class="rating"
@@ -284,7 +284,7 @@
             </div>
         </div>
     </form>
-    <card-tabs class="card__tabs" id="cardTabs"/>
+    <card-tabs class="card__tabs" :properties="item.DISPLAY_PROPERTIES" :description="item.DETAIL_TEXT" id="cardTabs"/>
     <ul class="card__usp">
         <li class="card__usp-item">
             <i></i>
@@ -375,8 +375,11 @@ export default {
             isCompare: 'catalog/isCompare'
         }),
         labelNew() {
-            if (this.item.CURRENT.DISPLAY_PROPERTIES.new)
+            if (this.item.DISPLAY_PROPERTIES.new)
                 return true;
+            if (this.item.CURRENT.DISPLAY_PROPERTIES)
+                if (this.item.CURRENT.DISPLAY_PROPERTIES.new)
+                    return true;
             return false;
         },
         labelSale() {

@@ -96,12 +96,12 @@ export function createRouter () {
                 component: brands,
             },
             {
-                path: '/news',
+                path: '/news/:pagen(\\d+)?',
                 name: 'news',
                 component: news,
             },
             {
-                path: '/news/item',
+                path: '/news/:element',
                 name: 'newsItem',
                 component: newsItem,
             },
@@ -203,6 +203,14 @@ export function createRouter () {
                         path: ':element',
                         name: 'element',
                         component: element,
+                    },
+                    {
+                        path: ':element/specifications',
+                        name: 'e_specifications',
+                        component: element,
+                        meta: {
+                            title: ' - Характеристики'
+                        }
                     },
                     {
                         path: 'filter/:filter(.*)*/apply/:pagen?',

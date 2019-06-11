@@ -39,7 +39,7 @@
         <div class="index-grid__blog">
             <h2>Блог</h2>
             <small-slider
-                :items="topItems"
+                :items="blogItems"
                 :breakpoints="indexBlogBps"
                 :date="true"
             />

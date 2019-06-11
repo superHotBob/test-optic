@@ -22,16 +22,22 @@ export default {
         Detail
     },
     asyncData({ params, $axios, error }) {
+
         return $axios.get(`/api/v1/catalog/${params.section}/${params.element}/`).then((response) => {
-            console.log(response.data)
             return {
-                element:response.data.element
+                element:response.data.element,
+                seometa:response.data.seometa,
             }
         }).catch((e) => {
             if (e.response.status === 404) {
                 error({ statusCode: 404, message: e.message })
             }
         })
+    },
+    head() {
+        return {
+            title: this.seometa.title
+        }
     }
 }
 </script>

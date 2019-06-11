@@ -46,7 +46,8 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '~/modules/routers',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    ['vue-scrollto/nuxt', { duration: 1000 }],
   ],
   bootstrapVue: {
     bootstrapCSS: false, // Or `css: false`

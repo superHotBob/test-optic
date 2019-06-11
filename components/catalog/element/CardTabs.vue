@@ -244,6 +244,12 @@ export default {
                 }
             }
         },
+        openComments() {
+            for (let key in this.tabs) {
+                this.tabs[key].show = false
+            }
+            this.tabs[6].show = true
+        },
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {
                 if (result) {
@@ -251,6 +257,11 @@ export default {
                 }
             });
         },
+    },
+    mounted() {
+        this.$root.$on('addFeedback', result => { 
+            this.openComments();
+        })
     },
 }
 </script>

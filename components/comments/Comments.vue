@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="validateForm('form-feedback')" data-vv-scope="form-feedback" ref="form-feedback">
+        <form v-if="isLogged" @submit.prevent="validateForm('form-feedback')" data-vv-scope="form-feedback" ref="form-feedback">
             <input type="hidden" name="IBLOCK_ID" value="1"/>
             <input type="hidden" name="SITE_ID" value="s1"/>
             <input type="hidden" name="post" value="Y"/>
@@ -89,6 +89,7 @@ export default {
             sessid: 'user/getSessid',
             user: 'user/getName',
             email: 'user/getEmail',
+            isLogged: 'user/isLogged',
         })
     },
     mounted() {

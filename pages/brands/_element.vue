@@ -13,15 +13,16 @@
             <div class="brand__img">
                 <img v-lazy="item.src" alt="">
             </div>
-            <div class="brand__text" v-html="item.detail_text"></div>
+            <div class="brand__text" v-html="item.detail_text"></div> 
         </div>
         <div class="main-container brand__item-slider">
-            <item-slider items="recommended"/>
+            <item-slider items="recommended" :elements="items">Товары {{item.name}}</item-slider>
         </div>
     </div>
 </template>
 
 <script>
+
 import ItemSlider from '~/components/sliders/ItemSlider.vue'
 
 export default {
@@ -40,7 +41,7 @@ export default {
 
             if (response[0].data.items[0]) {
                 item = response[0].data.items[0];
-                items = response[1].data,section.items;
+                items = response[1].data.section.items;
             }
             else
                 error({ statusCode: 404, message: '404' })

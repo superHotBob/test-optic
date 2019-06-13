@@ -2,9 +2,9 @@
 <div class="item-slider">
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
         <div v-if="items == 'recommended'">
-            <p class="simple active">Рекоммендуем вам</p>
+            <p class="simple active"><slot>Рекоммендуем вам</slot></p>
         </div>
-        <div class="swiper-wrapper"  v-else>
+        <div class="swiper-wrapper" v-else>
             <p
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'newItems'}"
@@ -47,6 +47,7 @@ export default {
     props: {
         breakpoints: {},
         items: '',
+        elements: {}
     },
     data () {
         return {
@@ -88,6 +89,10 @@ export default {
     },
     computed: {
         returnItems() {
+
+            if (this.elements)
+                return this.elements;
+
             if (this.items == 'recommended')
                 return this.bestsellers; // нужно подставить правильный геттер
 

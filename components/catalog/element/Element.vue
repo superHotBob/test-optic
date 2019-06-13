@@ -39,7 +39,8 @@
                     :round-start-rating="false"
                     :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
                 />
-                <span class="card__replies">0 отзывов</span>
+                <span v-if="item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT" class="card__replies">{{item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT.VALUE}} отзывов</span>
+                <span v-else>(0)</span>
                 <button type="button" v-scroll-to="'#cardTabs'" @click="addFeedback">Добавить отзыв</button>
             </div>
             <div class="card__available">

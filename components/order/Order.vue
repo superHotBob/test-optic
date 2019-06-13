@@ -17,9 +17,9 @@
             </div>
             <div v-else role="tablist">
                 <order-items />
-                <person-type :personType="order.PERSON_TYPE" :promocode="promocode"/>
-                <delivery :delivery="order.DELIVERY" :promocode="promocode" />
-                <pay-system class="order__pay-system" :paysystem="order.PAY_SYSTEM" :promocode="promocode" />
+                <person-type v-if="getBasket.COUPON_LIST" :personType="order.PERSON_TYPE" :promocode="getBasket.COUPON_LIST"/>
+                <delivery v-if="getBasket.COUPON_LIST" :delivery="order.DELIVERY" :promocode="getBasket.COUPON_LIST" />
+                <pay-system v-if="getBasket.COUPON_LIST" class="order__pay-system" :paysystem="order.PAY_SYSTEM" :promocode="getBasket.COUPON_LIST" />
                 <properties />
             </div>
             <div class="order__submit hidden-mobile">
@@ -91,8 +91,7 @@ export default {
     },
     data() {
         return {
-            orderId: false,
-            promocode: [],
+            orderId: false
         }
     },
     methods: {

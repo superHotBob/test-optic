@@ -26,9 +26,12 @@
         <div class="cart__bottom">
             <div class="cart__promocode">
                 <label class="textfield">
-                    <input name="promocode" type="text" placeholder="Код купона для скидки">
+                    <input name="promocode" v-model="promocode" type="text" placeholder="Код купона для скидки">
                 </label>
-                <button class="button black">Применить</button>
+                <button class="button black" @click="addPromocode()">Применить</button>
+                <div v-for="(coupon, index) in getBasket.COUPON_LIST" :key="index">
+                    <span @click="delPromo(coupon.COUPON)">{{coupon.COUPON}} - {{coupon.STATUS_TEXT}}</span>
+                </div>
             </div>
             <div class="cart__summary">
                 <p>
@@ -68,6 +71,7 @@ export default {
     mixins: [basket],
     data() {
         return {
+            promocode:'',
             postponed: false,
         }
     },
@@ -79,7 +83,14 @@ export default {
 
     },
     methods: {
-
+        addPromocode() {
+            if (this.promocode != '') {
+                this.$store.dispatch('basket/ADD_COUPON', this.promocode);
+            }    
+        },
+        delPromo(text) {
+            this.$store.dispatch('basket/ADD_COUPON', text);
+        }
     },
 }
 </script>

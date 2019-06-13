@@ -36,7 +36,7 @@ export default {
       // if (locations[key].VALUE == payload.code)
         if (locations[key].LOCATION.NAME)
           return locations[key].LOCATION.NAME;
-        return false;
+        return '';
     }
   },
   getLocationList: (state) => {

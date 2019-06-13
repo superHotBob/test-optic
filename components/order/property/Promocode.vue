@@ -7,8 +7,10 @@
             <span class="promofield__button" @click="addPromocode"></span>
         </div>
     </label>
-    <ul v-if="promocode.length">
-        <li v-for="(code, index) in promocode" :key="index">{{code}}<span class="delete" @click="delPromo(code)"></span>
+    <ul v-if="promocode">
+        <li v-for="(code, index) in promocode" :key="index">
+            {{code.COUPON}}
+            <span class="delete" @click="delPromo(code.COUPON)"></span>
         </li>
     </ul>
 </div>

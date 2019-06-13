@@ -11,14 +11,14 @@ export default {
                         'sph':props.elements['left-sph'].value,
                         'cyl':props.elements['left-cyl'].value,
                         'ax':props.elements['left-ax'].value,
-                        'add':props.elements['left-add'].value
+                        'add':props.elements['left-add'].value,
                     },
                     'right': {
                         'sph':props.elements['right-sph'].value,
                         'cyl':props.elements['right-cyl'].value,
                         'ax':props.elements['right-ax'].value,
-                        'add':props.elements['right-add'].value
-                    }
+                        'add':props.elements['right-add'].value,
+                    },
                 }
             }
             
@@ -27,8 +27,6 @@ export default {
                     query += `&${key}[${name}]=${params[key][name]}`;
                 }
             }
-
-            console.log(query);
 
             let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}${query}`);
             this.$store.dispatch('basket/STATE');

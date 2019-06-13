@@ -30,17 +30,31 @@
                     </ul>
                 </div>
             </template>
+            <template  v-for="(prop, index) in item.PROPS">
+                <div
+                    class="item__offers"
+                    :key="index"
+                    v-if="prop.CODE == 'left' || prop.CODE == 'right'"
+                >
+                    <p>{{prop.NAME}}</p>
+                    <ul>
+                        <li class="selected">
+                            <span>sph: {{getPropValue(prop['~VALUE']).sph}}</span>
+                        </li>
+                        <li class="selected">
+                            <span>cyl: {{getPropValue(prop['~VALUE']).cyl}}</span>
+                        </li>
+                        <li class="selected">
+                            <span>ax: {{getPropValue(prop['~VALUE']).ax}}</span>
+                        </li>
+                        <li class="selected">
+                            <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </template>
         </div>
     </div>
-    <template  v-for="(prop, index) in item.PROPS">
-        <div :key="index" v-if="prop.CODE == 'left' || prop.CODE == 'right'">
-            <div>{{prop.NAME}}</div>
-            <div>{{getPropValue(prop['~VALUE']).sph}}</div>
-            <div>{{getPropValue(prop['~VALUE']).cyl}}</div>
-            <div>{{getPropValue(prop['~VALUE']).ax}}</div>
-            <div>{{getPropValue(prop['~VALUE']).add}}</div>
-        </div>
-    </template>
     
     <div class="basket-item__price">{{item.PRICE_FORMATED}}</div>
     <div class="basket-item__discount" v-if="postponed">{{item.DISCOUNT_PRICE_PERCENT_FORMATED}}</div>

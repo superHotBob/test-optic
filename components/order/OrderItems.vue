@@ -31,6 +31,29 @@
                             </template>
                         </ul>
                     </div>
+                    <template  v-for="(prop, index) in item.PROPS">
+                        <div
+                            class="item__offers"
+                            :key="index"
+                            v-if="prop.CODE == 'left' || prop.CODE == 'right'"
+                        >
+                            <p>{{prop.NAME}}</p>
+                            <ul>
+                                <li>
+                                    <span>sph: {{getPropValue(prop['~VALUE']).sph}}</span>
+                                </li>
+                                <li>
+                                    <span>cyl: {{getPropValue(prop['~VALUE']).cyl}}</span>
+                                </li>
+                                <li>
+                                    <span>ax: {{getPropValue(prop['~VALUE']).ax}}</span>
+                                </li>
+                                <li>
+                                    <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
                 </div>
             </div>
             <div class="basket-item__o-quantity">
@@ -50,5 +73,10 @@ import basket from '~/mixins/basket/basket.js'
 
 export default {
     mixins: [basket],
+    methods: {
+        getPropValue(value) {
+            return JSON.parse(value);
+        }
+    },
 }
 </script>

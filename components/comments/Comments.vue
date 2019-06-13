@@ -30,7 +30,6 @@
                 :page-count="pageCount"
                 :classes="paginationClasses"
                 :labels="customLabels"
-                @change="onChangePagen"
             />
         </div>
     </div>
@@ -55,6 +54,9 @@ export default {
                 }
             });
         },
+        loadComments() {
+            
+        }
     },
     data() {
         return {
@@ -78,6 +80,9 @@ export default {
     },
     computed: {
         commentsPage() {
+            if (!this.comments)
+                return false;
+
             return this.comments[this.pagen];
         },
         ...mapGetters({
@@ -90,6 +95,10 @@ export default {
         this.$axios.post(`/api/v1/comments/?IBLOCK_ID=${this.iblock_id}&ELEMENT_ID=${this.element_id}&SITE_ID=s1`, qs.stringify({'sessid':this.sessid}))
         .then((response) => {
             this.comments = response.data.comments;
+
+            if (response.data.page == 0) 
+                this.page = 0;
+
             this.pageCount = response.data.page;
         })
     }

@@ -59,9 +59,9 @@
     <div class="brands main-container">
         <div class="brands__header">
             <h2>Бренды</h2>
-            <nuxt-link class="brands__see-all" to="#0">Смотреть все бренды</nuxt-link>
+            <nuxt-link class="brands__see-all" to="/brands">Смотреть все бренды</nuxt-link>
         </div>
-        <brands-slider :breakpoints="brandsBps" />
+        <brands-slider :breakpoints="brandsBps" :items="brandItems"/>
     </div>
     <div class="features main-container">
         <ul>

@@ -10,52 +10,65 @@
     </div>
     <div class="main-container">
         <div class="p-brands">
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/brendel.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/essilor.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/fineline.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/freigeist.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/humphreys.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/jos.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/marcopolo.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/mekk.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/ocean-blue.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/rodenstock.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/seiko-vision.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/titanflex.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/titanflex-kids.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/titanflex-selection.jpg" alt="">
-            </nuxt-link>
-            <nuxt-link to="#0">
-                <img src="~/assets/images/brands/younger-optics.jpg" alt="">
+            <nuxt-link :to="'/brands/'+item.code" v-for="(item, index) in items" :key="index">
+                <img v-lazy="item.src" alt="">
             </nuxt-link>
         </div>
+        <pagination
+            class="d-flex justify-content-center flex-wrap"
+            v-model="pagen"
+            :page-count="pagen_count"
+            :classes="paginationClasses"
+            :labels="customLabels"
+            @change="onChangePagen"
+        />
     </div>
 </div>
 </template>
+
+<script>
+
+import Pagination from '~/components/Pagination.vue'
+
+export default {
+    async asyncData({ store, error, params }) {
+        let response = await store.dispatch('catalog/LOAD_BRANDS', {'params':params})
+
+        if (response.hasOwnProperty('error'))
+            error({ statusCode: response.statusCode, message: response.error.message })
+
+        return {
+            items:response.items,
+            pagen_count:response.pagen_count,
+            pagen:response.pagen
+        }
+    },
+    methods: {
+        onChangePagen: function () {
+            this.$router.push({ name: this.$route.name, params:{pagen:this.pagen}});
+        },
+    },
+    data() {
+        return {
+            paginationClasses: {
+                ul: 'pagination',
+                li: 'pagination__li',
+                liActive: 'active',
+                liDisable: 'disabled',
+                button: 'pagination__btn'
+            },
+            customLabels: {
+                first: 'First',
+                prev: 'Previous',
+                next: 'Next',
+                last: 'Last'
+            },
+        }
+    },
+    components: {
+        Pagination
+    },
+}
+</script>
+
+

@@ -36,6 +36,37 @@ export default {
                 });
     },
     
+    LOAD_BRANDS ({ state }, payload) {
+        var items = false,
+            pagen = 1,
+            pagen_count = 1;
+
+            if (payload.params.pagen)
+                pagen = Number(payload.params.pagen);
+        
+        return this.$axios.get(`/api/v1/iblock/list/?iblock=8&properties[0]=name&count=18&PAGEN_1=${pagen}`)
+        .then((response) => {
+
+            if (response.data.items) {
+                items = response.data.items
+                pagen_count = response.data.pagen.count;
+            }
+
+            return {
+                items:items,
+                pagen_count:pagen_count,
+                pagen:pagen
+            }
+        }).catch((e) => {
+            if (e.response.status === 404) {
+                return {
+                    error: e,
+                    statusCode: 404
+                }
+            }
+        })
+    },
+
     LOAD_NEWS ({ state }, payload) {
         var items = false,
             pagen = 1,
@@ -68,19 +99,21 @@ export default {
     },
 
     async SERVICE () {
-        let [swiperData, topData, banerData, bottomData, blogData] = await Promise.all([
+        let [swiperData, topData, banerData, bottomData, blogData, brandData] = await Promise.all([
             this.$axios.get(`/api/v1/iblock/list/?iblock=2&properties[0]=name`),
             this.$axios.get(`/api/v1/iblock/list/?iblock=5&count=3&properties[0]=link&filter[PROPERTY_position_VALUE]=top`),
             this.$axios.get(`/api/v1/iblock/list/?iblock=4&count=1&properties[0]=link`),
             this.$axios.get(`/api/v1/iblock/list/?iblock=5&count=2&properties[0]=link&filter[PROPERTY_position_VALUE]=bottom`),
-            this.$axios.get(`/api/v1/iblock/list/?iblock=7&properties[0]=name&count=3`)
+            this.$axios.get(`/api/v1/iblock/list/?iblock=7&properties[0]=name&count=3`),
+            this.$axios.get(`/api/v1/iblock/list/?iblock=8&properties[0]=name&count=20`)
         ])
         return {
             swiperItems: swiperData.data.items,
             topItems: topData.data.items,
             banerItems: banerData.data.items,
             bottomItems: bottomData.data.items,
-            blogItems: blogData.data.items
+            blogItems: blogData.data.items,
+            brandItems: brandData.data.items,
         }
     },
 

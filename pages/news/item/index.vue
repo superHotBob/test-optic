@@ -2,7 +2,7 @@
 <div>
     <div class="content-header">
         <div class="main-container">
-            <h2>Новость</h2>
+            <h2>{{item.name}}</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
                 <li><nuxt-link to="/news">Новости</nuxt-link></li>

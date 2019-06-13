@@ -12,6 +12,7 @@ const basket = () => import('~/pages/basket/index').then(m => m.default || m)
 const favorites = () => import('~/pages/favorites/index').then(m => m.default || m)
 const compare = () => import('~/pages/compare/index').then(m => m.default || m)
 const brands = () => import('~/pages/brands/index').then(m => m.default || m)
+const e_brands = () => import('~/pages/brands/_element').then(m => m.default || m)
 const search = () => import('~/pages/search/index').then(m => m.default || m)
 const news = () => import('~/pages/news/index').then(m => m.default || m)
 const newsItem = () => import('~/pages/news/item/index').then(m => m.default || m)
@@ -91,9 +92,14 @@ export function createRouter () {
                 component: favorites,
             },
             {
-                path: '/brands',
+                path: '/brands/:pagen(\\d+)?',
                 name: 'brands',
                 component: brands,
+            },
+            {
+                path: '/brands/:element',
+                name: 'e_brands',
+                component: e_brands,
             },
             {
                 path: '/news/:pagen(\\d+)?',

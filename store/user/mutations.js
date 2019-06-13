@@ -2,6 +2,7 @@ export default {
     setUser(state, payload) {
         state.user = payload.user;
         state.logged = payload.logged;
+        state.sessid = payload.sessid;
     },
     setName(state, payload) {
         state.user.name = payload;

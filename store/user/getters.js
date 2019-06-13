@@ -59,4 +59,7 @@ export default {
 
       return state.user.active;
     },
+    getSessid: (state) => {
+      return state.sessid;
+    },
 }

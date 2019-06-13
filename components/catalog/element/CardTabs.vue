@@ -68,19 +68,9 @@
                 Чтобы оставить комментарий,
                 <button class="btn-simple" @click="$bvModal.show('auth-modal')">авторизируйтесь</button>.
             </p>
-            <form v-else @submit.prevent="validateForm('form-feedback')" data-vv-scope="form-feedback" ref="form-feedback">
-                <label class="textfield half">
-                    <input name="name" type="text" placeholder="Ваше имя">
-                </label>
-                <label class="textfield half">
-                    <input v-validate="'required|email'" name="email" type="text" data-vv-as="Электронная почта" placeholder="Эл.почта">
-                    <span v-show="errors.has('form-feedback.email')" class="error">{{ errors.first('form-feedback.email') }}</span>
-                </label>
-                <label class="textfield">
-                    <textarea name="textarea" cols="30" rows="10" placeholder="Текст комментария" required></textarea>
-                </label>
-                <button class="button black submit" type="submit">Отправить</button>
-            </form>
+            <div v-else>
+                <comments iblock_id="1" :element_id="element_id"/>
+            </div>
         </div>
     </div>
 </div>
@@ -88,10 +78,14 @@
 
 <script>
 
+import Comments from '~/components/comments/Comments.vue'
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['properties','description'],
+    props: ['properties','description', 'element_id'],
+    components: {
+        Comments
+    },
     data() {
         return {
             tabs: {
@@ -151,13 +145,6 @@ export default {
                 this.tabs[key].show = false
             }
             this.tabs[6].show = true
-        },
-        validateForm(scope) {
-            this.$validator.validateAll(scope).then((result) => {
-                if (result) {
-                    this.$refs[scope].submit()
-                }
-            });
         },
     },
     mounted() {

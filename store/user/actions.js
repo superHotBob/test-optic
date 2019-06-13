@@ -4,6 +4,7 @@ export default {
     STATE ({commit, getters}) {
         return this.$axios.$get(getters.getEndpointUser)
                 .then((user) => {                
+                    console.log(user)
                     commit('setUser', user);
                 })
     },

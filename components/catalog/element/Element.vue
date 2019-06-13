@@ -285,7 +285,7 @@
             </div>
         </div>
     </form>
-    <card-tabs class="card__tabs" :properties="item.DISPLAY_PROPERTIES" :description="item.DETAIL_TEXT" id="cardTabs"/>
+    <card-tabs class="card__tabs" :element_id="item.ID" :properties="item.DISPLAY_PROPERTIES" :description="item.DETAIL_TEXT" id="cardTabs"/>
     <ul class="card__usp">
         <li class="card__usp-item">
             <i></i>

@@ -102,7 +102,7 @@
                 <button @click="itemAmount++">+</button>
             </div>
             <button class="card__promo-btn" @click="promo.shown = !promo.shown">Доп скидка 10% по промокоду</button>
-            <button class="card__add-to-cart button black" @click="addToBasket(item.CURRENT.ADD_URL)">В корзину</button>
+            <button class="card__add-to-cart button black" @click="addToBasket(item.CURRENT.ADD_URL, $refs.form_props)">В корзину</button>
         </div>
         <div class="card__promo" v-show="promo.shown == true">
             <span>18 471.06 руб.</span>
@@ -123,7 +123,8 @@
             Купить в один клик
         </button>
     </div>
-    <form class="card__lense-form" v-if="itsaLense">
+   
+    <form ref="form_props" class="card__lense-form" v-if="itsaLense">
         <div class="card-lense">
             <p class="card-lense__heading">Выберите параметры Вашего  зрения, и мы подберем для Вас наилучший вариант линз:</p>
             <div class="card-lense__lense" v-for="lense in ['right', 'left']" :key="lense">

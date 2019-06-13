@@ -14,7 +14,7 @@
             <svg width="12" height="12"><use href="#svg-calendar"/></svg>
             {{item.date}}
         </span>
-        <span class="news-preview__stat">
+        <span v-if="item.comments" class="news-preview__stat">
             <svg width="12" height="12"><use href="#svg-comment"/></svg>
             {{item.comments}}
         </span>

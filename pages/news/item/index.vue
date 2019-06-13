@@ -14,11 +14,11 @@
             <img class="news-item__img" :src="item.src" alt="">
             <b class="news-item__name">{{item.name}}</b>
             <div class="news-item__stats">
-                <span class="news-item__stat">
+                <span class="news-item__stat" v-if="item.date">
                     <svg width="12" height="12"><use href="#svg-calendar"/></svg>
                     {{item.date}}
                 </span>
-                <span class="news-item__stat">
+                <span class="news-item__stat" v-if="item.comments">
                     <svg width="12" height="12"><use href="#svg-comment"/></svg>
                     {{item.comments}}
                 </span>
@@ -65,9 +65,9 @@
                 </form>
             </div>
         </div>
-        <div class="news-item__relative-news">
-            <h2 class="news-item__header">Похожие новости</h2>
-            <news-preview  v-for="(rel, index) in relativeNews" :key="index" :item="rel"/>
+        <div class="news-item__relative-news" v-if="news">
+            <h2 class="news-item__header">Похожие посты</h2>
+            <news-preview  v-for="(rel, index) in news" :key="index" :item="rel"/>
         </div>
     </div>
 </div>
@@ -97,44 +97,19 @@ export default {
             }
         })
     },
+    mounted() {
+        this.$axios.get(`/api/v1/iblock/list/?iblock=7&count=3&properties[0]=post&filter[PROPERTY_post]=${this.item.id}`).then((response) => {
+            console.log(response.data)
+            this.news = response.data.items;
+        })
+    },
     data() {
         return {
-            news: {
-                'news-001': {
-                    name: 'Выбираем офисные линзы',
-                    date: '03-08-2016',
-                    comments: '0',
-                    shortDesc: 'Офисные линзы предназначены для комфортной работы на близких и средних расстояниях. Рекомендуется для тех, кто работает за компьютером, длительное время читает и работает с документами. Офисные линзы не предназначены для использования вне помещения и вождения автомобиля!',
-                    detailedDesc: '<h3>Lorem ipsum dolor sit amet.</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus et neque debitis voluptatum animi. Rem officiis delectus saepe suscipit quia. Soluta incidunt rerum non et natus quas, magnam quisquam odit!</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>',
-                    imgUrl: 'https://home-optic.ru/upload/iblock/c03/c0308e1af5304cea8c03b48299cf7645.jpg',
-                },
-                'news-002': {
-                    name: 'Какие линзы для очков выбрать',
-                    date: '03-08-2016',
-                    comments: '0',
-                    shortDesc: 'Выбор линз для очков, это ответственный момент, к которому следует отнестись серьёзно, так как от этого зависит здоровье и комфорт глаз.',
-                    detailedDesc: '<h3>Lorem ipsum dolor sit amet.</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus et neque debitis voluptatum animi. Rem officiis delectus saepe suscipit quia. Soluta incidunt rerum non et natus quas, magnam quisquam odit!</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>',
-                    imgUrl: 'https://home-optic.ru/upload/iblock/88e/88ed289d3823021d012ebd86c43b3c8e.jpg',
-                },
-                'news-003': {
-                    name: 'Выбираем офисные линзы',
-                    date: '03-08-2016',
-                    comments: '0',
-                    shortDesc: 'Выбирая очки в салоне оптики, очень важно подобрать оправу, которая подходит по цвету к глаз, волосам, а также сочетающуюся с формой лица.',
-                    detailedDesc: '<h3>Lorem ipsum dolor sit amet.</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus et neque debitis voluptatum animi. Rem officiis delectus saepe suscipit quia. Soluta incidunt rerum non et natus quas, magnam quisquam odit!</p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>',
-                    imgUrl: 'https://home-optic.ru/upload/iblock/eaa/eaab437d9686dfce5054f133ea22e479.jpg',
-                },
-            },
+            news:false
         }
     },
     components: {
         NewsPreview,
-    },
-    computed: {
-        relativeNews() {
-            let array = Object.values(this.news);
-            return array.slice(1, 3)
-        }
     },
     methods: {
        validateForm(scope) {

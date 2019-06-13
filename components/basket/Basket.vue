@@ -9,10 +9,10 @@
         </div>
     </div>
     <div class="cart main-container">
-        <div class="cart__controls">
+        <!-- <div class="cart__controls">
             <button :class="{'active': postponed == false}" @click="postponed = false">Товары в корзине (n)</button>
             <button :class="{'active': postponed == true}" @click="postponed = true">Отложенные товары (z)</button>
-        </div>
+        </div> -->
         <div class="cart__heading">
             <b class="cart__info">Товары</b>
             <b class="cart__price">Цена</b>

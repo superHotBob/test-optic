@@ -21,6 +21,7 @@ export default {
                 speed: 500,
                 loop: false,
                 slidesPerView: 'auto',
+                preventClicks: false,
                 spaceBetween: 30,
                 pagination: {
                     el: '.brands-slider .s-pagination',

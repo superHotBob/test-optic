@@ -9,15 +9,25 @@
                 </ul>
             </div>
         </div>
-        <div>
-            <img v-lazy="item.src" alt="">
-            <div v-html="item.detail_text"></div>
+        <div class="brand main-container">
+            <div class="brand__img">
+                <img v-lazy="item.src" alt="">
+            </div>
+            <div class="brand__text" v-html="item.detail_text"></div>
+        </div>
+        <div class="main-container brand__item-slider">
+            <item-slider items="recommended"/>
         </div>
     </div>
 </template>
 
 <script>
+import ItemSlider from '~/components/sliders/ItemSlider.vue'
+
 export default {
+    components: {
+        ItemSlider,
+    },
     asyncData({ params, $axios, error }) {
 
         var item = false;
@@ -41,3 +51,44 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.brand {
+    display: flex;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #4a4a4a;
+    &__img {
+        width: 300px;
+        padding-right: 30px;
+        img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0 auto;
+        }
+    }
+    &__text {
+        width: calc(100% - 300px - 30px);
+    }
+    &__item-slider {
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .brand {
+        display: block;
+        &__img {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+        &__text {
+            width: 100%;
+        }
+        &__item-slider {
+            margin-top: 50px;
+        }
+    }
+}
+</style>

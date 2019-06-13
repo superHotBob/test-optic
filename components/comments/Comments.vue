@@ -23,7 +23,7 @@
             <div v-for="(comment, index) in commentsPage" :key="index">
                 <div>{{comment.AuthorName}}</div>
                 <div>{{comment.DateFormated}}</div>
-                <div>{{comment.TextFormated}}</div>
+                <div v-html="comment.TextFormated"></div>
             </div>
             <pagination
                 v-model="pagen"

@@ -20,20 +20,27 @@
 export default {
     asyncData({ params, $axios, error }) {
 
-        var item = false;
+        var item = false,
+            items = false;
 
-        return $axios.get(`/api/v1/iblock/list/?iblock=8&count=1&properties[0]=name&filter[CODE]=${params.element}`).then((response) => {
+        return Promise.all([
+            $axios.get(`/api/v1/iblock/list/?iblock=8&count=1&properties[0]=name&filter[CODE]=${params.element}`),
+            $axios.get(`/api/v1/catalog/elements/?filter[PROPERTY_brand_VALUE]=${params.element}`)
+        ]).then((response) => {
 
-            if (response.data.items[0])
-                item = response.data.items[0];
+            if (response[0].data.items[0]) {
+                item = response[0].data.items[0];
+                items = response[1].data,section.items;
+            }
             else
                 error({ statusCode: 404, message: '404' })
 
             return {
-                item:item
+                item:item,
+                items:items
             }
         }).catch((e) => {
-            if (e.response.status === 404) {
+            if (e.response[0].status === 404) {
                 error({ statusCode: 404, message: e.message })
             }
         })

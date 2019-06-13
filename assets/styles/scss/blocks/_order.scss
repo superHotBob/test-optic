@@ -102,7 +102,19 @@
     }
 }
 
-
+@media (min-width: 769px) {
+    .order {
+        .basket-item__offers {
+            li {
+                cursor: default;
+                &:hover,
+                &:focus {
+                    border-color: #e6e6e6;
+                }
+            }
+        }
+    }
+}
 @media (max-width: 850px) {
     .order {
         > form {

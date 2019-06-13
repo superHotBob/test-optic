@@ -65,7 +65,7 @@
                 </form>
             </div>
         </div>
-        <div class="news-item__relative-news" v-if="news">
+        <div class="news-item__relative-news" v-if="news.length">
             <h2 class="news-item__header">Похожие посты</h2>
             <news-preview  v-for="(rel, index) in news" :key="index" :item="rel"/>
         </div>

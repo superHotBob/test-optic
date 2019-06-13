@@ -24,11 +24,10 @@ export default {
 
     async DELETE_CPUPON({commit, getters}, coupon)
     {   
-        var param = 'basket[delete_coupon][' + coupon + ']'
         var post = {
             'basketAction':'recalculateAjax',
             'via_ajax':'Y',
-            param:coupon
+            'basket[delete_coupon]':coupon
         };
 
         let response = await this.$axios.post(getters.getEndpoint, qs.stringify(post));

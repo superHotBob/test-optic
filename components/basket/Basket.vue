@@ -89,7 +89,7 @@ export default {
             }    
         },
         delPromo(text) {
-            this.$store.dispatch('basket/ADD_COUPON', text);
+            this.$store.dispatch('basket/DELETE_CPUPON', text);
         }
     },
 }

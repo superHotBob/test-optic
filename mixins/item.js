@@ -31,7 +31,7 @@ export default {
             console.log(query);
 
             let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}${query}`);
-            // this.$store.dispatch('basket/STATE');
+            this.$store.dispatch('basket/STATE');
         },
         async addCompare(url) {
 

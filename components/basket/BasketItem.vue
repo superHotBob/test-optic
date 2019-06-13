@@ -32,13 +32,16 @@
             </template>
         </div>
     </div>
-    <div v-for="(prop, index) in item.PROPS" :key="index">
-        <div>{{prop.NAME}}</div>
-        <div>{{getPropValue(prop['~VALUE']).sph}}</div>
-        <div>{{getPropValue(prop['~VALUE']).cyl}}</div>
-        <div>{{getPropValue(prop['~VALUE']).ax}}</div>
-        <div>{{getPropValue(prop['~VALUE']).add}}</div>
-    </div>
+    <template  v-for="(prop, index) in item.PROPS">
+        <div :key="index" v-if="prop.CODE == 'left' || prop.CODE == 'right'">
+            <div>{{prop.NAME}}</div>
+            <div>{{getPropValue(prop['~VALUE']).sph}}</div>
+            <div>{{getPropValue(prop['~VALUE']).cyl}}</div>
+            <div>{{getPropValue(prop['~VALUE']).ax}}</div>
+            <div>{{getPropValue(prop['~VALUE']).add}}</div>
+        </div>
+    </template>
+    
     <div class="basket-item__price">{{item.PRICE_FORMATED}}</div>
     <div class="basket-item__discount" v-if="postponed">{{item.DISCOUNT_PRICE_PERCENT_FORMATED}}</div>
     <div class="basket-item__summ">{{item.SUM}}</div>

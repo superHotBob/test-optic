@@ -68,7 +68,7 @@
                 Чтобы оставить комментарий,
                 <button class="btn-simple" @click="$bvModal.show('auth-modal')">авторизируйтесь</button>.
             </p>
-            <comments class="card-tabs__comments" iblock_id="1" :element_id="element_id"/>
+            <comments iblock_id="1" :element_id="element_id"/>
         </div>
     </div>
 </div>

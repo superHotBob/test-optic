@@ -1,12 +1,6 @@
 <template>
     <div>
         <form v-if="isLogged" @submit.prevent="validateForm('form-feedback')" data-vv-scope="form-feedback" ref="form-feedback">
-            <input type="hidden" name="IBLOCK_ID" value="1"/>
-            <input type="hidden" name="SITE_ID" value="s1"/>
-            <input type="hidden" name="post" value="Y"/>
-            <input type="hidden" name="ELEMENT_ID" :value="element_id"/>
-            <input type="hidden" name="act" value="add"/>
-            <input type="hidden" name="sessid" :value="sessid"/>
             <label class="textfield half">
                 <input name="user_name" type="text" :value="user" placeholder="Ваше имя">
             </label>
@@ -15,7 +9,7 @@
                 <span v-show="errors.has('form-feedback.user_email')" class="error">{{ errors.first('form-feedback.user_email') }}</span>
             </label>
             <label class="textfield">
-                <textarea name="comment" cols="30" rows="10" placeholder="Текст комментария" required></textarea>
+                <textarea name="comment" v-model="comment" cols="30" rows="10" placeholder="Текст комментария" required></textarea>
             </label>
             <button class="button black submit" type="submit">Отправить</button>
         </form>
@@ -50,16 +44,51 @@ export default {
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {
                 if (result) {
-                    this.$refs[scope].submit()
+                    // this.$refs[scope].submit()
+                    this.addComment();
                 }
             });
         },
-        loadComments() {
+        addComment() {
+            var params = {
+                'act':'add',
+                'post':'Y',
+                'SITE_ID':'Y',
+                'AJAX_POST':'Y',
+                'sessid':this.sessid,
+                'ELEMENT_ID':this.element_id,
+                'IBLOCK_ID':this.iblock_id,
+                'comment':this.comment
+            }
+            this.$axios.post(`/api/v1/comments/`, qs.stringify(params)).then((response) => {
+                console.log(response);
+
+                if (response.data.error)
+                    this.error = response.data.error;
+
+                if (response.data.comments)
+                    this.newComment.push(response.data.comments[0][0]);
+
+            })
             
+        },
+        loadComments() {
+            this.$axios.post(`/api/v1/comments/?IBLOCK_ID=${this.iblock_id}&ELEMENT_ID=${this.element_id}&SITE_ID=s1`, qs.stringify({'sessid':this.sessid}))
+            .then((response) => {
+                this.comments = response.data.comments;
+
+                if (response.data.page == 0) 
+                    this.page = 0;
+                if (response.data.page)
+                    this.pageCount = response.data.page;
+            })
         }
     },
     data() {
         return {
+            error:false,
+            newComment: [],
+            comment: '',
             comments:false,
             pagen: 1,
             pageCount: 1,
@@ -93,15 +122,7 @@ export default {
         })
     },
     mounted() {
-        this.$axios.post(`/api/v1/comments/?IBLOCK_ID=${this.iblock_id}&ELEMENT_ID=${this.element_id}&SITE_ID=s1`, qs.stringify({'sessid':this.sessid}))
-        .then((response) => {
-            this.comments = response.data.comments;
-
-            if (response.data.page == 0) 
-                this.page = 0;
-
-            this.pageCount = response.data.page;
-        })
+        this.loadComments();
     }
 }
 </script>

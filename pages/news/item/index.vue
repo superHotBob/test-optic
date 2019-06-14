@@ -18,9 +18,9 @@
                     <svg width="12" height="12"><use href="#svg-calendar"/></svg>
                     {{item.date}}
                 </span>
-                <span class="news-item__stat" v-if="item.comments">
+                <span class="news-item__stat" v-if="item.properties.BLOG_COMMENTS_CNT.value">
                     <svg width="12" height="12"><use href="#svg-comment"/></svg>
-                    {{item.comments}}
+                    {{item.properties.BLOG_COMMENTS_CNT.value}}
                 </span>
             </div>
             <div v-html="item.detail_text"></div>
@@ -50,19 +50,11 @@
             </div>
             <div>
                 <h2 class="news-item__header">Написать комментарий</h2>
-                <form @submit.prevent="validateForm('comment')" data-vv-scope="comment" ref="comment">
-                    <label class="textfield half">
-                        <input name="name" type="text" placeholder="Ваше имя">
-                    </label>
-                    <label class="textfield half">
-                        <input v-validate="'required|email'" name="email" type="text" data-vv-as="Электронная почта" placeholder="Эл.почта">
-                        <span v-show="errors.has('comment.email')" class="error">{{ errors.first('comment.email') }}</span>
-                    </label>
-                    <label class="textfield">
-                        <textarea name="textarea" cols="30" rows="10" placeholder="Текст комментария" required></textarea>
-                    </label>
-                    <button class="button black submit" type="submit">Отправить</button>
-                </form>
+                    <p v-if="!isLogged">
+                    Чтобы оставить комментарий,
+                    <button class="btn-simple" @click="$bvModal.show('auth-modal')">авторизируйтесь</button>.
+                </p>
+                <comments iblock_id="7" :element_id="item.id" :rating_show="false"/>
             </div>
         </div>
         <div class="news-item__relative-news" v-if="news.length">
@@ -74,6 +66,8 @@
 </template>
 
 <script>
+
+import Comments from '~/components/comments/Comments.vue'
 import NewsPreview from '~/components/news/NewsPreview.vue'
 
 export default {
@@ -110,6 +104,7 @@ export default {
     },
     components: {
         NewsPreview,
+        Comments
     },
     methods: {
        validateForm(scope) {

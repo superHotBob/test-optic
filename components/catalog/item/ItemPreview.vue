@@ -13,8 +13,9 @@
             <b class="item-preview__name">{{item.CURRENT.NAME}}</b>
             
             <div class="item-preview__rating">
-                <star-rating class="rating" v-model="rating" :read-only="true" :show-rating="false" :round-start-rating="false"/>
-                <p>0 отзывов</p>
+                <star-rating class="rating" :rating="rating" :read-only="true" :show-rating="false" :round-start-rating="false"/>
+                <span v-if="item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT">({{item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT.value}})</span>
+                <span v-else>(0)</span>
             </div>
             <p
                 class="item-preview__price"
@@ -90,7 +91,6 @@ export default {
             item: false,
             timer: null,
             id: false,
-            rating: 4.4,
         }
     },
     components: {
@@ -118,6 +118,11 @@ export default {
         }
     },
     computed: {
+        rating() {
+            if (this.item.DISPLAY_PROPERTIES.rating) 
+                return this.item.DISPLAY_PROPERTIES.rating.value*1;
+            return 0;
+        },
         labelNew() {
             if (this.item.DISPLAY_PROPERTIES.new)
                 return true;

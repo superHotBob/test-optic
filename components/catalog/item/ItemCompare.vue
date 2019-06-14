@@ -22,7 +22,7 @@
         <div class="item__rating" v-if="wideItem" @click.prevent>
             <star
                 class="rating"
-                @rating-selected="setReting"
+                :rating="rating"
                 inactive-color="#e6e6e6"
                 active-color="#999999"
                 :read-only="true"
@@ -30,7 +30,8 @@
                 :round-start-rating="false"
                 :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
             />
-            <span>(35)</span>
+            <span v-if="item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT">({{item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT.value}})</span>
+            <span v-else>(0)</span>
         </div>
         <p class="item__name" v-if="wideItem">{{item.NAME}}</p>
         <div class="item__wide-offers">
@@ -115,7 +116,6 @@ export default {
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
-            rating: 4.4,
             regxNumbers: {
                 F: {
                     pattern: /[0-9]/,
@@ -127,9 +127,6 @@ export default {
         Star,
     },
     methods: {
-        setReting(value) {
-            console.log(value);
-        },
         showModal() {
             this.$root.$emit('preview', this.item);
         },
@@ -170,6 +167,11 @@ export default {
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
+        rating() {
+            if (this.item.DISPLAY_PROPERTIES.rating) 
+                return this.item.DISPLAY_PROPERTIES.rating.value*1;
+            return 0;
+        },
         labelSale() {
             for (let key in this.item.PRICES) {
                 if (this.item.PRICES[key].DISCOUNT_DIFF)

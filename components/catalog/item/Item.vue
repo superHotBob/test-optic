@@ -29,7 +29,7 @@
         <div class="item__rating" v-if="wideItem" @click.prevent>
             <star
                 class="rating"
-                @rating-selected="setReting"
+                :rating="rating"
                 inactive-color="#e6e6e6"
                 active-color="#999999"
                 :read-only="true"
@@ -130,7 +130,6 @@ export default {
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
-            rating: 4.4,
             regxNumbers: {
                 F: {
                     pattern: /[0-9]/,
@@ -142,9 +141,6 @@ export default {
         Star,
     },
     methods: {
-        setReting(value) {
-            console.log(value);
-        },
         showModal() {
             this.$root.$emit('preview', this.item);
         },
@@ -185,6 +181,11 @@ export default {
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
+        rating() {
+            if (this.item.DISPLAY_PROPERTIES.rating) 
+                return this.item.DISPLAY_PROPERTIES.rating.value*1;
+            return 0;
+        },
         labelNew() {
             if (this.item.DISPLAY_PROPERTIES.new)
                 return true;

@@ -31,7 +31,7 @@
             <div class="card__rating">
                 <star
                     class="rating"
-                    v-model="rating"
+                    :rating="rating"
                     inactive-color="#e6e6e6"
                     active-color="#999999"
                     :read-only="true"
@@ -338,7 +338,6 @@ export default {
                     pattern: /[0-9]/,
                 }
             },
-            rating: 4.4,
             promo: {
                 shown: false,
                 applied: false,
@@ -376,6 +375,11 @@ export default {
         ...mapGetters({
             isCompare: 'catalog/isCompare'
         }),
+        rating() {
+            if (this.item.DISPLAY_PROPERTIES.rating) 
+                return this.item.DISPLAY_PROPERTIES.rating.VALUE*1;
+            return 0;
+        },
         labelNew() {
             if (this.item.DISPLAY_PROPERTIES.new)
                 return true;

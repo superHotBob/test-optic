@@ -39,7 +39,7 @@
         <div class="card-tabs__tab" v-if="tabs[2].has" v-show="tabs[2].show">
             <ul class="card-tabs__attributes">
                 <template v-for="(prop, index) in properties">
-                <li v-if="!prop.VALUE.TEXT" :key="index">
+                <li v-if="!prop.VALUE.TEXT && prop.CODE != 'rating' && prop.CODE != 'BLOG_COMMENTS_CNT'" :key="index">
                     <span class="grey">{{prop.NAME}}:</span>
                     <span>{{prop.VALUE}}</span>
                 </li>
@@ -68,7 +68,7 @@
                 Чтобы оставить комментарий,
                 <button class="btn-simple" @click="$bvModal.show('auth-modal')">авторизируйтесь</button>.
             </p>
-            <comments iblock_id="1" :element_id="element_id"/>
+            <comments iblock_id="1" :element_id="element_id" :rating_show="true"/>
         </div>
     </div>
 </div>

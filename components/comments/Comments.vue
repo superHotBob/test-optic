@@ -2,7 +2,7 @@
     <div class="comments">
         <div v-if="error" class="alert alert-danger" role="alert" v-html="error"></div>
         <form v-if="isLogged" @submit.prevent="validateForm('form-feedback')" data-vv-scope="form-feedback" ref="form-feedback">
-            <div class="comments__rating">
+            <div class="comments__rating" v-if="rating_show">
                 <span class="comments__rate-item">Оцените товар:</span>
                 <star
                     class="rating"
@@ -27,11 +27,16 @@
             <button class="button black submit" type="submit">Отправить</button>
         </form>
         <div class="comments__container">
+            <div class="comments__comment" v-for="(comment, index) in newComment" :key="index">
+                <p class="comments__date">{{comment.DateFormated}}</p>
+                <p class="comments__name">{{comment.AuthorName}}</p>
+                <p class="comments__text" v-html="comment.TextFormated"></p>
+            </div> 
             <div class="comments__comment" v-for="(comment, index) in commentsPage" :key="index">
                 <p class="comments__date">{{comment.DateFormated}}</p>
                 <p class="comments__name">{{comment.AuthorName}}</p>
                 <p class="comments__text" v-html="comment.TextFormated"></p>
-            </div>              
+            </div>            
             <pagination
                 v-model="pagen"
                 :page-count="pageCount"
@@ -54,15 +59,14 @@ export default {
         Pagination,
         Star,
     },
-    props: ['iblock_id', 'element_id'],
+    props: ['iblock_id', 'element_id', 'rating_show'],
     methods: {
         setReting(value) {
-            console.log(value);
+            this.rating = value - 1;
         },
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {
                 if (result) {
-                    // this.$refs[scope].submit()
                     this.addComment();
                 }
             });
@@ -71,15 +75,20 @@ export default {
             var params = {
                 'act':'add',
                 'post':'Y',
-                'SITE_ID':'Y',
+                'SITE_ID':'s1',
                 'AJAX_POST':'Y',
                 'sessid':this.sessid,
                 'ELEMENT_ID':this.element_id,
                 'IBLOCK_ID':this.iblock_id,
-                'comment':this.comment
+                'comment':this.comment,
+                'vote_id':this.element_id,
+                'vote':'Y',
+                'rating':this.rating,
+                'AJAX_CALL':'Y',
+                'PAGE_PARAMS[ELEMENT_ID]':this.element_id,
+                'SESSION_PARAMS':this.sessionParams
             }
             this.$axios.post(`/api/v1/comments/`, qs.stringify(params)).then((response) => {
-                console.log(response);
 
                 if (response.data.error)
                     this.error = response.data.error;
@@ -95,8 +104,12 @@ export default {
             .then((response) => {
                 this.comments = response.data.comments;
 
-                if (response.data.page == 0) 
-                    this.page = 0;
+                if (response.data.session_params)
+                    this.sessionParams = response.data.session_params;
+
+                if (response.data.page == 0 || response.data.page == 1) 
+                    this.pagen = 0;
+
                 if (response.data.page)
                     this.pageCount = response.data.page;
             })
@@ -104,6 +117,8 @@ export default {
     },
     data() {
         return {
+            rating: 0,
+            sessionParams: '',
             error:false,
             newComment: [],
             comment: '',

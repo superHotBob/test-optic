@@ -224,7 +224,7 @@
                 <div class="card-workshop__option">
                     <p class="card-workshop__option-name">Межцентровое расстояние РЦ (PD):</p>
                     <label class="checkbox">
-                        <input type="checkbox" name="order-workshop" v-model="centerDistance">
+                        <input type="checkbox" name="center-distance" v-model="centerDistance">
                         <i class="checkbox__indicator"></i>
                         <span>Мое межцентровое расстояние</span>
                         <div class="card-lense__prop">
@@ -237,7 +237,7 @@
                                     {{(24.75 + value*0.25).toFixed(2) + ' мм'}}
                                 </option>
                             </select>
-                            <select name="center-distance-right" :disabled="!centerDistance">
+                            <select name="center-distance-left" :disabled="!centerDistance">
                                 <option value="-" selected>Левый</option>
                                 <option
                                     v-for="(value, index) in 53"
@@ -253,7 +253,7 @@
                 <div class="card-workshop__option">
                     <p class="card-workshop__option-name">Стоимость устоновки линз:</p>
                     <label class="radio">
-                        <input type="radio" name="workshop-lense" value="obodkovaya">
+                        <input type="radio" name="workshop-lense" value="OB">
                         <i class="radio__indicator"></i>
                         <span>Установка линз "Ободковая"</span>
                         <div class="card-workshop__info">
@@ -263,7 +263,7 @@
                         <div class="checkbox__bg"></div>
                     </label>
                     <label class="radio">
-                        <input type="radio" name="workshop-lense" value="poluobodkovaya">
+                        <input type="radio" name="workshop-lense" value="POB">
                         <i class="radio__indicator"></i>
                         <span>Установка линз "Полуободковая"</span>
                         <div class="card-workshop__info">
@@ -273,7 +273,7 @@
                         <div class="checkbox__bg"></div>
                     </label>
                     <label class="radio">
-                        <input type="radio" name="workshop-lense" value="bezobodkovaya">
+                        <input type="radio" name="workshop-lense" value="BO">
                         <i class="radio__indicator"></i>
                         <span>Установка линз "Безободковая"</span>
                         <div class="card-workshop__info">

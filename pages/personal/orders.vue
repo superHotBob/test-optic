@@ -21,28 +21,12 @@
                 <span>Посмотреть историю отмененных заказов</span>
             </nuxt-link>
         </div>
-        <div v-if="$route.query.filter_history == 'Y'">
+        <!-- <div v-if="$route.query.filter_history == 'Y'">
             <h2 v-if="$route.query.show_canceled == 'Y'">Отменённые заказы</h2>
             <h2 v-else>История заказов</h2>
             <div class="orders__small s-orders">
 
-                <div class="s-orders__item">
-                    <div class="s-orders__header">
-                        <div class="s-orders__name">
-                            <b>Заказ № 38 ОТ 07.06.2019 09:31:42, 1 товар на сумму 5 469.50 руб.</b>
-                        </div>
-                        <div class="s-orders__info">
-                            <p class="s-orders__canceled">Заказ отменен</p>
-                            <p class="s-orders__date">07.06.2019</p>
-                        </div>
-                    </div>
-                    <div class="s-orders__body p-20">
-                        <nuxt-link class="s-orders__detail mr-auto" to="/personal/orders/1">Подробнее о заказе</nuxt-link>
-                        <nuxt-link class="s-orders__repeat" to="#0">Повторить заказ</nuxt-link>
-                    </div>
-                </div>
-
-                <div class="s-orders__item">
+                <div class="s-orders__item" v-for="(order, index) in orders" :key="index">
                     <div class="s-orders__header">
                         <div class="s-orders__name">
                             <b>Заказ № 38 ОТ 07.06.2019 09:31:42, 1 товар на сумму 5 469.50 руб.</b>
@@ -59,11 +43,11 @@
                 </div>
 
             </div>
-        </div>
-        <div v-else>
+        </div> -->
+        <div>
             <h2>Заказы в статусе «Принят, Ожидается оплата»</h2>
-            <div class="orders__small s-orders">
-                <current-order />
+            <div class="orders__small s-orders" v-for="(order, index) in orders" :key="index">
+                <current-order :order="order" />
             </div>
         </div>
     </div>
@@ -77,7 +61,24 @@ export default {
     middleware: 'auth',
     components: {
         CurrentOrder,
-    }
+    },
+    watch: {
+        '$route' (to, from) {
+            this.$store.dispatch('order/LOAD_ORDERS', {'params':to.params, 'query':to.query}).then((response) => {
+                if (response.copy) {
+                    this.$store.dispatch('basket/STATE');
+                    this.$router.push('/basket');
+                }
+            });
+        },
+    },
+    async asyncData({ store, error, params, query }) {
+        let response = await store.dispatch('order/LOAD_ORDERS', {'params':params, 'query':query})
+        console.log(response)
+        return {
+            orders:response.orders
+        }
+    },
 }
 </script>
 

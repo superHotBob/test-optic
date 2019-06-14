@@ -3,9 +3,14 @@ export default {
         async addToBasket(url, props=false) {
 
             var params = false,
-                query = '';
+                query = '',
+                checked = 'N';
 
             if (props) {
+
+                if (props.elements['order-workshop'].checked)
+                    checked = 'Y';
+
                 params = {
                     'left': {
                         'sph':props.elements['left-sph'].value,
@@ -19,13 +24,24 @@ export default {
                         'ax':props.elements['right-ax'].value,
                         'add':props.elements['right-add'].value,
                     },
+                    'order_workshop':checked,
+                    'workshop_lense':props.elements['workshop-lense'].value
+                }
+
+                if (props.elements['center-distance'].checked) {
+                    params['center_distance_right'] = props.elements['center-distance-right'].value;
+                    params['center_distance_left'] = props.elements['center-distance-left'].value;
                 }
             }
-            
+
             for (let key in params) {
-                for (let name in params[key]) {
-                    query += `&${key}[${name}]=${params[key][name]}`;
+                if (key == 'left' || key == 'right') {
+                    for (let name in params[key]) {
+                        query += `&${key}[${name}]=${params[key][name]}`;
+                    }
+                    continue;
                 }
+                query += `&${key}=${params[key]}`;
             }
 
             let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}${query}`);

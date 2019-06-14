@@ -20,29 +20,17 @@
             </div>
             <p class="s-orders__data">Сумма к оплате по счету: {{payment.FORMATED_SUM}}</p>
             <div class="s-orders__payment" v-if="payment.PAID === 'N' && payment.IS_CASH !== 'Y'">
-                <div v-show="paymentTab == false">
-                    <button class="s-orders__change btn-simple mb-2" type="button" @click="paymentTab = true">Сменить способ оплаты</button>
+                <div>
+                    <button class="s-orders__change btn-simple mb-2" type="button" @click="changePayment(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER)">Сменить способ оплаты</button>
                     <br>
                     <button class="button black" type="button">Оплатить</button>
                 </div>
-                <div v-show="paymentTab != false">
+                <div v-if="payment_list">
                     <div class="s-orders__payment-wrapper">
-                        <label class="o-radio o-radio--img">
+                        <label class="o-radio o-radio--img" v-for="(item, index) in payment_list" :key="index">
                             <input name="PAY_SYSTEM_ID" type="radio" value="2">
-                            <img src="http://14.esobolev.ru//upload/sale/paysystem/logotip/569/56957ce1e60b58571eaccb8554657f20.png" alt="">
-                            <span>PayPal</span>
-                            <div class="o-radio__border"></div>
-                        </label>
-                        <label class="o-radio o-radio--img">
-                            <input name="PAY_SYSTEM_ID" type="radio" value="4">
-                            <img src="http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/890/300_300_1/89021eff8040b03e19c72a2370b83dc0.png" alt="">
-                            <span>Webmoney</span>
-                            <div class="o-radio__border"></div>
-                        </label>
-                        <label class="o-radio o-radio--img">
-                            <input name="PAY_SYSTEM_ID" type="radio" value="3">
-                            <img src="http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/2a3/300_300_1/2a3a6059c18ace49d72a524f19ea1744.png" alt="">
-                            <span>Наличный расчет</span>
+                            <img :src="item.LOGOTIP" alt="">
+                            <span>{{item.PSA_NAME}}</span>
                             <div class="o-radio__border"></div>
                         </label>
                     </div>
@@ -57,12 +45,12 @@
         </div>
         <div v-for="(delivery, index) in order.SHIPMENT" :key="index">
             <div class="s-orders__heading">
-                <p>Отгрузка	№{{delivery.ACCOUNT_NUMBER}}, стоимость доставки 500 руб.</p>
+                <p>Отгрузка	№{{delivery.ACCOUNT_NUMBER}}, стоимость доставки {{delivery.FORMATED_DELIVERY_PRICE}}</p>
                 <span v-if="delivery.DEDUCTED == 'Y'" class="s-orders__status green">Отгружено</span>
                 <span v-else class="s-orders__status red">Не отгружено</span>
             </div>
             <p class="s-orders__data">Статус отгрузки: <span class="s-orders__status">{{delivery.DELIVERY_STATUS_NAME}}</span></p>
-            <p class="s-orders__data">Служба доставки: Доставка курьером</p>
+            <p class="s-orders__data">Служба доставки: {{delivery.DELIVERY_NAME}}</p>
 
             <div class="s-orders__sub-header mt-3">
                 <i></i>
@@ -79,11 +67,34 @@
 
 <script>
 
+import qs from 'qs';
+
 export default {
     props: ['order'],
     data() {
         return {
+            payment_list: false,
             paymentTab: false,
+        }
+    },
+    methods: {
+        changePayment(order_id, payment_id) {
+            // console.log('ok');
+
+            var params = {
+                'orderData[order]':order_id,
+                'orderData[payment]':payment_id,
+                'orderData[allow_inner]':'N',
+                'orderData[refresh_prices]':'N',
+                'orderData[only_inner_full]':'Y',
+                'sessid':'2c5d529afbc6642d7ccb66bbbdc79e30'
+            }
+
+            this.$axios.post(`/api/v1/changepayment/`, qs.stringify(params)).then(response => {
+                console.log(response.data.PAYSYSTEMS_LIST)
+                if (response.data.PAYSYSTEMS_LIST)
+                    this.payment_list = response.data.PAYSYSTEMS_LIST;
+            });
         }
     }
 }

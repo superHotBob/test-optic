@@ -46,7 +46,7 @@
         </div> -->
         <div>
             <h2>Заказы в статусе «Принят, Ожидается оплата»</h2>
-            <div class="orders__small s-orders" v-for="(order, index) in orders" :key="index">
+            <div class="orders__small s-orders" v-for="order in orders" :key="order.ORDER.ID">
                 <current-order :order="order" />
             </div>
         </div>

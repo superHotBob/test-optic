@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="comments">
         <form v-if="isLogged" @submit.prevent="validateForm('form-feedback')" data-vv-scope="form-feedback" ref="form-feedback">
             <input type="hidden" name="IBLOCK_ID" value="1"/>
             <input type="hidden" name="SITE_ID" value="s1"/>
@@ -7,6 +7,18 @@
             <input type="hidden" name="ELEMENT_ID" :value="element_id"/>
             <input type="hidden" name="act" value="add"/>
             <input type="hidden" name="sessid" :value="sessid"/>
+            <div class="comments__rating">
+                <span class="comments__rate-item">Оцените товар:</span>
+                <star
+                    class="rating"
+                    @rating-selected="setReting"
+                    inactive-color="#e6e6e6"
+                    active-color="#999999"
+                    :show-rating="false"
+                    :round-start-rating="false"
+                    :star-points="[13.998,4.965, 9.306,4.085, 6.999,0.000, 4.692,4.085, 0.000,4.965, 3.266,8.370, 2.673,12.999, 6.999,11.018, 11.325,12.999, 10.732,8.370]"
+                />
+            </div>
             <label class="textfield half">
                 <input name="user_name" type="text" :value="user" placeholder="Ваше имя">
             </label>
@@ -19,12 +31,12 @@
             </label>
             <button class="button black submit" type="submit">Отправить</button>
         </form>
-        <div>
-            <div v-for="(comment, index) in commentsPage" :key="index">
-                <div>{{comment.AuthorName}}</div>
-                <div>{{comment.DateFormated}}</div>
-                <div v-html="comment.TextFormated"></div>
-            </div>
+        <div class="comments__container">
+            <div class="comments__comment" v-for="(comment, index) in commentsPage" :key="index">
+                <p class="comments__date">{{comment.DateFormated}}</p>
+                <p class="comments__name">{{comment.AuthorName}}</p>
+                <p class="comments__text" v-html="comment.TextFormated"></p>
+            </div>              
             <pagination
                 v-model="pagen"
                 :page-count="pageCount"
@@ -39,14 +51,19 @@
 
 import { mapGetters } from 'vuex'
 import qs from 'qs'
+import Star from '~/components/catalog/star/star.vue'
 import Pagination from '~/components/Pagination.vue'
 
 export default {
     components: {
-        Pagination
+        Pagination,
+        Star,
     },
     props: ['iblock_id', 'element_id'],
     methods: {
+        setReting(value) {
+            console.log(value);
+        },
         validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {
                 if (result) {
@@ -105,4 +122,52 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.comments {
+    &__rating {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+        .rating {
+            transform: scale(1.2);
+        }
+    }
+    &__rate-item {
+        margin-right: 20px;
+    }
+    &__container {
+        margin-top: 40px;
+    }
+    &__comment {
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        p {
+            word-wrap: break-word;
+        }
+    }
+    &__name{
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    &__date {
+        float: right;
+        margin-bottom: 10px;
+    }
+    &__text {
+        margin-bottom: 0;
+    }
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+</style>
 

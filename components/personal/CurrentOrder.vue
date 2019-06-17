@@ -23,18 +23,19 @@
                 <div>
                     <button class="s-orders__change btn-simple mb-2" type="button" @click="changePayment(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER)">Сменить способ оплаты</button>
                     <br>
-                    <button class="button black" type="button">Оплатить</button>
+                    <button class="button black" type="button" @click="toPay(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER)">Оплатить</button>
                 </div>
                 <div v-if="payment_list">
                     <div class="s-orders__payment-wrapper">
+                        
                         <label class="o-radio o-radio--img" v-for="(item, index) in payment_list" :key="index">
-                            <input name="PAY_SYSTEM_ID" type="radio" value="2">
+                            <input name="PAY_SYSTEM_ID" type="radio" @click="changeToPay(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER, item.ID)">
                             <img :src="item.LOGOTIP" alt="">
                             <span>{{item.PSA_NAME}}</span>
                             <div class="o-radio__border"></div>
                         </label>
                     </div>
-                    <button class="btn-simple" type="button" @click="paymentTab = false">Назад</button>
+                    <button class="btn-simple" type="button" @click="prev">Назад</button>
                 </div>
             </div>
         </div>
@@ -43,7 +44,7 @@
             <span>Доставка</span>
             <i></i>
         </div>
-        <div v-for="(delivery, index) in order.SHIPMENT" :key="index">
+        <div v-for="delivery in order.SHIPMENT" :key="delivery.ID">
             <div class="s-orders__heading">
                 <p>Отгрузка	№{{delivery.ACCOUNT_NUMBER}}, стоимость доставки {{delivery.FORMATED_DELIVERY_PRICE}}</p>
                 <span v-if="delivery.DEDUCTED == 'Y'" class="s-orders__status green">Отгружено</span>
@@ -57,7 +58,7 @@
             </div>
         </div>
         <div class="s-orders__buttons">
-            <nuxt-link class="s-orders__detail mr-4" to="/personal/orders/1">Подробнее о заказе</nuxt-link>
+            <nuxt-link class="s-orders__detail mr-4" :to="'/personal/orders/' + order.ORDER.ID">Подробнее о заказе</nuxt-link>
             <nuxt-link class="s-orders__repeat mr-3" :to="'?COPY_ORDER=Y&ID=' + order.ORDER.ID">Повторить заказ</nuxt-link>
             <nuxt-link class="s-orders__cancel" to="#0">Отменить заказ</nuxt-link>
         </div>
@@ -68,6 +69,7 @@
 <script>
 
 import qs from 'qs';
+import { mapGetters } from 'vuex'
 
 export default {
     props: ['order'],
@@ -77,9 +79,53 @@ export default {
             paymentTab: false,
         }
     },
+    computed: {
+        ...mapGetters({
+            sessid: 'user/getSessid',
+        })
+    },
     methods: {
+        changeToPay(order_id, payment_id, payment) {
+            
+            var params = {
+                'orderData[order]':order_id,
+                'orderData[payment]':payment_id,
+                'orderData[paySystemId]':payment,
+                'orderData[allow_inner]':'N',
+                'orderData[refresh_prices]':'N',
+                'orderData[only_inner_full]':'Y',
+                'sessid':this.sessid
+            }
+
+            this.$axios.post(`/api/v1/changepayment/`, qs.stringify(params)).then(response => {
+
+                var payment = window.open(``, 'Оплата', 'width=600,height=400');
+
+                payment.onload = function() {
+
+                    // создать div в документе нового окна
+                    var div = payment.document.createElement('div'),
+                        body = payment.document.body;
+
+                    div.innerHTML = response.data
+
+                    // вставить первым элементом в body нового окна
+                    body.insertBefore(div, body.firstChild);
+                }
+            });
+
+            
+        },
+
+        prev() {
+            this.payment_list = false;
+        },
+
+        toPay(order_id, payment_id) {
+            var payment = window.open(`/api/v1/payment/?ORDER_ID=${order_id}&PAYMENT_ID=${payment_id}`, 'Оплата', 'width=600,height=400');
+        },
+
         changePayment(order_id, payment_id) {
-            // console.log('ok');
 
             var params = {
                 'orderData[order]':order_id,
@@ -87,11 +133,10 @@ export default {
                 'orderData[allow_inner]':'N',
                 'orderData[refresh_prices]':'N',
                 'orderData[only_inner_full]':'Y',
-                'sessid':'2c5d529afbc6642d7ccb66bbbdc79e30'
+                'sessid':this.sessid
             }
 
             this.$axios.post(`/api/v1/changepayment/`, qs.stringify(params)).then(response => {
-                console.log(response.data.PAYSYSTEMS_LIST)
                 if (response.data.PAYSYSTEMS_LIST)
                     this.payment_list = response.data.PAYSYSTEMS_LIST;
             });

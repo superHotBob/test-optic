@@ -11,11 +11,11 @@
         </div>
     </div>
     <div class="user-order main-container">
-        <h2>Мой заказ №37, создан 06.06.2019</h2>
+        <h2>Мой заказ №{{order.ACCOUNT_NUMBER}}, создан {{order.DATE_INSERT_FORMATED}}</h2>
         <nuxt-link class="user-order__back mb-3" to="/personal/orders">← Вернуться в список заказов</nuxt-link>
         <div class="user-order__block">
             <div class="user-order__header small">
-                Заказ №37 от 06.06.2019, 1 товар на сумму {{paymentInfo.orderSumm}}
+                Заказ №{{order.ACCOUNT_NUMBER}} от {{order.DATE_INSERT_FORMATED}}, {{order.count_basket}} на сумму {{order.PRICE_FORMATED}}
             </div>
         </div>
         <div class="user-order__block">
@@ -24,17 +24,18 @@
                 <div class="user-order__info-table">
                     <div class="user-order__info-row heading">
                         <div>Ф.И.О.:</div>
-                        <div>Текущий статус, от 06.06.2019:</div>
+                        <div>Текущий статус, от {{order.DATE_INSERT_FORMATED}}:</div>
                         <div>Сумма:</div>
                         <div><button class="user-order__repeat btn-simple">Повторить заказ</button></div>
                     </div>
                     <div class="user-order__info-row">
-                        <div><b>vladimir</b></div>
-                        <div><b>Принят, ожидается оплата</b></div>
-                        <div><b>{{paymentInfo.paySumm}}</b></div>
+                        <div><b>{{order.USER_NAME}}</b></div>
+                        <div><b>{{order.STATUS.NAME}}</b></div>
+                        <div><b>{{order.PRICE_FORMATED}}</b></div>
                         <div>
                             <button class="user-order__repeat btn-simple hidden-desktop mr-2">Повторить заказ</button>
-                            <button class="user-order__cancel btn-simple">Отменить</button>
+                            <button v-if="order.CANCELED == 'Y'" class="user-order__cancel btn-simple">Заказ отменен</button>
+                            <button v-else class="user-order__cancel btn-simple">Отменить</button>
                         </div>
                     </div>
                 </div>
@@ -45,49 +46,27 @@
                     <ul>
                         <li>
                             <p>Логин:</p>
-                            <p>login</p>
+                            <p>{{order.USER.LOGIN}}</p>
                         </li>
                         <li>
                             <p>E-mail адрес:</p>
-                            <p>test@mail.ru</p>
+                            <p>{{order.USER.EMAIL}}</p>
                         </li>
                         <li>
                             <p>Тип плательщика:</p>
-                            <p>Физическое лицо</p>
+                            <p>{{order.USER.PERSON_TYPE_NAME}}</p>
                         </li>
-                        <li>
-                            <p>Ф.И.О.:</p>
-                            <p>Иван Иванович</p>
-                        </li>
-                        <li>
-                            <p>E-Mail:</p>
-                            <p>aaa@aaa.aaa</p>
-                        </li>
-                        <li>
-                            <p>Индекс:</p>
-                            <p>101000</p>
-                        </li>
-                        <li>
-                            <p>Местоположение:</p>
-                            <p>Россия, Центр, Московская область, Москва</p>
-                        </li>
-                        <li>
-                            <p>Город:</p>
-                            <p>Москва</p>
-                        </li>
-                        <li>
-                            <p>Адрес доставки:</p>
-                            <p>ул.Доваторцев 86</p>
+                        <li v-for="(prop, index) in order.ORDER_PROPS" :key="index">
+                            <p>{{prop.NAME}}:</p>
+                            <p>{{prop.VALUE}}</p>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <order-payment :info="paymentInfo"/>
-        <template v-if="getBasket.GRID">
-            <order-delivery :info="deliveryInfo" :items="getBasket.GRID.ROWS"/>
-            <order-content :items="getBasket.GRID.ROWS"/>
-        </template>
+        <order-payment :order="order"/>
+        <order-delivery :order="order"/>
+        <order-content :items="order.BASKET"/>
         <div class="user-order__summary">
             <div>
                 <p>Товар на:</p>
@@ -95,9 +74,9 @@
                 <p>Итого:</p>
             </div>
             <div class="ml-3">
-                <p>9 035.46 руб.</p>
-                <p>500 руб.</p>
-                <p>9 535.46 руб.</p>
+                <p>{{order.PRODUCT_SUM_FORMATED}}</p>
+                <p>{{order.PRICE_DELIVERY_FORMATED}}</p>
+                <p>{{order.PRICE_FORMATED}}</p>
             </div>
         </div>
         <nuxt-link class="user-order__back mt-3" to="/personal/orders">← Вернуться в список заказов</nuxt-link>
@@ -118,31 +97,31 @@ export default {
     data() {
         return {
             showInfo: false,
-            paymentInfo: {
-                systems: {
-                    0: {
-                        name: 'PayPal',
-                        img: 'http://14.esobolev.ru//upload/sale/paysystem/logotip/569/56957ce1e60b58571eaccb8554657f20.png',
-                        value: 2,
-                        selected: true,
-                    },
-                    1: {
-                        name: 'WebMoney',
-                        img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/890/300_300_1/89021eff8040b03e19c72a2370b83dc0.png',
-                        value: 4,
-                        selected: false,
-                    },
-                    2: {
-                        name: 'Наличный расчет',
-                        img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/2a3/300_300_1/2a3a6059c18ace49d72a524f19ea1744.png',
-                        value: 3,
-                        selected: false,
-                    },
-                },
-                paid: false,
-                orderSumm: '9 535.46 руб.',
-                paySumm: '9 535.46 руб.',
-            },
+            // paymentInfo: {
+            //     systems: {
+            //         0: {
+            //             name: 'PayPal',
+            //             img: 'http://14.esobolev.ru//upload/sale/paysystem/logotip/569/56957ce1e60b58571eaccb8554657f20.png',
+            //             value: 2,
+            //             selected: true,
+            //         },
+            //         1: {
+            //             name: 'WebMoney',
+            //             img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/890/300_300_1/89021eff8040b03e19c72a2370b83dc0.png',
+            //             value: 4,
+            //             selected: false,
+            //         },
+            //         2: {
+            //             name: 'Наличный расчет',
+            //             img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/2a3/300_300_1/2a3a6059c18ace49d72a524f19ea1744.png',
+            //             value: 3,
+            //             selected: false,
+            //         },
+            //     },
+            //     paid: false,
+            //     orderSumm: '9 535.46 руб.',
+            //     paySumm: '9 535.46 руб.',
+            // },
             deliveryInfo: {
                 cost: '500 руб.',
                 system: {
@@ -163,6 +142,19 @@ export default {
         OrderDelivery,
         OrderContent,
     },
+    asyncData({ params, $axios, error }) {
+        return $axios.get(`/api/v1/order/list/element?ORDER_ID=${params.id}`)
+        .then(response => {
+            console.log(response.data)
+            return {
+                order:response.data
+            }
+        }).catch((e) => {
+            if (e.response.status === 404) {
+                error({ statusCode: 404, message: e.message })
+            }
+        })
+    }
 }
 </script>
 

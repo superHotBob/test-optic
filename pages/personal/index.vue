@@ -55,7 +55,7 @@
                     История закаов
                 </nuxt-link>
             </li>
-            <li>
+            <!-- <li>
                 <nuxt-link to="/personal/profiles">
                     <svg viewBox="0 0 62.246 62.246" id="svg-icon-list" width="35px" height="35px">
                         <path d="m57.548 45.107h-37.583c-2.595 0-4.699 2.105-4.699 4.701 0 2.594 2.104 4.699 4.699 4.699h37.583c2.594 0 4.698-2.105 4.698-4.699 0-2.595-2.104-4.701-4.698-4.701z"></path>
@@ -67,7 +67,7 @@
                     </svg>
                     Профили заказов
                 </nuxt-link>
-            </li>
+            </li> -->
             <li>
                 <nuxt-link to="/basket">
                     <svg viewBox="0 0 33 33" id="svg-icon-cart" width="35px" height="35px">

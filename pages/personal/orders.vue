@@ -21,31 +21,33 @@
                 <span>Посмотреть историю отмененных заказов</span>
             </nuxt-link>
         </div>
-        <!-- <div v-if="$route.query.filter_history == 'Y'">
+        <div v-if="$route.query.filter_history == 'Y'">
             <h2 v-if="$route.query.show_canceled == 'Y'">Отменённые заказы</h2>
             <h2 v-else>История заказов</h2>
             <div class="orders__small s-orders">
 
-                <div class="s-orders__item" v-for="(order, index) in orders" :key="index">
+                <div class="s-orders__item" v-for="order in orders" :key="order.ORDER.ID">
                     <div class="s-orders__header">
                         <div class="s-orders__name">
-                            <b>Заказ № 38 ОТ 07.06.2019 09:31:42, 1 товар на сумму 5 469.50 руб.</b>
+                            <b>Заказ № {{order.ORDER.ACCOUNT_NUMBER}} ОТ {{order.ORDER.DATE_INSERT_FORMATED}}, {{order.count_basket}} на сумму {{order.ORDER.FORMATED_PRICE}}</b>
                         </div>
                         <div class="s-orders__info">
-                            <p class="s-orders__canceled">Заказ отменен</p>
-                            <p class="s-orders__date">07.06.2019</p>
+                            <p v-if="$route.query.show_canceled == 'Y'" class="s-orders__canceled">Заказ отменен</p>
+                            <p v-else>Выполнен</p>
+                            <p class="s-orders__date">{{order.ORDER.DATE_INSERT_FORMATED}}</p>
                         </div>
                     </div>
                     <div class="s-orders__body p-20">
-                        <nuxt-link class="s-orders__detail mr-auto" to="/personal/orders/1">Подробнее о заказе</nuxt-link>
-                        <nuxt-link class="s-orders__repeat" to="#0">Повторить заказ</nuxt-link>
+                        <nuxt-link class="s-orders__detail mr-auto" :to="'/personal/orders/' + order.ORDER.ID">Подробнее о заказе</nuxt-link>
+                        <nuxt-link class="s-orders__repeat" :to="'?COPY_ORDER=Y&ID=' + order.ORDER.ID">Повторить заказ</nuxt-link>
                     </div>
                 </div>
 
             </div>
-        </div> -->
-        <div>
-            <h2>Заказы в статусе «Принят, Ожидается оплата»</h2>
+        </div>
+        <div v-else>
+            <h2 v-if="title">Заказы в статусе «{{title}}»</h2>
+            <h2 v-else>Отмененные заказы</h2>
             <div class="orders__small s-orders" v-for="order in orders" :key="order.ORDER.ID">
                 <current-order :order="order" />
             </div>
@@ -68,6 +70,9 @@ export default {
                 if (response.copy) {
                     this.$store.dispatch('basket/STATE');
                     this.$router.push('/basket');
+                } else {
+                    this.orders = response.orders;
+                    this.title = response.title;
                 }
             });
         },
@@ -76,7 +81,8 @@ export default {
         let response = await store.dispatch('order/LOAD_ORDERS', {'params':params, 'query':query})
         console.log(response)
         return {
-            orders:response.orders
+            orders:response.orders,
+            title:response.title
         }
     },
 }

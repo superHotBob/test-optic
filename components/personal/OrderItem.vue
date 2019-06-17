@@ -33,7 +33,7 @@
     
     <div class="basket-item__price">{{item.PRICE_FORMATED}}</div>
     <div class="basket-item__discount">{{item.DISCOUNT_PRICE_PERCENT_FORMATED}}</div>
-    <div class="basket-item__summ">{{item.SUM}}</div>
+    <div class="basket-item__summ">{{item.FORMATED_SUM}}</div>
     <div class="basket-item__actions">
         <div>{{item.QUANTITY}}</div>
     </div>

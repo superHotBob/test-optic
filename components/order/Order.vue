@@ -8,14 +8,11 @@
             </ul>
         </div>
     </div>
-    <div class="order main-container">
+    <div class="order main-container" v-if="!orderId">
         <form ref="form">
             <input type="hidden" name="sessid" :value="getSessid">
             <input type="hidden" name="BUYER_STORE" value="0">
-            <div v-if="orderId">
-                Заказ №{{orderId}} оформлен
-            </div>
-            <div v-else role="tablist">
+            <div role="tablist">
                 <order-items />
                 <person-type v-if="getBasket.COUPON_LIST" :personType="order.PERSON_TYPE" :promocode="getBasket.COUPON_LIST"/>
                 <delivery v-if="getBasket.COUPON_LIST" :delivery="order.DELIVERY" :promocode="getBasket.COUPON_LIST" />
@@ -64,6 +61,10 @@
         <div class="order__submit hidden-desktop">
             <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
         </div>
+    </div>
+    <div class="custom-page main-container" v-else>
+        <p class="big-text-bold">Ваш заказ №{{orderId}} успешно создан.</p>
+        <p>Вы можете следить за выполнением своего заказа в <nuxt-link to="/personal/orders" style="color: #000">Персональном разделе сайта</nuxt-link>. Обратите внимание, что для входа в этот раздел вам необходимо будет ввести логин и пароль пользователя сайта.</p>
     </div>
 </div>
 </template>

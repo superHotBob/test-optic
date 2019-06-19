@@ -62,7 +62,7 @@
                         >
                             <p>{{prop.NAME}}</p>
                             <ul>
-                                <li class="selected">
+                                <li>
                                     <span>{{prop['~VALUE']}}</span>
                                 </li>
                             </ul>
@@ -76,7 +76,7 @@
                         >
                             <p>{{prop.NAME}}</p>
                             <ul>
-                                <li class="selected">
+                                <li>
                                     <span>{{prop['~VALUE']}}</span>
                                 </li>
                             </ul>

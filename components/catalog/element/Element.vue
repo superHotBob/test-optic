@@ -89,17 +89,17 @@
             <button class="card__add-to-cart button black" @click="addToBasket(item.CURRENT.ADD_URL, $refs.form_props)">В корзину</button>
         </div>
         <div class="card__promo" v-show="promo.shown == true">
-            <span>18 471.06 руб.</span>
+            <span>{{sale}} руб.</span>
             <p>Цена с доп. скидкой 10% по промокоду <b>HOMEOPTIC</b></p>
             <button
                 class="button black"
                 type="button"
-                v-if="promo.applied == false"
-                @click="promo.applied = true; promo.shown = false"
+                v-if="!isCoupon('homeoptic')"
+                @click="coupon"
             >
                 Применить купон в корзине
             </button>
-            <p v-else>Купон применён</p>
+            <p v-if="isCoupon('homeoptic')">Купон применён</p>
             <button class="card__promo-close" @click="promo.shown = false">Закрыть</button>
         </div>
         <button class="card__buy-one-click button">
@@ -324,7 +324,6 @@ export default {
             },
             promo: {
                 shown: false,
-                applied: false,
             },
             itsaLense: true,    // показывает блоки если товар - линза (а не оправа)
 
@@ -345,6 +344,9 @@ export default {
         Share
     },
     methods: {
+        coupon() {
+            this.$store.dispatch('basket/ADD_COUPON', 'homeoptic');
+        },  
         counterMinus() {
             if (this.itemAmount <= 1) {
                 return
@@ -358,8 +360,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            isCompare: 'catalog/isCompare'
+            isCompare: 'catalog/isCompare',
+            isCoupon: 'basket/isCoupon'
         }),
+        sale() {
+            var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
+            return this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE - this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE * 0.1;
+        },
         rating() {
             if (this.item.DISPLAY_PROPERTIES.rating) 
                 return this.item.DISPLAY_PROPERTIES.rating.VALUE*1;

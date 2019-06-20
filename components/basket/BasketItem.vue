@@ -53,20 +53,22 @@
                     </ul>
                 </div>
             </template>
-            <template  v-for="(prop, index) in item.PROPS">
-                <div
-                    class="item__offers"
-                    :key="index"
-                    v-if="prop.CODE == 'center_distance_left' || prop.CODE == 'center_distance_right'"
-                >
-                    <p>{{prop.NAME}}</p>
-                    <ul>
-                        <li class="selected">
-                            <span>{{prop['~VALUE']}}</span>
-                        </li>
-                    </ul>
-                </div>
-            </template>
+            <div style="display: flex; flex-wrap: wrap; width: 100%;">
+                <template  v-for="(prop, index) in item.PROPS">
+                    <div
+                        class="item__offers"
+                        :key="index"
+                        v-if="prop.CODE == 'center_distance_left' || prop.CODE == 'center_distance_right'"
+                    >
+                        <p>{{prop.NAME}}</p>
+                        <ul>
+                            <li class="selected">
+                                <span>{{prop['~VALUE']}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </template>
+            </div>
             <template  v-for="(prop, index) in item.PROPS">
                 <div
                     class="item__offers"

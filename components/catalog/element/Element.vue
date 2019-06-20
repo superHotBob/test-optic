@@ -9,24 +9,7 @@
             </div>
         </div>
         <div class="card__info">
-            <div class="social card__social">
-                <a href="#0">
-                    <svg width='18' height="18" fill="#000"><use href="#svg-vk"/></svg>
-                    Вконтакте
-                </a>
-                <a href="#0">
-                    <svg width='15' height="15" fill="#000"><use href="#svg-facebook"/></svg>
-                    Фейсбук
-                </a>
-                <a href="#0">
-                    <svg width='15' height="15" fill="#000"><use href="#svg-pinterest"/></svg>
-                    Пинтерест
-                </a>
-                <a href="#0">
-                    <svg width='15' height="15" fill="#000"><use href="#svg-twitter"/></svg>
-                    Твиттер
-                </a>
-            </div>
+            <share customClass="card__social"/>
             <p v-if="item.DISPLAY_PROPERTIES.articul" class="card__article">Артикул: {{item.DISPLAY_PROPERTIES.articul.VALUE}}</p>
             <div class="card__rating">
                 <star
@@ -319,6 +302,7 @@
 
 <script>
 
+import Share from '~/components/share.vue'
 import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
 import Star from '~/components/catalog/star/star.vue'
@@ -358,6 +342,7 @@ export default {
     components: {
         Star,
         CardTabs,
+        Share
     },
     methods: {
         counterMinus() {

@@ -26,24 +26,7 @@
             <div v-html="item.detail_text"></div>
             <div class="news-item__share">
                 <span>Поделиться:</span>
-                <div class="social">
-                    <a href="#0">
-                        <svg width='18' height="18" fill="#000"><use href="#svg-vk"/></svg>
-                        Вконтакте
-                    </a>
-                    <a href="#0">
-                        <svg width='15' height="15" fill="#000"><use href="#svg-facebook"/></svg>
-                        Фейсбук
-                    </a>
-                    <a href="#0">
-                        <svg width='15' height="15" fill="#000"><use href="#svg-pinterest"/></svg>
-                        Пинтерест
-                    </a>
-                    <a href="#0">
-                        <svg width='15' height="15" fill="#000"><use href="#svg-twitter"/></svg>
-                        Твиттер
-                    </a>
-                </div>
+                <share/>
             </div>
             <div class="news-item__comments">
                 <h2 class="news-item__header">Комментарии</h2>
@@ -69,6 +52,8 @@
 
 import Comments from '~/components/comments/Comments.vue'
 import NewsPreview from '~/components/news/NewsPreview.vue'
+import Share from '~/components/share.vue'
+import { mapGetters } from 'vuex'
 
 export default {
     asyncData({ params, $axios, error }) {
@@ -102,12 +87,18 @@ export default {
             news:false
         }
     },
+    computed: {
+        ...mapGetters({
+            isLogged: 'user/isLogged',
+        })
+    },
     components: {
         NewsPreview,
-        Comments
+        Comments,
+        Share
     },
     methods: {
-       validateForm(scope) {
+        validateForm(scope) {
             this.$validator.validateAll(scope).then((result) => {
                 if (result) {
                     this.$refs[scope].submit()

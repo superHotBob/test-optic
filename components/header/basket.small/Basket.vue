@@ -19,7 +19,7 @@
         <div class="hidden-mobile" v-if="getBasket.GRID">
             <basket-item v-for="arItem in getBasket.GRID.ROWS" :key="arItem.ID" :arItem="arItem"/>
             <div class="basket__footer">
-                <nuxt-link class="button black" :to="{ name: 'basket'}">Оформить заказ</nuxt-link>
+                <nuxt-link class="button black" @click.native="clickBasket" :to="{ name: 'basket'}">Оформить заказ</nuxt-link>
                 <span>Всего {{getBasket.BASKET_ITEMS_COUNT}} {{wording(getBasket.BASKET_ITEMS_COUNT)}}</span>
                 <b>{{getBasket.allSum_FORMATED}}</b>
             </div>
@@ -39,15 +39,15 @@
                 </nuxt-link>
             </p>
             <p>
-                <nuxt-link to="#0">
+                <nuxt-link to="/compare">
                     <span>Сравнение</span>
-                    <span>13</span>
+                    <span v-if="compareCount > 0">{{compareCount}}</span>
                 </nuxt-link>
             </p>
             <p>
-                <nuxt-link to="#0">
+                <nuxt-link to="/favorites">
                     <span>Список желаемого</span>
-                    <span>26</span>
+                    <span v-if="favoritesCount > 0">{{favoritesCount}}</span>
                 </nuxt-link>
             </p>
             <p v-if="!isLogged">
@@ -65,6 +65,7 @@
 import util from '~/mixins/util.js'
 import basket from '~/mixins/basket/basket.js'
 import BasketItem from '~/components/header/basket.small/BasketItem.vue'
+import { mapGetters } from 'vuex'
 
 export default {
     props: ['isLogged'],
@@ -78,6 +79,9 @@ export default {
         }
     },
     methods: {
+        clickBasket() {
+            this.basketPopup=false;
+        },  
         documentClick(e) {
             let el = this.$refs.dropdownMenu,
                 target = e.target,
@@ -96,6 +100,10 @@ export default {
                 return this.basketPopup;
             }
         },
+        ...mapGetters({
+            favoritesCount: 'catalog/getCountFavorites',
+            compareCount: 'catalog/getCountCompare'
+        })
     },
     created() {
         this.$store.dispatch('basket/STATE');

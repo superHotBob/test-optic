@@ -1,7 +1,7 @@
 <template>
 <div class="basket__item">
     <div class="basket__img">
-        <img alt="" v-if="arItem.DETAIL_PICTURE_SRC" v-lazy="'http://14.esobolev.ru/' + arItem.DETAIL_PICTURE_SRC">
+        <img alt="" v-if="arItem.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="'http://14.esobolev.ru' + arItem.PREVIEW_PICTURE_SRC_ORIGINAL">
         <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
         <div class="basket__flags">
             <span class="basket__flag left" v-for="(label, index) in arItem.LABEL_VALUES" :key="index">{{label.NAME}}</span>

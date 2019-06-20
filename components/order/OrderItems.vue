@@ -5,7 +5,7 @@
         <div class="basket-item basket-item--order" v-for="item in getBasket.GRID.ROWS" :key="item.ID" :item="item">
             <div class="basket-item__info">
                 <div class="basket-item__img">
-                    <img alt="" v-if="item.DETAIL_PICTURE_SRC" v-lazy="'http://14.esobolev.ru/' + item.DETAIL_PICTURE_SRC">
+                    <img alt="" v-if="item.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="'http://14.esobolev.ru' + item.PREVIEW_PICTURE_SRC_ORIGINAL">
                     <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
                 </div>
                 <div class="basket-item__offers">

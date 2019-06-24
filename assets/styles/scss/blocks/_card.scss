@@ -318,9 +318,12 @@
     }
     &__offers {
         padding-top: 20px;
+        padding-right: 30px;
         padding-bottom: 30px;
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
+        align-items: flex-start;
         margin-left: -20px;
         .item__offers {
             margin-left: 20px;

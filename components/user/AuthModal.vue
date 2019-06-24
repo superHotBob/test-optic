@@ -17,12 +17,13 @@
                 Регистрация
             </span>
         </p>
-
+       
         <form
             ref="form-login"
             v-show="loginShown && !passwordRecovery"
             @submit.prevent="validateForm('form-login')"
             data-vv-scope="form-login">
+             <div class="alert-danger" v-if="showError" v-html="showError"></div>
             <label class="textfield">
                 <span>Логин</span>
                 <input
@@ -160,7 +161,8 @@ export default {
             remember: false,
             loginShown: true,
             passwordRecovery: false,
-            showErrors:false
+            showErrors:false,
+            showError:false
         }
     },
     mounted(){
@@ -176,6 +178,11 @@ export default {
                     'remember':this.remember
                 }
             );
+            if (response.data.TYPE === 'ERROR') {
+                this.showError = response.data.MESSAGE;
+                return;
+            }
+
             this.$root.$emit('login/logout');
             this.$router.push({ name: 'main'});
         },

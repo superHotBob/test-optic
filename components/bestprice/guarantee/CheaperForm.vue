@@ -29,29 +29,20 @@
             <p
               class="cheaper-form-subtitle"
             >Пришлите нам ссылку на этот товар в другом магазине, и в течение четырех часов Вы получите SMS с уникальным промо-кодом. В случает отказа информация поступит на указанный Вами E-mail.</p>
-            <form
-              name="SIMPLE_FORM_1"
-              action="/information/garantiya_luchshey_tseny/"
+            <form @submit.prevent="submitRequest"
               method="POST"
-              enctype="multipart/form-data"
             >
-              <input
-                type="hidden"
-                name="sessid"
-                id="sessid"
-                value="a4b45fc200ea25da136fdf8a51381f71"
-              >
               <input type="hidden" name="WEB_FORM_ID" value="1">
               <div class="space-flex">
                 <div>
                   <p>Имя:</p>
-                  <input type="text" name="form_text_2" class="large-input" placeholder="Ваше имя">
+                  <input type="text" v-model="request.name" class="large-input" placeholder="Ваше имя">
                 </div>
                 <div>
                   <p>Фамилия:</p>
                   <input
                     type="text"
-                    name="form_text_1"
+                    v-model="request.last_name"
                     class="large-input"
                     placeholder="Ваша фамилия"
                   >
@@ -60,11 +51,11 @@
               <div class="space-flex">
                 <div>
                   <p>E-mail:</p>
-                  <input type="text" name="form_email_3" class="large-input" placeholder="E-mail">
+                  <input type="text" v-model="request.email" class="large-input" placeholder="E-mail">
                 </div>
                 <div>
                   <p>Телефон:</p>
-                  <input type="text" name="form_text_4" class="large-input" placeholder="Телефон">
+                  <input type="text" v-model="request.phone" class="large-input" placeholder="Телефон">
                 </div>
               </div>
               <div class="space-flex">
@@ -72,7 +63,7 @@
                   <p>Ссылка на товар в другом магазине:</p>
                   <input
                     type="text"
-                    name="form_text_5"
+                    v-model="request.link1"
                     class="large-input"
                     placeholder="Ссылка на товар в другом магазине"
                   >
@@ -81,14 +72,14 @@
                   <p>Ссылка на товар в нашем магазине:</p>
                   <input
                     type="text"
-                    name="form_text_6"
+                    v-model="request.link2"
                     class="large-input"
                     placeholder="Ссылка на товар в нашем магазине"
                   >
                 </div>
               </div>
               <p>Поле для сообщения:</p>
-              <textarea name="form_textarea_7" placeholder="Поле для сообщения"></textarea>
+              <textarea v-model="request.msg" placeholder="Поле для сообщения"></textarea>
               <input type="submit" name="web_form_submit" value="Отправить заявку ">
             </form>
           </div>
@@ -103,29 +94,18 @@
             <p
               class="cheaper-form-subtitle"
             >Пришлите нам ссылку на этот товар в другом магазине, и в течение четырех часов Вы получите SMS с уникальным промо-кодом. В случает отказа информация поступит на указанный Вами E-mail.</p>
-            <form
-              name="SIMPLE_FORM_1"
-              action="/information/garantiya_luchshey_tseny/"
-              method="POST"
-              enctype="multipart/form-data"
+            <form @submit.prevent="submitRequest"
             >
-              <input
-                type="hidden"
-                name="sessid"
-                id="sessid_1"
-                value="a4b45fc200ea25da136fdf8a51381f71"
-              >
-              <input type="hidden" name="WEB_FORM_ID" value="1">
               <div class="space-flex">
                 <div>
                   <p>Имя:</p>
-                  <input type="text" name="form_text_9" class="large-input" placeholder="Ваше имя">
+                  <input type="text" v-model="request.name" class="large-input" placeholder="Ваше имя">
                 </div>
                 <div>
                   <p>Фамилия:</p>
                   <input
                     type="text"
-                    name="form_text_8"
+                    v-model="request.last_name"
                     class="large-input"
                     placeholder="Ваша фамилия"
                   >
@@ -134,17 +114,17 @@
               <div class="space-flex">
                 <div>
                   <p>E-mail:</p>
-                  <input type="text" name="form_email_11" class="small-input" placeholder="E-mail">
+                  <input type="text" v-model="request.email" class="small-input" placeholder="E-mail">
                 </div>
                 <div>
                   <p>Телефон:</p>
-                  <input type="text" name="form_text_12" class="small-input" placeholder="Телефон">
+                  <input type="text" v-model="request.phone" class="small-input" placeholder="Телефон">
                 </div>
                 <div>
                   <p>Номер заказа:</p>
                   <input
                     type="text"
-                    name="form_text_10"
+                    v-model="request.order"
                     class="very-small-input"
                     placeholder="Номер заказа"
                   >
@@ -155,7 +135,7 @@
                   <p>Ссылка на товар в другом магазине:</p>
                   <input
                     type="text"
-                    name="form_text_13"
+                    v-model="request.link1"
                     class="large-input"
                     placeholder="Ссылка на товар в другом магазине"
                   >
@@ -164,14 +144,14 @@
                   <p>Ссылка на товар в нашем магазине:</p>
                   <input
                     type="text"
-                    name="form_text_14"
+                    v-model="request.link2"
                     class="large-input"
                     placeholder="Ссылка на товар в нашем магазине"
                   >
                 </div>
               </div>
               <p>Поле для сообщения:</p>
-              <textarea name="form_textarea_15" placeholder="Поле для сообщения"></textarea>
+              <textarea v-model="request.msg" placeholder="Поле для сообщения"></textarea>
               <input type="submit" name="web_form_submit" value="Отправить заявку ">
             </form>
           </div>
@@ -182,13 +162,55 @@
 </template>
 <script>
 
+import { mapGetters } from 'vuex'
+import qs from 'qs'
+
 export default {
     data () {
       return {
           active: true,
           show:false,
+          request: {
+            name:'',
+            last_name:'',
+            email: '',
+            phone:'',
+            order:'',
+            link1:'',
+            link2:'',
+            msg:''
+          }
       }
     
+    },
+
+    methods: {
+      submitRequest() {
+        var params = {
+            'WEB_FORM_ID':'2',
+            'sessid':this.getSessid,
+            'form_text_3':this.request.name,
+            'form_text_4':this.request.last_name,
+            'form_text_5':this.request.email,
+            'form_text_6':this.request.phone,
+            'form_text_7':this.request.order,
+            'form_text_8':this.request.link1,
+            'form_text_9':this.request.link2,
+            'form_text_10':this.request.msg,
+            'web_form_submit':'Y'
+        }
+
+        this.$axios.post('/api/v1/forms/', qs.stringify(params)).then( response => {
+            if (response.data.FORM_NOTE) {
+                this.callRequestOk = true;
+            }
+        });
+      },
+    },
+    computed: {
+      ...mapGetters({
+        getSessid: 'order/getSessid',
+      })
     },
     mounted(){
       this.$root.$on("show",(trigger)=>{

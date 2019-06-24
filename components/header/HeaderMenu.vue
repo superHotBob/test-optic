@@ -28,10 +28,10 @@
                 {{section.NAME}}
         </button>
         <div class="header-menu__features">
-            <nuxt-link to="#0">Быстрая доставка</nuxt-link>
-            <nuxt-link to="#0">Гарантия лучшей цены</nuxt-link>
-            <nuxt-link to="#0">Изготовление очков</nuxt-link>
-            <nuxt-link to="#0">Оригинальная продукция</nuxt-link>
+            <nuxt-link to="/company/delivery">Быстрая доставка</nuxt-link>
+            <nuxt-link to="/company/bestprice">Гарантия лучшей цены</nuxt-link>
+            <nuxt-link to="/company/glasses_manufacturer">Изготовление очков</nuxt-link>
+            <nuxt-link to="/company/original">Оригинальная продукция</nuxt-link>
         </div>
         <p class="header-menu__info">
             <svg width="15" height="15" fill="#4a4a4a"><use href="#svg-mobile"/></svg>
@@ -60,7 +60,7 @@
         </ul>
         <ul class="header-category__list" v-if="!showCategories">
             <li v-for="(brand, key) in section(indexCategories).BRANDS" :key="key"><nuxt-link :to="brand.UF_LINK">{{brand.UF_NAME}}</nuxt-link></li>
-            <li class="header-category__all"><nuxt-link to="#0">... смотреть все бренды</nuxt-link></li>
+            <li class="header-category__all"><nuxt-link to="/brands">... смотреть все бренды</nuxt-link></li>
         </ul>
     </b-modal>
 </div>

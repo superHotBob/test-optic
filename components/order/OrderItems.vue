@@ -9,7 +9,7 @@
                     <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
                 </div>
                 <div class="basket-item__offers">
-                    <nuxt-link class="basket-item__name" to="#0" :class="{'mt-0': !item.SKU_BLOCK_LIST}">{{item.NAME}}</nuxt-link>
+                    <nuxt-link class="basket-item__name" :to="item.DETAIL_PAGE_URL" :class="{'mt-0': !item.SKU_BLOCK_LIST}">{{item.NAME}}</nuxt-link>
                     <div
                         class="item__offers"
                         v-for="prop in item.SKU_BLOCK_LIST"
@@ -39,16 +39,16 @@
                         >
                             <p>{{prop.NAME}}</p>
                             <ul>
-                                <li>
+                                <li v-if="getPropValue(prop['~VALUE']).sph">
                                     <span>sph: {{getPropValue(prop['~VALUE']).sph}}</span>
                                 </li>
-                                <li>
+                                <li v-if="getPropValue(prop['~VALUE']).cyl">
                                     <span>cyl: {{getPropValue(prop['~VALUE']).cyl}}</span>
                                 </li>
-                                <li>
+                                <li v-if="getPropValue(prop['~VALUE']).ax">
                                     <span>ax: {{getPropValue(prop['~VALUE']).ax}}</span>
                                 </li>
-                                <li>
+                                <li v-if="getPropValue(prop['~VALUE']).add">
                                     <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
                                 </li>
                             </ul>

@@ -6,7 +6,7 @@
             <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
         </div>
         <div class="basket-item__offers">
-            <nuxt-link class="basket-item__name" to="#0" :class="{'mt-0': (postponed == true || !item.SKU_BLOCK_LIST)}">{{item.NAME}}</nuxt-link>
+            <nuxt-link class="basket-item__name" :to="item.DETAIL_PAGE_URL" :class="{'mt-0': (postponed == true || !item.SKU_BLOCK_LIST)}">{{item.NAME}}</nuxt-link>
             <template v-if="postponed == false">
                 <div
                     class="item__offers"
@@ -38,16 +38,16 @@
                 >
                     <p>{{prop.NAME}}</p>
                     <ul>
-                        <li class="selected">
+                        <li v-if="getPropValue(prop['~VALUE']).sph" class="selected">
                             <span>sph: {{getPropValue(prop['~VALUE']).sph}}</span>
                         </li>
-                        <li class="selected">
+                        <li v-if="getPropValue(prop['~VALUE']).cyl" class="selected">
                             <span>cyl: {{getPropValue(prop['~VALUE']).cyl}}</span>
                         </li>
-                        <li class="selected">
+                        <li v-if="getPropValue(prop['~VALUE']).ax" class="selected">
                             <span>ax: {{getPropValue(prop['~VALUE']).ax}}</span>
                         </li>
-                        <li class="selected">
+                        <li v-if="getPropValue(prop['~VALUE']).add" class="selected">
                             <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
                         </li>
                     </ul>

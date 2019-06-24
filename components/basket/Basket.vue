@@ -29,8 +29,16 @@
                     <input name="promocode" v-model="promocode" type="text" placeholder="Код купона для скидки">
                 </label>
                 <button class="button black" @click="addPromocode()">Применить</button>
-                <div v-for="(coupon, index) in getBasket.COUPON_LIST" :key="index">
-                    <span @click="delPromo(coupon.COUPON)">{{coupon.COUPON}} - {{coupon.STATUS_TEXT}}</span>
+                <div>
+                    <ul v-if="getBasket.COUPON_LIST">
+                        <template v-for="(coupon, index) in getBasket.COUPON_LIST">
+                            
+                            <li v-if="coupon.ACTIVE === 'Y'" :key="index">
+                                {{coupon.COUPON}}
+                                <span class="delete" @click="delPromo(coupon.COUPON)"></span>
+                            </li>
+                        </template>
+                    </ul>
                 </div>
             </div>
             <div class="cart__summary">

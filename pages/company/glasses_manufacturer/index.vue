@@ -8,7 +8,7 @@
           </ul>
       </div>
   </div>
-  <div class="glasses_manufacturer main-container">
+  <div class="glasses_manufacturer main-container custom-page">
     <div class="flex-wrap">
       <div class="making-img"></div>
       <div class="making-desc">

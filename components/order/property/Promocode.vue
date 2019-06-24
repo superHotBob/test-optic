@@ -8,10 +8,12 @@
         </div>
     </label>
     <ul v-if="promocode">
-        <li v-for="(code, index) in promocode" :key="index">
-            {{code.COUPON}}
-            <span class="delete" @click="delPromo(code.COUPON)"></span>
-        </li>
+        <template v-for="(code, index) in promocode">
+            <li :key="index" v-if="code.ACTIVE === 'Y'">
+                {{code.COUPON}}
+                <span class="delete" @click="delPromo(code.COUPON)"></span>
+            </li>
+        </template>
     </ul>
 </div>
 </template>

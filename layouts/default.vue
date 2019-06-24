@@ -66,14 +66,14 @@
                         <h3>Обратный звонок</h3>
                         <p>Вышлите нам свой номер телефона, <br> и наш менеджер перезвонит вам <br> в близжайшие 20 минут.</p>
                     </div>
-                    <form class="call-request__form" aria-label="Заказать обратный звонок" v-if="!callRequestOk" @submit.prevent="callRequestOk = !callRequestOk">
+                    <form class="call-request__form" method="POST" aria-label="Заказать обратный звонок" v-if="!callRequestOk" @submit.prevent="submitRequest">
                         <label class="textfield">
                             <span>Ваше имя</span>
-                            <input name="name" type="text">
+                            <input name="name" v-model="request.name" type="text">
                         </label>
                         <label class="textfield">
                             <span>Ваш телефон</span>
-                            <input name="phone" type="text">
+                            <input name="phone" v-model="request.phone" type="text">
                         </label>
                         <button class="call-request__submit button black" type="submit">Заказать звонок</button>
                     </form>
@@ -355,6 +355,8 @@ import DeliveryRegion from '~/components/header/DeliveryRegion.vue'
 
 import { mapGetters } from 'vuex'
 import basketInit from '~/mixins/basket/init.js'
+import qs from 'qs'
+
 
 export default {
     mixins: [basketInit],
@@ -362,6 +364,10 @@ export default {
         return {
             featuresHidden: true,
             callRequestOk: false,
+            request: {
+                name:'',
+                phone:''
+            }
         }
     },
     components: {
@@ -374,6 +380,21 @@ export default {
         DeliveryRegion,
     },
     methods: {
+        submitRequest() {
+            var params = {
+                'WEB_FORM_ID':'1',
+                'sessid':this.getSessid,
+                'form_text_1':this.request.name,
+                'form_text_2':this.request.phone,
+                'web_form_submit':'Y'
+            }
+
+            this.$axios.post('/api/v1/forms/', qs.stringify(params)).then( response => {
+                if (response.data.FORM_NOTE) {
+                    this.callRequestOk = true;
+                }
+            });
+        },
         documentClick(e) {
             let target = e.target,
                 features = this.$refs.featuresToggle;
@@ -387,7 +408,8 @@ export default {
         ...mapGetters({
             isLogged: 'user/isLogged',
             favoritesCount: 'catalog/getCountFavorites',
-            compareCount: 'catalog/getCountCompare'
+            compareCount: 'catalog/getCountCompare',
+            getSessid: 'order/getSessid',
         })
     },
     created() {

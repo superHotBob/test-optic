@@ -108,7 +108,7 @@
 
 @media (min-width: 769px)  {
     .item-slider {
-        &__before,
+        &__prev,
         &__next {
             &:hover {
                 &:not(.disabled) {

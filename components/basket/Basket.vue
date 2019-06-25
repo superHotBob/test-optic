@@ -102,3 +102,49 @@ export default {
     },
 }
 </script>
+
+<style lang="scss">
+    .cart {
+        &__promocode {
+            li {
+                display: flex;
+                word-wrap: break-word;
+                margin: 0;
+                margin-top: 5px;
+                margin-right: 20px;
+                padding: 0;
+                color: #A94442;
+                font-weight: 700;
+            }
+            .delete {
+                position: relative;
+                width: 20px;
+                margin-left: 2px;
+                cursor: pointer;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: 9px;
+                    width: 2px;
+                    height: 14px;
+                    background-color: #000;
+                    -webkit-transform: translateY(-50%) rotate(45deg);
+                    transform: translateY(-50%) rotate(45deg);
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: 9px;
+                    width: 2px;
+                    height: 14px;
+                    background-color: #000;
+                    -webkit-transform: translateY(-50%) rotate(-45deg);
+                    transform: translateY(-50%) rotate(-45deg)
+                }
+            }
+        }
+    }
+</style>
+

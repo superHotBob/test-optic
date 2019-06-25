@@ -94,7 +94,6 @@
         <div v-else ><quantity v-bind:id="item.ID"/></div>
         <div class="basket-item__buttons">
             <div><button type="button" @click="deleteItem(item.ID)">Удалить</button></div>
-            <div><button type="button">Отложить</button></div>
         </div>
     </div>
 </div>

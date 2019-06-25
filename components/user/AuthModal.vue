@@ -223,6 +223,10 @@ export default {
 
 <style lang="scss">
 .auth-modal {
+    .alert-danger {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
     .modal-dialog {
         max-width: 970px;
     }

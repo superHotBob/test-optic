@@ -209,11 +209,11 @@
 @media (max-width: 375px) {
     .cart {
         &__summary-buttons {
-            button {
+            .button {
                 width: 100%;
-                &:not(:last-of-type) {
-                    margin-bottom: 10px;
-                }
+            }
+            button {
+                margin-bottom: 10px;
             }
         }
     }

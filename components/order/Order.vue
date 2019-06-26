@@ -62,10 +62,13 @@
             <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
         </div>
     </div>
-    <div class="custom-page main-container" v-else>
-        <p class="big-text-bold">Ваш заказ №{{orderId}} успешно создан.</p>
-        <p>Вы можете следить за выполнением своего заказа в <nuxt-link to="/personal/orders" style="color: #000">Персональном разделе сайта</nuxt-link>. Обратите внимание, что для входа в этот раздел вам необходимо будет ввести логин и пароль пользователя сайта.</p>
+    <div id="compile" >
+        <div v-if="orderId" class="custom-page main-container" >
+            <p class="big-text-bold">Ваш заказ №{{orderId}} успешно создан.</p>
+            <p>Вы можете следить за выполнением своего заказа в <nuxt-link to="/personal/orders" style="color: #000">Персональном разделе сайта</nuxt-link>. Обратите внимание, что для входа в этот раздел вам необходимо будет ввести логин и пароль пользователя сайта.</p>
+        </div>
     </div>
+   
 </div>
 </template>
 
@@ -92,7 +95,7 @@ export default {
     },
     data() {
         return {
-            orderId: false
+            orderId: false,
         }
     },
     methods: {
@@ -127,8 +130,10 @@ export default {
 
                 this.orderId = result.order.ID;
 
-                if (this.orderId) 
+                if (this.orderId) {
                     this.$root.$emit('order');
+                }
+                    
             } 
         },
         async refresh() {

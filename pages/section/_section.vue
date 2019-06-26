@@ -15,7 +15,7 @@
             </div>
             <div class="catalog__col-2">
                 <div class="catalog__top">
-                    <p class="catalog__items-found hidden-desktop">Найдено {{54}} {{wording(54)}}</p>
+                    <p class="catalog__items-found hidden-desktop">Найдено {{result.filter.count_items}} {{wording(result.filter.count_items)}}</p>
                     <sort-by class="catalog__sort" />
                     <div class="catalog__view item-view">
                         <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false; $root.$emit('recalcSlider')">narrow</button>
@@ -36,7 +36,7 @@
                     :labels="customLabels"
                     @change="onChangePagen"
                 />
-                <button class="catalog__ajax-pagen button black hidden-desktop">Показать еще N товаров из Z</button>
+                <button v-if="loadPage < result.section.pagen.count" type="button" @click="onLoadItems()" class="catalog__ajax-pagen button black hidden-desktop">Показать еще</button>
                 <clear-filter class="catalog__reset-filter button hidden-desktop" />
             </div>
         </div>
@@ -88,6 +88,28 @@ export default {
         onChangePagen: function () {
             this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}, query: this.$route.query});
         },
+        onLoadItems: function() {
+            var items = [];
+
+            if (this.loadPage < this.result.section.pagen.count) {
+                this.loadPage++;
+            }
+            this.$store.dispatch('catalog/LOAD_SECTION', {'pagen':this.loadPage,'params':this.$route.params, 'query':this.$route.query})
+            .then( response => {
+                if (!Array.isArray(this.result.section.items)) {
+                    for (let key in this.result.section.items) {
+                        items.push(this.result.section.items[key]);
+                    }
+                } else {
+                    items = this.result.section.items;
+                }
+                    
+                for (let key in response.result.section.items) {
+                    items.push(response.result.section.items[key]);
+                }
+                this.result.section.items = items;
+            })
+        }
     },
     watch: {
         '$route' (to, from) {
@@ -111,9 +133,11 @@ export default {
         if (response.hasOwnProperty('error'))
             error({ statusCode: response.statusCode, message: response.error.message })
 
+        console.log(response);
         return {
             result: response.result,
             pagen: response.pagen,
+            loadPage: response.pagen,
         }
     },
     validate ({ params }) {

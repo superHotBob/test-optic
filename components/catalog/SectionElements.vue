@@ -12,15 +12,7 @@ import Item from '~/components/catalog/item/Item.vue'
 
 export default {
     name: 'SectionElements',
-    props: {
-        items: {
-            type: Object,
-        },
-        wideItem: {
-            type: Boolean,
-            default: () => false,
-        },
-    },
+    props: ['items','wideItem'],
     components: {
         Item,
     },

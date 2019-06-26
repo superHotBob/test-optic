@@ -157,6 +157,15 @@
           </div>
         </div>
       </div>
+  
+      <b-modal class="call-request" id="call-request-price" hide-header hide-footer>
+        <div class="modal-wrap">
+            <div class="call-request__ok" v-if="callRequestOk">
+                <p>Ваша заявка принята.</p>
+                <p>Наш менеджер перезвонит вам <br> в ближайшие 20 минут.</p>
+            </div>
+        </div>
+      </b-modal>
     </div>
   
 </template>
@@ -170,6 +179,7 @@ export default {
       return {
           active: true,
           show:false,
+          callRequestOk:false,
           request: {
             name:'',
             last_name:'',
@@ -203,6 +213,7 @@ export default {
         this.$axios.post('/api/v1/forms/', qs.stringify(params)).then( response => {
             if (response.data.FORM_NOTE) {
                 this.callRequestOk = true;
+                this.$bvModal.show('call-request-price');
             }
         });
       },

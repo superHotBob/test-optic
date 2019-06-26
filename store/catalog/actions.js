@@ -48,7 +48,8 @@ export default {
         .then((response) => {
 
             if (response.data.items) {
-                items = response.data.items
+                items = response.data.items;
+                count_items = response.data.count_items;
                 pagen_count = response.data.pagen.count;
             }
 
@@ -140,6 +141,9 @@ export default {
 
             if (payload.params.pagen)
                 pagen = Number(payload.params.pagen);
+
+            if (payload.pagen)
+                pagen = Number(payload.pagen);
         
         return this.$axios.get(`/api/v1/catalog/?PAGEN_2=${pagen}&q=${encodeURI(payload.query['q'])}`)
         .then((response) => {
@@ -175,6 +179,9 @@ export default {
 
         if (payload.params.pagen)
             pagen = Number(payload.params.pagen);
+
+        if (payload.pagen)
+            pagen = Number(payload.pagen);
 
         for (let key in payload.query) {
             query += `&${key}=${payload.query[key]}`;

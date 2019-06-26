@@ -208,7 +208,7 @@
                     <p class="card-workshop__option-name">Межцентровое расстояние РЦ (PD):</p>
                     <label class="checkbox">
                         <input type="checkbox" name="center-distance" v-model="centerDistance">
-                        <i class="checkbox__indicator"></i>
+                        <i class="checkbox__indicator" :class="{'error':centerDistanceError}"></i>
                         <span>Мое межцентровое расстояние</span>
                         <div class="card-lense__prop">
                             <select name="center-distance-right" :disabled="!centerDistance">
@@ -336,6 +336,7 @@ export default {
             officeLenses: true,
             progressiveLenses: false,
             accomodationLenses: false,
+            centerDistanceError:false
         }
     },
     components: {

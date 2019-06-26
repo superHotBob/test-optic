@@ -29,6 +29,7 @@ const glasses_manufacturer = () => import('~/pages/company/glasses_manufacturer/
 const confidentiality = () => import('~/pages/company/confidentiality/index').then(m => m.default || m)
 const original = () => import('~/pages/company/original/index').then(m => m.default || m)
 const bestprice = () => import('~/pages/company/bestprice/index').then(m => m.default || m)
+const contacts = () => import('~/pages/contacts/index').then(m => m.default || m)
 
 const personal = () => import('~/pages/personal/index').then(m => m.default || m)
 const userOrder = () => import('~/pages/personal/user-order').then(m => m.default || m)
@@ -175,6 +176,11 @@ export function createRouter () {
                 path: '/company/bestprice',
                 name: 'bestprice',
                 component: bestprice,
+            },
+            {
+                path: '/contacts',
+                name: 'contacts',
+                component: contacts,
             },
             {
                 path: '/order',

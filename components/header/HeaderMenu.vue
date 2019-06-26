@@ -28,10 +28,10 @@
                 {{section.NAME}}
         </button>
         <div class="header-menu__features">
-            <nuxt-link to="/company/delivery">Быстрая доставка</nuxt-link>
-            <nuxt-link to="/company/bestprice">Гарантия лучшей цены</nuxt-link>
-            <nuxt-link to="/company/glasses_manufacturer">Изготовление очков</nuxt-link>
-            <nuxt-link to="/company/original">Оригинальная продукция</nuxt-link>
+            <nuxt-link @click.native="$bvModal.hide('header-menu');" to="/company/delivery">Быстрая доставка</nuxt-link>
+            <nuxt-link @click.native="$bvModal.hide('header-menu');" to="/company/bestprice">Гарантия лучшей цены</nuxt-link>
+            <nuxt-link @click.native="$bvModal.hide('header-menu');" to="/company/glasses_manufacturer">Изготовление очков</nuxt-link>
+            <nuxt-link @click.native="$bvModal.hide('header-menu');" to="/company/original">Оригинальная продукция</nuxt-link>
         </div>
         <p class="header-menu__info">
             <svg width="15" height="15" fill="#4a4a4a"><use href="#svg-mobile"/></svg>
@@ -56,11 +56,17 @@
             </p>
         </div>
         <ul class="header-category__list" v-if="showCategories">
-            <li v-for="(category, key) in section(indexCategories).SECTIONS" :key="key"><nuxt-link :to="category.UF_LINK">{{category.UF_NAME}}</nuxt-link></li>
+            <li v-for="(category, key) in section(indexCategories).SECTIONS" :key="key">
+                <nuxt-link :to="category.UF_LINK" @click.native="$bvModal.hide('header-category')">{{category.UF_NAME}}</nuxt-link>
+            </li>
         </ul>
         <ul class="header-category__list" v-if="!showCategories">
-            <li v-for="(brand, key) in section(indexCategories).BRANDS" :key="key"><nuxt-link :to="brand.UF_LINK">{{brand.UF_NAME}}</nuxt-link></li>
-            <li class="header-category__all"><nuxt-link to="/brands">... смотреть все бренды</nuxt-link></li>
+            <li v-for="(brand, key) in section(indexCategories).BRANDS" :key="key">
+                <nuxt-link :to="brand.UF_LINK" @click.native="$bvModal.hide('header-category');">{{brand.UF_NAME}}</nuxt-link>
+            </li>
+            <li class="header-category__all">
+                <nuxt-link to="/brands" @click.native="$bvModal.hide('header-category');" >... смотреть все бренды</nuxt-link>
+            </li>
         </ul>
     </b-modal>
 </div>

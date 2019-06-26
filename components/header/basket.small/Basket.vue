@@ -33,19 +33,19 @@
         </div>
         <div class="basket__header-panel header-panel">
             <p>
-                <nuxt-link to="/basket">
+                <nuxt-link to="/basket" @click.native="$bvModal.hide('basket__mobile')">
                     <span>Корзина</span>
                     <span>{{getBasket.BASKET_ITEMS_COUNT}}</span>
                 </nuxt-link>
             </p>
             <p>
-                <nuxt-link to="/compare">
+                <nuxt-link to="/compare" @click.native="$bvModal.hide('basket__mobile')">
                     <span>Сравнение</span>
                     <span v-if="compareCount > 0">{{compareCount}}</span>
                 </nuxt-link>
             </p>
             <p>
-                <nuxt-link to="/favorites">
+                <nuxt-link to="/favorites" @click.native="$bvModal.hide('basket__mobile')">
                     <span>Список желаемого</span>
                     <span v-if="favoritesCount > 0">{{favoritesCount}}</span>
                 </nuxt-link>
@@ -54,6 +54,12 @@
                 <a class="header-panel__login" @click="$bvModal.hide('basket__mobile'); $bvModal.show('auth-modal')">
                     <span>Вход</span>
                 </a>
+            </p>
+            <p v-if="isLogged">
+                <nuxt-link to="/personal" @click.native="$bvModal.hide('basket__mobile')">
+                    Профиль
+                </nuxt-link>
+                <logout-button />
             </p>
         </div>
     </b-modal>
@@ -65,6 +71,7 @@
 import util from '~/mixins/util.js'
 import basket from '~/mixins/basket/basket.js'
 import BasketItem from '~/components/header/basket.small/BasketItem.vue'
+import LogoutButton from '~/components/user/LogoutButton.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -72,6 +79,7 @@ export default {
     mixins: [util, basket],
     components: {
         BasketItem,
+        LogoutButton
     },
     data() {
         return {

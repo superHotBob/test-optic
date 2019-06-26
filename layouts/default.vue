@@ -171,7 +171,7 @@
                     </b-collapse>
                 </div>
                 <div class="page-footer__list">
-                    <nuxt-link class="page-footer__big-link no-after" to="#0">Контакты</nuxt-link>
+                    <nuxt-link class="page-footer__big-link no-after" :to="{ name:'contacts'}">Контакты</nuxt-link>
                     <ul class="page-footer__icon-list">
                         <li>
                             <a>

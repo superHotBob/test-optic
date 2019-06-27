@@ -141,6 +141,10 @@ export default {
         Star,
     },
     methods: {
+        updateElement(url) {
+            console.log(url);
+            var newWin = window.open(url, "hello", "width=800,height=600");
+        },
         showModal() {
             this.$root.$emit('preview', this.item);
         },

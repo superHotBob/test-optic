@@ -60,6 +60,7 @@ module.exports = {
   },
   proxy: {
     '/api/': 'http://14.esobolev.ru/',
+    '/bitrix/': 'http://vosq.proj/',
     // '/api/': 'http://home-optic.proj/',
   },
   cache: true,

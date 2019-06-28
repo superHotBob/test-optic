@@ -5,7 +5,8 @@
             <h2>{{result.seometa.title}}</h2>
             <ul class="breadcrumbs">
                 <li v-for="(item, index) in result.seometa.bredcrumbs" :key="index">
-                    <nuxt-link :to="item.LINK">{{item.TITLE}}</nuxt-link>
+                   
+                    <nuxt-link :to="item.LINK.LINK">{{item.TITLE}}</nuxt-link>
                 </li>
             </ul>
         </div>

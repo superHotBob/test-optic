@@ -114,7 +114,8 @@
             text-align: center;
         }
         li {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             min-height: 30px;
             min-width: 30px;
             vertical-align: middle;
@@ -141,6 +142,9 @@
                     height: 28px;
                     padding: 6px;
                     pointer-events: auto;
+                }
+                span {
+                    padding-right: 5px;
                 }
             }
         }

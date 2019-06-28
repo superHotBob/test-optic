@@ -45,6 +45,7 @@
                 >
                     <p>{{prop.NAME}}</p>
                     <ul>
+                        
                         <li
                             :data-value="value.ID"
                             @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
@@ -53,7 +54,7 @@
                             :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
                         >
                             <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
-                            <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
+                            <span v-if="!value.PICT || value.PICT.ID == 0 || prop.ID === 49">{{value.NAME}}</span>
                         </li>
                     </ul>
                 </div>

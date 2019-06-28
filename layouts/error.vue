@@ -124,9 +124,13 @@ export default {
         }
         
     }
-    @media (max-width: 370px) {
+    @media (max-width: 400px) {
         .page-error {
             background-position: 0 5%, 100% 20%;
+        }
+    }
+    @media (max-width: 370px) {
+        .page-error {
             .text-error {
                 .button-error {
                     a {

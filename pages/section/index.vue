@@ -14,7 +14,6 @@ import ItemSlider from '~/components/sliders/ItemSlider.vue'
 import ItemPreview from '~/components/catalog/item/ItemPreview.vue'
 
 export default {
-    transition: 'fade',
     components: {
         ItemSlider,
         ItemPreview,

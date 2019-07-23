@@ -3,7 +3,7 @@
     <template v-if="item">
         <button class="modal-close" @click="$bvModal.hide('item-preview')"></button>
         <div class="item-preview__img">
-            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img"/>
+            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">SALE</span>

@@ -412,14 +412,11 @@ export default {
             getSessid: 'order/getSessid',
         })
     },
-    created() {
+    mounted() {
         Promise.all([
             this.$store.dispatch('catalog/GET_FAVORITES'),
             this.$store.dispatch('catalog/GET_COMPARE')
         ])
-        
-    },
-    mounted() {
         window.addEventListener('click', this.documentClick)
     },
     beforeDestroy () {

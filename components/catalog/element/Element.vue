@@ -2,7 +2,7 @@
 <div class="card main-container">
     <div class="card__top">
         <div class="card__img">
-            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img">
+            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img">
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">SALE</span>

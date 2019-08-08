@@ -49,7 +49,6 @@ export default {
 
             if (response.data.items) {
                 items = response.data.items;
-                count_items = response.data.count_items;
                 pagen_count = response.data.pagen.count;
             }
 

@@ -340,6 +340,8 @@
         </svg>
 
     </div>
+    <item-added/>
+    <buy-click/>
 </div>
 </template>
 
@@ -352,6 +354,8 @@ import SearchForm from '~/components/catalog/search/SearchForm.vue'
 import HeaderMenu from '~/components/header/HeaderMenu.vue'
 import BasketSmall from '~/components/header/basket.small/Basket.vue'
 import DeliveryRegion from '~/components/header/DeliveryRegion.vue'
+import ItemAdded from '~/components/catalog/item/ItemAdded.vue'
+import BuyClick from '~/components/catalog/buy1click.vue'
 
 import { mapGetters } from 'vuex'
 import basketInit from '~/mixins/basket/init.js'
@@ -378,6 +382,8 @@ export default {
         SearchForm,
         LogoutButton,
         DeliveryRegion,
+        ItemAdded,
+        BuyClick
     },
     methods: {
         submitRequest() {

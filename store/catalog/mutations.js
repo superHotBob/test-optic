@@ -1,4 +1,7 @@
 export default {
+    setView(state, payload) {
+        state.view = payload;
+    },
     setSections(state, payload) {
         state.sections = payload;
     },

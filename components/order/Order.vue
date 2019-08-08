@@ -126,7 +126,7 @@ export default {
                     return;
                 
                 if (!this.isLogged)
-                    this.$store.dispatch('user/state');
+                    this.$store.dispatch('user/STATE');
 
                 this.orderId = result.order.ID;
 

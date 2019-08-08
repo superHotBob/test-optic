@@ -41,7 +41,7 @@
                 <template v-for="(prop, index) in properties">
                 <li v-if="!prop.VALUE.TEXT && prop.CODE != 'rating' && prop.CODE != 'BLOG_COMMENTS_CNT'" :key="index">
                     <span class="grey">{{prop.NAME}}:</span>
-                    <span>{{prop.VALUE}}</span>
+                    <span>{{ getPropValue(prop.VALUE) }}</span>
                 </li>
                 </template>
             </ul>
@@ -125,9 +125,16 @@ export default {
     computed: {
         ...mapGetters({
             isLogged: 'user/isLogged',
-        })
+        }),
     },
     methods: {
+        getPropValue(value) {
+
+            if (Array.isArray(value))
+                value = value.join('/');
+
+            return value;
+        },
         toggleTab(tabNum) {
 
             for (let [key, tab] in this.tabs) {

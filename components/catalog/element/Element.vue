@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="card__guarantee">
-                <p>Гарантируем лучшую цену! Нашли дешевле? Снизим цену</p>
+                <p @click="warrantyModal();">Гарантируем лучшую цену! Нашли дешевле? Снизим цену</p>
                 <p>
                     Дополнительная <span>10% скидка по промокоду</span> <br>
                     при изготовлении очков в нашей мастерской или при заказе онлайн.
@@ -103,7 +103,7 @@
             <p v-if="isCoupon('homeoptic')">Купон применён</p>
             <button class="card__promo-close" @click="promo.shown = false">Закрыть</button>
         </div>
-        <button class="card__buy-one-click button">
+        <button class="card__buy-one-click button" @click="buy1click()">
             <svg width="22" height="22" fill="#000"><use href="#svg-click"/></svg>
             Купить в один клик
         </button>
@@ -118,7 +118,7 @@
                     <img src="~assets/images/card/lense-right.png" alt="">
                 </div>
                 <div class="card-lense__img" v-else>
-                    <span>Левая линза (OD)</span>
+                    <span>Левая линза (OS)</span>
                     <img src="~assets/images/card/lense-left.png" alt="">
                 </div>
                 <div class="card-lense__props">
@@ -298,6 +298,14 @@
             <path d="M337.169,46.869c-4.16-4.181-10.923-4.181-15.104,0l-45.269,45.248c-4.16,4.16-4.16,10.923,0,15.083 c2.091,2.069,4.821,3.115,7.552,3.115c2.731,0,5.461-1.024,7.552-3.115l45.269-45.248 C341.329,57.792,341.329,51.051,337.169,46.869z"/>
         </svg>
     </div>
+    <b-modal class="warranty" id="warranty" hide-header hide-footer>
+        <div class="modal-wrap">
+            <button class="modal-close" @click="$bvModal.hide('warranty')">
+                <span class="modal-close__icon"></span>
+            </button>
+            <cheaper-form/>
+        </div>
+    </b-modal>
 </div>
 </template>
 
@@ -308,6 +316,7 @@ import offers from '~/mixins/offers.js'
 import item from '~/mixins/item.js'
 import Star from '~/components/catalog/star/star.vue'
 import CardTabs from '~/components/catalog/element/CardTabs.vue'
+import CheaperForm from '~/components/bestprice/guarantee/CheaperForm.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -337,15 +346,25 @@ export default {
             officeLenses: true,
             progressiveLenses: false,
             accomodationLenses: false,
-            centerDistanceError:false
+            centerDistanceError:false,
         }
     },
     components: {
         Star,
         CardTabs,
-        Share
+        Share,
+        CheaperForm
     },
     methods: {
+        warrantyModal() {
+            this.$root.$emit("show", true)
+            this.$bvModal.show('warranty');
+        },
+        buy1click() {
+            var item = this.item;
+            this.$root.$emit('buy1click', {item})
+            this.$bvModal.show('buyclick');
+        },
         coupon() {
             this.$store.dispatch('basket/ADD_COUPON', 'homeoptic');
         },  
@@ -363,7 +382,7 @@ export default {
     computed: {
         ...mapGetters({
             isCompare: 'catalog/isCompare',
-            isCoupon: 'basket/isCoupon'
+            isCoupon: 'basket/isCoupon',
         }),
         sale() {
             var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
@@ -392,3 +411,51 @@ export default {
     },
 }
 </script>
+
+<style lang="scss">
+.card__guarantee {
+    p {
+        &:nth-of-type(1) {
+            cursor: pointer;
+        }
+    }
+}
+.warranty {
+    .modal-body {
+        padding: 0;
+        .modal-wrap {
+            border: none;
+            .modal-close {
+                z-index: 1;
+                &:hover, &:focus {
+                    &:before, &:after {
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width:1201px) {
+    .warranty {
+        .modal-dialog {
+            max-width: 1170px;
+        }
+    }
+}
+@media (max-width:1200px) {
+.warranty {
+    .cheaper-form {
+            .tabs-three {
+                .form-nav {
+                    left: 0;
+                    right: 0;
+                    margin: 0 auto;
+                    text-align: center;
+                }
+            } 
+        } 
+    }
+}
+</style>

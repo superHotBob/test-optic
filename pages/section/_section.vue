@@ -21,8 +21,8 @@
                     <p class="catalog__items-found hidden-desktop">Найдено {{result.filter.count_items}} {{wording(result.filter.count_items)}}</p>
                     <sort-by class="catalog__sort" />
                     <div class="catalog__view item-view">
-                        <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="wideItem = false; $root.$emit('recalcSlider')">narrow</button>
-                        <button class="item-view__wide" :class="{'active' : wideItem}" @click="wideItem = true; $root.$emit('recalcSlider')">wide</button>
+                        <button class="item-view__narrow" :class="{'active' : !wideItem}" @click="changeView(false)">narrow</button>
+                        <button class="item-view__wide" :class="{'active' : wideItem}" @click="changeView(true)">wide</button>
                     </div>
                 </div>
                 <tags v-bind:tags="result.tags" />
@@ -57,6 +57,7 @@ import SectionElements from '~/components/catalog/SectionElements.vue'
 import SortBy from '~/components/catalog/SortBy.vue'
 import StickyScroll from '~/components/StickyScroll.vue'
 import Pagination from '~/components/Pagination.vue'
+import { mapGetters } from 'vuex'
 
 export default {
     mixins: [util],
@@ -75,7 +76,6 @@ export default {
                 next: 'Next',
                 last: 'Last'
             },
-            wideItem: true,
         }
     },
     components: {
@@ -87,7 +87,16 @@ export default {
         Pagination,
         Tags,
     },
+    computed: {
+        ...mapGetters({
+            wideItem: 'catalog/getView',
+        }),
+    },
     methods: {
+        changeView(bool) {
+            this.$store.commit('catalog/setView', bool)
+            this.$root.$emit('recalcSlider');
+        },
         onChangePagen: function () {
             this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}, query: this.$route.query});
         },
@@ -135,8 +144,7 @@ export default {
 
         if (response.hasOwnProperty('error'))
             error({ statusCode: response.statusCode, message: response.error.message })
-
-        console.log(response);
+            
         return {
             result: response.result,
             pagen: response.pagen,

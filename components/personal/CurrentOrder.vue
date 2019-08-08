@@ -23,7 +23,7 @@
                 <div>
                     <button class="s-orders__change btn-simple mb-2" type="button" @click="changePayment(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER)">Сменить способ оплаты</button>
                     <br>
-                    <button class="button black" type="button" @click="toPay(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER)">Оплатить</button>
+                    <button v-if="payment.PAY_SYSTEM_ID != 3" class="button black" type="button" @click="toPay(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER)">Оплатить</button>
                 </div>
                 <div v-if="payment_list">
                     <div class="s-orders__payment-wrapper">

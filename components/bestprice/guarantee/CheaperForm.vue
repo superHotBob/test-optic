@@ -227,11 +227,7 @@ export default {
       this.$root.$on("show",(trigger)=>{
         console.log(1)
         this.show = trigger;
-        
       })
-      
-    }
-
-    
+    } 
 }
 </script>

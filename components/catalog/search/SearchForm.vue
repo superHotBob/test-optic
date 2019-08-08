@@ -5,7 +5,7 @@
         Поиск
     </button>
     <label @click="showSearch = true" ref="input" class="textfield light" :class="{'active': showSearch}">
-        <input @input="search($event.target.value)" name="q" type="text" placeholder="Поиск...">
+        <input @input="search($event.target.value)" autocomplete="off" name="q" type="text" placeholder="Поиск...">
         <button class="textfield__icon" type="submit">
             <svg width="15" height="15"><use href="#svg-search"/></svg>
             Поиск
@@ -43,7 +43,7 @@ export default {
         submit($event) {
             var q = $event.target.elements.q.value
             this.$router.push('/search?q=' + q);
-            this.showSearch = true;
+            this.showSearch = false;
         },
         search(value) {
             

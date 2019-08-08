@@ -1,4 +1,5 @@
 export default () => ({
+    view: true,
     endpoint: {
         sections:'/api/v1/catalog/',
         favorites:'/api/v1/catalog/favorites/',

@@ -89,7 +89,6 @@
             </div>
             <div class="basket-item__o-price">
                 <p>{{item.SUM}}</p>
-                <p>{{item.SUM}}</p>
             </div>
         </div>
     </template>

@@ -56,7 +56,7 @@
                     <button @click="itemAmount++">+</button>
                 </div>
                 <button class="button black" @click.prevent="addToBasket(item.CURRENT.ADD_URL)">В корзину</button>
-                <button class="button">
+                <button class="button" @click="buy1click()">
                     <svg id="svg-icon-click" fill="#000" viewBox="0 0 18 25.929" width="20" height="20">
                         <path d="M18 18L8.353 8.646 7 9v14l3.658-1.835 2.196 4.764.034-.026.006.012 3.186-1.688-2.222-5.168L18 19v-1zm-4.313.062l-1.025.738 2.263 4.908-1.623.859-2.196-4.762L8 21.438V9.707l8.317 8.317-2.63.038z"></path>
                         <path d="M1 8a7 7 0 1 1 14 0 6.959 6.959 0 0 1-.697 3.03l.869.497A7.95 7.95 0 0 0 16 8 8 8 0 0 0 0 8c0 3.727 2.551 6.849 6 7.738v-1.031A7.001 7.001 0 0 1 1 8z"></path>
@@ -109,6 +109,11 @@ export default {
         }); 
     },
     methods: {
+        buy1click() {
+            var item = this.item;
+            this.$root.$emit('buy1click', {item})
+            this.$bvModal.show('buyclick');
+        },
         counterMinus() {
             if (this.itemAmount <= 1) {
                 return

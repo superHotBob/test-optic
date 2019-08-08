@@ -44,7 +44,12 @@ export default {
                 query += `&${key}=${params[key]}`;
             }
 
-            let response = await this.$axios.get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}${query}`);
+            let response = await this.$axios.$get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}${query}`);
+
+            var item = this.item.CURRENT;
+
+            this.$root.$emit('add-item', {item, response})
+            this.$bvModal.show('item-added');
             this.$store.dispatch('basket/STATE');
         },
         async addCompare(url) {

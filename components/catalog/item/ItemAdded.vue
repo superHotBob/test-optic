@@ -70,6 +70,7 @@ export default {
     &__cart-link {
         height: 44px;
         padding: 0 34px;
+        margin: 0 10px;
         margin-bottom: 10px;
         font-size: 12px;
         line-height: 44px;
@@ -82,6 +83,16 @@ export default {
     .item-added {
         .modal-dialog {
             max-width: 300px;
+            .modal-body {
+                background-color: #fff;
+                .modal-wrap {
+                    position: initial;
+                    .modal-close {
+                        top: 20px;
+                        right: 20px;
+                    }
+                }
+            }
         }
         &__response {
             margin-top: 29px;
@@ -91,7 +102,6 @@ export default {
         }
         img {
             width: 148px;
-            height: 192px;
             margin-bottom: 15px;
         }
         &__name {

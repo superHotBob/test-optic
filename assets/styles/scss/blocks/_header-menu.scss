@@ -46,13 +46,12 @@
         padding-right: 15px;
         font-weight: 600;
         color: #000;
-        &::after {
-            content: "";
+        .arrow {
             position: absolute;
             top: 50%;
-            right: 0;
-            width: 6px;
-            height: 6px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
             border-bottom: 1px solid #000;
             border-right: 1px solid #000;
             transform: translateY(-50%) rotate(-45deg);

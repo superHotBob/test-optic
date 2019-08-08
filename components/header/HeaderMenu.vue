@@ -20,13 +20,18 @@
         >
             Вход / Регистрация
         </button>
-        <button 
+        <nuxt-link
+            tag="button"
             v-for="(section, index) in sections" :key="index"
+            :to="{ name: 'section', params: {section: section.CODE }}" 
             class="header-menu__btn" 
-            @click="indexCategories = index; $bvModal.hide('header-menu'); $bvModal.show('header-category')"
         >
-                {{section.NAME}}
-        </button>
+            {{section.NAME}}
+            <span 
+                class="arrow"
+                @click="indexCategories = index; $bvModal.hide('header-menu'); $bvModal.show('header-category')"
+            ></span>
+        </nuxt-link>
         <div class="header-menu__features">
             <nuxt-link @click.native="$bvModal.hide('header-menu');" to="/company/delivery">Быстрая доставка</nuxt-link>
             <nuxt-link @click.native="$bvModal.hide('header-menu');" to="/company/bestprice">Гарантия лучшей цены</nuxt-link>

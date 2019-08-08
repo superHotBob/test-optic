@@ -24,22 +24,22 @@
             <basket-item class="cart__item" v-for="item in getBasket.GRID.ROWS" :key="item.ID" :item="item" :postponed="postponed"/>
         </div>
         <div class="cart__bottom">
+            <div class="block__promocode">
+                <ul v-if="getBasket.COUPON_LIST">
+                    <template v-for="(coupon, index) in getBasket.COUPON_LIST">
+                        
+                        <li v-if="coupon.ACTIVE === 'Y'" :key="index">
+                            {{coupon.COUPON}}
+                            <span class="delete" @click="delPromo(coupon.COUPON)"></span>
+                        </li>
+                    </template>
+                </ul>
+            </div>
             <div class="cart__promocode">
                 <label class="textfield">
                     <input name="promocode" v-model="promocode" type="text" placeholder="Код купона для скидки">
                 </label>
                 <button class="button black" @click="addPromocode()">Применить</button>
-                <div>
-                    <ul v-if="getBasket.COUPON_LIST">
-                        <template v-for="(coupon, index) in getBasket.COUPON_LIST">
-                            
-                            <li v-if="coupon.ACTIVE === 'Y'" :key="index">
-                                {{coupon.COUPON}}
-                                <span class="delete" @click="delPromo(coupon.COUPON)"></span>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
             </div>
             <div class="cart__summary">
                 <p>
@@ -104,8 +104,13 @@ export default {
 </script>
 
 <style lang="scss">
-    .cart {
+    .block {
         &__promocode {
+            width: 100%;
+            ul {
+                margin-bottom: 0;
+                padding-left: 30px;
+            }
             li {
                 display: flex;
                 word-wrap: break-word;

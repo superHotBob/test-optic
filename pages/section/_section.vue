@@ -2,7 +2,7 @@
 <div>
     <div class="content-header">
         <div class="main-container">
-            <h2>{{result.seometa.title}}</h2>
+            <h2>{{result.seometa.headline}}</h2>
             <ul class="breadcrumbs">
                 <li v-for="(item, index) in result.seometa.bredcrumbs" :key="index">
                    
@@ -159,7 +159,11 @@ export default {
     },
     head() {
         return {
-            title: this.result.seometa.title
+            title: this.result.seometa.title,
+            meta: [
+                // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+                { hid: 'description', name: 'description', content: this.result.seometa.description }
+            ]
         }
     }
 }

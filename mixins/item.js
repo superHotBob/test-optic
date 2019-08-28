@@ -17,12 +17,14 @@ export default {
                         'cyl':props.elements['left-cyl'].value,
                         'ax':props.elements['left-ax'].value,
                         'add':props.elements['left-add'].value,
+                        'deg':props.elements['left-deg'].value,
                     },
                     'right': {
                         'sph':props.elements['right-sph'].value,
                         'cyl':props.elements['right-cyl'].value,
                         'ax':props.elements['right-ax'].value,
                         'add':props.elements['right-add'].value,
+                        'deg':props.elements['right-deg'].value,
                     },
                     'order_workshop':checked,
                     'workshop_lense':props.elements['workshop-lense'].value

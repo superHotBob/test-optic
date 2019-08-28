@@ -50,6 +50,9 @@
                         <li v-if="getPropValue(prop['~VALUE']).add" class="selected">
                             <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
                         </li>
+                        <li v-if="getPropValue(prop['~VALUE']).deg" class="selected">
+                            <span>deg: {{getPropValue(prop['~VALUE']).deg}}</span>
+                        </li>
                     </ul>
                 </div>
             </template>

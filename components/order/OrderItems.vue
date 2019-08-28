@@ -51,6 +51,9 @@
                                 <li v-if="getPropValue(prop['~VALUE']).add">
                                     <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
                                 </li>
+                                <li v-if="getPropValue(prop['~VALUE']).deg">
+                                    <span>deg: {{getPropValue(prop['~VALUE']).deg}}</span>
+                                </li>
                             </ul>
                         </div>
                     </template>

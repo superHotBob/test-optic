@@ -158,7 +158,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="card-lense__prop" v-if="officeLenses">
+                    <div class="card-lense__prop" v-if="getAdd">
                         <span>Аддидация (add)</span>
                         <select :name="lense+'-add'">
                             <option value="0.00" selected>0.00 дпт.</option>
@@ -170,7 +170,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="card-lense__prop" v-if="progressiveLenses || accomodationLenses">
+                    <div class="card-lense__prop" v-if="getDeg">
                         <span>Дегрессия (deg)</span>
                         <select :name="lense+'-deg'">
                             <option value="0.00" selected>0.00 дпт.</option>
@@ -399,6 +399,16 @@ export default {
             if (this.item.CURRENT.PROPERTIES)
                 if (this.item.CURRENT.PROPERTIES.new)
                     return true;
+            return false;
+        },
+        getAdd() {
+            if (this.item.PROPERTIES.add.VALUE)
+                return true;
+            return false;
+        },
+        getDeg() {
+            if (this.item.PROPERTIES.deg.VALUE)
+                return true;
             return false;
         },
         labelSale() {

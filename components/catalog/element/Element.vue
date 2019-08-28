@@ -2,7 +2,7 @@
 <div class="card main-container">
     <div class="card__top">
         <div class="card__img">
-            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img">
+            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" @click="lightboxClick()" :key="index" :src="img">
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">SALE</span>
@@ -306,6 +306,11 @@
             <cheaper-form/>
         </div>
     </b-modal>
+    <vue-easy-lightbox
+        @hide="lightboxClick"
+        :visible="lightbox"
+        :imgs="item.CURRENT.MORE_PHOTO"
+    ></vue-easy-lightbox>
 </div>
 </template>
 
@@ -326,6 +331,7 @@ export default {
     },
     data() {
         return {
+            lightbox:false,
             itemAmount: 1,
             regxNumbers: {
                 F: {
@@ -356,6 +362,9 @@ export default {
         CheaperForm
     },
     methods: {
+        lightboxClick() {
+            this.lightbox = !this.lightbox
+        },
         warrantyModal() {
             this.$root.$emit("show", true)
             this.$bvModal.show('warranty');

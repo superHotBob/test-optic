@@ -75,6 +75,7 @@ module.exports = {
     { src: '~/plugins/lazyload', ssr: false },
     { src: '~/plugins/vuex-cache', ssr: false },
     { src: '~/plugins/swiper', ssr: false },
+    { src: '~/plugins/lightbox', ssr: false },
     { src: '~/plugins/vee-validate', ssr: true },
     { src: '~/plugins/mask', ssr: true },
   ],

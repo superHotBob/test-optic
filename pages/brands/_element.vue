@@ -16,7 +16,16 @@
             <div class="brand__text" v-html="item.detail_text"></div> 
         </div>
         <div class="main-container brand__item-slider">
-            <item-slider items="recommended" :elements="items">Товары {{item.name}}</item-slider>
+            <item-slider items="recommended" :elements="items">
+                <template v-if="item.properties.link">
+                    <nuxt-link tag="span" :to="item.properties.link.value">
+                        Товары {{item.name}}
+                    </nuxt-link>   
+                </template>
+                <template v-else>
+                    Товары {{item.name}}
+                </template>
+            </item-slider>
         </div>
     </div>
 </template>

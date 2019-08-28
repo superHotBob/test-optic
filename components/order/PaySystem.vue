@@ -12,10 +12,6 @@
                 <span>{{pay.NAME}}</span>
             </label>
         </div>
-        <div class="order__next">
-            <promocode :promocode="promocode" @input="promocode = $event" />
-            <button class="button black" type="button" v-b-toggle.accordion-4.accordion-5>Далее</button>
-        </div>
     </b-collapse>
     <div class="order__short-info">
         <template v-for="pay in paysystem">

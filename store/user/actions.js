@@ -24,6 +24,8 @@ export default {
             getters.getEndpointRegister,
             qs.stringify({
                 'REGISTER[NAME]':payload.name,
+                'REGISTER[LAST_NAME]':payload.lastName,
+                'REGISTER[SECOND_NAME]':payload.secondName,
                 'REGISTER[LOGIN]':payload.username,
                 'REGISTER[PASSWORD]':payload.password,
                 'REGISTER[CONFIRM_PASSWORD]':payload.password1,

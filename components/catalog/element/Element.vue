@@ -59,14 +59,14 @@
                     </ul>
                 </div>
             </div>
-            <div class="card__lense-production-wrapper" v-if="itsaLense">
+            <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">
                 <div class="card__lense-production">
                     <p>Линзы изготавливаются на заказ.</p>
                     <p>Срок изготовления 10 рабочих дней.</p>
                 </div>
             </div>
             <div class="card__guarantee">
-                <p @click="warrantyModal();">Гарантируем лучшую цену! Нашли дешевле? Снизим цену</p>
+                <p @click="warrantyModal();">Гарантируем лучшую цену! Нашли дешевле? Снизим цену!</p>
                 <p>
                     Дополнительная <span>10% скидка по промокоду</span> <br>
                     при изготовлении очков в нашей мастерской или при заказе онлайн.
@@ -389,15 +389,15 @@ export default {
             return this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE - this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE * 0.1;
         },
         rating() {
-            if (this.item.DISPLAY_PROPERTIES.rating) 
-                return this.item.DISPLAY_PROPERTIES.rating.VALUE*1;
+            if (this.item.PROPERTIES.rating) 
+                return this.item.PROPERTIES.rating.VALUE*1;
             return 0;
         },
         labelNew() {
-            if (this.item.DISPLAY_PROPERTIES.new)
+            if (this.item.PROPERTIES.new.VALUE)
                 return true;
-            if (this.item.CURRENT.DISPLAY_PROPERTIES)
-                if (this.item.CURRENT.DISPLAY_PROPERTIES.new)
+            if (this.item.CURRENT.PROPERTIES)
+                if (this.item.CURRENT.PROPERTIES.new)
                     return true;
             return false;
         },
@@ -417,6 +417,11 @@ export default {
     p {
         &:nth-of-type(1) {
             cursor: pointer;
+            padding-left: 10px;
+        }
+        &:nth-of-type(2) {
+            padding: 10px;
+            background: #f7f7f7;
         }
     }
 }

@@ -80,6 +80,26 @@
                     data-vv-as="Имя">
                 <span v-show="errors.has('form-register.name')" class="error">{{ errors.first('form-register.name') }}</span>
             </label>
+             <label class="textfield">
+                <span>Фамилия</span>
+                <input
+                    v-validate="'required'"
+                    v-model="lastName"
+                    name="last_name"
+                    type="text"
+                    data-vv-as="Фамилия">
+                <span v-show="errors.has('form-register.last_name')" class="error">{{ errors.first('form-register.last_name') }}</span>
+            </label>
+             <label class="textfield">
+                <span>Отчество</span>
+                <input
+                    v-validate="'required'"
+                    v-model="secondName"
+                    name="second_name"
+                    type="text"
+                    data-vv-as="Имя">
+                <span v-show="errors.has('form-register.second_name')" class="error">{{ errors.first('form-register.second_name') }}</span>
+            </label>
             <label class="textfield">
                 <span>E-mail</span>
                 <input
@@ -152,11 +172,13 @@ import { Validator } from "vee-validate";
 export default {
     data() {
         return {
-            username: '',
-            password: '',
+            username:'',
+            password:'',
             passwordConfirmation: '',
             email:'',
             name:'',
+            lastName:'',
+            secondName:'',
             phone:'',
             remember: false,
             loginShown: true,
@@ -192,6 +214,8 @@ export default {
                 {
                     'username':this.username, 
                     'name':this.name,
+                    'lastName':this.lastName,
+                    'secondName':this.secondName,
                     'password':this.password, 
                     'password1':this.passwordConfirmation,
                     'email':this.email,

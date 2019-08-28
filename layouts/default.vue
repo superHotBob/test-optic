@@ -36,12 +36,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="stat-counter"></div>
+                <a class="stat-counter" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews"></a>
                 <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden" ref="featuresToggle">Показать</button>
             </div>
         </div>
         <div class="page-header__tels main-container hidden-mobile">
-            <p>Контактные номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
+            <p>Наши номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
             <p>Режим работы Пн-Сб: <b>с 10:00 до 20:00</b></p>
         </div>
         <div class="page-header__main main-container">
@@ -64,7 +64,7 @@
                     <button class="modal-close" @click="$bvModal.hide('call-request')"></button>
                     <div class="call-request__text" v-if="!callRequestOk">
                         <h3>Обратный звонок</h3>
-                        <p>Вышлите нам свой номер телефона, <br> и наш менеджер перезвонит вам <br> в близжайшие 20 минут.</p>
+                        <p>Оставьте нам свой номер телефона, <br> и наш менеджер перезвонит вам <br> в близжайшие 20 минут.</p>
                     </div>
                     <form class="call-request__form" method="POST" aria-label="Заказать обратный звонок" v-if="!callRequestOk" @submit.prevent="submitRequest">
                         <label class="textfield">
@@ -152,9 +152,9 @@
                         <ul>
                             <li><nuxt-link :to="{ name:'exchange' }">Возврат и обмен</nuxt-link></li>
                             <li><nuxt-link :to="{ name:'delivery' }">Доставка</nuxt-link></li>
+                            <li><nuxt-link :to="{ name: 'howOrder' }">Как заказать</nuxt-link></li>
                             <li><nuxt-link :to="{ name: 'payment' }">Оплата</nuxt-link></li>
                             <li><nuxt-link :to="{ name: 'support' }">Центр поддержки</nuxt-link></li>
-                            <li><nuxt-link :to="{ name: 'howOrder' }">Как заказать</nuxt-link></li>
                         </ul>
                     </b-collapse>
                 </div>
@@ -197,7 +197,7 @@
         </div>
         <div class="page-footer__bottom">
             <div class="main-container">
-                <p class="copyright">© 2018 <span>«HOME OPTIC»</span></p>
+                <p class="copyright">© 2019 <span>«HOME OPTIC»</span></p>
                 <div class="page-footer__sub-line">
                     <div class="social">
                         <a href="#0">
@@ -209,7 +209,7 @@
                             Мы в Инстаграме
                         </a>
                     </div>
-                    <div class="stat-counter"></div>
+                    <a class="stat-counter" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews"></a>
                 </div>
             </div>
         </div>
@@ -437,5 +437,8 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+.modal-backdrop {
+    opacity: .5;
 }
 </style>

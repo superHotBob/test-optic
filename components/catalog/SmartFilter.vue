@@ -35,7 +35,7 @@
             </div>
         </template>
         <template v-for="(item, itemIndex) in items">
-            <div v-if="!item.price && item.values" :key="item.CODE">
+            <div v-if="!item.price && item.values && item.code != 'size'" :key="item.code">
                 <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
                 <b-collapse :id="'collapse-'+itemIndex">
                     <ul class="filter__square" v-if="item.display_type === 'F'">
@@ -47,7 +47,7 @@
                                     @click="change()"
                                     :disabled="value.disabled"
                                 />
-                                <img alt="" v-if="value.image" v-lazy="'http://14.esobolev.ru'+value.image" :title="value.name">
+                                <img alt="" v-if="value.image" v-lazy="value.image" :title="value.name">
                                 <span v-if="!value.image">{{value.name}}</span>
                             </label>
                         </li>
@@ -105,7 +105,7 @@ export default {
                 else
                 {
                     values = [];
-
+                    
                     for (let value in this.items[item].values) {
                         if(this.items[item].values[value].checked) {
                             values.push(this.items[item].values[value].value);

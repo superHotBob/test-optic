@@ -12,7 +12,7 @@
         <section-elements class="main-container catalog__items" :items="items"></section-elements>
         <item-preview />
     </template>
-    <div v-else>
+    <div class="main-container catalog__items" v-else>
         Список желаемого пуст
     </div>
 </div>

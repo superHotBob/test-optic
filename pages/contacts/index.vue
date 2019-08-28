@@ -12,9 +12,10 @@
             <div class="row mb-4">
                 <div class="col">
                     <div class="contacts__item">
-                        <h4>Телефон</h4>
-                        <a href="tel:+7 (499) 391-19-41"><span class="callibri_phone">+7 (499) 391-19-41</span></a>
-                        <a href="tel:8 (800) 444-34-88"><span class="callibri_phone">8 (800) 444-34-88</span></a>			
+                        <h4>Адрес офиса</h4>
+                        <p></p>
+                            <address>Россия, Москва, 117556, Варшавское шоссе, д.79, к.2, оф.211</address>
+                        <p></p>
                     </div>
                 </div>
                 <div class="col">
@@ -26,12 +27,11 @@
                         </span>			
                     </div>
                 </div>
-                <div class="col">
+                 <div class="col">
                     <div class="contacts__item">
-                        <h4>Адрес офиса</h4>
-                        <p></p>
-                            <address>Россия, Москва, 117556, Варшавское шоссе, д.79, к.2, оф.211</address>
-                        <p></p>
+                        <h4>Телефон</h4>
+                        <a href="tel:+7 (499) 391-19-41"><span class="callibri_phone">+7 (499) 391-19-41</span></a>
+                        <a href="tel:8 (800) 444-34-88"><span class="callibri_phone">8 (800) 444-34-88</span></a>			
                     </div>
                 </div>
                 <div class="col">

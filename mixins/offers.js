@@ -214,6 +214,7 @@ export default {
                 rowItems = null;
     
             var lineContainer = this.$refs.sku_line_block;
+
             if (intNumber > -1 && intNumber < lineContainer.length)
             {
                 rowItems = lineContainer[intNumber].querySelectorAll('li');

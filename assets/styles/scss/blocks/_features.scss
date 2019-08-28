@@ -15,6 +15,16 @@
         &:not(:last-of-type) {
             padding-right: 30px;
         }
+        &:hover {
+            .features {
+                &__icon {
+                    background: #000; 
+                }
+            }
+            svg {
+                fill: #fff;
+            }
+        }
     }
     &__icon {
         display: flex;
@@ -24,9 +34,11 @@
         margin-right: 20px;
         border: 1px solid #e6e6e6; 
         border-radius: 50%;
+        transition: .4s;
     }
     svg {
         margin: auto;
+        transition: .4s;
     }
     p {
         margin: 0;

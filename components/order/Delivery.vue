@@ -31,7 +31,6 @@
             </template>
         </div>
         <div class="order__next">
-            <promocode :promocode="promocode" @input="promocode = $event" />
             <button class="button black" type="button" v-b-toggle.accordion-3.accordion-4>Далее</button>
         </div>
     </b-collapse>

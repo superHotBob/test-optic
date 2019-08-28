@@ -3,7 +3,7 @@
     <template v-if="item">
         <button class="modal-close" @click="$bvModal.hide('item-preview')"></button>
         <div class="item-preview__img">
-            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" v-lazy="img"/>
+            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img"/>
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">SALE</span>
@@ -48,7 +48,7 @@
                 </ul>
             </div>
             <hr>
-            <nuxt-link class="item-preview__link" :to="{path: item.URL}">Перейти на страницу товара ></nuxt-link>
+            <nuxt-link class="item-preview__link" @click.native="$bvModal.hide('item-preview')" :to="{path: item.URL}">Перейти на страницу товара ></nuxt-link>
             <div class="item-preview__buttons">
                 <div class="counter">
                     <button @click="counterMinus">-</button>
@@ -101,6 +101,7 @@ export default {
             this.item = JSON.parse(JSON.stringify(item));
             this.id = item.ID;
             this.$bvModal.show('item-preview');
+            console.log(this.item)
             if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3) {
                 setTimeout(() => {
                     this.setCurrent();

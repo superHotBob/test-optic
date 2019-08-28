@@ -16,19 +16,25 @@ export default {
                         'sph':props.elements['left-sph'].value,
                         'cyl':props.elements['left-cyl'].value,
                         'ax':props.elements['left-ax'].value,
-                        'add':props.elements['left-add'].value,
-                        'deg':props.elements['left-deg'].value,
                     },
                     'right': {
                         'sph':props.elements['right-sph'].value,
                         'cyl':props.elements['right-cyl'].value,
                         'ax':props.elements['right-ax'].value,
-                        'add':props.elements['right-add'].value,
-                        'deg':props.elements['right-deg'].value,
                     },
                     'order_workshop':checked,
                     'workshop_lense':props.elements['workshop-lense'].value
                 }
+
+                if (props.elements['left-add'])
+                    params['left']['add'] = props.elements['left-add'].value
+                if (props.elements['left-add'])
+                    params['left']['deg'] = props.elements['left-deg'].value
+                if (props.elements['right-add'])
+                    params['right']['add'] = props.elements['right-add'].value
+                if (props.elements['right-add'])
+                    params['right']['deg'] = props.elements['right-deg'].value
+
 
                 if (props.elements['center-distance'].checked) {
                     params['center_distance_right'] = props.elements['center-distance-right'].value;

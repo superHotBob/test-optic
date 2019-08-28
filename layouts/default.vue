@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="stat-counter" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews"></a>
+                <a class="stat-counter" target="_blank" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews"></a>
                 <button class="page-header__features-toggle" @click="featuresHidden =! featuresHidden" ref="featuresToggle">Показать</button>
             </div>
         </div>
@@ -209,7 +209,7 @@
                             Мы в Инстаграме
                         </a>
                     </div>
-                    <a class="stat-counter" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews"></a>
+                    <a class="stat-counter" target="_blank" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews"></a>
                 </div>
             </div>
         </div>

@@ -82,7 +82,6 @@ export default {
                 } else {
                     rowItems = $event.target.parentNode.querySelectorAll('li');
                 }
-                console.log($event.target.tagName == 'IMG')
                 if (rowItems && 0 < rowItems.length)
                 {
                     for (i = 0; i < rowItems.length; i++)
@@ -211,6 +210,7 @@ export default {
             var i = 0,
                 value = '',
                 isCurrent = false,
+                show = false,
                 rowItems = null;
     
             var lineContainer = this.$refs.sku_line_block;
@@ -226,6 +226,7 @@ export default {
                         isCurrent = value === activeID;
                         if (isCurrent)
                         {
+                            show = true;
                             rowItems[i].classList.add("selected");
                         }
                         else
@@ -236,6 +237,10 @@ export default {
                         rowItems[i].style.display = this.in_array(value, showID) ? '' : 'none';
                     }
                 }
+                if (show)
+                    lineContainer[intNumber].classList.remove("hide");
+                else
+                    lineContainer[intNumber].classList.add("hide");
             }
         }
     },

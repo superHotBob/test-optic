@@ -37,27 +37,28 @@
                 </button>
             </div>
             <div class="card__offers" v-if="item.SKU_PROPS">
-                <div
-                    class="item__offers"
-                    v-for="prop in item.SKU_PROPS"
-                    :key="prop.ID"
-                    ref="sku_line_block"
-                >
-                    <p>{{prop.NAME}}</p>
-                    <ul>
-                        
-                        <li
-                            :data-value="value.ID"
-                            @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
-                            v-for="value in prop.VALUES"
-                            :key="value.ID"
-                            :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
-                        >
-                            <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
-                            <span v-if="!value.PICT || value.PICT.ID == 0 || prop.ID === 49">{{value.NAME}}</span>
-                        </li>
-                    </ul>
-                </div>
+                <template v-for="prop in item.SKU_PROPS">
+                    <div
+                        class="item__offers"
+                        :class="{ 'column': prop.ID === 45 }"
+                        :key="prop.ID"
+                        ref="sku_line_block"
+                    >
+                        <p>{{prop.NAME}}</p>
+                        <ul>
+                            <li
+                                :data-value="value.ID"
+                                @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
+                                v-for="value in prop.VALUES"
+                                :key="value.ID"
+                                :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
+                            >
+                                <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
+                                <span v-if="!value.PICT || value.PICT.ID == 0 || prop.ID === 49">{{value.NAME}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </template>
             </div>
             <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">
                 <div class="card__lense-production">

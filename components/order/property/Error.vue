@@ -25,9 +25,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss">
-.order-error {
-    padding: 8px 10px;
-}
-</style>

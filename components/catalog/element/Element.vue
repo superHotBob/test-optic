@@ -413,8 +413,6 @@ export default {
                 if (a.NAME < b.NAME) return -1
             })
 
-            console.log(array)
-
             return array
         },
         sale() {

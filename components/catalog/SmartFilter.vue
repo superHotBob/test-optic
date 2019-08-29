@@ -35,7 +35,7 @@
             </div>
         </template>
         <template v-for="(item, itemIndex) in items">
-            <div v-if="!item.price && item.values && item.code != 'size'" :key="item.code">
+            <div v-if="!item.price && item.values" :key="item.code">
                 <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
                 <b-collapse :id="'collapse-'+itemIndex">
                     <ul class="filter__square" v-if="item.display_type === 'F'">

@@ -270,7 +270,7 @@
             </div>
         </div>
     </form>
-    <card-tabs class="card__tabs" :element_id="item.ID" :properties="item.DISPLAY_PROPERTIES" :description="item.DETAIL_TEXT" id="cardTabs"/>
+    <card-tabs class="card__tabs" :element_id="item.ID" :properties="properties" :description="item.DETAIL_TEXT" id="cardTabs"/>
     <ul class="card__usp">
         <li class="card__usp-item">
             <i></i>
@@ -306,11 +306,13 @@
             <cheaper-form/>
         </div>
     </b-modal>
+    <client-only>
     <vue-easy-lightbox
         @hide="lightboxClick"
         :visible="lightbox"
         :imgs="item.CURRENT.MORE_PHOTO"
     ></vue-easy-lightbox>
+    </client-only>
 </div>
 </template>
 
@@ -393,6 +395,28 @@ export default {
             isCompare: 'catalog/isCompare',
             isCoupon: 'basket/isCoupon',
         }),
+        properties() {
+
+            var properties = this.item.DISPLAY_PROPERTIES,
+                array = [];
+ 
+            for(let i in properties) {
+                array.push(properties[i]);
+            }
+            
+            if (this.item.CURRENT.DISPLAY_PROPERTIES.variant)
+                properties['variant'] = this.item.CURRENT.DISPLAY_PROPERTIES.variant
+
+            array.sort(function(a, b) {
+                if (a.NAME > b.NAME) return 1
+                if (a.NAME == b.NAME) return 0
+                if (a.NAME < b.NAME) return -1
+            })
+
+            console.log(array)
+
+            return array
+        },
         sale() {
             var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
             return this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE - this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE * 0.1;

@@ -1,5 +1,5 @@
 <template>
-<div class="item-slider">
+<div class="item-slider" v-if="returnItems.length">
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
         <div v-if="items == 'recommended'">
             <p class="simple active"><slot>Рекоммендуем вам</slot></p>

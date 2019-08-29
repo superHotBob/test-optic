@@ -98,6 +98,9 @@
     &__offers {
         display: flex;
         justify-content: center;
+        &.hide {
+            display: none;
+        }
         p {
             margin: 0;
             margin-top: 10px;

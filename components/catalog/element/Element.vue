@@ -242,7 +242,7 @@
                         <i class="radio__indicator"></i>
                         <span>Установка линз "Ободковая"</span>
                         <div class="card-workshop__info">
-                            <img src="~assets/images/card/workshop-obodkovaya.png" alt="">
+                            <img src="~assets/images/card/workshop-obodkovaya.svg" alt="">
                             <span>+590 Р</span>
                         </div>
                         <div class="checkbox__bg"></div>
@@ -252,7 +252,7 @@
                         <i class="radio__indicator"></i>
                         <span>Установка линз "Полуободковая"</span>
                         <div class="card-workshop__info">
-                            <img src="~assets/images/card/workshop-poluobodkovaya.png" alt="">
+                            <img src="~assets/images/card/workshop-poluobodkovaya.svg" alt="">
                             <span>+690 Р</span>
                         </div>
                         <div class="checkbox__bg"></div>
@@ -262,7 +262,7 @@
                         <i class="radio__indicator"></i>
                         <span>Установка линз "Безободковая"</span>
                         <div class="card-workshop__info">
-                            <img src="~assets/images/card/workshop-bezobodkovaya.png" alt="">
+                            <img src="~assets/images/card/workshop-bezobodkovaya.svg" alt="">
                             <span>+990 Р</span>
                         </div>
                         <div class="checkbox__bg"></div>

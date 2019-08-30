@@ -33,6 +33,7 @@
             <template  v-for="(prop, index) in item.PROPS">
                 <div
                     class="item__offers"
+                    style="width: 100%;"
                     :key="index"
                     v-if="prop.CODE == 'left' || prop.CODE == 'right'"
                 >

@@ -53,27 +53,17 @@
         </p>
     </b-modal>
     <b-modal class="header-category hidden-desktop" id="header-category" hide-header hide-footer>
-        <div class="header-category__top">
-            <button class="modal-back black hidden-desktop" @click="$bvModal.hide('header-category'); $bvModal.show('header-menu')"></button>
-            <p>
-                <span :class="{'active': showCategories}" @click="showCategories = !showCategories">Категории</span>
-                /
-                <span :class="{'active': !showCategories}" @click="showCategories = !showCategories">Бренды</span>
-            </p>
-        </div>
-        <ul class="header-category__list" v-if="showCategories">
-            <li v-for="(category, key) in section(indexCategories).SECTIONS" :key="key">
-                <nuxt-link :to="category.UF_LINK" @click.native="$bvModal.hide('header-category')">{{category.UF_NAME}}</nuxt-link>
-            </li>
-        </ul>
-        <ul class="header-category__list" v-if="!showCategories">
-            <li v-for="(brand, key) in section(indexCategories).BRANDS" :key="key">
-                <nuxt-link :to="brand.UF_LINK" @click.native="$bvModal.hide('header-category');">{{brand.UF_NAME}}</nuxt-link>
-            </li>
-            <li class="header-category__all">
-                <nuxt-link to="/brands" @click.native="$bvModal.hide('header-category');" >... смотреть все бренды</nuxt-link>
-            </li>
-        </ul>
+        <b-tabs pills>
+            <template v-for="(tab, index) in section(indexCategories).TABS">
+                <b-tab :key="index" v-if="tab.LINK.length > 0" :title="tab.UF_NAME">
+                    <ul class="header-category__list">
+                        <li v-for="(link, key) in tab.LINK" :key="key">
+                            <nuxt-link :to="link.UF_LINK" @click.native="$bvModal.hide('header-category')">{{link.UF_NAME}}</nuxt-link>
+                        </li>
+                    </ul>
+                </b-tab>
+            </template>
+        </b-tabs>
     </b-modal>
 </div>
 </template>
@@ -86,7 +76,6 @@ export default {
     props: ['isLogged'],
     data() {
         return {
-            showCategories: true,
             indexCategories: 0
         }
     },

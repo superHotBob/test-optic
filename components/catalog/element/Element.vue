@@ -79,8 +79,8 @@
         <div class="card__price-inner"> 
             <h3>Цена</h3>
             <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
-                <p class="card__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
                 <p class="card__current-price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
+                <p class="card__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
             </template>
             <div class="card__counter counter">
                 <button @click="counterMinus">-</button>

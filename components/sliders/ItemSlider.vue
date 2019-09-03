@@ -1,21 +1,21 @@
 <template>
-<div class="item-slider" v-if="returnItems.length">
+<div class="item-slider" v-if="returnItems">
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
         <div v-if="items == 'recommended'">
             <p class="simple active"><slot>Рекоммендуем вам</slot></p>
         </div>
         <div class="swiper-wrapper" v-else>
-            <p
+            <p  v-if="itemCategory === 'newItems' && returnItems"
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'newItems'}"
                 @click="itemCategory = 'newItems'"
             >Новинки</p>
-            <p
+            <p  v-if="itemCategory === 'bestsellers' && returnItems"
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'bestsellers'}"
                 @click="itemCategory = 'bestsellers'"
             >Бестселлеры</p>
-            <p
+            <p  v-if="itemCategory === 'mostWanted' && returnItems"
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'mostWanted'}"
                 @click="itemCategory = 'mostWanted'"
@@ -101,7 +101,8 @@ export default {
             if (this.itemCategory == 'newItems')
                 return this.newItems;
             if (this.itemCategory == 'mostWanted')
-                return this.mostWanted;
+                return this.bestsellers;
+            
             return this.bestsellers;
         }
     }

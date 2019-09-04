@@ -47,10 +47,7 @@
 
 @media (max-width: 900px) {
     .tags {
-        white-space: nowrap;
-        overflow: hidden;
-        width: 100%;
-        text-overflow: ellipsis;
+        padding-right: 30px;
         .arrow {
             display: block;
             position: absolute;
@@ -66,8 +63,6 @@
             transition: .4s;
         }
         &.active {
-            white-space: pre-wrap;
-            text-overflow: clip;
             .arrow {
                 bottom: 15px;
                 transform: rotate(225deg);

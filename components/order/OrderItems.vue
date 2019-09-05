@@ -31,10 +31,11 @@
                             </template>
                         </ul>
                     </div>
-                    <template  v-for="(prop, index) in item.PROPS">
+                    <template  v-for="prop in item.PROPS">
                         <div
                             class="item__offers"
-                            :key="index"
+                            style="width: 100%;"
+                            :key="prop.CODE"
                             v-if="prop.CODE == 'left' || prop.CODE == 'right'"
                         >
                             <p>{{prop.NAME}}</p>

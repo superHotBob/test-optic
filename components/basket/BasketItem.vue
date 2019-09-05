@@ -30,7 +30,7 @@
                     </ul>
                 </div>
             </template>
-            <template  v-for="prop in item.PROPS">
+            <template  v-for="prop in sortProps">
                 <div
                     class="item__offers"
                     style="width: 100%;"
@@ -114,6 +114,20 @@ export default {
         postponed: {
             type: Boolean,
             default: false,
+        }
+    },
+    computed: {
+        sortProps() {
+
+            var props = JSON.parse(JSON.stringify(this.item.PROPS))
+            
+            props = props.sort( (a, b) => {
+                if ( a.NAME > b.NAME) return -1
+                if ( a.NAME == b.NAME) return 0
+                if ( a.NAME < b.NAME) return 1
+            })
+
+            return this.item.PROPS
         }
     },
     methods: {

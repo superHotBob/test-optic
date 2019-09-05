@@ -435,15 +435,12 @@ export default {
         }),
         properties() {
 
-            var properties = this.item.DISPLAY_PROPERTIES,
+            var properties = Object.assign({}, this.item.DISPLAY_PROPERTIES, this.item.CURRENT.DISPLAY_PROPERTIES),
                 array = [];
  
             for(let i in properties) {
                 array.push(properties[i]);
             }
-            
-            if (this.item.CURRENT.DISPLAY_PROPERTIES.variant)
-                properties['variant'] = this.item.CURRENT.DISPLAY_PROPERTIES.variant
 
             array.sort(function(a, b) {
                 if (a.NAME > b.NAME) return 1

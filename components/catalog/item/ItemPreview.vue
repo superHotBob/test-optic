@@ -50,7 +50,7 @@
             <hr>
             <nuxt-link class="item-preview__link" @click.native="$bvModal.hide('item-preview')" :to="{path: item.URL}">Перейти на страницу товара ></nuxt-link>
             <div class="item-preview__buttons">
-                <div class="counter">
+                <div class="counter" v-if="!item.PROPERTIES.lins">
                     <button @click="counterMinus">-</button>
                     <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
                     <button @click="itemAmount++">+</button>
@@ -101,7 +101,6 @@ export default {
             this.item = JSON.parse(JSON.stringify(item));
             this.id = item.ID;
             this.$bvModal.show('item-preview');
-            console.log(this.item)
             if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3) {
                 setTimeout(() => {
                     this.setCurrent();

@@ -73,7 +73,7 @@
                 <p class="item__sale">Еще -10% по акции</p>
             </div>
             <div class="item__buttons">
-                <div class="counter" v-if="wideItem" @click.prevent>
+                <div class="counter" v-if="wideItem && !item.PROPERTIES.lins" @click.prevent>
                     <button @click="counterMinus">-</button>
                     <the-mask mask="FFF" :tokens="regxNumbers" v-model="itemAmount"/>
                     <button @click="itemAmount++">+</button>

@@ -53,6 +53,7 @@
         </p>
     </b-modal>
     <b-modal class="header-category hidden-desktop" id="header-category" hide-header hide-footer>
+        <button class="modal-back black hidden-desktop" @click="$bvModal.hide('header-category'); $bvModal.show('header-menu')"></button>
         <b-tabs pills>
             <template v-for="(tab, index) in section(indexCategories).TABS">
                 <b-tab :key="index" v-if="tab.LINK.length > 0" :title="tab.UF_NAME">

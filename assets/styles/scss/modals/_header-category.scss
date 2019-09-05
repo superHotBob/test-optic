@@ -28,6 +28,11 @@
             }
         }
     }
+    &__list {
+        li {
+            padding: 0 1rem;
+        }
+    }
     ul {
         margin-top: 25px;
         list-style: none;

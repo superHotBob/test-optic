@@ -89,9 +89,9 @@
                     за пару
                 </template>
             </h3>
-            <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
-                <p class="card__current-price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
-                <p class="card__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
+            <template v-for="(price, index) in item.CURRENT.ITEM_PRICES"> 
+                <p class="card__current-price" :key="price.ID">{{  priceFormat(price.RATIO_PRICE) }}</p>
+                <p class="card__old-price" v-if="labelSale" :key="index">{{ priceFormat(price.BASE_PRICE) }}</p>
             </template>
             <div class="card__counter counter" v-if="!item.PROPERTIES.lins.VALUE">
                 <button @click="counterMinus">-</button>
@@ -103,10 +103,14 @@
         </div>
         <div class="card__promo" v-show="promo.shown == true">
             <span>{{sale}} руб.</span>
-            <p>Цена с доп. скидкой 10% 
+            <p>Цена 
                 <template v-if="item.PROPERTIES.lins.VALUE">
                     за пару линз 
                 </template>
+                 <template v-if="item.PROPERTIES.frames.VALUE">
+                    одной оправы
+                </template>
+                с доп. скидкой 10% 
                 по промокоду <b>HOMEOPTIC</b>
             </p>
             <button
@@ -433,6 +437,29 @@ export default {
             isCompare: 'catalog/isCompare',
             isCoupon: 'basket/isCoupon',
         }),
+        priceFormat() 
+        {
+            return (_number) => {
+                var format_string = '# руб.',
+                    decpoint = '.',
+                    price = parseFloat(_number * this.itemAmount),
+                    decimal = 0,
+                    separator= ' ',
+                    exp10,
+                    rr,
+                    b
+
+                exp10=Math.pow(10,decimal);// приводим к правильному множителю
+                price=Math.round(price*exp10)/exp10;// округляем до необходимого числа знаков после запятой
+            
+                rr=Number(price).toFixed(decimal).toString().split('.');
+            
+                b=rr[0].replace(/(\d{1,3}(?=(\d{3})+(?:\.\d|\b)))/g,"\$1"+separator);
+            
+                price=(rr[1]?b+ decpoint +rr[1]:b);
+                return format_string.replace('#', price);
+            }
+        },
         properties() {
 
             var properties = Object.assign({}, this.item.DISPLAY_PROPERTIES, this.item.CURRENT.DISPLAY_PROPERTIES),

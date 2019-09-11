@@ -41,6 +41,7 @@
                 />
                 <button v-if="loadPage < result.section.pagen.count" type="button" @click="onLoadItems()" class="catalog__ajax-pagen button black hidden-desktop">Показать еще</button>
                 <clear-filter class="catalog__reset-filter button hidden-desktop" />
+                <item-slider/>
             </div>
         </div>
     </sticky-scroll>
@@ -57,6 +58,7 @@ import SectionElements from '~/components/catalog/SectionElements.vue'
 import SortBy from '~/components/catalog/SortBy.vue'
 import StickyScroll from '~/components/StickyScroll.vue'
 import Pagination from '~/components/Pagination.vue'
+import ItemSlider from '~/components/sliders/ItemSlider.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -86,6 +88,7 @@ export default {
         SortBy,
         Pagination,
         Tags,
+        ItemSlider
     },
     computed: {
         ...mapGetters({

@@ -26,7 +26,7 @@ export default {
     
                 if (!arShowValues)
                     break;
-                
+                console.log(current)
                 if (this.in_array(current[strName], arShowValues))
                 {
                     arFilter[strName] = current[strName];
@@ -36,6 +36,7 @@ export default {
                     arFilter[strName] = arShowValues[0];
                     this.item.CURRENT = this.item.JS_OFFERS[0];
                 }
+                console.log(arFilter)
                 this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
             }
     
@@ -217,19 +218,22 @@ export default {
 
             if (intNumber > -1 && intNumber < lineContainer.length)
             {
-                var hide = true;
+                
                 
                 rowItems = lineContainer[intNumber].querySelectorAll('li');
                 if (rowItems && 0 < rowItems.length)
                 {
+                    var hide = true;
+
                     for (i = 0; i < rowItems.length; i++)
                     {
+                        hide = false;
                         value = Number(rowItems[i].getAttribute('data-value'));
+                        console.log(activeID)
                         isCurrent = value === activeID;
                         if (isCurrent)
                         {
                             show = true;
-                            hide = false;
                             lineContainer[intNumber].classList.remove("hide");    
                             rowItems[i].classList.add("selected");
                             
@@ -240,6 +244,7 @@ export default {
                         }
                         
                         rowItems[i].style.display = this.in_array(value, showID) ? '' : 'none';
+                        console.log(rowItems[i], show)
                         if (hide)
                             rowItems[i].parentNode.parentNode.classList.add("hide");     
                     }

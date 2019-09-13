@@ -53,6 +53,9 @@ export default {
         window.onresize = (event) => {
             this.tagsResize();
         }
+    },
+    destroyed() {
+        window.onresize = null
     }
 }
 </script>

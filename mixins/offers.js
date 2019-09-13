@@ -227,13 +227,13 @@ export default {
 
                     for (i = 0; i < rowItems.length; i++)
                     {
-                        hide = false;
                         value = Number(rowItems[i].getAttribute('data-value'));
                         console.log(activeID)
                         isCurrent = value === activeID;
                         if (isCurrent)
                         {
                             show = true;
+                            hide = false;
                             lineContainer[intNumber].classList.remove("hide");    
                             rowItems[i].classList.add("selected");
                             

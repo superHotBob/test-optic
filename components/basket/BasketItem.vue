@@ -2,8 +2,8 @@
 <div class="basket-item">
     <div class="basket-item__info">
         <div class="basket-item__img">
-            <img alt="" v-if="item.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="'http://14.esobolev.ru' + item.PREVIEW_PICTURE_SRC_ORIGINAL">
-            <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
+            <img alt="" v-if="item.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="item.PREVIEW_PICTURE_SRC_ORIGINAL">
+            <img alt="" v-else v-lazy="'/bitrix/components/bitrix/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
         </div>
         <div class="basket-item__offers">
             <nuxt-link class="basket-item__name" :to="item.DETAIL_PAGE_URL" :class="{'mt-0': (postponed == true || !item.SKU_BLOCK_LIST)}">{{item.NAME}}</nuxt-link>
@@ -24,7 +24,7 @@
                             :key="value.ID"
                             :class="{'img': value.PICT, 'selected': value.SELECTED, 'not-available':value.NOT_AVAILABLE_OFFER}"
                         >
-                            <img v-if="value.PICT && value.PICT.ID !== 0" :src="'http://14.esobolev.ru/' + value.PICT" alt="" :title="value.NAME">
+                            <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT" alt="" :title="value.NAME">
                             <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
                         </li>
                     </ul>

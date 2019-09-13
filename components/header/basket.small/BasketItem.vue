@@ -1,8 +1,8 @@
 <template>
 <div class="basket__item">
     <div class="basket__img">
-        <img alt="" v-if="arItem.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="'http://14.esobolev.ru' + arItem.PREVIEW_PICTURE_SRC_ORIGINAL">
-        <img alt="" v-else v-lazy="'http://14.esobolev.ru/local/components/api/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
+        <img alt="" v-if="arItem.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="arItem.PREVIEW_PICTURE_SRC_ORIGINAL">
+        <img alt="" v-else v-lazy="'/bitrix/components/bitrxi/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
         <div class="basket__flags">
             <span class="basket__flag left" v-for="(label, index) in arItem.LABEL_VALUES" :key="index">{{label.NAME}}</span>
             <span class="basket__flag right red" v-if="arItem.DISCOUNT_PRICE">SALE</span>
@@ -14,7 +14,7 @@
             {{prop.NAME}}
             <template v-for="(value, propIndex) in prop.SKU_VALUES_LIST">
                 <span class="basket__square img" v-if="value.SELECTED && value.PROP_CODE == 'color'" :key="propIndex">
-                    <img :title="value.NAME" alt="" v-if="value.PICT" v-lazy="'http://14.esobolev.ru/' + value.PICT">
+                    <img :title="value.NAME" alt="" v-if="value.PICT" v-lazy="value.PICT">
                     <span class="basket__square" v-else :key="propIndex">{{value.NAME}}</span>
                 </span>
                 <span class="basket__square" v-if="value.SELECTED && value.PROP_CODE !== 'color'" :key="propIndex">{{value.NAME}}</span>

@@ -97,44 +97,6 @@ export default {
     data() {
         return {
             showInfo: false,
-            // paymentInfo: {
-            //     systems: {
-            //         0: {
-            //             name: 'PayPal',
-            //             img: 'http://14.esobolev.ru//upload/sale/paysystem/logotip/569/56957ce1e60b58571eaccb8554657f20.png',
-            //             value: 2,
-            //             selected: true,
-            //         },
-            //         1: {
-            //             name: 'WebMoney',
-            //             img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/890/300_300_1/89021eff8040b03e19c72a2370b83dc0.png',
-            //             value: 4,
-            //             selected: false,
-            //         },
-            //         2: {
-            //             name: 'Наличный расчет',
-            //             img: 'http://14.esobolev.ru//upload/resize_cache/sale/paysystem/logotip/2a3/300_300_1/2a3a6059c18ace49d72a524f19ea1744.png',
-            //             value: 3,
-            //             selected: false,
-            //         },
-            //     },
-            //     paid: false,
-            //     orderSumm: '9 535.46 руб.',
-            //     paySumm: '9 535.46 руб.',
-            // },
-            deliveryInfo: {
-                cost: '500 руб.',
-                system: {
-                    name: 'Доставка курьером',
-                    img: 'https://home-optic.ru/upload/sale/delivery/logotip/138/1382eb4390d1fcf8e248af9508c52f7b.png',
-                },
-                status: 'Ожидает обрабоки',
-            },
-            items: {
-                0: {
-                    name: 'Оправа Brendel 902145-50',
-                }
-            }
         }
     },
     components: {

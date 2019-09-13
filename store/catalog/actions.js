@@ -186,8 +186,10 @@ export default {
             query += `&${key}=${payload.query[key]}`;
         }
 
-        if (payload.params.tag)
-            url = `/api/v1/catalog/${payload.params.section}/${payload.params.tag}/?PAGEN_1=${pagen}${query}`;
+        if (payload.params.tag) {
+            var tag = payload.params.tag.replace(/\//, "")
+            url = `/api/v1/catalog/${payload.params.section}/${tag}/?PAGEN_1=${pagen}${query}`;
+        } 
         else
             url = `/api/v1/catalog/${payload.params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}${query}`;
         

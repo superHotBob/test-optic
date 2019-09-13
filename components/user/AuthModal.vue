@@ -187,9 +187,6 @@ export default {
             showError:false
         }
     },
-    mounted(){
-        
-    },
     methods: {
         async login() {
             let response = await this.$store.dispatch(

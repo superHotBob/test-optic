@@ -217,6 +217,8 @@ export default {
 
             if (intNumber > -1 && intNumber < lineContainer.length)
             {
+                var hide = true;
+                
                 rowItems = lineContainer[intNumber].querySelectorAll('li');
                 if (rowItems && 0 < rowItems.length)
                 {
@@ -227,7 +229,10 @@ export default {
                         if (isCurrent)
                         {
                             show = true;
+                            hide = false;
+                            lineContainer[intNumber].classList.remove("hide");    
                             rowItems[i].classList.add("selected");
+                            
                         }
                         else
                         {
@@ -235,12 +240,10 @@ export default {
                         }
                         
                         rowItems[i].style.display = this.in_array(value, showID) ? '' : 'none';
+                        if (hide)
+                            rowItems[i].parentNode.parentNode.classList.add("hide");     
                     }
-                }
-                if (show)
-                    lineContainer[intNumber].classList.remove("hide");
-                else
-                    lineContainer[intNumber].classList.add("hide");
+                } 
             }
         }
     },

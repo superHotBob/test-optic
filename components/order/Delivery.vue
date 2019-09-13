@@ -9,7 +9,7 @@
             <div class="delivery__options">
                 <label class="o-radio o-radio--img" :class="{'active': deliver.CHECKED}" v-for="deliver in delivery" :key="deliver.ID">
                     <input @change="change" :checked="deliver.CHECKED" name="DELIVERY_ID" type="radio" :value="deliver.ID"/>
-                    <img v-if="deliver.LOGOTIP_SRC" :src="'http://14.esobolev.ru/' + deliver.LOGOTIP_SRC" alt="">
+                    <img v-if="deliver.LOGOTIP_SRC" :src="deliver.LOGOTIP_SRC" alt="">
                     <span>{{deliver.NAME}}</span>
                 </label>
             </div>
@@ -17,7 +17,7 @@
             <template v-for="deliver in delivery">
                 <div class="delivery__info" v-if="deliver.CHECKED" :key="deliver.ID">
                     <p class="delivery__name">{{deliver.NAME}}</p>
-                    <img v-if="deliver.LOGOTIP_SRC" :src="'http://14.esobolev.ru/' + deliver.LOGOTIP_SRC" alt="">
+                    <img v-if="deliver.LOGOTIP_SRC" :src="deliver.LOGOTIP_SRC" alt="">
                     <p v-if="deliver.DESCRIPTION">{{deliver.DESCRIPTION}}</p>
                     <p class="delivery__prop">
                         <span>Стоимость:</span>
@@ -37,7 +37,7 @@
     <div class="order__short-info">
         <template v-for="deliver in delivery">
             <p v-if="deliver.CHECKED" :key="deliver.ID">
-                <img v-if="deliver.LOGOTIP_SRC" :src="'http://14.esobolev.ru/' + deliver.LOGOTIP_SRC" alt="">
+                <img v-if="deliver.LOGOTIP_SRC" :src="deliver.LOGOTIP_SRC" alt="">
                 <b>{{deliver.NAME}}</b>
             </p>
         </template>

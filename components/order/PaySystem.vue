@@ -8,7 +8,7 @@
         <div class="pay-system__wrapper">
             <label class="o-radio o-radio--img" :class="{'active': pay.CHECKED}" v-for="pay in paysystem" :key="pay.ID">
                 <input @change="change" name="PAY_SYSTEM_ID" :checked="pay.CHECKED" type="radio" :value="pay.ID"/>
-                <img v-if="pay.PSA_LOGOTIP_SRC" :src="'http://14.esobolev.ru/' + pay.PSA_LOGOTIP_SRC" alt="">
+                <img v-if="pay.PSA_LOGOTIP_SRC" :src="pay.PSA_LOGOTIP_SRC" alt="">
                 <span>{{pay.NAME}}</span>
             </label>
         </div>
@@ -16,7 +16,7 @@
     <div class="order__short-info">
         <template v-for="pay in paysystem">
             <p v-if="pay.CHECKED" :key="pay.ID">
-                <img v-if="pay.PSA_LOGOTIP_SRC" :src="'http://14.esobolev.ru/' + pay.PSA_LOGOTIP_SRC" alt="">
+                <img v-if="pay.PSA_LOGOTIP_SRC" :src="pay.PSA_LOGOTIP_SRC" alt="">
                 <b>{{pay.NAME}}</b>
             </p>
         </template>

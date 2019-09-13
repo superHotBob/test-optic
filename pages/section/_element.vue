@@ -22,8 +22,9 @@ export default {
         Detail
     },
     asyncData({ params, $axios, error }) {
-
+        console.log(`/api/v1/catalog/${params.section}/${params.element}/`)
         return $axios.get(`/api/v1/catalog/${params.section}/${params.element}/`).then((response) => {
+            console.log(response.data.element)
             return {
                 element:response.data.element,
                 seometa:response.data.seometa,

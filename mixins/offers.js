@@ -26,7 +26,7 @@ export default {
     
                 if (!arShowValues)
                     break;
-                console.log(current)
+
                 if (this.in_array(current[strName], arShowValues))
                 {
                     arFilter[strName] = current[strName];
@@ -36,7 +36,7 @@ export default {
                     arFilter[strName] = arShowValues[0];
                     this.item.CURRENT = this.item.JS_OFFERS[0];
                 }
-                console.log(arFilter)
+
                 this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
             }
     
@@ -228,7 +228,7 @@ export default {
                     for (i = 0; i < rowItems.length; i++)
                     {
                         value = Number(rowItems[i].getAttribute('data-value'));
-                        console.log(activeID)
+
                         isCurrent = value === activeID;
                         if (isCurrent)
                         {
@@ -244,7 +244,7 @@ export default {
                         }
                         
                         rowItems[i].style.display = this.in_array(value, showID) ? '' : 'none';
-                        console.log(rowItems[i], show)
+ 
                         if (hide)
                             rowItems[i].parentNode.parentNode.classList.add("hide");     
                     }

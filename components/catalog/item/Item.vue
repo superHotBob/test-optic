@@ -44,7 +44,7 @@
         <div class="item__wide-offers">
             <div
                 class="item__offers"
-                v-for="prop in item.SKU_PROPS"
+                v-for="prop in sortPropsSku"
                 :key="prop.ID"
                 ref="sku_line_block"
             >
@@ -185,6 +185,23 @@ export default {
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
+        sortPropsSku() {
+            var properties = Object.assign({}, this.item.SKU_PROPS),
+                array = [];
+
+            for(let i in properties) {
+                array.push(properties[i]);
+            }
+
+            array.sort(function(a, b) {
+                if (a.SORT > b.SORT) return 1
+                if (a.SORT == b.SORT) return 0
+                if (a.SORT < b.SORT) return -1
+            })
+           
+
+            return array;
+        },
         rating() {
             if (this.item.DISPLAY_PROPERTIES.rating) 
                 return this.item.DISPLAY_PROPERTIES.rating.value*1;

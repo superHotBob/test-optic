@@ -10,15 +10,20 @@ export default {
     methods: {
         setCurrent() {
             var i,
-              j = 0,
-              arCanBuyValues = [],
-              strName = '',
-              arShowValues = false,
-              arFilter = {},
-              tmpFilter = [],
-              treeProps = this.object_in_array(this.item.SKU_PROPS),
-              current = this.item.JS_OFFERS[this.item.OFFERS_SELECTED].TREE;
-            
+                j = 0,
+                arCanBuyValues = [],
+                strName = '',
+                arShowValues = false,
+                arFilter = {},
+                tmpFilter = [],
+                treeProps = this.object_in_array(this.item.SKU_PROPS),
+                current = this.item.JS_OFFERS[this.item.OFFERS_SELECTED].TREE;
+              
+            treeProps.sort(function(a, b) {
+                if (a.SORT > b.SORT) return 1
+                if (a.SORT == b.SORT) return 0
+                if (a.SORT < b.SORT) return -1
+            })
     
             for(i = 0; i<treeProps.length; i++) {
                 strName = 'PROP_'+treeProps[i].ID;
@@ -213,7 +218,7 @@ export default {
                 isCurrent = false,
                 show = false,
                 rowItems = null;
-    
+            
             var lineContainer = this.$refs.sku_line_block;
 
             if (intNumber > -1 && intNumber < lineContainer.length)

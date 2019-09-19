@@ -100,7 +100,23 @@ export default {
             for (let item in this.items) {
                 if (this.items[item].price)
                 {
-                    url_params.push('price-' + this.items[item].code + '-from-' + this.items[item].values.array.join('-to-'));
+                    var priceFilter = 'price-',
+                        bool = false
+                    
+                    if (this.items[item].values.min !== this.items[item].values.array[0]) {
+                        priceFilter += this.items[item].code + '-from-' + this.items[item].values.array[0]
+                        bool = true
+                    }
+
+                     if (this.items[item].values.max !== this.items[item].values.array[1]) {
+                        priceFilter += '-to-' + this.items[item].values.array[0]
+                        bool = true
+                    }
+
+                    if (bool) {
+                        url_params.push(priceFilter);
+                    }
+                    
                 }
                 else
                 {

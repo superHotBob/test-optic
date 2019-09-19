@@ -2,7 +2,7 @@
 <div class="item-slider" v-if="returnItems">
     <div class="item-slider__categories" v-swiper:mySwiperC="categoriesOption">
         <div v-if="items == 'recommended'">
-            <p class="simple active"><slot>Рекоммендуем вам</slot></p>
+            <p class="simple active"><slot>Рекомендуем вам</slot></p>
         </div>
         <div class="swiper-wrapper" v-else>
             <p  v-if="itemCategory === 'newItems' && returnItems"

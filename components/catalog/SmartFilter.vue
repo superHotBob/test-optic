@@ -139,9 +139,6 @@ export default {
 
             if (url_params.length > 0) {
                 this.$router.push({ name: 'filter', params: {filter: url_params}, query: this.$route.query})
-                if (process.client) {
-                    location.reload(); // Я этого не хотел простите за костыль
-                }
             }
             else 
                 this.$router.push({ name: 'section'})

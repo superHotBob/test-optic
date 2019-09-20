@@ -41,10 +41,9 @@ export default {
                     arFilter[strName] = arShowValues[0];
                     this.item.CURRENT = this.item.JS_OFFERS[0];
                 }
-
                 this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
             }
-    
+            this.item.CURRENT = this.item.JS_OFFERS[0];
             this.selectedValues = arFilter;
             this.setOfferIndex();
         },
@@ -223,7 +222,7 @@ export default {
 
             if (intNumber > -1 && intNumber < lineContainer.length)
             {
-                
+                // console.log(activeID, lineContainer)
                 
                 rowItems = lineContainer[intNumber].querySelectorAll('li');
                 if (rowItems && 0 < rowItems.length)

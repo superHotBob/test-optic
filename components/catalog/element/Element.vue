@@ -136,11 +136,11 @@
             <div class="card-lense__lense" v-for="lense in ['right', 'left']" :key="lense">
                 <div class="card-lense__img" v-if="lense == 'right'">
                     <span>Правая линза (OD)</span>
-                    <img src="~assets/images/card/lense-right.png" alt="">
+                    <img src="~assets/images/card/lense-right.svg" alt="">
                 </div>
                 <div class="card-lense__img" v-else>
                     <span>Левая линза (OS)</span>
-                    <img src="~assets/images/card/lense-left.png" alt="">
+                    <img src="~assets/images/card/lense-left.svg" alt="">
                 </div>
                 <div class="card-lense__props">
                     <div class="card-lense__prop">
@@ -223,7 +223,7 @@
                 <input type="checkbox" name="order-workshop" v-model="orderWorkshop">
                 <i class="checkbox__indicator"></i>
                 <p>Закажите работу оптической мастерской по обработке и установке линз в оправу</p>
-                <img src="~assets/images/card/workshop.png" alt="">
+                <img src="~assets/images/card/workshop.svg" alt="">
             </label>
             <div v-show="orderWorkshop">
                 <div class="card-workshop__option">

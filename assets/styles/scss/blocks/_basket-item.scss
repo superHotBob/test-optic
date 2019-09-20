@@ -157,6 +157,11 @@
         flex-wrap: wrap;
         padding: 10px;
         border: 1px solid #e6e6e6;
+        .item {
+            &__offers {
+                width: 100%;
+            }
+        }
         &__info {
             flex-wrap: wrap;
             width: auto;

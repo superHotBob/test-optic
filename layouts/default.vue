@@ -200,11 +200,11 @@
                 <p class="copyright">© 2019 <span>«HOME OPTIC»</span></p>
                 <div class="page-footer__sub-line">
                     <div class="social">
-                        <a href="#0">
+                        <a href="https://vk.com/home_optic/" target="_blank">
                             <svg width='17' height="17" fill="#000"><use href="#svg-vk"/></svg>
                             Мы в Вконтакте
                         </a>
-                        <a href="#0">
+                        <a href="https://www.instagram.com/home_optic/" target="_blank">
                             <svg width='15' height="15" fill="#000"><use href="#svg-instagram"/></svg>
                             Мы в Инстаграме
                         </a>

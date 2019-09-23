@@ -54,15 +54,15 @@ module.exports = {
     bootstrapVueCSS: false // Or `bvCSS: false`
   },
   axios: {
-    proxy: true,
+    proxy: false,
     baseURL: 'https://home-optic.ru/',
     credentials: true
   },
-  proxy: {
-   '/api/': 'http://14.esobolev.ru/',
-    // '/bitrix/': 'http://vosq.proj/',
-    // '/api/': 'http://home-optic.proj/',
-  },
+  // proxy: {
+  //  '/api/': 'http://14.esobolev.ru/',
+  //   // '/bitrix/': 'http://vosq.proj/',
+  //   // '/api/': 'http://home-optic.proj/',
+  // },
   cache: true,
   css: [
     '~/assets/styles/styles.scss',

@@ -5,12 +5,12 @@
             <p class="simple active"><slot>Рекомендуем вам</slot></p>
         </div>
         <div class="swiper-wrapper" v-else>
-            <p  v-if="itemCategory === 'newItems' && returnItems"
+            <p  
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'newItems'}"
                 @click="itemCategory = 'newItems'"
             >Новинки</p>
-            <p  v-if="itemCategory === 'bestsellers' && returnItems"
+            <p  
                 class="swiper-slide"
                 :class="{'active': itemCategory == 'bestsellers'}"
                 @click="itemCategory = 'bestsellers'"
@@ -51,7 +51,7 @@ export default {
     },
     data () {
         return {
-            itemCategory: 'bestsellers',
+            itemCategory: 'newItems',
             swiperOption: {
                 roundLengths: true,
                 speed: 500,

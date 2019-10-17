@@ -62,6 +62,7 @@ import ItemSlider from '~/components/sliders/ItemSlider.vue'
 import { mapGetters } from 'vuex'
 
 export default {
+    transition: 'fade',
     mixins: [util],
     data() {
         return {

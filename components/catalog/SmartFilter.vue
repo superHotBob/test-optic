@@ -35,7 +35,7 @@
             </div>
         </template>
         <template v-for="(item, itemIndex) in items">
-            <div v-if="!item.price && item.values" :key="item.code">
+            <div v-if="!item.price && item.values" :key="item.CODE">
                 <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
                 <b-collapse :id="'collapse-'+itemIndex">
                     <ul class="filter__square" v-if="item.display_type === 'F'">
@@ -95,6 +95,7 @@ export default {
     },
     methods: {
         reload() {
+            console.log('reload');
             var properties = {}, values, url_params = [];
 
             for (let item in this.items) {
@@ -109,7 +110,7 @@ export default {
                     }
 
                      if (this.items[item].values.max !== this.items[item].values.array[1]) {
-                        priceFilter += '-to-' + this.items[item].values.array[0]
+                        priceFilter += '-to-' + this.items[item].values.array[1]
                         bool = true
                     }
 

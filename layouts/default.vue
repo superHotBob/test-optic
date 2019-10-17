@@ -438,6 +438,7 @@ export default {
     display: flex;
     flex-direction: column;
 }
+
 .modal-backdrop {
     opacity: .5;
 }

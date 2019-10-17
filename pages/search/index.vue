@@ -11,7 +11,7 @@
         <div class="main-container catalog__items" v-if="items">
             <section-elements :items="items"></section-elements>
             <pagination
-                class="d-flex justify-content-center flex-wrap"
+                class="d-flex justify-content-center flex-wrap mt-5"
                 v-model="pagen"
                 :page-count="pagen_count"
                 :classes="paginationClasses"

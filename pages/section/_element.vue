@@ -18,6 +18,7 @@
 import Detail from '~/components/catalog/element/Element.vue'
 
 export default {
+    transition: 'fade',
     components: {
         Detail
     },

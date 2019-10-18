@@ -17,6 +17,9 @@ export default {
     isLogged: (state) => {
       return state.logged;
     },
+    getCity: (state) => {
+        return state.city
+    },
     getName: (state) => {
       if (!state.user)
         return;

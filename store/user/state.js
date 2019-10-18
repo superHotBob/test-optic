@@ -8,6 +8,7 @@ export default () => ({
         logout:'/api/v1/user/logout/',
         update:'/api/v1/user/update/'
     },
+    city: false,
     logged: false,
     user: {},
 })

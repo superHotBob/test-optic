@@ -14,7 +14,7 @@
     </form>
     <ul ref="regionList">
         <li v-for="(item, index) in city" :key="index">
-            <a href="javascript:void(0)" @click.prevent="setCity(item['~CODE'])"><span>{{ item.NAME }}</span></a>
+            <a href="javascript:void(0)" @click.prevent="setCity(item['~CODE'], item['HREF'])"><span>{{ item.NAME }}</span></a>
         </li>
     </ul>
 </b-modal>
@@ -50,15 +50,32 @@ export default {
         loadRegion() {
             this.$axios.$get(`api/v1/regions/`).then( response => {
                 this.city = response.items;
-                this.$store.commit('user/setCity', response.name)
+            });
+            this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=get-php-coords`).then( response => {
+                var lat = response.lat, lon = response.lon
+                this.$axios.$get(`api/v1/regions/set/?latitude=${lat}&longitude=${lon}&site_id=s1&action=get-closest-region`).then( response => {
+                    var code=response.region_code;
+                    this.$store.commit('user/setCity', response.region)
+                    this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=prepare-for-redirect-by-region-code&cookie=${code}`).then( response => {
+                        if (response.redirect)
+                        {
+                            var domen = response.domen
+                            this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=set-cookie&cookie=${code}`).then( response => {
+                                if (response.success && response.reload)
+                                {
+                                    location.href = domen;
+                                }
+                            });
+                        }
+                    });
+                });
             });
         },
-        setCity(code) {
-            this.$axios.$get(`api/regions/set/?sessid=${this.sessid}&site_id=s1&action=set-cookie&cookie=${code}`).then( response => {
+        setCity(code, href) {
+            this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=set-cookie&cookie=${code}`).then( response => {
                 if (response.success && response.reload)
                 {
-                    this.$cookie.set('BITRIX_SM_VREGION_SUBDOMAIN', code, { expires: '1M' });
-                    location.href = window.location;
+                    location.href = href;
                 }
             });
         }

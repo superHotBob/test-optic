@@ -130,8 +130,6 @@ export default {
             this.$axios.$post(getters.getEndpointElements, qs.stringify(filter))
         ]);
 
-        console.log(getters.getEndpointElements, qs.stringify(filter));
-
         return promise;
     },
 

@@ -102,7 +102,6 @@ export default {
             this.$root.$emit('recalcSlider');
         },
         onChangePagen: function () {
-            console.log(this.$route.params.tag.replace("/\//$", ""))
             this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}, query: this.$route.query});
         },
         onLoadItems: function() {

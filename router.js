@@ -207,7 +207,7 @@ export function createRouter () {
                 component: index,
                 children: [
                     {
-                        path: ':tag(t-[a-z0-9]+)?/:pagen(\\d+)?',
+                        path: ':tag(t-[a-z0-9_-]+)?/:pagen(\\d+)?',
                         name: 'section',
                         component: section,
                     },

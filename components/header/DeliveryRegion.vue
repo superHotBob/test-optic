@@ -50,13 +50,13 @@ export default {
         loadRegion() {
             this.$axios.$get(`api/v1/regions/`).then( response => {
                 this.city = response.items;
+                this.$store.commit('user/setCity', response.name)
             });
             this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=get-php-coords`).then( response => {
                 var lat = response.lat, lon = response.lon
                 this.$axios.$get(`api/v1/regions/set/?latitude=${lat}&longitude=${lon}&site_id=s1&action=get-closest-region`).then( response => {
                     var code=response.region_code;
-                    this.$store.commit('user/setCity', response.region)
-                    this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=prepare-for-redirect-by-region-code&cookie=${code}`).then( response => {
+                    this.$axios.$get(`api/v1/regions/set/?site_id=s1&action=prepare-for-redirect-by-region-code&code=${code}`).then( response => {
                         if (response.redirect)
                         {
                             var domen = response.domen

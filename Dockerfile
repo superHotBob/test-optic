@@ -5,9 +5,10 @@ ENV APP_ROOT /web
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 ADD . ${APP_ROOT}
+
 RUN yarn upgrade
-RUN npm ci
-RUN npm run build
+#RUN npm ci
+#RUN npm run build
 
 CMD ["npm", "run", "start"]
 

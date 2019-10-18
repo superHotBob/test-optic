@@ -11,3 +11,6 @@ npm-debug.log
 dist
 
 yarn.lock
+
+.idea
+upload/

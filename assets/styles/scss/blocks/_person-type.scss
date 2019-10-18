@@ -1,0 +1,14 @@
+.person-type {
+    &__label {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .o-radio {
+        margin-right: 15px;
+        margin-bottom: 10px;
+    }
+    &__props {
+        margin-top: 10px;
+    }
+}

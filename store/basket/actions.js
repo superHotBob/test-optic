@@ -1,12 +1,39 @@
 import qs from 'qs';
 
 export default {
-    async state({commit, getters}) {
-        // let auth = await this.$axios.post(`/api/v1/auth/`,qs.stringify({'USER_LOGIN':'admin','USER_PASSWORD':'123456','AUTH_FORM':'Y','TYPE':'AUTH'}));
-        let response = await this.$axios.get(getters.getEndpoint);
-        commit('setBasket', response.data.basket);
-        return response;
+
+    STATE ({commit, getters}) {
+        return this.$axios.get(getters.getEndpoint).then((result) => {         
+            commit('setBasket', result.data.basket);
+        })
     },
+
+    async ADD_COUPON({commit, getters}, coupon)
+    {
+        var post = {
+            'basketAction':'recalculateAjax',
+            'via_ajax':'Y',
+            'lastAppliedDiscounts': 1,
+            'basket[coupon]':coupon,
+            'site_id':'s1'
+        };
+
+        let response = await this.$axios.post(getters.getEndpoint, qs.stringify(post));
+        commit('setBasket', response.data.BASKET_DATA);
+    },
+
+    async DELETE_CPUPON({commit, getters}, coupon)
+    {   
+        var post = {
+            'basketAction':'recalculateAjax',
+            'via_ajax':'Y',
+            'basket[delete_coupon]':coupon
+        };
+
+        let response = await this.$axios.post(getters.getEndpoint, qs.stringify(post));
+        commit('setBasket', response.data.BASKET_DATA);
+    },
+
     async delete({commit, getters}, payload) {
         var post = {};
 

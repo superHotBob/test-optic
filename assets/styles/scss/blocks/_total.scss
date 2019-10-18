@@ -1,0 +1,32 @@
+.total {
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000;
+    background-color: #f7f7f7;
+    &__row {
+        display: flex;
+        padding: 15px;
+    }
+    p {
+        margin: 0;
+    }
+    &__value {
+        margin-left: auto;
+        p {
+            font-weight: 700;
+            &:nth-of-type(2) {
+                font-size: 14px;
+                font-weight: 400;
+                text-align: right;
+                text-decoration: line-through;
+                color: #B8B8B8;
+            }
+        }
+    }
+    &--total {
+        font-weight: 700;
+        p {
+            font-size: 18px;
+        }
+    }
+}

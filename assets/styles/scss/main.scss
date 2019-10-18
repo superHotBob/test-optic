@@ -3,8 +3,87 @@
 
 @import "misc/fonts.scss";
 @import "misc/mixins.scss";
+@import "misc/buttons.scss";
 @import "misc/scaffolding.scss";
+@import "misc/inputs.scss";
 
-//blocks
-@import "blocks/page-header.scss";
+// modals
+@import "modals/modals.scss";
+
+// smaller blocks
+@import "blocks/stat-counter.scss";
+@import "blocks/rating.scss";
+@import "blocks/counter.scss";
+@import "blocks/item-view.scss";
+
+// blocks
+@import "blocks/basket.scss";
+@import "blocks/breadcrumbs.scss";
+@import "blocks/header-categories.scss";
 @import "blocks/header-feature.scss";
+@import "blocks/header-panel.scss";
+@import "blocks/header-menu.scss";
+@import "blocks/social.scss";
+@import "blocks/page-header.scss";
+@import "blocks/content-header.scss";
+@import "blocks/page-footer.scss";
+
+// index oage
+@import "blocks/s-pagination.scss";
+@import "blocks/banner-card.scss";
+@import "blocks/big-slider.scss";
+@import "blocks/small-slider.scss";
+@import "blocks/newsletter.scss";
+@import "blocks/item.scss";
+@import "blocks/item-slider.scss";
+@import "blocks/index-grid.scss";
+@import "blocks/brands-slider.scss";
+@import "blocks/brands.scss";
+@import "blocks/features.scss";
+
+// catalog page
+@import "blocks/filter.scss";
+@import "blocks/sort-by.scss";
+@import "blocks/tags.scss";
+@import "blocks/pagination.scss";
+@import "blocks/catalog.scss";
+
+// card
+@import "blocks/card-lense.scss";
+@import "blocks/card-workshop.scss";
+@import "blocks/card-tabs.scss";
+@import "blocks/card.scss";
+
+// news 
+@import "blocks/news-preview.scss";
+@import "blocks/news-item.scss";
+@import "blocks/news.scss";
+
+// basket, order pages
+@import "blocks/basket-item.scss";
+@import "blocks/cart.scss";
+@import "blocks/delivery.scss";
+@import "blocks/person-type.scss";
+@import "blocks/pay-system.scss";
+@import "blocks/total.scss";
+@import "blocks/order.scss";
+
+// personal
+@import "blocks/s-orders.scss";
+
+// pages
+@import "blocks/p-brands.scss";
+
+// custom pages
+@import "custom-pages/custom-page.scss";
+@import "custom-pages/reviews.scss";
+@import "custom-pages/delivery.scss";
+@import "custom-pages/support.scss";
+@import "custom-pages/bestprice.scss";
+@import "custom-pages/guarantee.scss";
+@import "custom-pages/cheaper-form.scss";
+@import "custom-pages/glasses_manufacturer.scss";
+@import "custom-pages/howOrder.scss";
+
+//"overwrites" display
+@import "misc/display.scss";

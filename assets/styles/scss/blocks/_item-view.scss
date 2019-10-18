@@ -1,0 +1,75 @@
+.item-view {
+    font-size: 0;
+    &__narrow,
+    &__wide {
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        background-color: #e6e6e6;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            background-color: #fff;
+        }
+        &::before {
+            left: 0;
+            top: calc(50% - 1px);
+            width: 100%;
+            height: 2px;
+        }
+        &::after {
+            top: 0;
+            left: calc(50% - 1px);
+            width: 2px;
+            height: 100%;
+        }
+        &.active {
+            background-color: #000;
+            cursor: default;
+        }
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+    }
+    &__narrow {
+        margin-right: 10px;
+    }
+    &__wide {
+        &::after {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .item-view {
+        &__narrow,
+        &__wide {
+            &:not(.active) {
+                &:hover,
+                &:focus {
+                    background-color: #bbb;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .item-view {
+        &__narrow,
+        &__wide {
+            width: 24px;
+            height: 24px;
+        }
+        &__narrow {
+            margin-right: 20px;
+        }
+    }
+}

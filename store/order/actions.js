@@ -1,12 +1,42 @@
 import qs from 'qs';
 
 export default {
-    async state({commit, getters}) {
-        let order = await this.$axios.$get(getters.getEndpointOrder);
-        commit('setOrder', order);
-        commit('setSessid', order);
-        commit('setLocation', order);
+
+    STATE ({commit, getters}) {
+        return this.$axios.$get(getters.getEndpointOrder)
+                .then((result) => {
+                    commit('setOrder', result);
+                    commit('setSessid', result);
+                    commit('setLocation', result);
+                })
     },
+
+    LOAD_ORDERS ({ state }, payload) {
+        var items = false,
+            pagen = 1,
+            query = '',
+            pagen_count = 1;
+
+        if (payload.params.pagen)
+            pagen = Number(payload.params.pagen);
+    
+        for (let key in payload.query) {
+            query += `&${key}=${payload.query[key]}`;
+        }
+
+        return this.$axios.get(`/api/v1/order/list/?PAGEN_1=${pagen}${query}`)
+        .then((response) => {
+            return response.data;
+        }).catch((e) => {
+            if (e.response.status === 404) {
+                return {
+                    error: e,
+                    statusCode: 404
+                }
+            }
+        })
+    },
+
     async request({commit, getters}, payload) {
         let result = await this.$axios.$post(getters.getEndpointOrder, qs.stringify(payload));
         

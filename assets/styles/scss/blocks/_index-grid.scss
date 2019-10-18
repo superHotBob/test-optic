@@ -1,0 +1,268 @@
+.index-grid {
+    display: grid;
+    grid-template-columns: 270px minmax(100px, 3fr);
+    grid-column-gap: 30px;
+    grid-template-areas:
+        "aside catalog"
+        "aside blog";
+    margin-top: 30px;
+    &__aside {
+        grid-area: aside;
+        display: flex;
+        flex-direction: column;
+        .banner-card {
+            max-width: 100%;
+        }
+    }
+    .aside-1 {
+        height: 460px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+    .aside-2 {
+        margin: auto;
+    }
+    .aside-3 {
+        margin: 0 auto;
+        margin-top: 30px;
+        height: 322px;
+    }
+    &__catalog {
+        grid-area: catalog;
+        margin-bottom: auto;
+    }
+    &__blog {
+        margin-top: auto;
+        h2 {
+            margin: 0;
+            margin-top: 20px;
+            font-size: 21px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .small-slider {
+            margin-top: 20px;
+        }
+    }
+    &__banners {
+        display: flex;
+        flex-wrap: wrap;
+        .banner-card {
+            flex-shrink: 0;
+            flex-grow: 1;
+            width: calc(57% - 30px);
+            margin-top: 30px;
+            b {
+                display: block;
+                margin-top: 15px;
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase
+            }
+            p {
+                font-size: 20px;
+                line-height: 28px;
+            }
+            &__over {
+                right: unset;
+                bottom: 10px;
+                left: 10px;
+                width: 66%;
+            }
+            &:nth-of-type(2n) {
+                width: 43%;
+                margin-left: 30px;
+                .banner-card {
+                    &__over {
+                        width: 63%;
+                        top: 10px;
+                        bottom: unset;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1100px) {
+    .index-grid {
+        &__banners {
+            .banner-card {
+                p {
+                    font-size: 16px;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .index-grid {
+        &__banners {
+            .banner-card {
+                margin-top: 20px;
+                &:nth-of-type(n) {
+                    width: 100%;
+                    margin-left: 0;
+                    .banner-card {
+                        &__over {
+                            top: unset;
+                            bottom: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .index-grid {
+        grid-template-columns: minmax(100px, 768px);
+        grid-template-areas:
+            "catalog catalog"
+            "aside aside"
+            "blog blog";
+        grid-template-areas:
+            "catalog"
+            "aside"
+            "blog";
+        .aside-1 {
+            width: auto;
+            max-width: 350px;
+            height: 150px;
+            img {
+                transition: 0ms;
+                transform: scale(1.8) translateY(30px) translateX(-45px);
+            }
+            .banner-card__over {
+                width: 65%;
+                padding-top: 15px;
+            }
+        }
+        .aside-2 {
+            width: 300px;
+        }
+        .aside-3 {
+            width: 300px;
+            height: 255px;
+            .banner-card__over {
+                width: 85%;
+            }
+        }
+        &__banners {
+            margin-top: 30px;
+            .banner-card {
+                margin-top: 10px;
+                p {
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 20px;
+                }
+                b {
+                    margin-top: 10px;
+                    font-size: 11px;
+                }
+                &:nth-of-type(2n) {
+                    margin-left: 10px;
+                }
+                &:nth-of-type(n) {
+                    width: calc(50% - 5px);
+                    .banner-card {
+                        &__over {
+                            width: 75%;
+                        }
+                    }
+                }
+            }
+        }
+        &__aside {
+            margin-top: 60px;
+        }
+        &__blog {
+            .small-slider {
+                margin-right: -5px;
+            }
+        }
+    }
+}
+@media (max-width: 650px) {
+    .index-grid {
+        &__banners {
+            .banner-card {
+                &:nth-of-type(n) {
+                    width: 100%;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 500px) and (max-width: 768px) {
+    .index-grid {
+        &__aside {
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .aside-1 {
+            width: 100%;
+            max-width: 100%;
+            height: 270px;
+            img {
+                transform: scale(1.8) translateY(50px) translateX(-45px);
+            }
+            .banner-card__over {
+                width: 40%;
+            }
+        }
+        .aside-2,
+        .aside-3 {
+            width: calc(50% - 15px);
+            height: 270px;
+            margin: 0;
+        }
+        .aside-2 {
+            margin-right: 30px;
+        }
+    }
+}
+@media (min-width: 500px) and (max-width: 599px) {
+    .index-grid {
+        .aside-2,
+        .aside-3 {
+            width: 50%;
+            margin: 0;
+        }
+    }
+}
+@media (max-width: 450px) {
+    .index-grid {
+        &__blog {
+            h2 {
+                margin-left: 27px;
+                font-size: 16px;
+            }
+            .small-slider {
+                margin-top: 10px;
+            }
+        }
+        &__banners {
+            .banner-card {
+                height: 150px;
+            }
+        }
+    }
+}
+@media (max-width: 400px) {
+    .index-grid {
+        .aside-1 {
+            max-width: unset;
+            width: 100%;
+        }
+        .aside-2 {
+            width: 256px;
+        }
+        .aside-3 {
+            width: 256px;
+        }
+    }
+}

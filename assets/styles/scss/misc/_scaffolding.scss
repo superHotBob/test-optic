@@ -24,6 +24,7 @@ body {
     line-height: normal;
     font-weight: 400;
     color: #000;
+    // sticky footer
     > div {
         height: 100%;
         > div {
@@ -44,39 +45,69 @@ body {
     margin: 0 auto;
     padding: 0 15px;
 }
-.fs-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.4);
-    z-index: 50;
-}
-.modal {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%);
-    width: auto;
-    height: auto;
-    background-color: lightgreen;
-    overflow: unset;
-    z-index: 100;
-    &.flex {
-        display: flex;
-        flex-wrap: wrap;
-    }
+// .fs-overlay {
+//     display: block;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0,0,0,.4);
+//     z-index: 50;
+// }
+.big-text-bold{
+    font-weight: 700;
+    color: #000;
+    font-size: 21px;
+    text-transform: uppercase;
 }
 
+
+h2{
+    font-weight: 700;
+    text-transform: uppercase;
+}
+ul {
+    &.square{
+        margin-left: 20px;
+        padding: 0;
+        color: #4a4a4a;
+        li{
+            list-style: square;
+        }
+    }
+}
+.space-flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.__nuxt-error-page {
+    position: static;
+}
 // only desktop hover, focus
 @media (min-width: 769px) {
 
 }
 @media (max-width: 768px) {
+    main {
+        margin-top: 45px;
+    }
+    *,
+    button {
+        &:hover,
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
     .main-container {
-        padding: 0 10px;
+        padding: 0 5px;
+    }
+    .big-text-bold{
+        font-size: 16px;
     }
 }
+

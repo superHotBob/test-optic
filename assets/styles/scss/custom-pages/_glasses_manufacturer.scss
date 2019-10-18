@@ -1,0 +1,179 @@
+.glasses_manufacturer {
+    color: #4a4a4a;
+    .flex-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .making-img {
+            width: 585px;
+            height: 390px;
+            background: url("~assets/images/glasses/glasses-img.png") center
+                no-repeat;
+        }
+        .making-desc {
+            width: 585px;
+            padding: 115px 10px 115px 20px;
+            overflow: hidden;
+            p {
+                font-size: 14px;
+                line-height: 18px;
+            }
+            .making-title {
+                font-size: 21px;
+                margin-top: 0;
+                font-weight: 700;
+            }
+        }
+    }
+    .making-advantage-block {
+        overflow: hidden;
+        border-top: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e5e5e5;
+        margin: auto;
+        padding: 100px 50px 100px 50px;
+        .making-advantage {
+            width: 267px;
+            color: #7e7e7e;
+            font-size: 14px;
+            text-align: center;
+
+            .making-advantage-img {
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0 auto;
+                width: 97px;
+                height: 92px;
+            }
+            &:nth-of-type(1) {
+                .making-advantage-img {
+                    background: url("~assets/images/glasses/price-tag.svg")
+                        center no-repeat;
+                }
+            }
+            &:nth-of-type(2) {
+                .making-advantage-img {
+                    background: url("~assets/images/glasses/manager.svg") center
+                        no-repeat;
+                }
+            }
+            &:nth-of-type(3) {
+                .making-advantage-img {
+                    background: url("~assets/images/glasses/stopwatch.svg")
+                        center no-repeat;
+                }
+            }
+            &:nth-of-type(4) {
+                .making-advantage-img {
+                    background: url("~assets/images/glasses/guarantee.svg")
+                        center no-repeat;
+                }
+            }
+            p:nth-of-type(1) {
+                color: black;
+                text-transform: uppercase;
+                width: 200px;
+                margin: 24px auto 15px auto;
+            }
+            p {
+                width: 240px;
+                margin: 0 auto;
+                line-height: 18px;
+            }
+        }
+    }
+    .setup {
+        margin-bottom: 85px;
+        .setup-title {
+            font-size: 21px;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 53px;
+            font-weight: 700;
+        }
+        .setup-item {
+            width: 33.3333%;
+            .setup-item-top {
+                width: 100%;
+                height: 70px;
+                background-color: #e5e5e5;
+                text-align: center;
+                display: flex;
+                border-left: 1px solid #fff;
+                p {
+                    margin: auto;
+                    font-size: 20px;
+                }
+            }
+            .setup-item-mid {
+                width: 100%;
+                height: 50px;
+                background-repeat: no-repeat;
+                background-position: center;
+                border-left: 1px solid #e5e5e5;
+                margin: 10px 0
+            }
+            &:nth-of-type(1) {
+                .setup-item-mid {
+                    background: url("~assets/images/card/workshop-obodkovaya.svg") center
+                        no-repeat;
+                    border: none;
+                }
+            }
+            &:nth-of-type(2) {
+                .setup-item-mid {
+                    background: url("~assets/images/card/workshop-poluobodkovaya.svg") center
+                        no-repeat;
+                }
+            }
+            &:nth-of-type(3) {
+                .setup-item-mid {
+                    background: url("~assets/images/card/workshop-bezobodkovaya.svg") center
+                        no-repeat;
+                }
+            }
+            .setup-item-bot {
+                width: 100%;
+                height: 70px;
+                background-color: #f6f6f6;
+                text-align: center;
+                display: flex;
+                border-left: 1px solid #fff;
+                p {
+                    margin: auto;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1200px) {
+    .glasses_manufacturer {
+        .setup {
+            .setup-item {
+                width: 100%;
+            }
+        }
+        .flex-wrap {
+            .making-img{
+                margin: 0 auto;
+            }
+            .making-desc {
+                width: 100%;
+                padding-top: 40px;
+                padding-bottom: 20px;
+            }
+        }
+        .making-advantage-block{
+            .making-advantage{
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
+@media(max-width:650px){
+    .glasses_manufacturer{
+        .making-advantage-block{
+            padding: 50px;
+        }
+    }
+}

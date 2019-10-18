@@ -1,0 +1,220 @@
+.cart {
+    &__controls {
+        button {
+            position: relative;
+            width: auto;
+            margin: 0;
+            padding: 20px 0;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: color 150ms, border-color 150ms;
+            &:hover,
+            &:focus {
+                outline: none;
+            }
+            &:not(:last-of-type) {
+                margin-right: 25px;
+            }
+            &.active {
+                color: #000;
+                border-color: #000;
+            }
+        }
+    }
+    &__heading {
+        display: flex;
+        min-height: 50px;
+        margin-top: 30px;
+        padding: 10px;
+        padding-left: 20px;
+        background-color: #f7f7f7;
+        b {
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+    }
+    &__items {
+        margin-bottom: 30px;
+    }
+    &__info {
+        flex-grow: 1;
+        width: 20%;
+        padding-right: 5px;
+    }
+    &__price,
+    &__discount,
+    &__summ {
+        max-width: 110px;
+        width: 110px;
+        padding-right: 5px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    &__actions {
+        width: 200px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    &__bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    &__promocode {
+        display: flex;
+        width: 400px;
+        padding: 30px;
+        background-color: #f7f7f7;
+        .textfield {
+            margin: 0;
+        }
+        input {
+            height: 40px;
+        }
+        button {
+            height: 40px;
+            padding: 0 15px;
+            line-height: 40px;
+            font-weight: 700;
+        }
+    }
+    &__summary {
+        p {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-bottom: 20px;
+            margin-left: auto;
+            font-size: 16px;
+            &:last-of-type {
+                font-size: 24px;
+                font-weight: 700;
+            }
+        }
+        b {
+            font-weight: 700;
+        }
+    }
+    &__summary-buttons {
+        text-align: right;
+        .button {
+            display: inline-block;
+            height: 40px;
+            padding: 0 15px;
+            font-weight: 700;
+            line-height: 40px;
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+    &__slider {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 900px) {
+    .cart {
+        &__heading {
+            padding-left: 10px;
+        }
+        &__actions {
+            width: 180px;
+        }
+    }
+}
+@media (max-width: 800px) {
+    .cart {
+        &__promocode {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        &__summary {
+            margin: 0 auto;
+            p {
+                width: 100%;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .cart {
+        &__items {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            margin-left: -5px;
+        }
+        &__item {
+            width: calc(50% - 5px);
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+        &__heading {
+            display: none;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .cart {
+        &__controls {
+            button {
+                padding: 10px 0;
+            }
+        }
+        &__items {
+            display: block;
+            margin-left: 0;
+        }
+        &__item {
+            width: 100%;
+            margin-left: 0;
+        }
+        &__heading {
+            display: none;
+        }
+    }
+}
+@media (max-width: 400px) {
+    .cart {
+        &__controls {
+            button {
+                font-size: 11px;
+                &:not(:last-of-type) {
+                    margin-right: 10px;
+                }
+            }
+        }
+        &__promocode {
+            justify-content: center;
+            padding: 20px 10px;
+            .textfield {
+                width: 180px;
+            }
+            input {
+                padding-right: 10px;
+            }
+        }
+    }
+}
+@media (max-width: 375px) {
+    .cart {
+        &__summary-buttons {
+            .button {
+                width: 100%;
+            }
+            button {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

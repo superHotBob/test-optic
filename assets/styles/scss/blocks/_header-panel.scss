@@ -1,0 +1,78 @@
+.header-panel {
+    display: flex;
+    color: $grey;
+    p {
+        position: relative;
+        align-items: center;
+        display: flex;
+        margin: 0;
+        &:not(:first-of-type) {
+            margin-left: 15px;
+            &::before {
+                content: "/";
+                position: absolute;
+                left: -17px;
+            }
+        }
+        &:not(:last-of-type) {
+            margin-right: 15px;
+        }
+    }
+    a {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        transition: color 150ms;
+        cursor: pointer;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    &__icon,
+    .btn-logout {
+        padding: 10px;
+        font-size: 0;
+        svg {
+            transition: fill 150ms;
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .header-panel {
+        a {
+            &:hover,
+            &:focus {
+                color: #000;
+                outline: none;
+                svg {
+                    fill: #000;
+                }
+            }
+        }
+        span + span {
+            margin-left: 10px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .header-panel {
+        flex-direction: column;
+        p {
+            &:not(:first-of-type) {
+                border-top: 1px solid #d9d9d9;
+                &::before {
+                    display: none;
+                }
+            }
+        }
+        a {
+            width: 100%;
+            padding: 15px 0;
+            color: #000;
+        }
+        &__login {
+            font-weight: 700;
+        }
+    }
+}

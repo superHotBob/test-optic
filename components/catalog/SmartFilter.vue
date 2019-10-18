@@ -1,89 +1,158 @@
 <template>
-    <div>
-        <form>
-            <input v-for="arItem in arResult.HIDDEN" :key="arItem.ID" type="hidden"/>
-            <div v-for="arItem in arResult.ITEMS" :key="arItem.CODE">
-                <div v-if="arItem.DISPLAY_TYPE === 'F'">
-                    <ul>
-                        <li v-for="ar in arItem.VALUES" :key="ar.ID">
-                            <label>
-                                <input v-on:click="change(ar.URL_ID,arItem.ID)"
+<form class="filter">
+    <h2>Фильтр</h2>
+    <button class="filter__f-toggle button black hidden-desktop" type="button"  @click="showFilter = !showFilter">
+        {{showFilter ? 'Скрыть фильтры' : 'Показать фильтры'}}
+    </button>
+    <b-collapse class="filter__collapse" id="collapse-filter" v-model="showFilter">
+        <div>
+            <button class="filter__heading" type="button" v-b-toggle="'collapse-categories'">Категории</button>
+            <b-collapse id="collapse-categories" visible>
+                <ul class="filter__categories">
+                    <li v-for="section in sections" :key="section.CODE">
+                        <nuxt-link :to="{ name: 'section', params: {section: section.CODE }}" >{{section.NAME}}</nuxt-link>
+                    </li>
+                </ul>
+            </b-collapse>
+        </div>
+        <template v-for="(item, itemIndex) in items">
+            <div class="filter__slider" v-if="item.price && item.values.min !== item.values.max" :key="item.CODE">
+                <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">Цена</button>
+                <b-collapse :id="'collapse-'+itemIndex">
+                    <vue-slider
+                        v-model="item.values.array"
+                        :min="item.values.min"
+                        :max="item.values.max"
+                        :dotSize="15"
+                        :height="1"
+                        tooltip="none"
+                        contained="true"
+                        @change="change()"
+                    >
+                    </vue-slider>
+                    <p>от {{minPrice}} до {{maxPrice}}</p>
+                </b-collapse>
+            </div>
+        </template>
+        <template v-for="(item, itemIndex) in items">
+            <div v-if="!item.price && item.values" :key="item.CODE">
+                <button class="filter__heading" type="button" v-b-toggle="'collapse-'+itemIndex">{{item.name}}</button>
+                <b-collapse :id="'collapse-'+itemIndex">
+                    <ul class="filter__square" v-if="item.display_type === 'F'">
+                        <li v-for="(value, index) in item.values" :key="index">
+                            <label :class="{'active': value.checked, 'disabled': value.disabled, 'color': value.image}">
+                                <input
                                     type="checkbox"
-                                    :value="ar.URL_ID"
-                                    :checked="ar.CHECKED"
+                                    v-model="value.checked"
+                                    @click="change()"
+                                    :disabled="value.disabled"
                                 />
-                                {{ar.VALUE}}
+                                <img alt="" v-if="value.image" v-lazy="value.image" :title="value.name">
+                                <span v-if="!value.image">{{value.name}}</span>
                             </label>
                         </li>
                     </ul>
-                </div>
+                </b-collapse>
             </div>
-        </form>
-        <button class="btn btn-secondary" v-on:click="clear">Clear</button>
-    </div>
+        </template>
+    </b-collapse>
+    <clear-filter class="filter__reset button" />
+</form>
 </template>
 
 <script>
+
+import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
+import ClearFilter from '~/components/catalog/ClearFilter.vue'
+
+import { mapGetters } from 'vuex'
+
 export default {
     name: 'SmartFilter',
+    components: {
+        VueSlider,
+        ClearFilter,
+    },
     props: {
-      arResult: Object,
+      items: Object,
     },
     data() {
         return {
-            timer:null,
-            prop: {},
+            timer: null,
+            showFilter: false,
         }
     },
-    methods: {
-        clear() {
-            this.$router.push({ name: 'filter', params: {filter: ['clear']}})
+    computed: {
+        ...mapGetters({
+            sections: 'catalog/getSections',
+        }),
+        minPrice() {
+            return this.items.base.values.array[0].toLocaleString('ru-RU')
         },
+        maxPrice() {
+            return this.items.base.values.array[1].toLocaleString('ru-RU')
+        },
+    },
+    methods: {
         reload() {
-            var allValues, url_params = [];
-            
-            for (let property in this.arResult.ITEMS) {
-                if (!this.arResult.ITEMS[property].PRICE) {
-                    allValues = [];
-                    for (let value in this.arResult.ITEMS[property].VALUES) {
-                        if(this.arResult.ITEMS[property].VALUES[value].CHECKED) {
-                            allValues.push(this.arResult.ITEMS[property].VALUES[value].URL_ID);
+            console.log('reload');
+            var properties = {}, values, url_params = [];
+
+            for (let item in this.items) {
+                if (this.items[item].price)
+                {
+                    var priceFilter = 'price-',
+                        bool = false
+                    
+                    if (this.items[item].values.min !== this.items[item].values.array[0]) {
+                        priceFilter += this.items[item].code + '-from-' + this.items[item].values.array[0]
+                        bool = true
+                    }
+
+                     if (this.items[item].values.max !== this.items[item].values.array[1]) {
+                        priceFilter += '-to-' + this.items[item].values.array[1]
+                        bool = true
+                    }
+
+                    if (bool) {
+                        url_params.push(priceFilter);
+                    }
+                    
+                }
+                else
+                {
+                    values = [];
+                    
+                    for (let value in this.items[item].values) {
+                        if(this.items[item].values[value].checked) {
+                            values.push(this.items[item].values[value].value);
                         }
                     }
-                    this.prop[this.arResult.ITEMS[property].CODE] = allValues;
+
+                    properties[this.items[item].code] = values;
                 }
             }
-            
-            for (let key in this.prop) {
-                if (this.prop[key].length > 0)
-                    url_params.push(key + '-is-' + this.prop[key].join('-or-'));
+
+            for (let key in properties) {
+                if (properties[key].length > 0)
+                    url_params.push(key + '-is-' + properties[key].join('-or-'));
             }
 
-            if (url_params.length == 0) 
-                url_params.push('clear');
-
-
-            this.$router.push({ name: 'filter', params: {filter: url_params}})
+            if (url_params.length > 0) {
+                this.$router.push({ name: 'filter', params: {filter: url_params}, query: this.$route.query})
+            }
+            else 
+                this.$router.push({ name: 'section'})
         },
-        change(value, id) {
+        change() {
 
-            for(let prop in this.arResult.ITEMS[id].VALUES) {
-                
-                if (this.arResult.ITEMS[id].VALUES[prop].URL_ID !== value)
-                    continue;
-                
-                if (this.arResult.ITEMS[id].VALUES[prop].CHECKED) 
-                    this.arResult.ITEMS[id].VALUES[prop]['CHECKED'] = false;
-                else
-                    this.arResult.ITEMS[id].VALUES[prop]['CHECKED'] = true;
-            }
-
-            if(!!this.timer)
+            if (!!this.timer)
             {
                 clearTimeout(this.timer);
             }
-            this.timer = setTimeout(() => { 
+            this.timer = setTimeout(() => {
                 this.reload();
+                this.$root.$emit('recalcSlider');
             }, 500);
         },
     },

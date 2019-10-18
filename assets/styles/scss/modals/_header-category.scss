@@ -1,0 +1,76 @@
+.header-category {
+    @include modal-slide-mobile;
+    .modal-dialog {
+        width: 260px;
+        margin: 0;
+    }
+    .modal-body {
+        min-height: 100vh;
+        padding: 5px;
+    }
+    .tabs {
+        .nav-pills {
+            flex-direction: column;
+            border-bottom: 1px solid #d9d9d9;
+            padding-bottom: 15px;
+            li {
+                margin-bottom: 0;
+            }
+            .nav-link {
+                font-size: 16px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #999;
+                &.active {
+                    color: #000;
+                    background: transparent;
+                }
+            }
+        }
+    }
+    &__list {
+        li {
+            padding: 0 1rem;
+        }
+    }
+    ul {
+        margin-top: 25px;
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 16px;
+    }
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+    &__all {
+        a {
+            color: $grey;
+        }
+    }
+    &__top {
+        min-height: 111px;
+        padding-top: 25px;
+        padding-right: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $grey;
+        border-bottom: 1px solid #d9d9d9;
+        transition: color 150ms;
+        p {
+            margin: 0;
+        }
+        span {
+            &.active {
+                color: #000;
+            }
+        }
+    }
+    .modal-back {
+        top: 30px;
+        right: 12px;
+    }
+}

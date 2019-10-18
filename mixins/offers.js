@@ -10,15 +10,20 @@ export default {
     methods: {
         setCurrent() {
             var i,
-              j = 0,
-              arCanBuyValues = [],
-              strName = '',
-              arShowValues = false,
-              arFilter = {},
-              tmpFilter = [],
-              treeProps = this.object_in_array(this.item.SKU_PROPS),
-              current = this.item.JS_OFFERS[this.item.OFFERS_SELECTED].TREE;
-            
+                j = 0,
+                arCanBuyValues = [],
+                strName = '',
+                arShowValues = false,
+                arFilter = {},
+                tmpFilter = [],
+                treeProps = this.object_in_array(this.item.SKU_PROPS),
+                current = this.item.JS_OFFERS[this.item.OFFERS_SELECTED].TREE;
+              
+            treeProps.sort(function(a, b) {
+                if (a.SORT > b.SORT) return 1
+                if (a.SORT == b.SORT) return 0
+                if (a.SORT < b.SORT) return -1
+            })
     
             for(i = 0; i<treeProps.length; i++) {
                 strName = 'PROP_'+treeProps[i].ID;
@@ -26,7 +31,7 @@ export default {
     
                 if (!arShowValues)
                     break;
-                
+
                 if (this.in_array(current[strName], arShowValues))
                 {
                     arFilter[strName] = current[strName];
@@ -38,7 +43,7 @@ export default {
                 }
                 this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
             }
-    
+            this.item.CURRENT = this.item.JS_OFFERS[0];
             this.selectedValues = arFilter;
             this.setOfferIndex();
         },
@@ -52,11 +57,11 @@ export default {
                 boolOneSearch = true;
                 for (j in this.selectedValues)
                 {
-                if (this.selectedValues[j] !== this.item.JS_OFFERS[i].TREE[j])
-                {
-                    boolOneSearch = false;
-                    break;
-                }
+                    if (this.selectedValues[j] !== this.item.JS_OFFERS[i].TREE[j])
+                    {
+                        boolOneSearch = false;
+                        break;
+                    }
                 }
                 if (boolOneSearch)
                 {
@@ -67,8 +72,6 @@ export default {
 
             if (index > -1)
                 this.item.CURRENT = this.item.JS_OFFERS[index];
-
-            
         },
         selectOfferProp(prop_id, value_id, $event) {
             var i = 0,
@@ -79,7 +82,11 @@ export default {
                 return;
     
             if(this.searchOfferPropIndex(prop_id,value_id)) {
-                rowItems = $event.target.parentNode.querySelectorAll('li');
+                if ($event.target.tagName == 'IMG') {
+                    rowItems = $event.target.parentNode.parentNode.querySelectorAll('li');
+                } else {
+                    rowItems = $event.target.parentNode.querySelectorAll('li');
+                }
                 if (rowItems && 0 < rowItems.length)
                 {
                     for (i = 0; i < rowItems.length; i++)
@@ -208,22 +215,32 @@ export default {
             var i = 0,
                 value = '',
                 isCurrent = false,
+                show = false,
                 rowItems = null;
-    
-            var lineContainer = this.$refs.sku_line_block;
             
+            var lineContainer = this.$refs.sku_line_block;
+
             if (intNumber > -1 && intNumber < lineContainer.length)
             {
+                // console.log(activeID, lineContainer)
+                
                 rowItems = lineContainer[intNumber].querySelectorAll('li');
                 if (rowItems && 0 < rowItems.length)
                 {
+                    var hide = true;
+
                     for (i = 0; i < rowItems.length; i++)
                     {
                         value = Number(rowItems[i].getAttribute('data-value'));
+
                         isCurrent = value === activeID;
                         if (isCurrent)
                         {
+                            show = true;
+                            hide = false;
+                            lineContainer[intNumber].classList.remove("hide");    
                             rowItems[i].classList.add("selected");
+                            
                         }
                         else
                         {
@@ -231,13 +248,16 @@ export default {
                         }
                         
                         rowItems[i].style.display = this.in_array(value, showID) ? '' : 'none';
+ 
+                        if (hide)
+                            rowItems[i].parentNode.parentNode.classList.add("hide");     
                     }
-                }
+                } 
             }
         }
     },
     mounted() {
-        if (this.item.PRODUCT.TYPE == 3)
+        if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3)
             this.setCurrent();
     }
 }

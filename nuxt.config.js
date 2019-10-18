@@ -15,7 +15,10 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    // script: [
+    //   { src: 'https://vk.com/js/api/openapi.js?160' }
+    // ],
   },
   /*
   ** Customize the progress bar color
@@ -28,7 +31,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extractCSS: false,
+    extractCSS: true,
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -42,22 +45,39 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
-    '~/modules/routers'
+    '~/modules/routers',
+    'bootstrap-vue/nuxt',
+    ['vue-scrollto/nuxt', { duration: 1000 }],
   ],
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
+  },
   axios: {
-    proxy: true,
-    baseURL: 'http://localhost:3000/',
+    proxy: false,
+    baseURL: 'https://home-optic.ru/',
     credentials: true
   },
-  proxy: {
-    '/api/': 'http://14.esobolev.ru/',
-  },
-  cache: false,
-  css: ['~/assets/styles/styles.scss'],
+  // proxy: {
+  //  '/api/': 'http://14.esobolev.ru/',
+  //   // '/bitrix/': 'http://vosq.proj/',
+  //   // '/api/': 'http://home-optic.proj/',
+  // },
+  cache: true,
+  css: [
+    '~/assets/styles/styles.scss',
+    'swiper/dist/css/swiper.css'
+  ],
   plugins: [
-    '~/plugins/axios',
     '~/plugins/array',
-    { src: '~/plugins/vue-masonry-css', ssr: true }
-  ]
+    '~/plugins/axios',
+    '~/plugins/cookie',
+    { src: '~/plugins/lazyload', ssr: false },
+    { src: '~/plugins/vuex-cache', ssr: false },
+    { src: '~/plugins/swiper', ssr: false },
+    { src: '~/plugins/lightbox', ssr: false },
+    { src: '~/plugins/vee-validate', ssr: true },
+    { src: '~/plugins/mask', ssr: true },
+  ],
 }
 

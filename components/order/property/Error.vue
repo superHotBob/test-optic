@@ -1,5 +1,5 @@
 <template>
-    <div v-if="message" class="alert alert-danger">
+    <div v-if="message" class="alert-danger order-error mb-1">
         {{message}}
     </div>    
 </template>
@@ -25,4 +25,3 @@ export default {
     },
 }
 </script>
-

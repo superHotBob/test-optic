@@ -5,7 +5,7 @@ export default {
     'CACHE_STATE': cacheAction(
         ({ cache, commit }) => (
             cache.dispatch('CATALOG')
-                .then(([sections, bestsellers, newitems]) => {                
+                .then(([sections, bestsellers, newitems]) => {
                     commit('setSections', sections);
                     commit('setBestsellers', bestsellers.section);
                     commit('setNewItems', newitems.section);
@@ -16,7 +16,7 @@ export default {
     'CACHE_SERVICE': cacheAction(
         ({ cache }) => (
             cache.dispatch('SERVICE')
-                .then((result) => {                
+                .then((result) => {
                     return result
                 })
         )
@@ -35,7 +35,7 @@ export default {
                     commit('setFavorites', result.section);
                 });
     },
-    
+
     LOAD_BRANDS ({ state }, payload) {
         var items = false,
             pagen = 1,
@@ -43,7 +43,7 @@ export default {
 
             if (payload.params.pagen)
                 pagen = Number(payload.params.pagen);
-        
+
         return this.$axios.get(`/api/v1/iblock/list/?iblock=8&properties[0]=name&count=18&PAGEN_1=${pagen}`)
         .then((response) => {
 
@@ -74,7 +74,7 @@ export default {
 
             if (payload.params.pagen)
                 pagen = Number(payload.params.pagen);
-        
+
         return this.$axios.get(`/api/v1/iblock/list/?iblock=7&properties[0]=name&count=18&PAGEN_1=${pagen}`)
         .then((response) => {
 
@@ -120,16 +120,18 @@ export default {
     CATALOG ({ getters }) {
         const filter = {
             'filter':{
-                'PROPERTY_new_VALUE':'Да'
+                'PROPERTY_new_VALUE':'Y'
             }
         }
-    
+
         const promise = Promise.all([
             this.$axios.$get(getters.getEndpointSections),
             this.$axios.$get(getters.getEndpointBestsellers),
             this.$axios.$post(getters.getEndpointElements, qs.stringify(filter))
         ]);
-    
+
+        console.log(getters.getEndpointElements, qs.stringify(filter));
+
         return promise;
     },
 
@@ -143,7 +145,7 @@ export default {
 
             if (payload.pagen)
                 pagen = Number(payload.pagen);
-        
+
         return this.$axios.get(`/api/v1/catalog/?PAGEN_2=${pagen}&q=${encodeURI(payload.query['q'])}`)
         .then((response) => {
 
@@ -189,10 +191,10 @@ export default {
         if (payload.params.tag) {
             var tag = payload.params.tag.replace(/\//, "")
             url = `/api/v1/catalog/${payload.params.section}/${tag}/?PAGEN_1=${pagen}${query}`;
-        } 
+        }
         else
             url = `/api/v1/catalog/${payload.params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}${query}`;
-        
+
         return this.$axios.get(url)
         .then((response) => {
             return {
@@ -208,5 +210,5 @@ export default {
             }
         })
     },
-  
+
 }

@@ -68,7 +68,7 @@
                 <p class="item__name" v-if="!wideItem">{{item.CURRENT.NAME}}</p>
                 <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
                     <p class="item__price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
-                    <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_BASE_PRICE}}</p>
+                    <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_RATIO_BASE_PRICE}}</p>
                 </template>
                 <p class="item__sale">Еще -10% по акции</p>
             </div>
@@ -93,8 +93,8 @@
                     <svg width="16" height="16" fill="#fff"><use href="#svg-heart2" /></svg>
                     В избранное
                 </button>
-                <button 
-                    class="item__compare" 
+                <button
+                    class="item__compare"
                      :class="{'active':isCompare(item.CURRENT.ID)}"
                     @click.prevent="addCompare(item.CURRENT.COMPARE_URL)"
                 >
@@ -198,12 +198,12 @@ export default {
                 if (a.SORT == b.SORT) return 0
                 if (a.SORT < b.SORT) return -1
             })
-           
+
 
             return array;
         },
         rating() {
-            if (this.item.DISPLAY_PROPERTIES.rating) 
+            if (this.item.DISPLAY_PROPERTIES.rating)
                 return this.item.DISPLAY_PROPERTIES.rating.value*1;
             return 0;
         },

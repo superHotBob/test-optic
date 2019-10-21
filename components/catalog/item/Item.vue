@@ -160,7 +160,7 @@ export default {
         loadFavorites() {
             var cookie, elementsId = [];
 
-            if (cookie = this.$cookie.get('favorites'))
+            if (cookie = localStorage.getItem('favorites'))
                 elementsId = JSON.parse(cookie);
 
             if (this.in_array(this.id,elementsId))
@@ -168,7 +168,7 @@ export default {
             else
                 elementsId.push(this.id);
 
-            this.$cookie.set('favorites', JSON.stringify(elementsId), { expires: '1Y' });
+            localStorage.setItem('favorites', JSON.stringify(elementsId));
             this.$store.dispatch('catalog/GET_FAVORITES');
             this.$root.$emit('favorites');
         },

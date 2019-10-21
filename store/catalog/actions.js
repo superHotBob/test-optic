@@ -30,9 +30,17 @@ export default {
     },
 
     GET_FAVORITES ({ commit, getters }) {
-        return this.$axios.$get(getters.getEndpointFavorites)
+
+        var cookie = [];
+
+        if (localStorage.getItem('favorites'))
+        {
+            cookie = JSON.parse(localStorage.getItem('favorites'));
+        }
+
+        return this.$axios.$post(getters.getEndpointElements, qs.stringify({'filter':{'ID':cookie}}))
                 .then((result) => {
-                    commit('setFavorites', result.section);
+                    commit('setFavorites', {'items':result.section.items, 'count':result.filter.count_items});
                 });
     },
 

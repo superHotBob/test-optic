@@ -36,7 +36,7 @@ export default {
     computed: {
         items() {
             var items = this.$store.state.catalog.compare.items;
-            
+
             if (items)
                 return JSON.parse(JSON.stringify(items));
             return false;

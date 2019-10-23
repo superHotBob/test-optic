@@ -5,7 +5,7 @@
             <h2>{{result.seometa.headline}}</h2>
             <ul class="breadcrumbs">
                 <li v-for="(item, index) in result.seometa.bredcrumbs" :key="index">
-                   
+
                     <nuxt-link :to="item.LINK.LINK">{{item.TITLE}}</nuxt-link>
                 </li>
             </ul>
@@ -119,7 +119,7 @@ export default {
                 } else {
                     items = this.result.section.items;
                 }
-                    
+
                 for (let key in response.result.section.items) {
                     items.push(response.result.section.items[key]);
                 }
@@ -130,10 +130,10 @@ export default {
     watch: {
         '$route' (to, from) {
             this.$store.dispatch('catalog/LOAD_SECTION', {'params':to.params, 'query':to.query}).then((response) => {
-                
+
                 if (response.hasOwnProperty('error'))
                     this.$nuxt.error({ statusCode: response.statusCode, message: response.error.message })
-                
+
                 this.result = response.result;
                 this.pagen = response.pagen;
             })
@@ -142,13 +142,13 @@ export default {
     updated() {
         this.$root.$emit('recalcSlider')
     },
-    
+
     async asyncData({ store, error, params, query }) {
         let response = await store.dispatch('catalog/LOAD_SECTION', {'params':params, 'query':query})
 
         if (response.hasOwnProperty('error'))
             error({ statusCode: response.statusCode, message: response.error.message })
-            
+
         return {
             result: response.result,
             pagen: response.pagen,

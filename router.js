@@ -202,14 +202,14 @@ export function createRouter () {
                 name: 'userOrder',
                 component: userOrder,
             },
-            {   
+            {
                 path: '/:section',
                 component: index,
                 children: [
                     {
-                        path: ':tag(t-.*)?/:pagen(\\d+)?',
+                        path: ':tag(t-[a-z0-9_-]+)?/:pagen(\\d+)?',
                         name: 'section',
-                        component: section,   
+                        component: section,
                     },
                     {
                         path: ':element',
@@ -230,7 +230,7 @@ export function createRouter () {
                         component: section,
                     },
                 ]
-            },   
+            },
         ]
     })
 }

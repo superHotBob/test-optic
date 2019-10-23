@@ -6,7 +6,7 @@
 >
     <div class="item__wide-left">
         <div class="item__img">
-            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img">
+            <img alt="" :src="item.IMAGE">
         </div>
         <div class="item__flags">
             <!-- <span v-if="labelNew" class="item__flag left">NEW</span> -->
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="item__wide-bottom">
-            
+
             <div class="item__info">
                 <p class="item__name" v-if="!wideItem">{{item.NAME}}</p>
                 <template v-for="(price, index) in item.PRICES">
@@ -79,8 +79,8 @@
                     <svg width="16" height="16" fill="#fff"><use href="#svg-heart2" /></svg>
                     В избранное
                 </button>
-                <button 
-                    class="item__compare" 
+                <button
+                    class="item__compare"
                      :class="{'active':isCompare(item.ID)}"
                     @click.prevent="addCompare(item.COMPARE_URL)"
                 >
@@ -168,7 +168,7 @@ export default {
             isCompare: 'catalog/isCompare'
         }),
         rating() {
-            if (this.item.DISPLAY_PROPERTIES.rating) 
+            if (this.item.DISPLAY_PROPERTIES.rating)
                 return this.item.DISPLAY_PROPERTIES.rating.value*1;
             return 0;
         },

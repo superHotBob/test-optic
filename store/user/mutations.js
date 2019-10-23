@@ -18,6 +18,8 @@ export default {
     },
     setPhone(state, payload) {
         state.user.phone = payload;
+    },
+    setCity(state, payload) {
+        state.city = payload
     }
 }
-  

@@ -10,7 +10,7 @@
                 class="header-menu__delivery-btn"
                 @click="$bvModal.hide('header-menu'); $bvModal.show('delivery-region')"
             >
-                Ваш регоин доставки: <span>Санкт-Петербург</span>
+                Ваш регоин доставки: <span v-if="city">{{city}}</span>
             </p>
         </div>
         <button
@@ -23,12 +23,12 @@
         <button v-for="(section, index) in sections" :key="index" class="header-menu__btn" >
             <nuxt-link
                 @click.native="$bvModal.hide('header-menu');"
-                :to="{ name: 'section', params: {section: section.CODE }}" 
+                :to="{ name: 'section', params: {section: section.CODE }}"
             >
                 {{section.NAME}}
-                
+
             </nuxt-link>
-            <span 
+            <span
                 class="arrow"
                 @click="indexCategories = index; $bvModal.hide('header-menu'); $bvModal.show('header-category')"
             ></span>
@@ -84,6 +84,7 @@ export default {
         ...mapGetters({
             section: 'catalog/getSectionsIndex',
             sections: 'catalog/getSections',
+            city: 'user/getCity'
         }),
     },
 }

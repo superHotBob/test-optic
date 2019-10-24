@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="page-header__tels main-container hidden-mobile">
-            <p>Наши номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (беслатный звонок)</p>
+            <p>Наши номера: <b>8 (499) 391-19-41, 8 (800) 444-34-88</b> (бесплатный звонок)</p>
             <p>Режим работы Пн-Сб: <b>с 10:00 до 20:00</b></p>
         </div>
         <div class="page-header__main main-container">

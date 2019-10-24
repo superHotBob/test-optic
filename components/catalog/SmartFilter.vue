@@ -110,7 +110,7 @@ export default {
                     }
 
                      if (this.items[item].values.max !== this.items[item].values.array[1]) {
-                        priceFilter += '-to-' + this.items[item].values.array[1]
+                        priceFilter += 'base-to-' + this.items[item].values.array[1]
                         bool = true
                     }
 

@@ -596,6 +596,9 @@ export default {
     }
     .card-lense__prop{
         margin-right: 30px;
+        @media(max-width: 768px){
+          margin-right: 10px;
+        }
     }
 }
 .warranty {

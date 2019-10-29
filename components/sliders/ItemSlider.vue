@@ -75,6 +75,7 @@ export default {
         slidesPerView: "auto",
         spaceBetween: 0,
         freeMode: true
+        
       },
       bestsellers: JSON.parse(
         JSON.stringify(this.$store.state.catalog.bestsellers)

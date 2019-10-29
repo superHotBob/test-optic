@@ -18,9 +18,10 @@
         <div class="main-container brand__item-slider">
             <item-slider items="recommended" :elements="items" :ref="recommendeds">
                 <template v-if="item.properties.link">
-                    <nuxt-link tag="span" :to="item.properties.link.value">
-                        Товары {{item.name}}
-                    </nuxt-link>   
+                    <!-- <nuxt-link  :to="item.properties.link.value">
+                        
+                    </nuxt-link>    -->
+                    <div tag="span"> Товары {{item.name}}</div>
                 </template>
                 <template v-else>
                     Товары {{item.name}}
@@ -91,6 +92,11 @@ export default {
     }
     &__item-slider {
         margin-top: 70px;
+    }
+}
+.brand__item-slider{
+    .simple{
+        cursor:initial !important;
     }
 }
 

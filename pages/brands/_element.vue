@@ -16,7 +16,7 @@
             <div class="brand__text" v-html="item.detail_text"></div> 
         </div>
         <div class="main-container brand__item-slider">
-            <item-slider items="recommended" :elements="items">
+            <item-slider items="recommended" :elements="items" :ref="recommendeds">
                 <template v-if="item.properties.link">
                     <nuxt-link tag="span" :to="item.properties.link.value">
                         Товары {{item.name}}

@@ -123,7 +123,7 @@ export default {
                 );
                 
                 if (result.hasOwnProperty('ERROR'))
-                    return;
+                    return ;
                 
                 if (!this.isLogged)
                     this.$store.dispatch('user/STATE');

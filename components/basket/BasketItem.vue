@@ -94,8 +94,11 @@
     <div class="basket-item__discount" v-if="postponed">{{item.DISCOUNT_PRICE_PERCENT_FORMATED}}</div>
     <div class="basket-item__summ">{{item.SUM}}</div>
     <div class="basket-item__actions">
+
         <div v-if="postponed">{{item.QUANTITY}}</div>
-        <div v-else ><quantity v-bind:id="item.ID"/></div>
+
+        <div v-else ><quantity v-bind:id="item.ID" v-bind:itemname="item.NAME" />
+        </div>
         <div class="basket-item__buttons">
             <div><button type="button" @click="deleteItem(item.ID)">Удалить</button></div>
         </div>

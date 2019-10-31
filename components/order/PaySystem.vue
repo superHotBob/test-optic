@@ -12,6 +12,9 @@
                 <span>{{pay.NAME}}</span>
             </label>
         </div>
+        <div class="order__next">
+            <button class="button black" type="button" v-b-toggle.accordion-4.accordion-5>Далее</button>
+        </div>
     </b-collapse>
     <div class="order__short-info">
         <template v-for="pay in paysystem">

@@ -2,7 +2,8 @@ import { mapGetters } from 'vuex';
 
 export default {
     props: [
-        'id'
+        'id',
+        'itemname'
     ],
     data() {
         return {
@@ -11,19 +12,38 @@ export default {
     },
     methods: {
         quantityUp() {
+            var itemname=this.itemname.split(" ")[0];
             var quantity = this.quantity;
+            if(itemname!='Линза')
+                {
+                    quantity++;
+                    this.$store.commit('basket/setQuantity', {'id':this.id,'quantity':quantity});
+                    this.quantity = quantity;
+                }
+            else
+                {
+                    quantity=quantity+2;
+                    this.$store.commit('basket/setQuantity', {'id':this.id,'quantity':quantity});
+                    this.quantity = quantity;
+                }
 
-            quantity++;
-            this.$store.commit('basket/setQuantity', {'id':this.id,'quantity':quantity});
-            this.quantity = quantity;
         },
         quantityDown() {
+            var itemname=this.itemname.split(" ")[0];
             var quantity = this.quantity;
-
             if (quantity > 1) {
-                quantity--;
-                this.$store.commit('basket/setQuantity', {'id':this.id,'quantity':quantity});
-                this.quantity = quantity;
+                if(itemname!='Линза')
+                {
+                    quantity--;
+                    this.$store.commit('basket/setQuantity', {'id':this.id,'quantity':quantity});
+                    this.quantity = quantity;
+                }
+                else
+                {
+                    quantity=quantity-2;
+                    this.$store.commit('basket/setQuantity', {'id':this.id,'quantity':quantity});
+                    this.quantity = quantity;
+                }
             }
                 
         }

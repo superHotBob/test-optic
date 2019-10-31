@@ -98,6 +98,7 @@ export default {
             orderId: false,
         }
     },
+
     methods: {
         getFormData() {
             let form = new FormData(this.$refs.form), 
@@ -110,6 +111,7 @@ export default {
             return formData;
         },
         async save() {
+            this.$root.$emit('refresh');
             if (!this.isEmptyBasket) {
                 var payload, order = {
                     'soa-action':'saveOrderAjax',
@@ -134,7 +136,7 @@ export default {
                     this.$root.$emit('order');
                 }
                     
-            } 
+            }
         },
         async refresh() {
             this.$store.dispatch(
@@ -149,7 +151,7 @@ export default {
         },
     },
     mounted() {
-        this.$root.$on('refresh', value => { 
+        this.$root.$on('refresh', value => {
             this.refresh();
         })
     },

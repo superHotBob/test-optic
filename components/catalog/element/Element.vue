@@ -99,15 +99,17 @@
     </div>
     <div class="card__price">
       <div class="card__price-inner">
+        <template v-if="item.JS_OFFERS[0].NAME.split(' ')[0]!='Оправа'">
         <span class="card__price-lins" v-if="item.PROPERTIES.lins.VALUE">
           Цена за одну
           <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
             <span :key="index">{{ XFormatPrice(price.RATIO_PRICE) }}</span>
           </template>
         </span>
+        </template>
         <h3>
-          Цена
-          <template v-if="item.PROPERTIES.lins.VALUE">за пару</template>
+          <template v-if="item.JS_OFFERS[0].NAME.split(' ')[0]=='Оправа'">Цена</template>
+          <template v-else >Цена за пару</template>
         </h3>
         <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
           <p class="card__current-price" :key="price.ID">{{ priceFormat(price.RATIO_PRICE) }}</p>
@@ -115,7 +117,9 @@
             class="card__old-price"
             v-if="labelSale"
             :key="index"
-          >{{ priceFormat(price.BASE_PRICE) }}</p>
+          ><span v-if="item.JS_OFFERS[0].NAME.split(' ')[0]=='Оправа'">{{ priceFormat(price.BASE_PRICE) }}</span>
+            <span v-else >{{ priceFormat(price.BASE_PRICE).split(' ')[0]*2*1000+priceFormat(price.BASE_PRICE).split(' ')[1]*2 }} руб</span>
+          </p>
         </template>
         <div class="card__counter counter" v-if="!item.PROPERTIES.lins.VALUE">
           <button @click="counterMinus">-</button>
@@ -596,9 +600,6 @@ export default {
     }
     .card-lense__prop{
         margin-right: 30px;
-        @media(max-width: 768px){
-          margin-right: 10px;
-        }
     }
 }
 .warranty {

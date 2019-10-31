@@ -1,8 +1,8 @@
 <template>
 <label class="o-prop textfield" :class="{'error': message}">
     <p>{{property.NAME}} *</p>
-    <input 
-        class="o-prop__input" 
+    <input
+        class="o-prop__input"
         :name="'ORDER_PROP_' + property.ID"  
         v-for="(value, index) in property.VALUE" :key="index" 
         :value="value">
@@ -15,6 +15,7 @@ import { mapGetters } from 'vuex';
 import Error from '~/components/order/property/Error.vue'
 
 export default {
+   
     props: ['property'],
     components: {
         Error

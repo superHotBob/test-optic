@@ -51,11 +51,11 @@
     }
     .collapse,
     .collapsing {
-        &.show {
-            // + .order__short-info {
-            //     display: none;
-            // }
-        }
+        // &.show {
+        //     + .order__short-info {
+        //         display: none;
+        //     }
+        // }
         + .order__short-info {
             display: block;
         }

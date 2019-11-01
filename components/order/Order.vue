@@ -118,7 +118,7 @@ export default {
                 }
 
                 payload = Object.assign(this.getFormData(),order);
-
+                payload['receptSorce']=localStorage.recept;
                 let result = await this.$store.dispatch(
                     'order/request', 
                     payload

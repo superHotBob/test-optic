@@ -53,14 +53,14 @@
             <div class="item__info">
                 <p class="item__name" v-if="!wideItem">{{item.NAME}}</p>
                 <template v-for="(price, index) in item.PRICES">
-                    <teamplate v-if="item.NAME.split(' ')[0]=='Линза'">
+                    <template v-if="item.NAME.split(' ')[0]=='Линза'">
                         <p class="item__price" :key="price.ID">{{price.PRINT_DISCOUNT_VALUE.split(' ')[0]*2000+price.PRINT_DISCOUNT_VALUE.split(' ')[1]*2 | format}} руб.</p>
                         <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_VALUE.split(' ')[0]*2000+price.PRINT_VALUE.split(' ')[1]*2 | format}} руб.</p>
-                    </teamplate>
-                    <teamplate v-else>
+                    </template>
+                    <template v-else>
                         <p class="item__price" :key="price.ID">{{price.PRINT_DISCOUNT_VALUE}} </p>
                         <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_VALUE}}</p>
-                    </teamplate>
+                    </template>
                 </template>
                 <p class="item__sale">Еще -10% по акции</p>
             </div>

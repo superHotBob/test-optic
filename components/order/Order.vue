@@ -112,21 +112,31 @@ export default {
         },
         async save() {
             this.$root.$emit('refresh');
-            if (!this.isEmptyBasket) {
+            await setTimeout(() => {
+                this.saveDate()
+            } , 1000)
+            
+               
+           
+            
+        },
+
+       async saveDate(){
+              if (!this.isEmptyBasket) {
                 var payload, order = {
                     'soa-action':'saveOrderAjax',
                 }
 
                 payload = Object.assign(this.getFormData(),order);
 
-                let result = await this.$store.dispatch(
+                let result =  await this.$store.dispatch(
                     'order/request', 
                     payload
                 );
                 
                 if (result.hasOwnProperty('ERROR'))
                     return ;
-                
+
                 if (!this.isLogged)
                     this.$store.dispatch('user/STATE');
 
@@ -151,7 +161,7 @@ export default {
         },
     },
     mounted() {
-        this.$root.$on('refresh', value => {
+       this.$root.$on('refresh', value => {
             this.refresh();
         })
     },

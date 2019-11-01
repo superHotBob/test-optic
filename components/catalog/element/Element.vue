@@ -236,9 +236,10 @@
             v-if="noRecipe"
           >Не волнуйтесь и продолжайте оформлять заказ! Мы с вами свяжемся для уточнения параметров линз.</p>
           <label class="button card-lense__upload-recipe" v-else>
-            <input type="file" name="lense-recepite" hidden />
-            Загрузить рецепт »
+            <input type="file" name="lense-recepite" hidden @change="FileSelected"/>
+            выбрать файл »
           </label>
+          <label class="button" @click="onUpload">загрузить</label>
           <label class="checkbox">
             <input type="checkbox" name="no-recipe" v-model="noRecipe" />
             <i class="checkbox__indicator"></i>
@@ -404,6 +405,7 @@ export default {
   },
   data() {
     return {
+      selectedFile:null,
       lightbox: false,
       itemAmount: 1,
       regxNumbers: {
@@ -482,7 +484,22 @@ export default {
     },
     addFeedback() {
       this.$root.$emit("addFeedback");
-    }
+    },
+    FileSelected(event){
+
+      this.selectedFile=event.target.files[0];
+    },
+     onUpload(){
+       const fd= new FormData();
+       fd.append('image', this.selectedFile, this.selectedFile.name);
+       this.$axios.$post('/api/v1/recept/action.php', fd)
+               .then(result => {
+                 if (result!=='error!'){
+                   localStorage.recept=result
+                 }
+
+               })
+     }
   },
   computed: {
     ...mapGetters({

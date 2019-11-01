@@ -38,6 +38,7 @@ export default {
     },
 
     async request({commit, getters}, payload) {
+        // console.log(payload);
         let result = await this.$axios.$post(getters.getEndpointOrder, qs.stringify(payload));
         
         if (result.success === 'N')

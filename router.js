@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import redirectFile from '~/middleware/redirect'
 
 Vue.use(Router)
 
@@ -51,6 +52,9 @@ export function createRouter () {
                 path: '',
                 name: 'main',
                 component: main,
+                meta: {
+                    middleware: redirectFile
+                }
             },
             {
                 path: '/personal',

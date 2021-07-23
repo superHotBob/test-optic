@@ -18,10 +18,12 @@ export default {
     return state.sections.SECTIONS[index];
   },
   getCountFavorites: (state) => {
+    //console.log('favorite', state.favorites.count);
     return state.favorites.count;
   },
   getCountCompare: (state) => {
-    return state.compare.count;
+    //console.log('compare', parseInt(state.compare.count));
+    return parseInt(state.compare.count);
   },
   getEndpointBestsellers: (state) => {
     return state.endpoint.bestsellers;
@@ -30,8 +32,9 @@ export default {
     return state.endpoint.elements;
   },
   isFavorites: (state) => (id) => {
-    if (state.favorites.items.hasOwnProperty(id))
-      return true;
+    for(let i in state.favorites.items) {
+      if(state.favorites.items[i].ID == id) return true;
+    }   
     return false;
   },
   isCompare: (state) => (id) => {

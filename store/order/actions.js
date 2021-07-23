@@ -24,8 +24,11 @@ export default {
             query += `&${key}=${payload.query[key]}`;
         }
 
+        //console.log(query);
+
         return this.$axios.get(`/api/v1/order/list/?PAGEN_1=${pagen}${query}`)
         .then((response) => {
+            console.log('orders', response.data)
             return response.data;
         }).catch((e) => {
             if (e.response.status === 404) {

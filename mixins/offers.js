@@ -27,7 +27,10 @@ export default {
     
             for(i = 0; i<treeProps.length; i++) {
                 strName = 'PROP_'+treeProps[i].ID;
-                arShowValues = this.getRowValues(arFilter, strName);
+                if(strName.indexOf('undefined') === -1)
+                    arShowValues = this.getRowValues(arFilter, strName);
+                else
+                    arShowValues = false
     
                 if (!arShowValues)
                     break;
@@ -129,10 +132,14 @@ export default {
                 for (i = 0; i < index; i++)
                 {
                     strName = 'PROP_'+treeProps[i].ID;
-                    arFilter[strName] = this.selectedValues[strName];
+                    if(strName.indexOf('undefined') === -1)
+                        arFilter[strName] = this.selectedValues[strName];
                 }
-                strName = 'PROP_'+treeProps[index].ID;
-                arShowValues = this.getRowValues(arFilter, strName);
+                strName = 'PROP_'+treeProps[i].ID;
+                if(strName.indexOf('undefined') === -1)
+                    arShowValues = this.getRowValues(arFilter, strName);
+                else
+                    arShowValues = false
                 if (!arShowValues)
                 {
                     return false;
@@ -146,7 +153,11 @@ export default {
                 for (i = index+1; i < treeProps.length; i++)
                 {
                     strName = 'PROP_'+treeProps[i].ID;
-                    arShowValues = this.getRowValues(arFilter, strName);
+                    if(strName.indexOf('undefined') === -1)
+                        arShowValues = this.getRowValues(arFilter, strName);
+                    else
+                        arShowValues = false
+
                     if (!arShowValues)
                     {
                         return false;

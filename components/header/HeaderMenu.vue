@@ -12,6 +12,7 @@
             >
                 Ваш регоин доставки: <span v-if="city">{{city}}</span>
             </p>
+            <a target="_blank" rel="nofollow" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/352074/reviews" class="stat-counter" style="display: block; margin: 9px 0 0 0;"></a>
         </div>
         <button
             v-if="!isLogged"

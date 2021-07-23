@@ -37,11 +37,14 @@ export default {
         {
             cookie = JSON.parse(localStorage.getItem('favorites'));
         }
-
-        return this.$axios.$post(getters.getEndpointElements, qs.stringify({'filter':{'ID':cookie}}))
+        if (cookie.length == 0) {
+            commit('setFavorites', {'items':'', 'count':''});
+        }else {
+            return this.$axios.$post(getters.getEndpointElements, qs.stringify({'filter':{'ID':cookie}}))
                 .then((result) => {
                     commit('setFavorites', {'items':result.section.items, 'count':result.filter.count_items});
                 });
+        }
     },
 
     LOAD_BRANDS ({ state }, payload) {
@@ -152,7 +155,7 @@ export default {
             if (payload.pagen)
                 pagen = Number(payload.pagen);
 
-        return this.$axios.get(`/api/v1/catalog/?PAGEN_2=${pagen}&q=${encodeURI(payload.query['q'])}`)
+        return this.$axios.get(`/api/v1/catalog/?PAGEN_2=${pagen}&q=${encodeURI(payload.query['q'])}&searchpage=Y`)
         .then((response) => {
 
             if (response.data.section.items) {
@@ -191,7 +194,7 @@ export default {
             pagen = Number(payload.pagen);
 
         for (let key in payload.query) {
-            query += `&${key}=${payload.query[key]}`;
+            query += `&${key}=${encodeURIComponent(payload.query[key])}`;
         }
 
         if (payload.params.tag) {
@@ -201,13 +204,23 @@ export default {
         else
             url = `/api/v1/catalog/${payload.params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}${query}`;
 
+        console.log('payload', payload)
+        console.log('url', url)
+
         return this.$axios.get(url)
         .then((response) => {
+            //console.log("watch", this)
+            console.log("response", response)
             return {
                 result: response.data,
                 pagen: pagen,
             }
         }).catch((e) => {
+
+        if (typeof e.response == 'undefined') {
+            console.log('urlurlurl',e,state,payload,url);
+        }
+
             if (e.response.status === 404) {
                 return {
                     error: e,

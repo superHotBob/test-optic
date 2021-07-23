@@ -5,7 +5,7 @@
             <h2>{{item.name}}</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
-                <li><nuxt-link to="/news">Новости</nuxt-link></li>
+                <li><nuxt-link to="/news">Блог</nuxt-link></li>
             </ul>
         </div>
     </div>
@@ -78,7 +78,7 @@ export default {
     },
     mounted() {
         this.$axios.get(`/api/v1/iblock/list/?iblock=7&count=3&properties[0]=post&filter[PROPERTY_post]=${this.item.id}`).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             this.news = response.data.items;
         })
     },

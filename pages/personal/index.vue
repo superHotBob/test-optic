@@ -52,7 +52,7 @@
                         <polygon points="137.36 228.67 123.58 214.88 112.97 225.49 137.36 249.89 169.54 217.71 158.93 207.11"></polygon>
                         <polygon points="156.1 297.29 141.25 312.14 126.4 297.29 115.8 307.9 130.65 322.74 115.8 337.59 126.4 348.2 141.25 333.35 156.1 348.2 166.71 337.59 151.86 322.74 166.71 307.9"></polygon>
                     </svg>
-                    История закаов
+                    История заказов
                 </nuxt-link>
             </li>
             <!-- <li>
@@ -94,7 +94,11 @@
 
 <script>
 export default {
-  middleware: 'auth'
+  middleware: 'auth',
+  mounted() {
+    console.log(this.$route)
+    if(this.$route.query.refreshOrderList == "Y") this.$router.push('/personal/orders')
+  }
 }
 </script>
 

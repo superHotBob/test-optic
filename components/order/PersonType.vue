@@ -8,9 +8,11 @@
         <div>
             <span class="person-type__label">Тип плательщика:</span>
             <label class="o-radio" :class="{'active': person.CHECKED}" v-for="person in personType" :key="person.ID">
+                <div v-if="person.NAME=='Физическое лицо'">
                 <input @change="change" name="PERSON_TYPE" :checked="person.CHECKED" type="radio" :value="person.ID"/>
                 <span>{{person.NAME}}</span>
                 <input v-if="person.CHECKED" type="hidden" name="PERSON_TYPE_OLD" :value="person.ID">
+                </div>
             </label>
         </div>
         <div class="person-type__props o-prop-wrap">

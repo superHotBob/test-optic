@@ -11,7 +11,7 @@
         />
         <div class="item__flags">
           <span v-if="labelNew" class="item__flag left">NEW</span>
-          <span v-if="labelSale" class="item__flag right red">SALE</span>
+          <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
         </div>
       </div>
       <div class="card__info">
@@ -82,16 +82,16 @@
           </template>
         </div>
         <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">
-          <div class="card__lense-production">
+          <div class="card__lense-production" v-if="item.PROPERTIES.production_time.VALUE !=''">
             <p>Линзы изготавливаются на заказ.</p>
-            <p>Срок изготовления 10 рабочих дней.</p>
+            <p>Срок изготовления {{item.PROPERTIES.production_time.VALUE}}</p>
           </div>
         </div>
         <div class="card__guarantee">
           <p @click="warrantyModal();">Гарантируем лучшую цену! Нашли дешевле? Снизим цену!</p>
-          <p>
+          <p v-if="getDiscount() > 0">
             Дополнительная
-            <span>10% скидка по промокоду</span>
+            <span>{{getDiscount()}}% скидка по промокоду</span>
             <br />при изготовлении очков в нашей мастерской или при заказе онлайн.
           </p>
         </div>
@@ -99,6 +99,7 @@
     </div>
     <div class="card__price">
       <div class="card__price-inner">
+
         <template v-if="item.JS_OFFERS[0].NAME.split(' ')[0]!='Оправа'">
         <span class="card__price-lins" v-if="item.PROPERTIES.lins.VALUE">
           Цена за одну
@@ -118,7 +119,8 @@
             v-if="labelSale"
             :key="index"
           ><span v-if="item.JS_OFFERS[0].NAME.split(' ')[0]=='Оправа'">{{ priceFormat(price.BASE_PRICE) }}</span>
-            <span v-else >{{ priceFormat(price.BASE_PRICE).split(' ')[0]*2*1000+priceFormat(price.BASE_PRICE).split(' ')[1]*2 }} руб</span>
+            <span v-else >{{ priceFormat(parseInt(new String(price.BASE_PRICE).replace(/[\D]/gi, "")) * 2) }}</span>
+            <!-- <span v-else >{{ priceFormat(price.BASE_PRICE).split(' ')[0]*2*1000+priceFormat(price.BASE_PRICE).split(' ')[1]*2 }} руб</span> -->
           </p>
         </template>
         <div class="card__counter counter" v-if="!item.PROPERTIES.lins.VALUE">
@@ -129,19 +131,20 @@
         <button
           class="card__promo-btn"
           @click="promo.shown = !promo.shown"
-        >Доп скидка 10% по промокоду</button>
+          v-if="getDiscount() > 0"
+        >Доп скидка {{getDiscount()}}% по промокоду</button>
         <button
           class="card__add-to-cart button black"
           @click="addToBasket(item.CURRENT.ADD_URL, $refs.form_props)"
         >В корзину</button>
       </div>
-      <div class="card__promo" v-show="promo.shown == true">
+      <div class="card__promo" v-show="promo.shown == true" v-if="getDiscount() > 0">
         <span>{{sale}} руб.</span>
         <p>
-          Цена
+          Цена <template v-if="new String(item.URL).indexOf('opravy') != -1">оправы</template> 
           <template v-if="item.PROPERTIES.lins.VALUE">за пару линз</template>
           <template v-if="item.PROPERTIES.frames.VALUE">одной оправы</template>
-          с доп. скидкой 10%
+          с доп. скидкой {{getDiscount()}}%
           по промокоду
           <b>HOMEOPTIC</b>
         </p>
@@ -235,11 +238,12 @@
             class="card-lense__recipe"
             v-if="noRecipe"
           >Не волнуйтесь и продолжайте оформлять заказ! Мы с вами свяжемся для уточнения параметров линз.</p>
-          <label class="button card-lense__upload-recipe" v-else>
+          <label class="button card-lense__upload-recipe" v-bind:class="{ upload: uploaded }" v-else>
             <input type="file" name="lense-recepite" hidden @change="FileSelected"/>
-            выбрать файл »
+            <svg v-if="uploaded" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-check fa-w-14 fa-2x"><path fill="currentColor" d="M413.505 91.951L133.49 371.966l-98.995-98.995c-4.686-4.686-12.284-4.686-16.971 0L6.211 284.284c-4.686 4.686-4.686 12.284 0 16.971l118.794 118.794c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-11.314-11.314c-4.686-4.686-12.284-4.686-16.97 0z" class=""></path></svg>
+            {{titleFileLoad}}
           </label>
-          <label class="button" @click="onUpload">загрузить</label>
+
           <label class="checkbox">
             <input type="checkbox" name="no-recipe" v-model="noRecipe" />
             <i class="checkbox__indicator"></i>
@@ -326,6 +330,7 @@
       :element_id="item.ID"
       :properties="properties"
       :description="item.DETAIL_TEXT"
+      :section_multi_coating = "item.JS_OFFERS[0].NAME.split(' ')[0]"
       id="cardTabs"
     />
     <ul class="card__usp">
@@ -405,7 +410,10 @@ export default {
   },
   data() {
     return {
+      uploaded: false,
       selectedFile:null,
+      titleFileLoad: 'Загрузить рецепт',
+      titleFileLoaded: 'Рецепт загружен',
       lightbox: false,
       itemAmount: 1,
       regxNumbers: {
@@ -437,6 +445,17 @@ export default {
     CheaperForm
   },
   methods: {
+    getDiscount() {
+      let discount = false
+      //console.log('url', this)
+      for(let i in this.item.PROPERTIES) {
+        if(this.item.PROPERTIES[i].CODE == "DISCOUNT" && this.item.PROPERTIES[i].VALUE) {
+          discount = this.item.PROPERTIES[i].VALUE
+          break
+        }
+      }
+      return discount
+    },
     XFormatPrice(_number) {
       var format_string = "# руб.",
         decpoint = ".",
@@ -486,20 +505,18 @@ export default {
       this.$root.$emit("addFeedback");
     },
     FileSelected(event){
-
       this.selectedFile=event.target.files[0];
+      const fd= new FormData();
+      fd.append('image', this.selectedFile, this.selectedFile.name);
+      this.$axios.$post('/api/v1/recept/action.php', fd)
+              .then(result => {
+                if (result!=='error!'){
+                  localStorage.recept=result;
+                  this.titleFileLoad = this.titleFileLoaded;
+                  this.uploaded = true
+                }
+              })
     },
-     onUpload(){
-       const fd= new FormData();
-       fd.append('image', this.selectedFile, this.selectedFile.name);
-       this.$axios.$post('/api/v1/recept/action.php', fd)
-               .then(result => {
-                 if (result!=='error!'){
-                   localStorage.recept=result
-                 }
-
-               })
-     }
   },
   computed: {
     ...mapGetters({
@@ -510,7 +527,7 @@ export default {
       return _number => {
         var format_string = "# руб.",
           decpoint = ".",
-          price = parseFloat(_number * this.itemAmount),
+          price = parseInt(Math.ceil(_number * this.itemAmount)),
           decimal = 0,
           separator = " ",
           exp10,
@@ -543,6 +560,7 @@ export default {
         array = [];
 
       for (let i in properties) {
+        if(properties[i].NAME == "Новинка") continue;
         array.push(properties[i]);
       }
 
@@ -557,8 +575,8 @@ export default {
     sale() {
       var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
       return (
-        this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE -
-        this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE * 0.1
+        Math.ceil(this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE -
+        this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_PRICE * 0.1)
       );
     },
     rating() {
@@ -584,7 +602,7 @@ export default {
       var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
 
       if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
-        return true;
+        return this.item.CURRENT.ITEM_PRICES[selectedPrice].PERCENT;
       return false;
     }
   }

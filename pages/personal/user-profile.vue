@@ -46,6 +46,19 @@
                     <p class="mb-0 mt-1" style="font-size: 12px;">Пароль должен быть не менее 6 символов длиной.</p>
                 </label>
             </div>
+            <label class="textfield" style="display: flex;flex-direction: row; align-items: center; flex-wrap: wrap;">
+                <input
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span>Пожалуйста, подтвердите согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">подтвердите согласие на обработку персональных данных</span>
+            </label>
             <button class="button black" type="button" @click="saveUser">Сохранить</button>
             <button class="button black" type="reset" @click="resetUser">Отмена</button>
         </form>
@@ -64,7 +77,9 @@ export default {
             success:false,
             password: '',
             password1: '',
-            error: false
+            error: false,
+            rule: [],
+            ruleError: false
         }
     },
     methods: {
@@ -88,6 +103,13 @@ export default {
             this.error = false;
         },
         async saveUser() {
+            if(this.rule == 1) 
+                this.ruleError = false
+            else
+                this.ruleError = true
+
+            if(this.ruleError) return
+
             let response = await this.$store.dispatch(
                 'user/UPDATE',
                 {
@@ -100,6 +122,8 @@ export default {
                     'password1':this.password1
                 }
             );
+
+            //console.log('response', response);
 
             if (response['status'] == 'OK') {
                 this.success = true;

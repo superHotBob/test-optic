@@ -13,7 +13,7 @@
             <item v-for="(item, index) in items" :key="index" :item="item" :wideItem="wideItem" />
         </div>
         <div v-else>
-            Список сравнение пуст
+            Список сравнения пуст
         </div>
     </div>
 </div>

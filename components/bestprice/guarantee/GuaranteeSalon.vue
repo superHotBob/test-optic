@@ -90,7 +90,7 @@ export default {
     },
     methods:{
       showForm(){
-        console.log(2)
+        //console.log(2)
         this.cheaperFormActive=!this.cheaperFormActive
         this.$root.$emit("show" , this.cheaperFormActive)
       },

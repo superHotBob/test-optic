@@ -3,7 +3,12 @@
     <div class="basket-item__info">
         <div class="basket-item__img">
             <img alt="" v-if="item.PREVIEW_PICTURE_SRC_ORIGINAL" v-lazy="item.PREVIEW_PICTURE_SRC_ORIGINAL">
-            <img alt="" v-else v-lazy="'/bitrix/components/bitrix/catalog/templates/.default/bitrix/catalog.section/.default/images/no_photo.png'">
+            <template v-else-if="item.NAME == 'Ободковая' || item.NAME == 'Полуободковая' || item.NAME == 'Безободковая'">
+                <img alt="" v-if="item.NAME == 'Ободковая'" src="~assets/images/card/workshop-obodkovaya.svg">
+                <img alt="" v-if="item.NAME == 'Полуободковая'" src="~assets/images/card/workshop-poluobodkovaya.svg">
+                <img alt="" v-if="item.NAME == 'Безободковая'" src="~assets/images/card/workshop-bezobodkovaya.svg">
+            </template>
+            <img alt="" v-else v-lazy="'/bitrix/components/bitrix/catalog.section/templates/.default/images/no_photo.png'">
         </div>
         <div class="basket-item__offers">
             <nuxt-link class="basket-item__name" :to="item.DETAIL_PAGE_URL" :class="{'mt-0': (postponed == true || !item.SKU_BLOCK_LIST)}">{{item.NAME}}</nuxt-link>
@@ -35,7 +40,7 @@
                     class="item__offers"
                     style="width: 100%;"
                     :key="prop.CODE"
-                    v-if="prop.CODE == 'left' || prop.CODE == 'right'"
+                    v-if="prop.CODE == 'right' "
                 >
                     <p>{{prop.NAME}}</p>
                     <ul>
@@ -56,6 +61,35 @@
                         </li>
                     </ul>
                 </div>
+
+
+            </template>
+            <template  v-for="prop in sortProps">
+            <div
+                    class="item__offers"
+                    style="width: 100%;"
+                    :key="prop.CODE"
+                    v-if="prop.CODE == 'left' "
+            >
+                <p>{{prop.NAME}}</p>
+                <ul>
+                    <li v-if="getPropValue(prop['~VALUE']).sph" class="selected">
+                        <span>sph: {{getPropValue(prop['~VALUE']).sph}}</span>
+                    </li>
+                    <li v-if="getPropValue(prop['~VALUE']).cyl" class="selected">
+                        <span>cyl: {{getPropValue(prop['~VALUE']).cyl}}</span>
+                    </li>
+                    <li v-if="getPropValue(prop['~VALUE']).ax" class="selected">
+                        <span>ax: {{getPropValue(prop['~VALUE']).ax}}</span>
+                    </li>
+                    <li v-if="getPropValue(prop['~VALUE']).add" class="selected">
+                        <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
+                    </li>
+                    <li v-if="getPropValue(prop['~VALUE']).deg" class="selected">
+                        <span>deg: {{getPropValue(prop['~VALUE']).deg}}</span>
+                    </li>
+                </ul>
+            </div>
             </template>
             <div style="display: flex; flex-wrap: wrap; width: 100%;">
                 <template  v-for="(prop, distanceIndex) in item.PROPS">
@@ -121,7 +155,7 @@ export default {
     },
     computed: {
         sortProps() {
-
+            //console.log(this.item)
             var props = JSON.parse(JSON.stringify(this.item.PROPS))
             
             props = props.sort( (a, b) => {
@@ -134,6 +168,17 @@ export default {
         }
     },
     methods: {
+        getDiscount() {
+            let discount = false
+            //console.log('item', this.item)
+            for(let i in this.item.PROPERTIES) {
+                if(this.item.PROPERTIES[i].name == "Скидка" && this.item.PROPERTIES[i].value) {
+                    discount = this.item.PROPERTIES[i].value
+                    break
+                }
+            }
+            return discount
+        },
         getPropValue(value) {
             return JSON.parse(value);
         }

@@ -80,6 +80,20 @@
               </div>
               <p>Поле для сообщения:</p>
               <textarea v-model="request.msg" placeholder="Поле для сообщения"></textarea>
+              <label class="textfield" style="flex-direction: row; align-items: center; flex-wrap: wrap; color: #fff">
+                <input
+                    v-validate="'required'"
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span style="color: #fff">Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">Пожалуйста, подтвердите согласие на обработку персональных данных</span>
+            </label>
               <input type="submit" name="web_form_submit" value="Отправить заявку ">
             </form>
           </div>
@@ -152,6 +166,20 @@
               </div>
               <p>Поле для сообщения:</p>
               <textarea v-model="request.msg" placeholder="Поле для сообщения"></textarea>
+              <label class="textfield" style="flex-direction: row; align-items: center; flex-wrap: wrap; color: #fff">
+                <input
+                    v-validate="'required'"
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span style="color: #fff">Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">Пожалуйста, подтвердите согласие на обработку персональных данных</span>
+            </label>
               <input type="submit" name="web_form_submit" value="Отправить заявку ">
             </form>
           </div>
@@ -180,6 +208,8 @@ export default {
           active: true,
           show:false,
           callRequestOk:false,
+          rule: [],
+          ruleError: false,
           request: {
             name:'',
             last_name:'',
@@ -196,26 +226,33 @@ export default {
 
     methods: {
       submitRequest() {
-        var params = {
-            'WEB_FORM_ID':'2',
-            'sessid':this.getSessid,
-            'form_text_3':this.request.name,
-            'form_text_4':this.request.last_name,
-            'form_text_5':this.request.email,
-            'form_text_6':this.request.phone,
-            'form_text_7':this.request.order,
-            'form_text_8':this.request.link1,
-            'form_text_9':this.request.link2,
-            'form_text_10':this.request.msg,
-            'web_form_submit':'Y'
-        }
+        if(this.rule == 1) 
+            this.ruleError = false
+        else
+            this.ruleError = true
 
-        this.$axios.post('/api/v1/forms/', qs.stringify(params)).then( response => {
-            if (response.data.FORM_NOTE) {
-                this.callRequestOk = true;
-                this.$bvModal.show('call-request-price');
+        if(!this.ruleError) {  
+            var params = {
+                'WEB_FORM_ID':'2',
+                'sessid':this.getSessid,
+                'form_text_3':this.request.name,
+                'form_text_4':this.request.last_name,
+                'form_text_5':this.request.email,
+                'form_text_6':this.request.phone,
+                'form_text_7':this.request.order,
+                'form_text_8':this.request.link1,
+                'form_text_9':this.request.link2,
+                'form_text_10':this.request.msg,
+                'web_form_submit':'Y'
             }
-        });
+
+            this.$axios.post('/api/v1/forms/', qs.stringify(params)).then( response => {
+                if (response.data.FORM_NOTE) {
+                    this.callRequestOk = true;
+                    this.$bvModal.show('call-request-price');
+                }
+            });
+        }
       },
     },
     computed: {
@@ -225,7 +262,7 @@ export default {
     },
     mounted(){
       this.$root.$on("show",(trigger)=>{
-        console.log(1)
+        //console.log(1)
         this.show = trigger;
       })
     } 

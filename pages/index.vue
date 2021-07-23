@@ -1,6 +1,6 @@
 <template>
-  <div class="index-page">
-    <big-slider :items="swiperItems" :breakpoints="bigSliderBps" />
+  <div class="index-page 1">
+    <big-slider :items="swiperItems" :breakpoints="bigSliderBps" :simulateTouch="setBigSliderTouch"/>
     <small-slider
       class="index-features main-container"
       :items="topItems"
@@ -179,6 +179,7 @@ export default {
           slidesPerView: 1
         }
       },
+      bigSliderTouch: false,
       indexFeaturesBps: {
         1000: {
           slidesPerView: "auto",
@@ -227,6 +228,17 @@ export default {
         }
       }
     };
+  },
+  computed: {
+    setBigSliderTouch(){
+      if (process.client) {
+        if (window.innerWidth < 1025) {
+          return this.bigSliderTouch = true;
+        } else {
+          return this.bigSliderTouch;
+        }
+      }
+    }
   },
   components: {
     BigSlider,

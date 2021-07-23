@@ -19,13 +19,14 @@
                     <p class="delivery__name">{{deliver.NAME}}</p>
                     <img v-if="deliver.LOGOTIP_SRC" :src="deliver.LOGOTIP_SRC" alt="">
                     <p v-if="deliver.DESCRIPTION">{{deliver.DESCRIPTION}}</p>
+                    <div id="IPOLSDEK_injectHere"></div>
                     <p class="delivery__prop">
                         <span>Стоимость:</span>
                         <span>{{deliver.PRICE_FORMATED}}</span>
                     </p>
                     <p class="delivery__prop">
                         <span>Срок доставки:</span>
-                        <span></span>
+                        <span v-if="deliver.PERIOD_TEXT">{{deliver.PERIOD_TEXT}}</span>
                     </p>
                 </div>
             </template>

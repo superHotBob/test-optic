@@ -29,6 +29,18 @@
                 <label for="message">Текст сообщения</label>
                 <textarea class="form-control" name="text" id="message" v-model="buy1click.message" rows="5"></textarea>
             </div>
+            <div class="form-group" style="flex-direction: row; align-items: center; flex-wrap: wrap;">
+                <input
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    style="margin-right: 10px;"
+                    >
+                <span>Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%;color: red;padding: 10px 0;display: block;">Пожалуйста, подтвердите обработку персональных данных</span>
+            </div>
             <div class="form-group">
                 <button type="submit" class="button">Отправить</button>
             </div>
@@ -51,11 +63,20 @@ export default {
                 phone:'',
                 message:''
             },
+            rule: [],
+            ruleError: false,
             result: false
         }
     },
     methods: {
         submit($event) {
+            if(this.rule == 1) 
+                this.ruleError = false
+            else
+                this.ruleError = true
+
+            if(this.ruleError) return
+
             var data = {
                 'action':'buy1click',
                 'cart':'N',

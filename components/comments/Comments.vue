@@ -26,24 +26,24 @@
             </label>
             <button class="button black submit" type="submit">Отправить</button>
         </form>
-        <div class="comments__container">
-            <div class="comments__comment" v-for="(comment, index) in newComment" :key="index">
-                <p class="comments__date">{{comment.DateFormated}}</p>
-                <p class="comments__name">{{comment.AuthorName}}</p>
-                <p class="comments__text" v-html="comment.TextFormated"></p>
-            </div> 
-            <div class="comments__comment" v-for="(comment, index) in commentsPage" :key="index">
-                <p class="comments__date">{{comment.DateFormated}}</p>
-                <p class="comments__name">{{comment.AuthorName}}</p>
-                <p class="comments__text" v-html="comment.TextFormated"></p>
-            </div>            
-            <pagination
-                v-model="pagen"
-                :page-count="pageCount"
-                :classes="paginationClasses"
-                :labels="customLabels"
-            />
-        </div>
+<!--        <div class="comments__container">-->
+<!--            <div class="comments__comment" v-for="(comment, index) in newComment" :key="index">-->
+<!--                <p class="comments__date">{{comment.DateFormated}}</p>-->
+<!--                <p class="comments__name">{{comment.AuthorName}}</p>-->
+<!--                <p class="comments__text" v-html="comment.TextFormated"></p>-->
+<!--            </div> -->
+<!--            <div class="comments__comment" v-for="(comment, index) in commentsPage" :key="index">-->
+<!--                <p class="comments__date">{{comment.DateFormated}}</p>-->
+<!--                <p class="comments__name">{{comment.AuthorName}}</p>-->
+<!--                <p class="comments__text" v-html="comment.TextFormated"></p>-->
+<!--            </div>            -->
+<!--            <pagination-->
+<!--                v-model="pagen"-->
+<!--                :page-count="pageCount"-->
+<!--                :classes="paginationClasses"-->
+<!--                :labels="customLabels"-->
+<!--            />-->
+<!--        </div>-->
     </div>
 </template>
 

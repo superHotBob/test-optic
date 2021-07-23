@@ -59,7 +59,7 @@
                     <b>{{getBasket.allSum_FORMATED}}</b>
                 </p>
                 <div class="cart__summary-buttons">
-                    <button class="button">Продолжить покупки</button>
+                    <button class="button" @click="$router.go(-1)">Продолжить покупки</button>
                     <nuxt-link class="button black" :to="{ name: 'order'}">Оформить заказ</nuxt-link>
                 </div>
             </div>

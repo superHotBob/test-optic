@@ -26,7 +26,9 @@
                         <div>Ф.И.О.:</div>
                         <div>Текущий статус, от {{order.DATE_INSERT_FORMATED}}:</div>
                         <div>Сумма:</div>
-                        <div><button class="user-order__repeat btn-simple">Повторить заказ</button></div>
+                        <!-- <div>
+                            <nuxt-link class="user-order__repeat btn-simple" :to="'/personal/orders?COPY_ORDER=Y&ID=' + order.ID">Повторить заказ</nuxt-link>
+                        </div> -->
                     </div>
                     <div class="user-order__info-row">
                         <div><b>{{order.USER_NAME}}</b></div>
@@ -105,9 +107,9 @@ export default {
         OrderContent,
     },
     asyncData({ params, $axios, error }) {
-        return $axios.get(`/api/v1/order/list/element?ORDER_ID=${params.id}`)
+        return $axios.get(`/api/v1/order/list/element/?ORDER_ID=${params.id}`)
         .then(response => {
-            console.log(response.data)
+            //console.log(response.data)
             return {
                 order:response.data
             }

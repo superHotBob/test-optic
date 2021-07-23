@@ -19,6 +19,19 @@
                 <pay-system v-if="getBasket.COUPON_LIST" class="order__pay-system" :paysystem="order.PAY_SYSTEM" :promocode="getBasket.COUPON_LIST" />
                 <properties />
             </div>
+            <label class="textfield" style="display: flex;flex-direction: row; align-items: center; flex-wrap: wrap;">
+                <input
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span>Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">Пожалуйста, подтвердите согласие на обработку персональных данных</span>
+            </label>
             <div class="order__submit hidden-mobile">
                 <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
             </div>
@@ -58,15 +71,26 @@
                 </div>
             </div>
         </div>
+        
         <div class="order__submit hidden-desktop">
             <button type="button" class="button black mt-3" v-on:click="save">Оформить заказ</button>
         </div>
     </div>
+
+
+
+
     <div id="compile" >
         <div v-if="orderId" class="custom-page main-container" >
             <p class="big-text-bold">Ваш заказ №{{orderId}} успешно создан.</p>
             <p>Вы можете следить за выполнением своего заказа в <nuxt-link to="/personal/orders" style="color: #000">Персональном разделе сайта</nuxt-link>. Обратите внимание, что для входа в этот раздел вам необходимо будет ввести логин и пароль пользователя сайта.</p>
+            <div v-if="getOrder.PAY_SYSTEM[0].CHECKED==='Y'">
+
+                <a :href="`https://home-optic.ru/api/v1/payment/?ORDER_ID=${orderId}&PAYMENT_ID=${orderId}/1/`" class="button black" target="_blank">Оплатить</a>
+            </div>
         </div>
+
+
     </div>
    
 </div>
@@ -96,6 +120,8 @@ export default {
     data() {
         return {
             orderId: false,
+            rule: [],
+            ruleError: false
         }
     },
 
@@ -111,6 +137,17 @@ export default {
             return formData;
         },
         async save() {
+            if(this.rule == 1) 
+                this.ruleError = false
+            else
+                this.ruleError = true
+
+            if(this.ruleError) return
+
+            try {
+                window['yaCounter56402599'].reachGoal('placeOrder');
+            } catch(e){}
+            
             this.$root.$emit('refresh');
             await setTimeout(() => {
                 this.saveDate()

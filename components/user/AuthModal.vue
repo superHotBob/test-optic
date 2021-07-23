@@ -44,6 +44,20 @@
                     data-vv-as="Пароль">
                 <span v-show="errors.has('form-login.password')" class="error">{{ errors.first('form-login.password') }}</span>
             </label>
+            <label class="textfield" style="flex-direction: row; align-items: center; flex-wrap: wrap;">
+                <input
+                    v-validate="'required'"
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span>Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">Пожалуйста, подтвердите согласие на обработку персональных данных</span>
+            </label>
             <button class="auth-modal__submit button black" type="submit">Войти</button>
             <span
                 class="auth-modal__forgot-pwd"
@@ -141,6 +155,20 @@
                     data-vv-as="Повторите пароль">
                 <span v-show="errors.has('form-register.password_confirmation')" class="error">{{ errors.first('form-register.password_confirmation') }}</span>
             </label>
+            <label class="textfield" style="flex-direction: row; align-items: center; flex-wrap: wrap;">
+                <input
+                    v-validate="'required'"
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span>Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">Пожалуйста, подтвердите согласие на обработку персональных данных</span>
+            </label>
             <button class="auth-modal__submit button black" @click.prevent="register" type="submit">Зарегистрироваться</button>
         </form>
 
@@ -158,6 +186,20 @@
                     type="text"
                     data-vv-as="Логин">
                 <span v-show="errors.has('form-recovery.name')" class="error">{{ errors.first('form-recovery.name') }}</span>
+            </label>
+            <label class="textfield" style="flex-direction: row; align-items: center; flex-wrap: wrap;">
+                <input
+                    v-validate="'required'"
+                    v-model="rule"
+                    name="rule"
+                    type="checkbox"
+                    checked
+                    value="1"
+                    data-vv-as=""
+                    style="margin-right: 10px;"
+                    >
+                <span>Я даю согласие на обработку персональных данных</span>
+                <span v-show="ruleError" class="error" style="width: 100%">Пожалуйста, подтвердите согласие на обработку персональных данных</span>
             </label>
             <button class="auth-modal__submit button black" type="submit">Восстановить пароль</button>
         </form>
@@ -184,11 +226,20 @@ export default {
             loginShown: true,
             passwordRecovery: false,
             showErrors:false,
-            showError:false
+            showError:false,
+            rule: [],
+            ruleError: false
         }
     },
     methods: {
         async login() {
+            if(this.rule == 1) 
+                this.ruleError = false
+            else
+                this.ruleError = true
+
+            if(this.ruleError) return
+
             let response = await this.$store.dispatch(
                 'user/login',
                 {
@@ -206,6 +257,13 @@ export default {
             this.$router.push({ name: 'main'});
         },
         async register() {
+            if(this.rule == 1) 
+                this.ruleError = false
+            else
+                this.ruleError = true
+
+            if(this.ruleError) return
+
             let response = await this.$store.dispatch(
                 'user/REGISTER',
                 {
@@ -230,10 +288,15 @@ export default {
                 
         },
         validateForm(scope) {
+            if(this.rule == 1) 
+                this.ruleError = false
+            else
+                this.ruleError = true
+
             this.$validator.validateAll(scope).then((result) => {
-                if (result && (scope == 'form-login')) {
+                if (result && (scope == 'form-login') && !this.ruleError) {
                     this.login();
-                } else if (result){
+                } else if (result && !this.ruleError){
                     this.$refs[scope].submit();
                 }
             });

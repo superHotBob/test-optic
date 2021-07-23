@@ -2,7 +2,9 @@
 <div>
     <div class="content-header">
         <div class="main-container">
-            <h2>Мои заказы</h2>
+            <h2 v-if="$route.query.filter_history == 'Y' && $route.query.show_canceled != 'Y'">История заказов</h2>
+            <h2 v-else-if="$route.query.show_canceled == 'Y'">Отмененные заказы</h2>
+            <h2 v-else>Текущие заказы</h2>
             <ul class="breadcrumbs">
                 <li><nuxt-link to="/">Главная</nuxt-link></li>
                 <li><nuxt-link to="/personal">Мой кабинет</nuxt-link></li>
@@ -23,7 +25,7 @@
         </div>
         <div v-if="$route.query.filter_history == 'Y'">
             <h2 v-if="$route.query.show_canceled == 'Y'">Отменённые заказы</h2>
-            <h2 v-else>История заказов</h2>
+            <h2 v-else-if="orders.length>0">История заказов</h2>
             <div class="orders__small s-orders">
 
                 <div class="s-orders__item" v-for="order in orders" :key="order.ORDER.ID">
@@ -39,6 +41,7 @@
                     </div>
                     <div class="s-orders__body p-20">
                         <nuxt-link class="s-orders__detail mr-auto" :to="'/personal/orders/' + order.ORDER.ID">Подробнее о заказе</nuxt-link>
+
                         <nuxt-link class="s-orders__repeat" :to="'?COPY_ORDER=Y&ID=' + order.ORDER.ID">Повторить заказ</nuxt-link>
                     </div>
                 </div>
@@ -47,7 +50,8 @@
         </div>
         <div v-else>
             <h2 v-if="title">Заказы в статусе «{{title}}»</h2>
-            <h2 v-else>Отмененные заказы</h2>
+            <h2 v-else-if="orders.length>0">Отмененные заказы</h2>
+            <p v-else>Список пуст</p>
             <div class="orders__small s-orders" v-for="order in orders" :key="order.ORDER.ID">
                 <current-order :order="order" />
             </div>
@@ -67,19 +71,24 @@ export default {
     watch: {
         '$route' (to, from) {
             this.$store.dispatch('order/LOAD_ORDERS', {'params':to.params, 'query':to.query}).then((response) => {
+                //console.log('response', response);
+                console.log('response', "here1")
+                if(to.query.copy == "Y") this.$router.push('/basket');
                 if (response.copy) {
                     this.$store.dispatch('basket/STATE');
-                    this.$router.push('/basket');
+                    this.$router.push('/personal/orders?copy=Y');
                 } else {
                     this.orders = response.orders;
                     this.title = response.title;
                 }
             });
+            
         },
     },
     async asyncData({ store, error, params, query }) {
         let response = await store.dispatch('order/LOAD_ORDERS', {'params':params, 'query':query})
-        console.log(response)
+        //console.log(response)
+        console.log('response', "here2")
         return {
             orders:response.orders,
             title:response.title

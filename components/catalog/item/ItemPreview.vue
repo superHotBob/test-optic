@@ -6,7 +6,7 @@
             <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img"/>
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
-                <span v-if="labelSale" class="item__flag right red">SALE</span>
+                <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
             </div>
         </div>
         <div class="item-preview__content">
@@ -134,10 +134,12 @@ export default {
             return false;
         },
         labelSale() {
-            var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
+            if(this.item.CURRENT.ITEM_PRICES[0].RATIO_BASE_PRICE > this.item.CURRENT.ITEM_PRICES[0].PRICE) 
+            return this.item.CURRENT.ITEM_PRICES[0].PERCENT
+            //console.log(this.item)
 
-            if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
-                return true;
+            // if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT != 'undefined')
+            //     return true;
             return false;
         },
     }

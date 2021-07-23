@@ -48,7 +48,7 @@
                                     :disabled="value.disabled"
                                 />
                                 <img alt="" v-if="value.image" v-lazy="value.image" :title="value.name">
-                                <span v-if="!value.image">{{value.name}}</span>
+                                <span v-if="!value.image">{{value.name}} ({{value.count}})</span>
                             </label>
                         </li>
                     </ul>
@@ -74,13 +74,21 @@ export default {
         ClearFilter,
     },
     props: {
-      items: Object,
+      items: Object
     },
     data() {
         return {
             timer: null,
             showFilter: false,
         }
+    },
+    watch: {
+        '$route' (to, from) {
+            this.$store.dispatch('catalog/LOAD_SECTION', {'params':to.params, 'query':to.query}).then((response) => {
+                //console.log("filter_rout", this);
+                this.updateOptions();
+            })
+        },
     },
     computed: {
         ...mapGetters({
@@ -92,10 +100,13 @@ export default {
         maxPrice() {
             return this.items.base.values.array[1].toLocaleString('ru-RU')
         },
+        function() {
+            this.updateOptions();
+        }
     },
     methods: {
         reload() {
-            console.log('reload');
+            //console.log('reload');
             var properties = {}, values, url_params = [];
 
             for (let item in this.items) {
@@ -142,7 +153,74 @@ export default {
                 this.$router.push({ name: 'filter', params: {filter: url_params}, query: this.$route.query})
             }
             else 
-                this.$router.push({ name: 'section'})
+                this.$router.push({ name: 'section'});
+
+            // console.log("teeeeeeeeeest", this);
+            // console.log("options", options);
+
+            // var $this = this;
+            // setTimeout(function(){
+                
+            // }, 500);
+        },
+        updateOptions() {
+            var options = this.getCheckedOptions();
+            //console.log('options', options)
+            let offers = document.querySelectorAll('.catalog__items .item .item__offers');
+            for(let item = 0; item < offers.length; item++) {
+                offers[item].querySelectorAll('li')[0].click();
+            }
+            let items = document.querySelectorAll('.catalog__items .item .item__offers li');
+            for(let item = 0; item < items.length; item++) {
+                let lists = items[item].parentNode.querySelectorAll('li')
+                for(let option in options) {
+                    if(options[option].type == "color" && items[item].hasAttribute('data-color') && items[item].getAttribute('data-color') == options[option].value) {
+                        for(let li = 0; li < lists.length; li++) {
+                            lists[li].classList.remove('selected');
+                        }
+                        //items[item].classList.add('selected');
+                        items[item].click();
+                    } else if(options[option].type == "other" && items[item].textContent.indexOf(new String(options[option].value)) != -1) {
+                        if(lists.length > 1) {
+                            for(let li = 0; li < lists.length; li++) {
+                                lists[li].classList.remove('selected');
+                            }
+                            items[item].classList.add('selected');
+                        }
+                    }
+                }
+            }
+        },
+        getCheckedOptions() {
+            var values = [];
+            for (let item in this.items) {
+                if(this.items[item].hasOwnProperty('values')) {
+                    for (let val in this.items[item].values) {
+                        if(this.items[item].values[val].checked && 
+                            (
+                                this.items[item].name == "Цвет" ||
+                                this.items[item].name == "Ширина линзы" ||
+                                this.items[item].name == "Ширина моста" ||
+                                this.items[item].name == "Высота линзы" ||
+                                this.items[item].name == "Длина дужки"
+                            )
+                            ) {
+                            let $data = {};
+                            if(this.items[item].name == "Цвет"){
+                                $data.type = "color";
+                                $data.value = this.items[item].values[val].value;
+                            }
+                            else
+                                $data.type = "other";
+                                $data.value = this.items[item].values[val].value;
+
+                            values.push($data);
+                        }
+                    }
+                }
+            }
+
+            return values;
         },
         change() {
 

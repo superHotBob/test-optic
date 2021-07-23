@@ -31,13 +31,14 @@
         </div>
         <div class="contacts-col--info">
           <div class="contacts__item">
-            <h4>Телефон</h4>
+            <h4>Телефоны</h4>
+            <a href="tel:8 (800) 444-34-88">
+              <span class="callibri_phone">8 (800) 444-34-88</span>
+            </a><br />
             <a href="tel:+7 (499) 391-19-41">
               <span class="callibri_phone">+7 (499) 391-19-41</span>
             </a>
-            <a href="tel:8 (800) 444-34-88">
-              <span class="callibri_phone">8 (800) 444-34-88</span>
-            </a>
+
           </div>
         </div>
         <div class="contacts-col--info">
@@ -107,8 +108,7 @@ export default {};
     flex-wrap: wrap;
   }
   &-col--info {
-      width: 25%;
-      margin-right:20px;
+      width: 23%;
       &:last-child{
           margin-right: 0;
       }

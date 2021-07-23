@@ -27,7 +27,7 @@
                 </div>
                 <div v-if="payment_list">
                     <div class="s-orders__payment-wrapper">
-                        
+
                         <label class="o-radio o-radio--img" v-for="(item, index) in payment_list" :key="index">
                             <input name="PAY_SYSTEM_ID" type="radio" @click="changeToPay(order.ORDER.ACCOUNT_NUMBER, payment.ACCOUNT_NUMBER, item.ID)">
                             <img :src="item.LOGOTIP" alt="">
@@ -58,9 +58,10 @@
             </div>
         </div>
         <div class="s-orders__buttons">
-            <nuxt-link class="s-orders__detail mr-4" :to="'/personal/orders/' + order.ORDER.ID">Подробнее о заказе</nuxt-link>
+<!--            <nuxt-link class="s-orders__detail mr-4" :to="'/personal/orders/' + order.ORDER.ID">Подробнее о заказе</nuxt-link>-->
+            <nuxt-link class="s-orders__detail mr-4" :to="'?COPY_ORDER=Y&ID=' + order.ORDER.ID">Подробнее о заказе</nuxt-link>
             <nuxt-link class="s-orders__repeat mr-3" :to="'?COPY_ORDER=Y&ID=' + order.ORDER.ID">Повторить заказ</nuxt-link>
-            <nuxt-link class="s-orders__cancel" to="#0">Отменить заказ</nuxt-link>
+            <a class="s-orders__cancel" style="cursor: pointer" @click="orderCancel(order.ORDER.ID)">Отменить заказ</a>
         </div>
     </div>
 </div>
@@ -86,7 +87,9 @@ export default {
     },
     methods: {
         changeToPay(order_id, payment_id, payment) {
-            
+
+            window.$attr = arguments[2];
+
             var params = {
                 'orderData[order]':order_id,
                 'orderData[payment]':payment_id,
@@ -99,24 +102,44 @@ export default {
 
             this.$axios.post(`/api/v1/changepayment/`, qs.stringify(params)).then(response => {
 
-                var payment = window.open(``, 'Оплата', 'width=600,height=400');
+                var payment = window.open(`/api/v1/payment/?ORDER_ID=${order_id}&PAYMENT_ID=${order_id}/`+payment, 'Оплата', 'width=600,height=400');
 
-                payment.onload = function() {
-
+                setTimeout(function(){
+                    //console.log(response);
                     // создать div в документе нового окна
                     var div = payment.document.createElement('div'),
                         body = payment.document.body;
 
-                    div.innerHTML = response.data
+                    if(window.$attr != 7 && window.$attr != 'undefined')
+                        div.innerHTML = response.data;
 
                     // вставить первым элементом в body нового окна
                     body.insertBefore(div, body.firstChild);
-                }
+                }, 1000);
             });
 
-            
-        },
 
+        },
+        orderCancel($id)
+        {
+            console.log($id, this.order.ORDER.ID)
+            var canselId={
+                'id': $id
+            };
+            this.$axios.post('/api/v1/order/canselorder.php', qs.stringify(canselId)).then(response => {
+                console.log(response)
+                this.$router.push({
+                    path: "/personal", 
+                    query: { 
+                        refreshOrderList: 'Y' 
+                    },
+                    params: { 
+                        refreshOrderList: 'Y' 
+                    } 
+                } )
+                //location.reload()
+            });
+        },
         prev() {
             this.payment_list = false;
         },

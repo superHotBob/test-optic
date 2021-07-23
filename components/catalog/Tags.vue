@@ -40,7 +40,7 @@ export default {
                 tags[i].style.display = 'inline-block'
                 widthTags += tags[i].offsetWidth
                 if (widthTags > width) {
-                    if (widthWidth <= 768) 
+                    //if (widthWidth <= 768) 
                         tags[i].style.display = 'none'
                 } else {
                     this.item = i

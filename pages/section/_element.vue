@@ -23,9 +23,9 @@ export default {
         Detail
     },
     asyncData({ params, $axios, error }) {
-        console.log(`/api/v1/catalog/${params.section}/${params.element}/`)
         return $axios.get(`/api/v1/catalog/${params.section}/${params.element}/`).then((response) => {
-            console.log(response.data.element)
+            //console.log(response.data.element)
+            //console.log(response.data);
             return {
                 element:response.data.element,
                 seometa:response.data.seometa,
@@ -36,6 +36,7 @@ export default {
             }
         })
     },
+
     head() {
         return {
             title: this.seometa.title

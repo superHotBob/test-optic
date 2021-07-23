@@ -34,7 +34,10 @@ export default {
                 loop: true,
                 slidesPerView: 2,
                 spaceBetween: 0,
-                preventClicks: false,
+                simulateTouch: this.$props.simulateTouch,
+                preventClicks: true,
+                preventClicksPropagation: true,
+                slideToClickedSlide: false,
                 autoplay: {
                     delay: 5000,
                 },

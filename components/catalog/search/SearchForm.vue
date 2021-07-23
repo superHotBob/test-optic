@@ -20,7 +20,7 @@
             ></nuxt-link>
         </li>
         <li v-if="count > 5" class="page-header__all-results">
-            <nuxt-link @click.native.prevent="showSearch = false" :to="'/search?q='+string">Все результаты</nuxt-link>
+            <nuxt-link @click.native.prevent="showSearch = false" :to="'/search?q='+string+'&searchpage=Y'">Все результаты</nuxt-link>
         </li>
     </ul>
 </form>
@@ -42,7 +42,7 @@ export default {
     methods: {
         submit($event) {
             var q = $event.target.elements.q.value
-            this.$router.push('/search?q=' + q);
+            this.$router.push('/search?q=' + q + '&searchpage=Y');
             this.showSearch = false;
         },
         search(value) {
@@ -66,6 +66,7 @@ export default {
         },
         async load(search) {
             let response = await this.$axios.$get(`/api/v1/catalog/?count=5&q=${search}`);
+            //console.log('search', response)
             this.count = response.section.count;
             this.formatSearch(response.section.items, search);
             this.string = search;

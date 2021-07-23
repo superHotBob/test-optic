@@ -36,7 +36,34 @@
                             class="item__offers"
                             style="width: 100%;"
                             :key="prop.CODE"
-                            v-if="prop.CODE == 'left' || prop.CODE == 'right'"
+                            v-if="prop.CODE == 'right'"
+                        >
+                            <p>{{prop.NAME}}</p>
+                            <ul>
+                                <li v-if="getPropValue(prop['~VALUE']).sph">
+                                    <span>sph: {{getPropValue(prop['~VALUE']).sph}}</span>
+                                </li>
+                                <li v-if="getPropValue(prop['~VALUE']).cyl">
+                                    <span>cyl: {{getPropValue(prop['~VALUE']).cyl}}</span>
+                                </li>
+                                <li v-if="getPropValue(prop['~VALUE']).ax">
+                                    <span>ax: {{getPropValue(prop['~VALUE']).ax}}</span>
+                                </li>
+                                <li v-if="getPropValue(prop['~VALUE']).add">
+                                    <span>add: {{getPropValue(prop['~VALUE']).add}}</span>
+                                </li>
+                                <li v-if="getPropValue(prop['~VALUE']).deg">
+                                    <span>deg: {{getPropValue(prop['~VALUE']).deg}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                    <template  v-for="prop in item.PROPS">
+                        <div
+                                class="item__offers"
+                                style="width: 100%;"
+                                :key="prop.CODE"
+                                v-if="prop.CODE == 'left'"
                         >
                             <p>{{prop.NAME}}</p>
                             <ul>

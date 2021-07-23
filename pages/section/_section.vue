@@ -2,7 +2,7 @@
 <div>
     <div class="content-header">
         <div class="main-container">
-            <h2>{{result.seometa.headline}}</h2>
+           <h2> {{result.seometa.headline}}</h2>
             <ul class="breadcrumbs">
                 <li v-for="(item, index) in result.seometa.bredcrumbs" :key="index">
 
@@ -12,11 +12,24 @@
         </div>
     </div>
     <sticky-scroll sWrapper=".catalog" sScroll=".filter">
+        <template v-if="valuableLinze()">
+            <div class="main-container">
+                <div class="visulable">Указана стоимость 2-х линз</div>
+            </div>
+            <style>
+                /*@media (max-width: 768px) {
+                    .tags {
+                        top: 72px !important;
+                    }
+                }*/
+            </style>
+        </template>
         <div class="catalog catalog main-container">
             <div class="catalog__col-1">
                 <smart-filter v-bind:items="result.filter.items" />
             </div>
             <div class="catalog__col-2">
+                <a href="" id="top-block"></a>
                 <div class="catalog__top">
                     <p class="catalog__items-found hidden-desktop">Найдено {{result.filter.count_items}} {{wording(result.filter.count_items)}}</p>
                     <sort-by class="catalog__sort" />
@@ -30,6 +43,7 @@
                     class="catalog__items"
                     :class="{'catalog__items--wide': wideItem}"
                     v-bind:items="result.section.items"
+                    :filter="result"
                     :wideItem="wideItem"
                 />
                 <pagination
@@ -77,8 +91,9 @@ export default {
                 first: 'First',
                 prev: 'Previous',
                 next: 'Next',
-                last: 'Last'
+                last: 'Last',
             },
+            title_section: ''
         }
     },
     components: {
@@ -97,12 +112,31 @@ export default {
         }),
     },
     methods: {
+        valuableLinze() {
+             return new String(this.result.section.items[0].URL).indexOf('linzy') !== -1
+        },
         changeView(bool) {
             this.$store.commit('catalog/setView', bool)
             this.$root.$emit('recalcSlider');
         },
         onChangePagen: function () {
-            this.$router.push({ name: this.$route.name, params:{tag:this.$route.params.tag, filter:this.$route.params.filter, pagen:this.pagen}, query: this.$route.query});
+            this.$router.push({ 
+                name: this.$route.name, 
+                params: {
+                    tag:this.$route.params.tag, 
+                    filter:this.$route.params.filter, 
+                    pagen:this.pagen
+                }, 
+                query: this.$route.query
+            },
+            () => {
+                setTimeout(function(){
+                    window.scrollTo({
+                        top: document.getElementById('top-block').offsetTop,
+                        behavior: "smooth"
+                    })
+                }, 500)
+            })
         },
         onLoadItems: function() {
             var items = [];
@@ -123,42 +157,45 @@ export default {
                 for (let key in response.result.section.items) {
                     items.push(response.result.section.items[key]);
                 }
+                var top = window.pageYOffset
                 this.result.section.items = items;
+                setTimeout(function(){
+                    if (top > 0) window.scrollTo(top, top)
+                }, 500)
             })
         }
     },
     watch: {
         '$route' (to, from) {
+            //console.log("query", query)
             this.$store.dispatch('catalog/LOAD_SECTION', {'params':to.params, 'query':to.query}).then((response) => {
-
                 if (response.hasOwnProperty('error'))
                     this.$nuxt.error({ statusCode: response.statusCode, message: response.error.message })
-
+                console.log('routeresponse', response)
                 this.result = response.result;
                 this.pagen = response.pagen;
             })
         },
     },
-    updated() {
-        this.$root.$emit('recalcSlider')
-    },
 
     async asyncData({ store, error, params, query }) {
         let response = await store.dispatch('catalog/LOAD_SECTION', {'params':params, 'query':query})
-
+        //let title=document.getElementsByClassName('router-link-exact-active')['0'].innerHTML
+        //console.log("async", response);
         if (response.hasOwnProperty('error'))
             error({ statusCode: response.statusCode, message: response.error.message })
 
+        console.log('asyncresponse', response)
         return {
             result: response.result,
             pagen: response.pagen,
             loadPage: response.pagen,
+            // title: title
         }
     },
     validate ({ params }) {
         if (params.pagen)
             return /^\d+$/.test(params.pagen)
-
         return true;
     },
     head() {

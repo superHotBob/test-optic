@@ -98,13 +98,13 @@ export default {
                 name = 'rating'
                 description = 'По популярности'
             }
-            else if (query.sortName == 'price') {
-                name = 'price'
-                description = 'По цене'
-            }
-            else  {
+            else if (query.sortName == 'name') {
                 name = 'name'
                 description = 'По названию'
+            }
+            else {
+                name = 'price'
+                description = 'По цене'
             }
 
             if (query.sortOrder == undefined) {

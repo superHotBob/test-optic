@@ -13,11 +13,11 @@
     </button>
     <div class="item__wide-left">
         <div class="item__img">
-            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img">
+            <img alt="" v-if="item.CURRENT.hasOwnProperty('MORE_PHOTO')" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img">
         </div>
         <div class="item__flags">
             <span v-if="labelNew" class="item__flag left">NEW</span>
-            <span v-if="labelSale" class="item__flag right red">SALE</span>
+            <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
         </div>
         <div class="counter" v-if="wideItem" @click.prevent>
             <button @click="counterMinus">-</button>
@@ -41,6 +41,7 @@
             <span v-else>(0)</span>
         </div>
         <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
+
         <div class="item__wide-offers">
             <div
                 class="item__offers"
@@ -50,8 +51,10 @@
             >
                 <p v-if="wideItem">{{prop.NAME}}</p>
                 <ul>
+
                     <li
                         :data-value="value.ID"
+                        :data-color="value.XML_ID"
                         @click.prevent="selectOfferProp(prop.ID, value.ID, $event)"
                         v-for="value in prop.VALUES"
                         :key="value.ID"
@@ -59,6 +62,7 @@
                     >
                         <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
                         <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
+
                     </li>
                 </ul>
             </div>
@@ -66,11 +70,12 @@
         <div class="item__wide-bottom">
             <div class="item__info">
                 <p class="item__name" v-if="!wideItem">{{item.CURRENT.NAME}}</p>
+                <p style="color: #0B9001; font-weight: bold;" v-if="new String(item.URL).indexOf('linzy-dlya-ochkov') != -1">Цена 2-х линз</p>
                 <template v-for="(price, index) in item.CURRENT.ITEM_PRICES">
-                    <p class="item__price" :key="price.ID">{{price.PRINT_RATIO_PRICE}}</p>
-                    <p class="item__old-price" v-if="labelSale" :key="index">{{price.PRINT_RATIO_BASE_PRICE}}</p>
+                    <p class="item__price" :key="price.ID">{{numFormat(price.PRINT_RATIO_PRICE)}}</p>
+                    <p class="item__old-price" v-if="labelSale" :key="index">{{numFormat(price.PRINT_RATIO_BASE_PRICE)}}</p>
                 </template>
-                <p class="item__sale">Еще -10% по акции</p>
+                    <p class="item__sale" v-if="getDiscount() > 0">Еще -{{getDiscount()}}% по акции</p>
             </div>
             <div class="item__buttons">
                 <div class="counter" v-if="wideItem && !item.PROPERTIES.lins" @click.prevent>
@@ -87,7 +92,7 @@
                 <button
                     class="item__favorite"
                     :class="{'active':isFavorites(item.ID)}"
-                    @click.prevent="clickFavorites"
+                    @click.prevent="clickFavorites(item)"
                 >
                     <svg width="17" height="17" fill="#000"><use href="#svg-heart" /></svg>
                     <svg width="16" height="16" fill="#fff"><use href="#svg-heart2" /></svg>
@@ -120,6 +125,7 @@ export default {
     mixins: [offers, item],
     props: {
         item: Object,
+        filter: Object,
         wideItem: {
             type: Boolean,
             default: () => false,
@@ -141,34 +147,85 @@ export default {
         Star,
     },
     methods: {
+        // selectedProp(prop) {
+        //     console.log('prop', prop);
+        //     console.log('filter', this.filter);
+        //     console.log('data', this);
+        //     return false;
+        // },
+        getDiscount() {
+          let discount = false
+          for(let i in this.item.PROPERTIES) {
+            if(this.item.PROPERTIES[i].name == "Скидка" && this.item.PROPERTIES[i].value) {
+              discount = this.item.PROPERTIES[i].value
+              break
+            }
+          }
+          return discount
+        },
+        roundNum(n) {
+            return ""+Math.ceil(parseFloat(n))
+        },
+        clearNum(n) {
+            return new String(n).replace(/\s|руб.*/gi, "")
+        },
+        isFloat(n){
+            let str = new String(n).indexOf('.')
+            return str !== -1
+        },
+        numFormat(n) {
+            let num = this.clearNum(n)
+            if(this.isFloat(num)) {
+                num = this.roundNum(num)
+            }
+            if(num.length > 3) {
+                let len = num.length
+                let begin = num.substring(0, len - 3)
+                let finish = num.substring(len - 3)
+                num = begin + " " + finish
+            }
+            n = num + " руб."
+            return n
+        },
         updateElement(url) {
-            console.log(url);
+            //console.log(url);
             var newWin = window.open(url, "hello", "width=800,height=600");
         },
         showModal() {
             this.$root.$emit('preview', this.item);
         },
-        clickFavorites() {
+        clickFavorites(item) {
             if (!!this.timer)
             {
                 clearTimeout(this.timer);
             }
             this.timer = setTimeout(() => {
-                this.loadFavorites();
+                this.loadFavorites(item);
             }, 100)
         },
-        loadFavorites() {
-            var cookie, elementsId = [];
+        loadFavorites(item) {
+            //console.log('favorite', item)
+            let cookie, elementsId = [], favorCookie, offersFavotites = {};
+
+            if (favorCookie = localStorage.getItem('favoritesOffers'))
+                offersFavotites = JSON.parse(favorCookie);
+
+            if (offersFavotites[item.ID] === undefined )
+                offersFavotites[item.ID] = item.ID;
+            else
+                delete offersFavotites[item.ID];
 
             if (cookie = localStorage.getItem('favorites'))
                 elementsId = JSON.parse(cookie);
 
-            if (this.in_array(this.id,elementsId))
-                elementsId.remove(this.id);
+            if (this.in_array(item.ID,elementsId))
+                elementsId.remove(item.ID);
             else
-                elementsId.push(this.id);
+                elementsId.push(item.ID);
 
+            localStorage.setItem('favoritesOffers', JSON.stringify(offersFavotites));
             localStorage.setItem('favorites', JSON.stringify(elementsId));
+
             this.$store.dispatch('catalog/GET_FAVORITES');
             this.$root.$emit('favorites');
         },
@@ -213,10 +270,16 @@ export default {
             return false;
         },
         labelSale() {
-            var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
-
-            if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT)
-                return true;
+            //var selectedPrice = this.item.CURRENT.ITEM_PRICE_SELECTED;
+            let $ok = false
+            try {
+                if(this.item.CURRENT.ITEM_PRICES[0].RATIO_BASE_PRICE > this.item.CURRENT.ITEM_PRICES[0].PRICE) 
+                   $ok = true 
+            } catch(e){}
+            if($ok)
+                return this.item.CURRENT.ITEM_PRICES[0].PERCENT;
+            // if (this.item.CURRENT.ITEM_PRICES[selectedPrice].RATIO_DISCOUNT != 'undefined')
+            //     return true;
             return false;
         }
     },

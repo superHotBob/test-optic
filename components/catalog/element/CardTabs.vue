@@ -14,7 +14,7 @@
             >Характеристики</p>
             <p class="swiper-slide"
                 :class="{'active': tabs[3].show == true}"
-                v-if="tabs[3].has && properties.multitext"
+                v-if="tabs[3].has && isMultitext() && section_multi_coating !='Оправа'"
                 @click="toggleTab(3)"
             >Мультипокрытие</p>
             <p class="swiper-slide"
@@ -46,7 +46,9 @@
                 </template>
             </ul>
         </div>
-        <div class="card-tabs__tab" v-if="tabs[3].has && properties.multitext" v-show="tabs[3].show" v-html="properties.multitext.VALUE.TEXT"></div>
+        <div class="card-tabs__tab" v-if="tabs[3].has && isMultitext() && section_multi_coating !='Оправа'" v-show="tabs[3].show" v-html="isMultitext()">
+
+        </div>
         <div class="card-tabs__tab" v-if="tabs[4].has && properties.opportunities" v-show="tabs[4].show" v-html="properties.opportunities.VALUE.TEXT"></div>
         <div class="card-tabs__tab no-mob-padding" v-if="tabs[5].has" v-show="tabs[5].show">
             <form @submit.prevent="validateForm('form-question')" data-vv-scope="form-question" ref="form-question">
@@ -71,6 +73,10 @@
             <comments iblock_id="1" :element_id="element_id" :rating_show="true"/>
         </div>
     </div>
+
+<!--    <div>-->
+<!--        {{properties[8].VALUE.TEXT}}-->
+<!--    </div>-->
 </div>
 </template>
 
@@ -80,7 +86,7 @@ import Comments from '~/components/comments/Comments.vue'
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['properties','description', 'element_id'],
+    props: ['properties','description', 'element_id', 'section_multi_coating'],
     components: {
         Comments
     },
@@ -128,6 +134,14 @@ export default {
         }),
     },
     methods: {
+        isMultitext() {
+            for(let i in this.properties) {
+                if(this.properties[i].CODE == "multitext" && this.properties[i].VALUE.TEXT){
+                    return new String(this.properties[i].VALUE.TEXT).replace(/\n+/gi, "<br/>");
+                }
+            }
+            return false;
+        },
         getPropValue(value) {
 
             if (Array.isArray(value))

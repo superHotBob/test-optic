@@ -1,0 +1,29 @@
+strace: Process 2401 attached
+strace: Process 4418 attached
+strace: Process 4446 attached
+strace: Process 4448 attached
+strace: Process 17531 attached
+strace: Process 17532 attached
+[pid  4446] 15:42:35.233619 restart_syscall(<... resuming interrupted restart_syscall ...> <unfinished ...>
+[pid 17531] 15:42:35.233678 restart_syscall(<... resuming interrupted poll ...> <unfinished ...>
+[pid 17532] 15:42:35.233694 restart_syscall(<... resuming interrupted restart_syscall ...> <unfinished ...>
+[pid  4448] 15:42:35.233706 restart_syscall(<... resuming interrupted poll ...> <unfinished ...>
+[pid  4418] 15:42:35.233718 restart_syscall(<... resuming interrupted restart_syscall ...> <unfinished ...>
+[pid  2401] 15:42:35.233756 getpid()    = 1
+[pid  2401] 15:42:35.233791 epoll_pwait(8, [], 11, 126, NULL, 8) = 0
+[pid  2401] 15:42:35.360208 getpid()    = 1
+[pid  2401] 15:42:35.360306 getsockopt(7, SOL_TCP, TCP_INFO, "\n\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\27\0\0\0\200\0\0\0"..., [168]) = 0
+[pid  2401] 15:42:35.360391 getpid()    = 1
+[pid  2401] 15:42:35.360447 getpid()    = 1
+[pid  2401] 15:42:35.360533 epoll_pwait(8, [], 11, 1000, NULL, 8) = 0
+[pid  2401] 15:42:36.361871 getpid()    = 1
+[pid  2401] 15:42:36.361970 getsockopt(7, SOL_TCP, TCP_INFO, "\n\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\30\0\0\0\200\0\0\0"..., [168]) = 0
+[pid  2401] 15:42:36.362028 getpid()    = 1
+[pid  2401] 15:42:36.362067 getpid()    = 1
+[pid  2401] 15:42:36.362104 epoll_pwait(8, strace: Process 2401 detached
+ <detached ...>
+strace: Process 4418 detached
+strace: Process 4446 detached
+strace: Process 4448 detached
+strace: Process 17531 detached
+strace: Process 17532 detached

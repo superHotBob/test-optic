@@ -45,7 +45,7 @@ export default {
             for (let key in params) {
                 if (key == 'left' || key == 'right') {
                     for (let name in params[key]) {
-                        query += `&${key}[${name}]=${params[key][name]}`;
+                        query += `&${key}[${name}]=${encodeURIComponent(params[key][name])}`;
                     }
                     continue;
                 }
@@ -53,7 +53,7 @@ export default {
             }
 
             let response = await this.$axios.$get(`${url}&ajax_basket=Y&quantity=${this.itemAmount}${query}`);
-
+            //console.log(url)
             var item = this.item.CURRENT;
 
             this.$root.$emit('add-item', {item, response})

@@ -84,6 +84,8 @@ export default {
         },
 
         changeToPay(order_id, payment_id, payment) {
+
+            window.$attr = arguments[2];
             
             var params = {
                 'orderData[order]':order_id,
@@ -97,19 +99,19 @@ export default {
 
             this.$axios.post(`/api/v1/changepayment/`, qs.stringify(params)).then(response => {
 
-                var payment = window.open(``, 'Оплата', 'width=600,height=400');
-
-                payment.onload = function() {
-
+                var payment = window.open(`/api/v1/payment/?ORDER_ID=${order_id}&PAYMENT_ID=${order_id}/`+window.$attr, 'Оплата', 'width=600,height=400');
+                setTimeout(function(){
+                    //console.log(response);
                     // создать div в документе нового окна
                     var div = payment.document.createElement('div'),
                         body = payment.document.body;
 
-                    div.innerHTML = response.data
+                    if(window.$attr != 7)
+                        div.innerHTML = response.data;
 
                     // вставить первым элементом в body нового окна
                     body.insertBefore(div, body.firstChild);
-                }
+                }, 1000);
             });
 
             

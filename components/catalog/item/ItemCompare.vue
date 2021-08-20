@@ -280,3 +280,9 @@ export default {
     },
 }
 </script>
+<style scoped>
+    .item__sale {
+        background: red;
+        color: #fff;
+    }
+</style>

@@ -1,8 +1,6 @@
 <template>
   <div class="header-categories">
-    <template v-for="(section, index) in sections">
-      
-       
+    <template v-for="(section, index) in sections">      
       <nuxt-link 
         class="header-categories__button" 
         :to="{ name: 'section', params: {section: section.CODE }}" 
@@ -47,8 +45,8 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
         ...mapGetters({
-            sections: 'catalog/getSections',
-        }),
-    },
+          sections: 'catalog/getSections',            
+        }),         
+    }
 }
 </script>

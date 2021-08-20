@@ -13,7 +13,7 @@
         <h4 class="big-text-bold">Авторизация</h4>
         <p class="mb-1">Адрес подписки будет принадлежать пользователю: *имя пользователя*</p>
         <p>Вы можете <a @click="logout">закончить сеанс</a>, чтобы авторизоваться под другим пользователем.</p>
-        <div class="alert alert-danger" role="alert" v-for="error in subscriber.errors">
+        <div class="alert alert-danger" role="alert" v-bind:key="error"  v-for="error in subscriber.errors">
             <strong>{{error}}</strong>
         </div>
         <div class="alert alert-success" role="alert" v-if="subscriber.success.length>0">
@@ -27,7 +27,7 @@
             </label>
 
             <p class="mb-1 mt-4">Рубрики подписки*</p>
-            <label class="checkbox" v-for="list in subscriber.list_sub">
+            <label class="checkbox" v-for="list in subscriber.list_sub" v-bind:key="list">
                 <input type="checkbox" v-model="subscribe_id" :value="list.ID" checked>
                 <i class="checkbox__indicator"></i>
                 {{list.NAME}}

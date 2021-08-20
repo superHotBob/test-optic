@@ -13,8 +13,9 @@
     </button>
     <div class="item__wide-left">
         <div class="item__img">
-            <img alt="" v-if="item.CURRENT.hasOwnProperty('MORE_PHOTO')" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img">
+            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="'https://home-optic.ru' + img">
         </div>
+        <p>{{item.length}}
         <div class="item__flags">
             <span v-if="labelNew" class="item__flag left">NEW</span>
             <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -123,6 +124,7 @@ import Star from '~/components/catalog/star/star.vue'
 
 export default {
     mixins: [offers, item],
+ 
     props: {
         item: Object,
         filter: Object,
@@ -133,6 +135,7 @@ export default {
     },
     data() {
         return {
+           
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
@@ -242,10 +245,11 @@ export default {
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
+        
         sortPropsSku() {
             var properties = Object.assign({}, this.item.SKU_PROPS),
                 array = [];
-
+           
             for(let i in properties) {
                 array.push(properties[i]);
             }
@@ -285,3 +289,12 @@ export default {
     },
 }
 </script>
+<style scoped>
+    .item__sale {
+        background: red;
+        color: #fff;
+        width: auto;
+        padding: 1px 15px;
+        display: inline-block
+    }
+</style>

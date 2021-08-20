@@ -233,7 +233,8 @@ export default {
     setBigSliderTouch(){
       if (process.client) {
         if (window.innerWidth < 1025) {
-          return this.bigSliderTouch = true;
+          let slider =   this.bigSliderTouch ;
+          return slider = true;
         } else {
           return this.bigSliderTouch;
         }

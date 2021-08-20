@@ -3,7 +3,7 @@
     <template v-if="item">
         <button class="modal-close" @click="$bvModal.hide('item-preview')"></button>
         <div class="item-preview__img">
-            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="img"/>
+            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="'https://home-optic.ru'+ img"/>
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -33,7 +33,7 @@
                 v-for="prop in item.SKU_PROPS"
                 :key="prop.ID"
                 ref="sku_line_block"
-                >
+            >
                 <p>{{prop.NAME}}</p>
                 <ul>
                     <li
@@ -42,7 +42,7 @@
                         v-for="value in prop.VALUES"
                         :key="value.ID"
                     >
-                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="">
+                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="'https://home-optic.ru' + value.PICT.SRC" alt="">
                         <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
                     </li>
                 </ul>
@@ -99,6 +99,7 @@ export default {
     mounted() {
         this.$root.$on('preview', (item) => {
             this.item = JSON.parse(JSON.stringify(item));
+            console.log('This is item',this.item);
             this.id = item.ID;
             this.$bvModal.show('item-preview');
             if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3) {

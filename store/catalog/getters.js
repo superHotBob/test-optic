@@ -1,5 +1,5 @@
 export default {
-  getView: (state) => {
+  getView: (state) => {   
     return state.view;
   },
   getEndpointSections: (state) => {

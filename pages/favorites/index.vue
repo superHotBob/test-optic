@@ -189,9 +189,11 @@
                 var items = this.$store.state.catalog.favorites.items;
                 if (items)
                     return JSON.parse(JSON.stringify(items));
-                else
-                	this.messageEmpty='Список желаемого пуст'
-                return false;
+                else {
+                    let spisok = this.messageEmpty ;
+                	spisok ='Список желаемого пуст'
+                    return false;
+                } 
             }
         }
     }

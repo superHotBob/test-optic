@@ -100,9 +100,9 @@ export default {
         maxPrice() {
             return this.items.base.values.array[1].toLocaleString('ru-RU')
         },
-        function() {
-            this.updateOptions();
-        }
+        //function() {
+        //    this.updateOptions();
+        //}
     },
     methods: {
         reload() {

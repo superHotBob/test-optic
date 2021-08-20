@@ -93,7 +93,7 @@ export default {
                 items = response.data.items
                 pagen_count = response.data.pagen.count;
             }
-
+           
             return {
                 items:items,
                 pagen_count:pagen_count,
@@ -117,15 +117,17 @@ export default {
             this.$axios.get(`/api/v1/iblock/list/?iblock=5&count=2&properties[0]=link&filter[PROPERTY_position_VALUE]=bottom`),
             this.$axios.get(`/api/v1/iblock/list/?iblock=7&properties[0]=name&count=3`),
             this.$axios.get(`/api/v1/iblock/list/?iblock=8&properties[0]=name&count=20`)
-        ])
-        return {
+        ])       
+        return {          
             swiperItems: swiperData.data.items,
             topItems: topData.data.items,
             banerItems: banerData.data.items,
             bottomItems: bottomData.data.items,
             blogItems: blogData.data.items,
             brandItems: brandData.data.items,
+            
         }
+      
     },
 
     CATALOG ({ getters }) {
@@ -140,8 +142,8 @@ export default {
             this.$axios.$get(getters.getEndpointBestsellers),
             this.$axios.$post(getters.getEndpointElements, qs.stringify(filter))
         ]);
-
-        return promise;
+         console.log(promise);              
+        return promise;    
     },
 
     LOAD_SEARCH ({ state }, payload) {
@@ -204,8 +206,8 @@ export default {
         else
             url = `/api/v1/catalog/${payload.params.section}/filter/${filter}/apply/?PAGEN_1=${pagen}${query}`;
 
-        console.log('payload', payload)
-        console.log('url', url)
+        // console.log('payload', payload)
+        // console.log('url', url)
 
         return this.$axios.get(url)
         .then((response) => {

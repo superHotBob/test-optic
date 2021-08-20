@@ -102,7 +102,6 @@ export default {
     },
 }
 </script>
-
 <style lang="scss">
     .block {
         &__promocode {

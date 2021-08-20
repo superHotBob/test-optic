@@ -2,7 +2,7 @@ module.exports = {
   /*
   ** Headers of the page
   */
-  
+ target: 'static',
  server: {
     port: 3003, // default: 3000
     host: '0.0.0.0', // default: localhost

@@ -253,7 +253,6 @@ export default {
   }
 };
 </script>
-
 <style lang="scss">
 .index-page {
   .brands {

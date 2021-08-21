@@ -141,8 +141,7 @@ export default {
             this.$axios.$get(getters.getEndpointSections),
             this.$axios.$get(getters.getEndpointBestsellers),
             this.$axios.$post(getters.getEndpointElements, qs.stringify(filter))
-        ]);
-         console.log(promise);              
+        ]);                
         return promise;    
     },
 

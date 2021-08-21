@@ -182,7 +182,6 @@
         {
             this.messageEmpty='Список желаемого пуст';
         }
-
     },
         computed: {
             items() {

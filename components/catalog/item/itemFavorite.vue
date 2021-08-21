@@ -39,12 +39,12 @@
 
             <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
             <div class="item__wide-offers" >
-                <div  class="item__offers" v-for="propsitm in item.SKU_PROPS" v-bind:key="propsitm">
+                <div  class="item__offers" v-for="(propsitm,index) in item.SKU_PROPS" v-bind:key="index">
                 <p>{{propsitm.NAME}}</p>
                     <ul v-if="propsitm.NAME=='Цвет'">
-                        <li v-for="value in propsitm.VALUES" 
+                        <li v-for="(value,index) in propsitm.VALUES" 
                             v-if="value.ID == item.CURRENT.TREE.PROP_2"
-                            v-bind:key="value"
+                            v-bind:key="index"
                         >
                         <span>
                             <img  :src="value.PICT.SRC"  :title="value.NAME" />
@@ -52,7 +52,7 @@
                         </li>
                     </ul>
                     <ul v-else>
-                        <li v-for="value in propsitm.VALUES" v-bind:key="value">
+                        <li v-for="(value,index) in propsitm.VALUES" v-bind:key="index">
                         <span>
                            {{value.NAME}}
                         </span>

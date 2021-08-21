@@ -146,7 +146,7 @@
         </div>
         <div class="main-container catalog__items">
             <div v-if="items.length" class="items">
-                <item v-for="(item, index) in items" :key="index" :item="item" :wideItem="wideItem" />
+                <item v-for="item in items" :key="item.id" :item="item" :wideItem="wideItem" />
             </div>
 
             <div >
@@ -185,10 +185,11 @@
     },
         computed: {
             items() {
-                var items = this.$store.state.catalog.favorites.items;
-                if (items)
+                const items = this.$store.state.catalog.favorites.items;
+                if (items) { 
+                    console.log(JSON.parse(JSON.stringify(items)));              
                     return JSON.parse(JSON.stringify(items));
-                else {
+                } else {
                     let spisok = this.messageEmpty ;
                 	spisok ='Список желаемого пуст'
                     return false;

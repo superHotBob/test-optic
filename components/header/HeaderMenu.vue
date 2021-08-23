@@ -60,7 +60,7 @@
                 <b-tab :key="index" v-if="tab.LINK.length > 0" :title="tab.UF_NAME">
                     <ul class="header-category__list">
                         <li v-for="(link, key) in tab.LINK" :key="key">
-                            <nuxt-link :to="link.UF_LINK" @click.native="$bvModal.hide('header-category')">{{link.UF_NAME}}</nuxt-link>
+                            <nuxt-link :to="link.UF_LINK" @click.native="$bvModal.hide('header-category')">yrtyr{{link.UF_NAME}}</nuxt-link>
                         </li>
                     </ul>
                 </b-tab>

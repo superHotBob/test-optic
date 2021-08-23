@@ -6,7 +6,7 @@
         :to="{ name: 'section', params: {section: section.CODE }}" 
         :key="section.CODE"
       >
-        {{section.NAME}}
+       {{section.NAME}}
       </nuxt-link>
       <div class="header-categories__popup" :key="index">
         <div class="header-categories__col">
@@ -14,7 +14,7 @@
             <template v-for="(tab, index) in section.TABS">
               <b-tab :key="index" v-if="tab.LINK.length > 0">
                 <template slot="title">
-                  {{ tab.UF_NAME }}
+                 sdfsdf {{ tab.UF_NAME }}
                   <span class="arrow"></span>
                 </template>
                 <div class="col">
@@ -29,7 +29,7 @@
           </b-tabs>
          </div>
           <nuxt-link class="header-categories__img" :to="{ name: 'section', params: {section: section.CODE }}">
-              <img v-if="section.PICTURE" :src="section.PICTURE" alt="">
+              <img v-if="section.PICTURE" :src="section.PICTURE" alt="{section.NAME}">
               <p>{{section.NAME}}</p>
               <p>{{section.DESCRIPTION}}</p>
           </nuxt-link>

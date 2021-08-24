@@ -3,11 +3,11 @@
     <div class="card__top">
       <div class="card__img">
         <img
-          alt
+          :alt="img"
           v-for="(img, index) in item.CURRENT.MORE_PHOTO"
           @click="lightboxClick()"
           :key="index"
-          :src="img"
+          :src="'https://home-optic.ru' + img"
         />
         <div class="item__flags">
           <span v-if="labelNew" class="item__flag left">NEW</span>
@@ -389,7 +389,7 @@
       </div>
     </b-modal>
     <client-only>
-      <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="item.CURRENT.MORE_PHOTO"></vue-easy-lightbox>
+      <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ru' + item.CURRENT.MORE_PHOTO"></vue-easy-lightbox>
     </client-only>
   </div>
 </template>
@@ -610,6 +610,9 @@ export default {
 </script>
 
 <style lang="scss">
+.card__img img {
+  margin: 40px auto 0;
+}
 .card__guarantee {
   p {
     &:nth-of-type(1) {

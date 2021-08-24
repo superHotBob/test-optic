@@ -43,7 +43,7 @@
               class="swiper-slide banner-card"
               :to="{ path: item.properties.link.value }"
             >
-              <img v-if="item.src" v-lazy="item.src" />
+              <img v-if="item.src" v-lazy="'https://home-optic.ru' + item.src" />
               <div class="banner-card__over">
                 <p>{{item.name}}</p>
                 <b v-if="item.properties.text">{{item.properties.text.value}}</b>

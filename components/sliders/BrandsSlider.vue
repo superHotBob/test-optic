@@ -2,7 +2,7 @@
 <div class="brands-slider" v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
         <nuxt-link class="swiper-slide" :to="'/brands/'+item.code" v-for="(item, index) in items" :key="index">
-            <img class="swiper-lazy" :src="item.src" alt="">
+            <img class="swiper-lazy" :src="'https://home-optic.ru'+ item.src" alt="">
             <div class="swiper-lazy-preloader"></div>
         </nuxt-link>
     </div>

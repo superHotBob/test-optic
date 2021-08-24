@@ -3,7 +3,7 @@
     <div class="big-slider" v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item, index) in items" :key="index">
-                <img :data-src="item.src" class="swiper-lazy" alt="">
+                <img :data-src="'https://home-optic.ru' + item.src" class="swiper-lazy" alt="">
                 <div class="swiper-lazy-preloader"></div>
                 <div class="big-slider__over">
                     <p v-if="item.description">{{ item.description }}</p>

@@ -7,7 +7,7 @@
             :class="{'s-date': date}"
             :to="{ path: getUrl(index) }"
         >
-            <img class="swiper-lazy" alt="" :data-src="item.src">
+            <img class="swiper-lazy" alt="" :data-src="'https://home-optic.ru' + item.src">
             <div class="swiper-lazy-preloader"></div>
             <div class="banner-card__over">
                 <p>{{item.name}}</p>

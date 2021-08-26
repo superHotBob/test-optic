@@ -625,8 +625,9 @@ export default {
 .carousel-item {
   position: static !important;
 }
-.carousel-indicators {
-  bottom: -30px;
+.carousel-indicators { 
+  width: min-content;
+  margin: 0 auto 10px;
 }
 .carousel-control-next,
 .carousel-control-prev {
@@ -635,23 +636,32 @@ export default {
 .carousel-indicators li {
   background: rgb(199, 190, 190) !important;
   height: 0px !important;
-  width: 15px !important;
+  width: 10px !important;
   border-bottom: 0;
   border-radius: 20px !important;
 }
 .carousel-control-prev-icon, 
 .carousel-control-next-icon {
   display: inline-block;
-  width: 20px;
+  width: 15px;
   left: 90%;
-  position: absolute;
-  border-radius: 20px;
-  height: 20px;
-  background-color: #999;
-  bottom: -1.5vw !important;   
+  position: absolute;  
+  height: 15px;
+  border-top: 4px solid #999;
+  border-right: 4px solid #999;
+  transform: rotate(-135deg);
+  background-color: inherit;
+  bottom: 10px !important;   
+}
+@media (max-width: 900px) {
+  .card__info {
+      margin-top: 20px;
+     
+  }
 }
 .carousel-control-next-icon {
   left: 0%;
+   transform: rotate(45deg);
 }    
 .carousel {
   height: 300px !important;

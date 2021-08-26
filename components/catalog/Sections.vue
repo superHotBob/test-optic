@@ -14,7 +14,7 @@
             <template v-for="(tab, index) in section.TABS">
               <b-tab :key="index" v-if="tab.LINK.length > 0">
                 <template slot="title">
-                 sdfsdf {{ tab.UF_NAME }}
+                 {{ tab.UF_NAME }}
                   <span class="arrow"></span>
                 </template>
                 <div class="col">

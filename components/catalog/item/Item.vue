@@ -3,19 +3,27 @@
     class="swiper-slide item"
     :class="{'item--wide': wideItem}"
     :to="{path: item.URL}"
->
-    <button
-        class="item__preview"
-        v-if="!wideItem"
-        @click.prevent="showModal"
-    >
-        Быстрый просмотр
-    </button>
+>   
     <div class="item__wide-left">
-        <div class="item__img">
-            <img alt="" v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="'https://home-optic.ru' + img">
+        <div class="item_img" v-bind:style="{backgroundImage:
+            'url(https://home-optic.ipol.tech' + new_image + ')'}"
+        >
+            <div class="new__image" 
+                v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
+                v-on:mouseover="showNew(img)"
+            />             
+           
+                   
+                
         </div>
         <p>{{item.length}}
+        <button
+            class="item__preview"
+            v-if="!wideItem"
+            @click.prevent="showModal"
+        >
+            Быстрый просмотр
+        </button>
         <div class="item__flags">
             <span v-if="labelNew" class="item__flag left">NEW</span>
             <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -135,7 +143,7 @@ export default {
     },
     data() {
         return {
-           
+            new_image: this.item.CURRENT.MORE_PHOTO[0],
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
@@ -156,6 +164,9 @@ export default {
         //     console.log('data', this);
         //     return false;
         // },
+        showNew(a) {
+            this.new_image = a;
+        },
         getDiscount() {
           let discount = false
           for(let i in this.item.PROPERTIES) {
@@ -290,6 +301,43 @@ export default {
 }
 </script>
 <style scoped>
+.item {
+    padding: 0;
+}
+.item_img {
+    height: 200px;
+    text-align: center;
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+.item__preview {
+    top: 210px;
+}
+.item__wide-bottom {
+    margin-top: 30px;
+}
+.item__wide-left {
+    height: 250px;
+}
+.item__wide-right {
+    margin: 0;
+}
+.item__wide-left:hover .new__image {
+   border-bottom: 3px solid rgba(0,0,0,.3);
+}
+.new__image {
+    display: inline-block;
+    width: 15.5%;
+    margin: 1px;
+    
+    height: 200px;
+   z-index: 10;
+    border-bottom: 3px solid rgba(0,0,0,.0);
+}
+.new__image:hover {
+    border-bottom: 3px solid rgba(0,0,0,.8) !important;
+}
     .item__sale {
         background: red;
         color: #fff;

@@ -16,7 +16,7 @@
                    
                 
         </div>
-        <p>{{item.length}}
+        <p>{{item.length}}</p>
         <button
             class="item__preview"
             v-if="!wideItem"

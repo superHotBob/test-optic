@@ -2,13 +2,26 @@
   <div class="card main-container">
     <div class="card__top">
       <div class="card__img">
-        <img
-          :alt="img"
-          v-for="(img, index) in item.CURRENT.MORE_PHOTO"
-          @click="lightboxClick()"
-          :key="index"
-          :src="'https://home-optic.ru' + img"
-        />
+        <b-carousel
+          id="carousel-5"           
+          :interval="40000"
+          controls
+          indicators
+          background="#fff"          
+        >
+          <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
+            <template>
+              <img
+                :alt="img"             
+                @click="lightboxClick()"             
+                :src="'https://home-optic.ipol.tech' + img"
+              />
+              <client-only>
+                <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ipol.tech' + img"></vue-easy-lightbox>
+              </client-only>
+            </template>             
+          </b-carousel-slide>               
+         </b-carousel>
         <div class="item__flags">
           <span v-if="labelNew" class="item__flag left">NEW</span>
           <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -388,9 +401,7 @@
         <cheaper-form />
       </div>
     </b-modal>
-    <client-only>
-      <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ru' + item.CURRENT.MORE_PHOTO"></vue-easy-lightbox>
-    </client-only>
+    
   </div>
 </template>
 
@@ -610,6 +621,41 @@ export default {
 </script>
 
 <style lang="scss">
+.carousel-caption,
+.carousel-item {
+  position: static !important;
+}
+.carousel-indicators {
+  bottom: -30px;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  width: 30%;
+}
+.carousel-indicators li {
+  background: rgb(199, 190, 190) !important;
+  height: 0px !important;
+  width: 15px !important;
+  border-bottom: 0;
+  border-radius: 20px !important;
+}
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 20px;
+  left: 90%;
+  position: absolute;
+  border-radius: 20px;
+  height: 20px;
+  background-color: #999;
+  bottom: -1.5vw !important;   
+}
+.carousel-control-next-icon {
+  left: 0%;
+}    
+.carousel {
+  height: 300px !important;
+}
 .card__img img {
   margin: 40px auto 0;
 }

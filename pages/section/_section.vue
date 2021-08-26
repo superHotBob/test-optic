@@ -185,13 +185,13 @@ export default {
         if (response.hasOwnProperty('error'))
             error({ statusCode: response.statusCode, message: response.error.message })
 
-        console.log('asyncresponse', response)
-        return {
-            result: response.result,
-            pagen: response.pagen,
-            loadPage: response.pagen,
-            // title: title
-        }
+       
+            return {
+                result: response.result,
+                pagen: response.pagen,
+                loadPage: response.pagen,
+                // title: title
+            }
     },
     validate ({ params }) {
         if (params.pagen)

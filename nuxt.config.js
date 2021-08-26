@@ -14,7 +14,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'demo bitrix 1' },
-        { name: 'google-site-verification', content: 'yLBxge6Gk1eUUvdZKzeCg7jH3sY3ozOY8YMsi43emuY' }
+      { name: 'google-site-verification', content: 'yLBxge6Gk1eUUvdZKzeCg7jH3sY3ozOY8YMsi43emuY' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/upload/favicon1.ico' }
@@ -79,7 +79,7 @@ module.exports = {
   },
   axios: {
     proxy: false,
-    baseURL: 'https://home-optic.ru/',
+    baseURL: 'https://home-optic.ipol.tech/',
 //    baseURL: 'https://new.anthony.beget.tech/',
     credentials: true
   },

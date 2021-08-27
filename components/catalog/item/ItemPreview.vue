@@ -1,9 +1,12 @@
 <template>
 <b-modal v-model="showModal" class="item-preview" id="item-preview" hide-header hide-footer>
     <template v-if="item">
-        <button class="modal-close" @click="$bvModal.hide('item-preview')"></button>
+        <button class="modal-close" @click="$bvModal.hide('item-preview')" />
         <div class="item-preview__img">
-            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index" :src="'https://home-optic.ru'+ img"/>
+            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
+             :src="'https://home-optic.ipol.tech' + img" 
+             v-bind:style="{width: index === 0 ? '100%' : '0%',display:'inline-block'}"
+            />
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -146,3 +149,11 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .item-preview__img {
+        padding-top: 30px;
+    }
+    .item-preview__img img {
+        margin: 10px 3px;
+    }
+</style>

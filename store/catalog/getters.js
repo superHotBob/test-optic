@@ -12,6 +12,7 @@ export default {
     return state.endpoint.compare;
   },
   getSections: (state) => {
+      console.log(state.sections.SECTIONS);
       return state.sections.SECTIONS;
   },
   getSectionsIndex: (state) => (index) => {

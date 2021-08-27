@@ -5,7 +5,6 @@
            <h2> {{result.seometa.headline}}</h2>
             <ul class="breadcrumbs">
                 <li v-for="(item, index) in result.seometa.bredcrumbs" :key="index">
-
                     <nuxt-link :to="item.LINK.LINK">{{item.TITLE}}</nuxt-link>
                 </li>
             </ul>
@@ -113,7 +112,9 @@ export default {
     },
     methods: {
         valuableLinze() {
-             return new String(this.result.section.items[0].URL).indexOf('linzy') !== -1
+           
+            return false
+            // new String(this.result.section.items[0].URL).indexOf('linzy') !== -1
         },
         changeView(bool) {
             this.$store.commit('catalog/setView', bool)
@@ -170,6 +171,7 @@ export default {
             //console.log("query", query)
             this.$store.dispatch('catalog/LOAD_SECTION', {'params':to.params, 'query':to.query}).then((response) => {
                 if (response.hasOwnProperty('error'))
+                    console.log(response.hasOwnProperty('error'))
                     this.$nuxt.error({ statusCode: response.statusCode, message: response.error.message })
                 console.log('routeresponse', response)
                 this.result = response.result;
@@ -179,15 +181,13 @@ export default {
     },
 
     async asyncData({ store, error, params, query }) {
-        let response = await store.dispatch('catalog/LOAD_SECTION', {'params':params, 'query':query})
+        let response = await store.dispatch('catalog/LOAD_SECTION', {'params':params, 'query':query})       
         //let title=document.getElementsByClassName('router-link-exact-active')['0'].innerHTML
         //console.log("async", response);
         if (response.hasOwnProperty('error'))
-            error({ statusCode: response.statusCode, message: response.error.message })
-
-       
+            error({ statusCode: response.statusCode, message: response.error.message })           
             return {
-                result: response.result,
+                result: response.result,                
                 pagen: response.pagen,
                 loadPage: response.pagen,
                 // title: title

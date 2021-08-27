@@ -84,7 +84,7 @@
                 >
                   <img
                     v-if="value.PICT && value.PICT.ID !== 0"
-                    :src="value.PICT.SRC"
+                    :src="'https://home-optic.ipol.tech' + value.PICT.SRC"
                     alt
                     :title="value.NAME"
                   />
@@ -627,7 +627,7 @@ export default {
 }
 .carousel-indicators { 
   width: min-content;
-  margin: 0 auto 10px;
+  margin: 0 auto -25px;
 }
 .carousel-control-next,
 .carousel-control-prev {
@@ -645,13 +645,14 @@ export default {
   display: inline-block;
   width: 15px;
   left: 90%;
-  position: absolute;  
+  position: absolute;
+  background-image: none !important ;  
   height: 15px;
   border-top: 4px solid #999;
   border-right: 4px solid #999;
   transform: rotate(-135deg);
   background-color: inherit;
-  bottom: 10px !important;   
+  bottom: -25px !important;   
 }
 @media (max-width: 900px) {
   .card__info {

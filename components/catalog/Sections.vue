@@ -29,7 +29,7 @@
           </b-tabs>
          </div>
           <nuxt-link class="header-categories__img" :to="{ name: 'section', params: {section: section.CODE }}">
-              <img v-if="section.PICTURE" :src="section.PICTURE" alt="{section.NAME}">
+              <img v-if="section.PICTURE" :src="'https://home-optic.ipol.tech' +  section.PICTURE" alt="{section.NAME}">
               <p>{{section.NAME}}</p>
               <p>{{section.DESCRIPTION}}</p>
           </nuxt-link>

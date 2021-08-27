@@ -23,12 +23,12 @@ export default {
 </script>
 
 <style lang="scss">
-.section-item-slider {
-    margin-top: 90px;
-}
-@media (max-width: 768px) {
     .section-item-slider {
-        margin-top: 45px;
+        margin-top: 90px;
     }
-}
+    @media (max-width: 768px) {
+        .section-item-slider {
+            margin-top: 45px;
+        }
+    }
 </style>

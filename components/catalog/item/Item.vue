@@ -11,10 +11,7 @@
             <div class="new__image" 
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
                 v-on:mouseover="showNew(img)"
-            />             
-           
-                   
-                
+            />                
         </div>
         <p>{{item.length}}</p>
         <button
@@ -69,7 +66,7 @@
                         :key="value.ID"
                         :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
                     >
-                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="value.PICT.SRC" alt="" :title="value.NAME">
+                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="'https://home-optic.ipol.tech' + value.PICT.SRC" alt="" :title="value.NAME">
                         <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
 
                     </li>
@@ -84,7 +81,7 @@
                     <p class="item__price" :key="price.ID">{{numFormat(price.PRINT_RATIO_PRICE)}}</p>
                     <p class="item__old-price" v-if="labelSale" :key="index">{{numFormat(price.PRINT_RATIO_BASE_PRICE)}}</p>
                 </template>
-                    <p class="item__sale" v-if="getDiscount() > 0">Еще -{{getDiscount()}}% по акции</p>
+                <p class="item__sale" v-if="getDiscount() > 0">Еще -{{getDiscount()}}% по акции</p>
             </div>
             <div class="item__buttons">
                 <div class="counter" v-if="wideItem && !item.PROPERTIES.lins" @click.prevent>
@@ -301,6 +298,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .item {
     padding: 0;
 }
@@ -341,8 +339,9 @@ export default {
     .item__sale {
         background: red;
         color: #fff;
-        width: auto;
+        width: 80%;
+        margin: 5px auto;
         padding: 1px 15px;
-        display: inline-block
+        display: block
     }
 </style>

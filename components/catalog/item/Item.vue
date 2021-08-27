@@ -344,4 +344,9 @@ export default {
         padding: 1px 15px;
         display: block
     }
+@media(max-width: 600px) {
+    .new__image {
+        display: none;
+    }
+};    
 </style>

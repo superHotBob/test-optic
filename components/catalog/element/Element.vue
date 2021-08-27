@@ -16,9 +16,9 @@
                 @click="lightboxClick()"             
                 :src="'https://home-optic.ipol.tech' + img"
               />
-              <client-only>
-                <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ipol.tech' + img"></vue-easy-lightbox>
-              </client-only>
+             
+              <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ipol.tech' + img"></vue-easy-lightbox>
+             
             </template>             
           </b-carousel-slide>               
          </b-carousel>
@@ -627,7 +627,8 @@ export default {
 }
 .carousel-indicators { 
   width: min-content;
-  margin: 0 auto -25px;
+  margin: 3px auto;
+  height: 10px;
 }
 .carousel-control-next,
 .carousel-control-prev {
@@ -678,12 +679,15 @@ export default {
 }
 .carousel-control-next-icon {
   left: 0%;
-   transform: rotate(45deg);
+  transform: rotate(45deg);
 }    
 
 .card__img img {
   margin: 0 auto 0;
 }
+
+
+
 .card__guarantee {
   p {
     &:nth-of-type(1) {

@@ -177,7 +177,16 @@ export default {
     .carousel-control-prev-icon,
     .carousel-indicators {
         position: absolute;
-        top: 90% !important;
+        top: 85% !important;
     }
-   
+   @media (max-width: 600px) {
+        .carousel-control-next-icon,
+        .carousel-control-prev-icon,
+        .carousel-indicators {
+        position: absolute;
+        top: 55vw !important;
+    }
+   }
+       
+  
 </style>

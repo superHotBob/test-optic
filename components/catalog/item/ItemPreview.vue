@@ -2,11 +2,27 @@
 <b-modal v-model="showModal" class="item-preview" id="item-preview" hide-header hide-footer>
     <template v-if="item">
         <button class="modal-close" @click="$bvModal.hide('item-preview')" />
-        <div class="item-preview__img">
-            <img v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
-             :src="'https://home-optic.ipol.tech' + img" 
-             v-bind:style="{width: index === 0 ? '100%' : '0%',display:'inline-block'}"
-            />
+        <div class="item-preview__img">           
+            <b-carousel
+                id="carousel-10"           
+                :interval="40000"
+                controls
+                indicators
+                background="#fff"          
+            >
+                <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
+                    <template>
+                    <img
+                        :alt="img"             
+                        @click="lightboxClick()"             
+                        :src="'https://home-optic.ipol.tech' + img"
+                    />
+                    <!-- <client-only>
+                        <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ipol.tech' + img"></vue-easy-lightbox>
+                    </client-only> -->
+                    </template>             
+                </b-carousel-slide>               
+            </b-carousel>
             <div class="item__flags">
                 <span v-if="labelNew" class="item__flag left">NEW</span>
                 <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -149,11 +165,19 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
     .item-preview__img {
         padding-top: 30px;
+        position: relative;
     }
     .item-preview__img img {
         margin: 10px 3px;
     }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon,
+    .carousel-indicators {
+        position: absolute;
+        top: 90% !important;
+    }
+   
 </style>

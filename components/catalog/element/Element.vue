@@ -620,7 +620,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style >
 .carousel-caption,
 .carousel-item {
   position: static !important;
@@ -654,21 +654,35 @@ export default {
   background-color: inherit;
   bottom: -25px !important;   
 }
+.carousel {
+  height: 300px !important;
+}
 @media (max-width: 900px) {
   .card__info {
-      margin-top: 20px;
-     
+    margin-top: 50px;     
   }
+}
+@media (max-width: 600px) {
+  .carousel-indicators,
+  .carousel-control-prev-icon, 
+  .carousel-control-next-icon {
+    bottom: 0 !important;
+    margin: 0 auto -3vw;
+  }
+  .carousel {
+    height: 250px !important;
+  } 
+  .card__info {
+    margin-top: 20vw;     
+  } 
 }
 .carousel-control-next-icon {
   left: 0%;
    transform: rotate(45deg);
 }    
-.carousel {
-  height: 300px !important;
-}
+
 .card__img img {
-  margin: 40px auto 0;
+  margin: 0 auto 0;
 }
 .card__guarantee {
   p {

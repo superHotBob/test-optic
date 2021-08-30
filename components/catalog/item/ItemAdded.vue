@@ -6,7 +6,7 @@
         </button>
         <p class="item-added__response" v-if="response.STATUS == 'OK'">Товар добавлен в корзину</p>
         <p class="item-added__response" v-else>{{response.error}}</p>
-        <img alt="" v-for="(img, index) in item.MORE_PHOTO" :key="index" :src="img">
+        <img alt=""  :src="'https://home-optic.ipol.tech' + item.MORE_PHOTO[0]">
         <p class="item-added__name">{{item.NAME}}</p>
         <nuxt-link class="item-added__cart-link button" @click.native="$bvModal.hide('item-added')" to="/basket">Перейти в корзину</nuxt-link>
     </div>

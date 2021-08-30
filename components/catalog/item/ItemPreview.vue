@@ -167,7 +167,7 @@ export default {
 </script>
 <style>
     .item-preview__img {
-        padding-top: 30px;
+        padding-top: 10px;
         position: relative;
     }
     .item-preview__img img {
@@ -178,6 +178,9 @@ export default {
     .carousel-indicators {
         position: absolute;
         top: 85% !important;
+    }
+    .carousel-inner {
+       height: -webkit-fill-available;
     }
    @media (max-width: 600px) {
         .carousel-control-next-icon,

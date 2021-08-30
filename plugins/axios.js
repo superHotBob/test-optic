@@ -1,7 +1,7 @@
 import { cacheAdapterEnhancer } from 'axios-extensions'
 import LRUCache from 'lru-cache'
 
-const ONE_HOUR = 1000 * 60 * 60
+const ONE_HOUR = 1000
 const defaultCache = new LRUCache({ maxAge: ONE_HOUR })
 
 export default function ({ $axios }) {
@@ -10,7 +10,7 @@ export default function ({ $axios }) {
   defaults.adapter = cacheAdapterEnhancer(defaults.adapter, { enabledByDefault: false })
 
   $axios.onRequest(config => {
-  //   console.log('Making request to ' + config.url);
+  // console.log('Making request to ' + config.url);
   })
 
   $axios.onResponse(res => {

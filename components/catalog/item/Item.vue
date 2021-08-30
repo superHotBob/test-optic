@@ -6,11 +6,11 @@
 >   
     <div class="item__wide-left">
         <div class="item_img" v-bind:style="{backgroundImage:
-            'url(https://home-optic.ipol.tech' + new_image + ')'}"
+            'url(https://home-optic.ipol.tech' + new_image + ')'}"                    
         >
             <div class="new__image" 
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
-                v-on:mouseover="showNew(img)"
+                v-on:mouseover="showNew(img)"                           
             />                
         </div>
         <p>{{item.length}}</p>

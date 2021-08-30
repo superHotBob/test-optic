@@ -211,7 +211,7 @@ export default {
         return this.$axios.get(url)
         .then((response) => {
             //console.log("watch", this)
-            console.log("response", response)
+            console.log(`ответ на запрос из меню ${payload.params.section}` , response)
             return {
                 result: response.data,
                 pagen: pagen,

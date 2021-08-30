@@ -686,11 +686,7 @@ export default {
   margin: 0 auto 0;
 }
 </style>
-<style lang="sass">
-
-
-
-
+<style lang="scss">
 .card__guarantee {
   p {
     &:nth-of-type(1) {

@@ -685,6 +685,9 @@ export default {
 .card__img img {
   margin: 0 auto 0;
 }
+</style>
+<style lang="sass">
+
 
 
 

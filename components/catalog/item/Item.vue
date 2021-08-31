@@ -20,11 +20,13 @@
            class="slider-mobile"
           background="#fff"          
         >
-          <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >            
+          <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
+            <template>              
             <img
                 :alt="img"                       
                 :src="'https://home-optic.ipol.tech' + img"
-            />                   
+            />
+            </template>                   
           </b-carousel-slide>               
         </b-carousel>
         <p>{{item.length}}</p>

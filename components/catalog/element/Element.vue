@@ -99,11 +99,12 @@
             </div>
           </template>
         </div>
-        <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">
+       
           <div class="card__lense-delivery" v-if="item.PROPERTIES.DELIVERY_PERIOD.VALUE !=''">
             <p>Доставка со склада Европы.</p>
             <p>Срок доставки 10-14 рабочих дней</p>
           </div>
+        <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">  
           <div class="card__lense-production" v-if="item.PROPERTIES.production_time.VALUE !=''">
             <p>Линзы изготавливаются на заказ.</p>
             <p>Срок изготовления {{item.PROPERTIES.production_time.VALUE}}</p>

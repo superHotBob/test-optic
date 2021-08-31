@@ -372,9 +372,13 @@ export default {
     }
     .slider-mobile {
         display: inline-block;
+        width: 100%;
     }
     .carousel img {
-        height: 30vh;
+        width: 100%;
+    }
+    .carousel {
+        width: 100%;
     }
 };    
 </style>

@@ -665,8 +665,11 @@ export default {
 .modal-footer {
   display: none;
 }
-.card__img {
+/* .card__img {
   height: 300px;
+} */
+.card__img img {
+  width: 100%;
 }
 .modal-header {
   border-bottom: none;
@@ -706,9 +709,9 @@ export default {
   background-color: inherit;
   bottom: -25px !important;   
 }
-.carousel {
+/* .carousel {
   height: 100% !important;
-}
+} */
 
 @media (max-width: 900px) {
   .card__info {
@@ -720,11 +723,10 @@ export default {
   .carousel-control-prev-icon, 
   .carousel-control-next-icon {
     bottom: 0 !important;
-    margin: 0 auto -3vw;
+    margin: 0 auto -6vw;
+    display: none;
   }
-  .carousel {
-    height: 250px !important;
-  } 
+ 
   .card__info {
     margin-top: 20vw;     
   } 

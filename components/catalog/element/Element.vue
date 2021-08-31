@@ -13,15 +13,20 @@
             <template>
               <img
                 :alt="img"             
-                @click="lightboxClick()"             
+                v-b-modal.modal-center           
                 :src="'https://home-optic.ipol.tech' + img"
-              />
-             
-              <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ipol.tech' + img"></vue-easy-lightbox>
-             
+              />             
+              <!-- <vue-easy-lightbox 
+                @hide="lightboxClick" 
+                :visible="lightbox" 
+                :imgs="item.CURRENT.MORE_PHOTO.map((i)=>'https://home-optic.ipol.tech' + i)"
+              >
+               
+              </vue-easy-lightbox> -->
             </template>             
           </b-carousel-slide>               
-         </b-carousel>
+        </b-carousel>
+        <modal-slider v-bind:item="item" />           
         <div class="item__flags">
           <span v-if="labelNew" class="item__flag left">NEW</span>
           <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -95,6 +100,10 @@
           </template>
         </div>
         <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">
+          <div class="card__lense-delivery" v-if="item.PROPERTIES.DELIVERY_PERIOD.VALUE !=''">
+            <p>Доставка со склада Европы.</p>
+            <p>Срок доставки 10-14 рабочих дней</p>
+          </div>
           <div class="card__lense-production" v-if="item.PROPERTIES.production_time.VALUE !=''">
             <p>Линзы изготавливаются на заказ.</p>
             <p>Срок изготовления {{item.PROPERTIES.production_time.VALUE}}</p>
@@ -413,6 +422,7 @@ import Star from "~/components/catalog/star/star.vue";
 import CardTabs from "~/components/catalog/element/CardTabs.vue";
 import CheaperForm from "~/components/bestprice/guarantee/CheaperForm.vue";
 import { mapGetters } from "vuex";
+import ModalSlider from './ModalSlider.vue';
 
 export default {
   mixins: [offers, item],
@@ -453,7 +463,8 @@ export default {
     Star,
     CardTabs,
     Share,
-    CheaperForm
+    CheaperForm,
+    ModalSlider
   },
   methods: {
     getDiscount() {
@@ -621,6 +632,45 @@ export default {
 </script>
 
 <style >
+.card__lense-delivery {
+    margin-top: 45px;
+    padding: 15px 0;
+    padding-left: 77px;
+    padding-right: 20px;
+    position: relative;
+    background-color: #f7f7f7; 
+}
+.card__lense-delivery::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 22px;
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+      width: 35px;
+      height: 35px;
+      background: url(~assets/images/icons/plane.svg) no-repeat center; 
+}
+.card__lense-delivery p {
+      margin: 0;
+      font-family: "Arial", "Open Sans", sans-serif;
+      font-size: 14px;
+      line-height: 24px; }
+.card__lense-delivery p:first-of-type {
+        margin: 0;
+        font-size: 16px;
+        line-height: 24px;
+        color: #e74c3c; }
+.modal-footer {
+  display: none;
+}
+.card__img {
+  height: 300px;
+}
+.modal-header {
+  border-bottom: none;
+  padding: 5px;
+}
 .carousel-caption,
 .carousel-item {
   position: static !important;
@@ -656,8 +706,9 @@ export default {
   bottom: -25px !important;   
 }
 .carousel {
-  height: 300px !important;
+  height: 100% !important;
 }
+
 @media (max-width: 900px) {
   .card__info {
     margin-top: 50px;     

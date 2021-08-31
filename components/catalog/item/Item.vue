@@ -4,15 +4,29 @@
     :class="{'item--wide': wideItem}"
     :to="{path: item.URL}"
 >   
-    <div class="item__wide-left">
+    <div class="item__wide-left" >
         <div class="item_img" v-bind:style="{backgroundImage:
-            'url(https://home-optic.ipol.tech' + new_image + ')'}"                    
+            'url(https://home-optic.ipol.tech' + new_image + ')'}"  
+                             
         >
             <div class="new__image" 
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
-                v-on:mouseover="showNew(img)"                           
+                v-on:mouseover.prevent="showNew(img)"                           
             />                
         </div>
+        <b-carousel
+          id="carousel-15"           
+          :interval="40000"          
+           class="slider-mobile"
+          background="#fff"          
+        >
+          <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >            
+            <img
+                :alt="img"                       
+                :src="'https://home-optic.ipol.tech' + img"
+            />                   
+          </b-carousel-slide>               
+        </b-carousel>
         <p>{{item.length}}</p>
         <button
             class="item__preview"
@@ -298,6 +312,9 @@ export default {
 }
 </script>
 <style scoped>
+.slider-mobile {
+    display: none;
+}
 
 .item {
     padding: 0;
@@ -345,8 +362,17 @@ export default {
         display: block
     }
 @media(max-width: 600px) {
-    .new__image {
+    .item_img {
         display: none;
+    }
+    .new__image {
+       border-bottom: 3px solid rgba(0,0,0,.3);
+    }
+    .slider-mobile {
+        display: inline-block;
+    }
+    .carousel img {
+        height: 30vh;
     }
 };    
 </style>

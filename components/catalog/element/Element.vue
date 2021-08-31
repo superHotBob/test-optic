@@ -102,7 +102,7 @@
        
           <div class="card__lense-delivery" v-if="item.PROPERTIES.DELIVERY_PERIOD.VALUE !=''">
             <p>Доставка со склада Европы.</p>
-            <p>Срок доставки 10-14 рабочих дней</p>
+            <p>Срок доставки {{item.PROPERTIES.DELIVERY_PERIOD.VALUE}}</p>
           </div>
         <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">  
           <div class="card__lense-production" v-if="item.PROPERTIES.production_time.VALUE !=''">

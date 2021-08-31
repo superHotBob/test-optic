@@ -24,4 +24,7 @@ export default {
 }
 </script>
 <style >
+    .modal-body {
+        padding: 0;
+    }
 </style>

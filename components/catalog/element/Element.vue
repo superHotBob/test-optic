@@ -5,8 +5,8 @@
         <b-carousel
           id="carousel-5"           
           :interval="40000"
-          controls
-          indicators
+          :controls="item.CURRENT.MORE_PHOTO.length>1"
+          :indicators="item.CURRENT.MORE_PHOTO.length>1"
           background="#fff"          
         >
           <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >

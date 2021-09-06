@@ -6,8 +6,8 @@
             <b-carousel
                 id="carousel-10"           
                 :interval="40000"
-                controls
-                indicators
+                :controls="item.CURRENT.MORE_PHOTO.length>1"
+                :indicators="item.CURRENT.MORE_PHOTO.length>1"
                 background="#fff"          
             >
                 <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
@@ -172,24 +172,17 @@ export default {
     }
     .item-preview__img img {
         margin: 10px 3px;
-    }
-    .carousel-control-next-icon,
-    .carousel-control-prev-icon,
-    .carousel-indicators {
-        position: absolute;
-        top: 85% !important;
-    }
+    }   
     .carousel-inner {
        height: -webkit-fill-available;
     }
-   @media (max-width: 600px) {
+    @media (max-width: 600px) {
         .carousel-control-next-icon,
         .carousel-control-prev-icon,
         .carousel-indicators {
-        position: absolute;
-        top: 55vw !important;
-    }
-   }
-       
+            position: absolute;
+            background: none !important;       
+        }
+    }       
   
 </style>

@@ -8,16 +8,17 @@
         <div class="item_img" v-bind:style="{backgroundImage:
             'url(https://home-optic.ipol.tech' + new_image + ')'}"  
                              
-        >
-            <div class="new__image" 
+        >           
+            <div class="new__image"                         
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
                 v-on:mouseover.prevent="showNew(img)"                           
-            />                
+            />                      
         </div>
         <b-carousel
           id="carousel-15"           
-          :interval="40000"          
-           class="slider-mobile"
+          :interval="40000"
+          :indicators="item.CURRENT.MORE_PHOTO.length>1"         
+          class="slider-mobile"
           background="#fff"          
         >
           <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
@@ -346,10 +347,9 @@ export default {
 .new__image {
     display: inline-block;
     width: 15.5%;
-    margin: 1px;
-    
+    margin: 0.5%;    
     height: 200px;
-   z-index: 10;
+    z-index: 10;
     border-bottom: 3px solid rgba(0,0,0,.0);
 }
 .new__image:hover {
@@ -380,5 +380,9 @@ export default {
     .carousel {
         width: 100%;
     }
+    .carousel-indicators {
+        width: '16.7%';
+        padding: 0;
+    }    
 };    
 </style>

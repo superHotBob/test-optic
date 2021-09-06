@@ -1,22 +1,21 @@
 <template>
- <b-modal id="modal-center" size="xl" centered >
-    <b-carousel
-        id="carousel-8"           
-        :interval="40000"
-        controls
-        indicators
-        background="#fff"          
-    >
-        <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
-            
-            <img
-                :alt="img"                          
-                :src="'https://home-optic.ipol.tech' + img"
-            />
-        </b-carousel-slide>               
-    </b-carousel>
-  </b-modal>
-    
+    <b-modal id="modal-center" size="xl" centered >
+        <b-carousel
+            id="carousel-8"           
+            :interval="40000"
+            :controls="item.CURRENT.MORE_PHOTO.length>1"
+            :indicators="item.CURRENT.MORE_PHOTO.length>1"
+            background="#fff"          
+        >
+            <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >            
+                <img
+                    v-bind:style="{cursor: 'pointer'}"
+                    :alt="img"                          
+                    :src="'https://home-optic.ipol.tech' + img"
+                />
+            </b-carousel-slide>               
+        </b-carousel>
+    </b-modal>    
 </template>
 <script>
 export default {
@@ -25,7 +24,7 @@ export default {
 </script>
 <style >
     img {
-        height: 100%;
+        height: 100%;       
     }
     .modal-body {
         padding: 0;
@@ -39,7 +38,6 @@ export default {
     .modal-header .close:active {
         outline: none;
     }
-
     .carousel-caption {
         padding: 0;
     }

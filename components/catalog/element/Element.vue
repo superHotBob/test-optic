@@ -15,14 +15,7 @@
                 :alt="img"             
                 v-b-modal.modal-center           
                 :src="'https://home-optic.ipol.tech' + img"
-              />             
-              <!-- <vue-easy-lightbox 
-                @hide="lightboxClick" 
-                :visible="lightbox" 
-                :imgs="item.CURRENT.MORE_PHOTO.map((i)=>'https://home-optic.ipol.tech' + i)"
-              >
-               
-              </vue-easy-lightbox> -->
+              />            
             </template>             
           </b-carousel-slide>               
         </b-carousel>
@@ -665,11 +658,17 @@ export default {
 .modal-footer {
   display: none;
 }
-/* .card__img {
-  height: 300px;
-} */
+.carousel-indicators .active {
+  height: 4px !important;
+  width: 15px !important;
+  background: rgb(0, 0, 0) !important;
+}
+.carousel-indicators li:hover { 
+  background: rgb(0, 0, 0) !important;
+}
 .card__img img {
   width: 100%;
+  cursor: zoom-in;
 }
 .modal-header {
   border-bottom: none;
@@ -680,9 +679,15 @@ export default {
   position: static !important;
 }
 .carousel-indicators { 
-  width: min-content;
-  margin: 3px auto;
+  width: 50%;
+  margin: -7px auto;
+  position: absolute;
   height: 10px;
+  bottom: 7px;
+  padding: 15px;
+  z-index: 0;
+  align-items: center;
+  background: #fff;
 }
 .carousel-control-next,
 .carousel-control-prev {
@@ -701,34 +706,45 @@ export default {
   width: 15px;
   left: 90%;
   position: absolute;
+  z-index: 100;
   background-image: none !important ;  
   height: 15px;
   border-top: 4px solid #999;
   border-right: 4px solid #999;
   transform: rotate(-135deg);
   background-color: inherit;
-  bottom: -25px !important;   
+  bottom: 7px !important;   
 }
-/* .carousel {
-  height: 100% !important;
-} */
+
 
 @media (max-width: 900px) {
   .card__info {
     margin-top: 50px;     
   }
 }
-@media (max-width: 600px) {
-  .carousel-indicators,
+@media (max-width: 600px) { 
   .carousel-control-prev-icon, 
   .carousel-control-next-icon {
     bottom: 0 !important;
     margin: 0 auto -6vw;
     display: none;
   }
+  .carousel-indicators li,
+  .carousel-indicators .active {
+    width: 16% !important;
+    height: 0;
+    border-bottom: 2px !important;
+    border-top: 2px solid transparent !important;
+    border-radius: 0;
+  }
+  .carousel-indicators {
+    width: 100%;
+    padding: 0;
+
+  }
  
   .card__info {
-    margin-top: 20vw;     
+    margin-top: 5vw;     
   } 
 }
 .carousel-control-next-icon {

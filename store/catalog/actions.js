@@ -209,15 +209,12 @@ export default {
         // console.log('url', url)
 
         return this.$axios.get(url)
-        .then((response) => {
-            //console.log("watch", this)
-            console.log(`ответ на запрос из меню ${payload.params.section}` , response)
+        .then((response) => {            
             return {
                 result: response.data,
                 pagen: pagen,
             }
         }).catch((e) => {
-
         if (typeof e.response == 'undefined') {
             console.log('urlurlurl',e,state,payload,url);
         }

@@ -11,7 +11,7 @@
                 <img
                     v-bind:style="{cursor: 'pointer'}"
                     :alt="img"                          
-                    :src="'https://home-optic.ipol.tech' + img"
+                    :src="'https://home-optic.ru' + img"
                 />
             </b-carousel-slide>               
         </b-carousel>

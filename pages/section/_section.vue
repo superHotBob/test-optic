@@ -111,10 +111,8 @@ export default {
         }),
     },
     methods: {
-        valuableLinze() {
-           
-            return false
-            // new String(this.result.section.items[0].URL).indexOf('linzy') !== -1
+        valuableLinze() {           
+            return new String(this.result.section.items[0].URL).indexOf('linzy') !== -1
         },
         changeView(bool) {
             this.$store.commit('catalog/setView', bool)

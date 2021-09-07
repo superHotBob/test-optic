@@ -117,8 +117,8 @@ const setupProgress = (axios, ctx) => {
 export default (ctx, inject) => {
   // baseURL
   const baseURL = process.browser
-      ? 'https://home-optic.ipol.tech/'
-      : (process.env._AXIOS_BASE_URL_ || 'https://home-optic.ipol.tech/')
+      ? 'https://home-optic.ru/'
+      : (process.env._AXIOS_BASE_URL_ || 'https://home-optic.ru/')
 
   // Create fresh objects for all default header scopes
   // Axios creates only one which is shared across SSR requests!

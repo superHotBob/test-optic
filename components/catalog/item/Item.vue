@@ -6,10 +6,11 @@
 >   
     <div class="item__wide-left" >
         <div class="item_img" v-bind:style="{backgroundImage:
-            'url(https://home-optic.ipol.tech' + new_image + ')'}"  
+            'url(https://home-optic.ru' + new_image + ')'}"  
                              
         >           
-            <div class="new__image"                         
+            <div class="new__image"
+                v-show="item.CURRENT.MORE_PHOTO.length>1"                         
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
                 v-on:mouseover.prevent="showNew(img)"                           
             />                      
@@ -25,12 +26,11 @@
             <template>              
             <img
                 :alt="img"                       
-                :src="'https://home-optic.ipol.tech' + img"
+                :src="'https://home-optic.ru' + img"
             />
             </template>                   
           </b-carousel-slide>               
-        </b-carousel>
-        <p>{{item.length}}</p>
+        </b-carousel>       
         <button
             class="item__preview"
             v-if="!wideItem"
@@ -64,7 +64,6 @@
             <span v-else>(0)</span>
         </div>
         <p class="item__name" v-if="wideItem">{{item.CURRENT.NAME}}</p>
-
         <div class="item__wide-offers">
             <div
                 class="item__offers"
@@ -74,7 +73,6 @@
             >
                 <p v-if="wideItem">{{prop.NAME}}</p>
                 <ul>
-
                     <li
                         :data-value="value.ID"
                         :data-color="value.XML_ID"
@@ -83,7 +81,7 @@
                         :key="value.ID"
                         :class="{'img': (value.PICT && value.PICT.ID !== 0)}"
                     >
-                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="'https://home-optic.ipol.tech' + value.PICT.SRC" alt="" :title="value.NAME">
+                        <img v-if="value.PICT && value.PICT.ID !== 0" :src="'https://home-optic.ru' + value.PICT.SRC" alt="" :title="value.NAME">
                         <span v-if="!value.PICT || value.PICT.ID == 0">{{value.NAME}}</span>
 
                     </li>
@@ -98,7 +96,10 @@
                     <p class="item__price" :key="price.ID">{{numFormat(price.PRINT_RATIO_PRICE)}}</p>
                     <p class="item__old-price" v-if="labelSale" :key="index">{{numFormat(price.PRINT_RATIO_BASE_PRICE)}}</p>
                 </template>
-                <p class="item__sale" v-if="getDiscount() > 0">Еще -{{getDiscount()}}% по акции</p>
+                <p class="item__sale" 
+                    v-if="getDiscount() > 0"
+                    v-bind:style="{width:wideItem?'100%':'80%'}"
+                >Еще -{{getDiscount()}}% по акции</p>
             </div>
             <div class="item__buttons">
                 <div class="counter" v-if="wideItem && !item.PROPERTIES.lins" @click.prevent>
@@ -337,9 +338,10 @@ export default {
 }
 .item__wide-left {
     height: 250px;
+    margin-bottom: 5px;
 }
 .item__wide-right {
-    margin: 0;
+    margin: 10px 0;
 }
 .item__wide-left:hover .new__image {
    border-bottom: 3px solid rgba(0,0,0,.3);
@@ -355,14 +357,13 @@ export default {
 .new__image:hover {
     border-bottom: 3px solid rgba(0,0,0,.8) !important;
 }
-    .item__sale {
-        background: red;
-        color: #fff;
-        width: 80%;
-        margin: 5px auto;
-        padding: 1px 15px;
-        display: block
-    }
+.item__sale {
+    background: red;
+    color: #fff;   
+    margin: 5px auto;
+    padding: 1px 15px;
+    display: block
+}
 @media(max-width: 600px) {
     .item_img {
         display: none;

@@ -15,11 +15,8 @@
                     <img
                         :alt="img"             
                         @click="lightboxClick()"             
-                        :src="'https://home-optic.ipol.tech' + img"
-                    />
-                    <!-- <client-only>
-                        <vue-easy-lightbox @hide="lightboxClick" :visible="lightbox" :imgs="'https://home-optic.ipol.tech' + img"></vue-easy-lightbox>
-                    </client-only> -->
+                        :src="'https://home-optic.ru' + img"
+                    />                   
                     </template>             
                 </b-carousel-slide>               
             </b-carousel>
@@ -166,13 +163,13 @@ export default {
 }
 </script>
 <style>
+    .modal-body {
+        padding: 10px !important;
+    }
     .item-preview__img {
         padding-top: 10px;
         position: relative;
-    }
-    .item-preview__img img {
-        margin: 10px 3px;
-    }   
+    }    
     .carousel-inner {
        height: -webkit-fill-available;
     }

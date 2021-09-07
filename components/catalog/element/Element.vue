@@ -14,7 +14,7 @@
               <img
                 :alt="img"             
                 v-b-modal.modal-center           
-                :src="'https://home-optic.ipol.tech' + img"
+                :src="'https://home-optic.ru' + img"
               />            
             </template>             
           </b-carousel-slide>               
@@ -47,7 +47,7 @@
             class="card__replies"
           >{{item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT.VALUE}} отзывов</span>
           <span v-else>(0)</span>
-          <button type="button" v-scroll-to="'#cardTabs'" @click="addFeedback">Добавить отзыв</button>
+          <button type="button"  @click="addFeedback">Добавить отзыв</button>
         </div>
         <div class="card__available">
           <span>
@@ -82,7 +82,7 @@
                 >
                   <img
                     v-if="value.PICT && value.PICT.ID !== 0"
-                    :src="'https://home-optic.ipol.tech' + value.PICT.SRC"
+                    :src="'https://home-optic.ru' + value.PICT.SRC"
                     alt
                     :title="value.NAME"
                   />
@@ -680,10 +680,10 @@ export default {
 }
 .carousel-indicators { 
   width: 50%;
-  margin: -7px auto;
+  margin: 0 auto;
   position: absolute;
   height: 10px;
-  bottom: 7px;
+  bottom: 0;
   padding: 15px;
   z-index: 0;
   align-items: center;

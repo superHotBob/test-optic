@@ -4,7 +4,7 @@ module.exports = {
   */
 //  target: 'static',
 env: {
-  baseURL:'https://home-optic.ipol.tech/'
+  baseURL:'https://home-optic.ru/'
 },
  server: {
     //port: 3000, // default: 3000
@@ -81,7 +81,7 @@ env: {
   },
   axios: {
     proxy: false,
-    baseURL: 'https://home-optic.ipol.tech/',
+    baseURL: 'https://home-optic.ru/',
 //    baseURL: 'https://new.anthony.beget.tech/',
     credentials: true
   },

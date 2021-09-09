@@ -13,7 +13,7 @@
                 <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
                     <template>
                     <img
-                        :alt="img"             
+                        alt="new img"             
                         @click="lightboxClick()"             
                         :src="'https://home-optic.ru' + img"
                     />                   
@@ -25,9 +25,8 @@
                 <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
             </div>
         </div>
-        <div class="item-preview__content">
-            <b class="item-preview__name">{{item.CURRENT.NAME}}</b>
-            
+        <div class="item-preview__content" v-bind:style="{padding: '10px' }">
+            <b class="item-preview__name">{{item.CURRENT.NAME}}</b>            
             <div class="item-preview__rating">
                 <star-rating class="rating" :rating="rating" :read-only="true" :show-rating="false" :round-start-rating="false"/>
                 <span v-if="item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT">({{item.DISPLAY_PROPERTIES.BLOG_COMMENTS_CNT.value}})</span>
@@ -115,7 +114,7 @@ export default {
     mounted() {
         this.$root.$on('preview', (item) => {
             this.item = JSON.parse(JSON.stringify(item));
-            console.log('This is item',this.item);
+            //console.log('This is item',this.item);
             this.id = item.ID;
             this.$bvModal.show('item-preview');
             if (this.item.PRODUCT && this.item.PRODUCT.TYPE == 3) {

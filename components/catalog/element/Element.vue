@@ -12,7 +12,7 @@
           <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
             <template>
               <img
-                :alt="img"             
+                alt="new image"             
                 v-b-modal.modal-center           
                 :src="'https://home-optic.ru' + img"
               />            
@@ -92,11 +92,12 @@
             </div>
           </template>
         </div>
-       
+        <template v-if="item.PROPERTIES.DELIVERY_PERIOD">
           <div class="card__lense-delivery" v-if="item.PROPERTIES.DELIVERY_PERIOD.VALUE !=''">
             <p>Доставка со склада Европы.</p>
             <p>Срок доставки {{item.PROPERTIES.DELIVERY_PERIOD.VALUE}}</p>
           </div>
+        </template>  
         <div class="card__lense-production-wrapper" v-if="item.PROPERTIES.lins.VALUE">  
           <div class="card__lense-production" v-if="item.PROPERTIES.production_time.VALUE !=''">
             <p>Линзы изготавливаются на заказ.</p>
@@ -687,14 +688,15 @@ export default {
   padding: 15px;
   z-index: 0;
   align-items: center;
-  background: #fff;
+  background: rgba(255,255,2555,.5);
+ 
 }
 .carousel-control-next,
 .carousel-control-prev {
   width: 30%;
 }
 .carousel-indicators li {
-  background: rgb(199, 190, 190) !important;
+  background: rgba(199, 190, 190, 1) !important;
   height: 0px !important;
   width: 10px !important;
   border-bottom: 0;
@@ -709,13 +711,17 @@ export default {
   z-index: 100;
   background-image: none !important ;  
   height: 15px;
-  border-top: 4px solid #999;
-  border-right: 4px solid #999;
+  border-top: 3px solid #999;
+  border-right: 3px solid #999;
   transform: rotate(-135deg);
   background-color: inherit;
   bottom: 7px !important;   
 }
-
+.carousel-control-prev-icon:hover, 
+.carousel-control-next-icon:hover {
+  border-top: 3px solid #000;
+  border-right: 3px solid #000;
+}
 
 @media (max-width: 900px) {
   .card__info {

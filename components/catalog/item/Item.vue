@@ -364,6 +364,14 @@ export default {
     padding: 1px 15px;
     display: block
 }
+@media(max-width: 700px) {
+    .item {
+        width: 50%;
+    }
+    .item__wide-left {
+        height: auto !important;
+    }
+}
 @media(max-width: 600px) {
     .item_img {
         display: none;
@@ -377,7 +385,7 @@ export default {
     }
     .carousel img {
         width: 100%;
-        height: 80vw;
+        height: auto;
     }
     .carousel {
         width: 100%;

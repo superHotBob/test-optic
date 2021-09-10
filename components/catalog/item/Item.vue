@@ -1,19 +1,20 @@
 <template>
 <nuxt-link
     class="swiper-slide item"
+    style="{height:'auto'}"
     :class="{'item--wide': wideItem}"
     :to="{path: item.URL}"
 >   
     <div class="item__wide-left" >
         <div class="item_img" v-bind:style="{backgroundImage:
-            'url(https://home-optic.ru' + new_image + ')'}"  
+            'url(https://home-optic.ru' + new_image + ')'}" 
                              
         >           
-            <div class="new__image"
+            <!-- <div class="new__image"
                 v-show="item.CURRENT.MORE_PHOTO.length>1"                         
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
                 v-on:mouseover.prevent="showNew(img)"                           
-            />                      
+            />                       -->
         </div>
         <b-carousel
           id="carousel-15"           
@@ -373,6 +374,14 @@ export default {
     }
 }
 @media(max-width: 600px) {
+    .item__add-to-cart:not(:last-of-type),
+    .item__favorite:not(:last-of-type) {
+        margin-right: 3px;
+    }
+    .item__add-to-cart {
+        min-width: 80px;
+        padding: 0;
+    }   
     .item_img {
         display: none;
     }

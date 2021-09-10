@@ -8,7 +8,7 @@
             background="#fff"          
         >
             <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >            
-                <img
+                <img class="img_modal"
                     v-bind:style="{cursor: 'pointer'}"
                     alt="new img"                          
                     :src="'https://home-optic.ru' + img"
@@ -23,8 +23,9 @@ export default {
 }
 </script>
 <style >
-    img {
-        height: 100%;       
+    .img_modal {
+        height: 80vh;
+        width: auto;       
     }
     .modal-body {
         padding: 0 !important;
@@ -34,6 +35,10 @@ export default {
         padding: 0;
         color: #fff;
         opacity: 1;
+    }
+    .modal-content {
+        width: auto;
+        margin: 0 auto;
     }
     .modal-header .close:active {
         outline: none;
@@ -56,6 +61,10 @@ export default {
         }
         .carousel-inner {
             top: 0;
+        }
+        .img_modal {
+            height: auto;
+            width: 100%;       
         }
     }
 </style>

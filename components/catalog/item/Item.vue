@@ -324,7 +324,7 @@ export default {
     padding: 0;
 }
 .item_img {
-    height: 200px;
+    height: 280px;
     text-align: center;
     background-position: center;
     background-size: 80%;
@@ -377,6 +377,7 @@ export default {
     }
     .carousel img {
         width: 100%;
+        height: 80vw;
     }
     .carousel {
         width: 100%;

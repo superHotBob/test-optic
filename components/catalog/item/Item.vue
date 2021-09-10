@@ -10,11 +10,11 @@
             'url(https://home-optic.ru' + new_image + ')'}" 
                              
         >           
-            <!-- <div class="new__image"
+            <div class="new__image"
                 v-show="item.CURRENT.MORE_PHOTO.length>1"                         
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
                 v-on:mouseover.prevent="showNew(img)"                           
-            />                       -->
+            />                      
         </div>
         <b-carousel
           id="carousel-15"           
@@ -325,9 +325,9 @@ export default {
     padding: 0;
 }
 .item_img {
-    height: 280px;
+     height: 280px;
     text-align: center;
-    background-position: center;
+    background-position: center 20%;
     background-size: 80%;
     background-repeat: no-repeat;
 }

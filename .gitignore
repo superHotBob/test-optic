@@ -6,9 +6,10 @@ npm-debug.log
 
 # Nuxt build
 .nuxt
-
+.nux_old
 # Nuxt generate
 dist
+dis_old
 
 yarn.lock
 

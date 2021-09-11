@@ -4,7 +4,7 @@
         <!--    //-->
         <!--    pixel vk-->
         <noscript>
-            <img src="https://vk.com/rtrg?p=VK-RTRG-439571-1BWpn" style="position:fixed; left:-999px;" alt=""/>
+            <img src="https://vk.com/rtrg?p=VK-RTRG-439571-1BWpn" style="position:fixed; left:-999px;" alt="vk"/>
         </noscript>
         <!--    pixel vk-->
         <!--    //-->
@@ -463,7 +463,7 @@ export default {
             if(!this.ruleError) {
             	this.$axios.post('/api/v1/forms/', qs.stringify(params)).then( response => {
             	    if (response.data.FORM_NOTE) {
-            	        this.callRequestOk = true;
+            	        this.callRequestOk = true;                       
             	    }
             	});
             }

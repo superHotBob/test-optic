@@ -1,7 +1,6 @@
 <template>
 <nuxt-link
-    class="swiper-slide item"
-    style="{height:'auto'}"
+    class="swiper-slide item"   
     :class="{'item--wide': wideItem}"
     :to="{path: item.URL}"
 >   
@@ -26,7 +25,7 @@
           <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
             <template>              
             <img
-                :alt="img"                       
+                alt="new img"                       
                 :src="'https://home-optic.ru' + img"
             />
             </template>                   
@@ -254,6 +253,7 @@ export default {
                 elementsId.push(item.ID);
 
             localStorage.setItem('favoritesOffers', JSON.stringify(offersFavotites));
+            console.log(offersFavotites);
             localStorage.setItem('favorites', JSON.stringify(elementsId));
 
             this.$store.dispatch('catalog/GET_FAVORITES');

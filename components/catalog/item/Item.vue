@@ -327,7 +327,7 @@ export default {
 .item_img {
      height: 280px;
     text-align: center;
-    background-position: center 20%;
+    background-position: center 40%;
     background-size: 80%;
     background-repeat: no-repeat;
 }

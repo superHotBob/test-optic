@@ -12,6 +12,7 @@
           <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
             <template>
               <img
+                :style="{marginTop:item.CURRENT.MORE_PHOTO.length > 1 ? '': '50px'}"
                 alt="new image"             
                 v-b-modal.modal-center           
                 :src="'https://home-optic.ru' + img"

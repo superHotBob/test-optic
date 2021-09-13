@@ -325,7 +325,7 @@ export default {
     padding: 0;
 }
 .item_img {
-     height: 280px;
+    height: 280px;
     text-align: center;
     background-position: center 40%;
     background-size: 80%;

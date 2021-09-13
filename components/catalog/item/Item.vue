@@ -371,6 +371,7 @@ export default {
     }
     .item__wide-left {
         height: auto !important;
+        /* margin: 30px 0 5px; */
     }
 }
 @media(max-width: 600px) {

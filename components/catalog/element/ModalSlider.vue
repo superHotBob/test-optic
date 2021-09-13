@@ -1,5 +1,6 @@
 <template>
     <b-modal id="modal-center" size="xl" centered >
+        <template v-if="item.CURRENT.MORE_PHOTO.length>1">
         <b-carousel
             id="carousel-8"           
             :interval="40000"
@@ -9,12 +10,20 @@
         >
             <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >           
                 <img class="img_modal"                    
-                    v-bind:style="{cursor: 'pointer'}"
+                    v-bind:style="{cursor: 'pointer',}"
                     alt="new img"                          
                     :src="'https://home-optic.ru' + img"
                 />
             </b-carousel-slide>               
         </b-carousel>
+        </template>
+        <template v-else>
+             <img                    
+                v-bind:style="{cursor: 'pointer',maxHeight: '80vh'}"
+                alt="new img"                          
+                :src="'https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0]"
+            />
+        </template>       
     </b-modal>    
 </template>
 <script>
@@ -24,9 +33,9 @@ export default {
 </script>
 <style >
     .img_modal {
-        height: auto;
-        width: auto;
-        max-height: 75vh;       
+        height: 80vh;
+        width: 80vw;
+          
     }
     .modal-body {
         padding: 0 !important;

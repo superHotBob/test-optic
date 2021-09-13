@@ -10,7 +10,7 @@
         >
             <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >           
                 <img class="img_modal"                    
-                    v-bind:style="{cursor: 'pointer',}"
+                   
                     alt="new img"                          
                     :src="'https://home-optic.ru' + img"
                 />
@@ -18,11 +18,15 @@
         </b-carousel>
         </template>
         <template v-else>
-             <img                    
-                v-bind:style="{cursor: 'pointer',maxHeight: '80vh'}"
+             <div class="item_img" v-bind:style="{backgroundImage:
+                'url(https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0] + ')'}" 
+                             
+            >   </div>       
+             <!-- <img                    
+                v-bind:style="{cursor: 'pointer',height:'70vh'}"
                 alt="new img"                          
                 :src="'https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0]"
-            />
+            /> -->
         </template>       
     </b-modal>    
 </template>
@@ -31,14 +35,21 @@ export default {
     props: ['item']
 }
 </script>
-<style >
+<style>
+    .item_img {
+        height: 90vh;
+        text-align: center;
+        background-position: center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+    }
     .img_modal {
-        height: 80vh;
-        width: 80vw;
-          
+        height: 90vh;
+        width: 80vw;          
     }
     .modal-body {
         padding: 0 !important;
+        width: 80vw;
     }
     .modal-header .close {
         margin: -40px 10px 0;
@@ -47,7 +58,7 @@ export default {
         opacity: 1;
     }
     .modal-content {
-        width: auto;
+        width: 80vw;
         margin: 0 auto;
     }
     .modal-header .close:active {
@@ -59,9 +70,7 @@ export default {
     .modal-header {
         padding: 0 !important;
     }
-    .carousel {
-        height: auto !important;
-    }
+   
     @media (max-width: 680px) {
         .modal-dialog {
             margin: 0;
@@ -75,6 +84,24 @@ export default {
         .img_modal {
             height: auto;
             width: 100%;       
+        }
+        .modal-content {
+            width: 100%;
+        }
+         .img_modal {
+            height: auto;
+            width: 100vw;
+          
+        }
+        .modal-body {
+            width: 100%
+        }
+        .item_img {
+            height: 50vh;
+            text-align: center;
+            background-position: center;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
         }
     }
 </style>

@@ -2,6 +2,7 @@
   <div class="card main-container">
     <div class="card__top">
       <div class="card__img">
+        <template v-if="item.CURRENT.MORE_PHOTO.length>1">
         <b-carousel
           id="carousel-5"           
           :interval="40000"
@@ -9,17 +10,24 @@
           :indicators="item.CURRENT.MORE_PHOTO.length>1"
           background="#fff"          
         >
-          <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >
-            <template>
+          <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >           
               <img
-                :style="{marginTop:item.CURRENT.MORE_PHOTO.length > 1 ? '': '50px'}"
+                :style="{verticalAlign: 'middle'}"
                 alt="new image"             
                 v-b-modal.modal-center           
                 :src="'https://home-optic.ru' + img"
-              />            
-            </template>             
+              />                  
           </b-carousel-slide>               
         </b-carousel>
+        </template>
+        <div v-else :style="{display:'flex',alignItems:'center',height: '100%'}">
+           <img
+              :style="{verticalAlign: 'middle',width: '100%',height:'auto'}"
+              alt="new image"             
+              v-b-modal.modal-center           
+              :src="'https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0]"
+              />                  
+        </div>  
         <modal-slider v-bind:item="item" />           
         <div class="item__flags">
           <span v-if="labelNew" class="item__flag left">NEW</span>
@@ -671,6 +679,7 @@ export default {
 .card__img img {
   width: 100%;
   cursor: zoom-in;
+  height: auto; 
 }
 .modal-header {
   border-bottom: none;
@@ -680,6 +689,7 @@ export default {
 .carousel-item {
   position: static !important;
 }
+
 .carousel-indicators { 
   width: 50%;
   margin: 0 auto;
@@ -723,6 +733,7 @@ export default {
   border-top: 3px solid #000;
   border-right: 3px solid #000;
 }
+
 
 @media (max-width: 900px) {
   .card__info {

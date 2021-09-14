@@ -21,8 +21,7 @@
         </b-carousel>
         </template>
         <div v-else :style="{display:'flex',alignItems:'center',height: '100%'}">
-           <img
-              
+           <img              
               alt="new image" 
               class="oneImage"            
               v-b-modal.modal-center           
@@ -636,7 +635,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .card__lense-delivery {
     margin-top: 45px;
     padding: 15px 0;
@@ -769,9 +768,9 @@ export default {
     border-radius: 0;
   }
   .carousel-indicators {
-    width: 100%;
+    width: 100% !important;
     padding: 0;
-
+    bottom: 0 ;
   }
  .card__img img {
    width: 100%;

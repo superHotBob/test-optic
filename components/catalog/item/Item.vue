@@ -5,9 +5,9 @@
     :to="{path: item.URL}" 
    
 >   
-    <div class="item__wide-left"  id="one">
+    <div class="item__wide-left" >
         <div class="item_img" v-bind:style="{backgroundImage:
-            'url(https://home-optic.ru' + new_image + ')'}" 
+            'url(https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0] + ')'}" 
                              
         >           
             <div class="new__image"
@@ -15,7 +15,7 @@
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
                 v-on:mouseover.prevent="showNew(img)"                           
             />                      
-        </div>
+        </div>      
         <b-carousel 
           id="carousel-15"           
           :interval="40000"
@@ -159,9 +159,8 @@ export default {
         }
     },
     data() {
-        return {
-            width: '100px',
-            new_image: this.item.CURRENT.MORE_PHOTO[0],
+        return {     
+           
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
@@ -221,7 +220,7 @@ export default {
         },
         updateElement(url) {
             //console.log(url);
-            var newWin = window.open(url, "hello", "width=800,height=600");
+            var newWin = window.open(url, "hello", "width=800,height=600");           
         },
         showModal() {
             this.$root.$emit('preview', this.item);
@@ -269,16 +268,13 @@ export default {
                 this.itemAmount--;
             }
         },
-    },
-    mounted() {
-        this.width = document.getElementById("one").offsetWidth
-    },
+    },   
     computed: {
         ...mapGetters({
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
-       
+     
        
         sortPropsSku() {
             var properties = Object.assign({}, this.item.SKU_PROPS),
@@ -404,7 +400,7 @@ export default {
         width: 100%;
     }
     .carousel img {
-        width: 45.5%;
+        width: 50%;
         height: auto;
         margin: 9px auto 0;
     }
@@ -412,8 +408,13 @@ export default {
         width: 100%;
     }
     .carousel-indicators {
-        width: '16.7%';
-        padding: 0;
+        width: 68% !important;
+        padding: 0 ;
+        bottom: -15px !important;
+    }
+    .catalog__items .item__flags {
+        max-width: 255px !important;
+       
     }    
 };    
 </style>

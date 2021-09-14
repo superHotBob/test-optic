@@ -2,9 +2,10 @@
 <nuxt-link
     class="swiper-slide item"   
     :class="{'item--wide': wideItem}"
-    :to="{path: item.URL}"
+    :to="{path: item.URL}" 
+   
 >   
-    <div class="item__wide-left" >
+    <div class="item__wide-left"  id="one">
         <div class="item_img" v-bind:style="{backgroundImage:
             'url(https://home-optic.ru' + new_image + ')'}" 
                              
@@ -15,7 +16,7 @@
                 v-on:mouseover.prevent="showNew(img)"                           
             />                      
         </div>
-        <b-carousel
+        <b-carousel 
           id="carousel-15"           
           :interval="40000"
           :indicators="item.CURRENT.MORE_PHOTO.length>1"         
@@ -31,13 +32,7 @@
             </template>                   
           </b-carousel-slide>               
         </b-carousel>       
-        <button
-            class="item__preview"
-            v-if="!wideItem"
-            @click.prevent="showModal"
-        >
-            Быстрый просмотр
-        </button>
+        
         <div class="item__flags">
             <span v-if="labelNew" class="item__flag left">NEW</span>
             <span v-if="labelSale" class="item__flag right red">-{{labelSale}}%</span>
@@ -48,6 +43,13 @@
             <button @click="itemAmount++">+</button>
         </div>
     </div>
+    <button
+        class="item__preview"
+        v-if="!wideItem"
+        @click.prevent="showModal"
+    >
+        Быстрый просмотр
+    </button>
     <div class="item__wide-right">
         <div class="item__rating" v-if="wideItem" @click.prevent>
             <star
@@ -158,6 +160,7 @@ export default {
     },
     data() {
         return {
+            width: '100px',
             new_image: this.item.CURRENT.MORE_PHOTO[0],
             timer: null,
             id: this.item.ID,
@@ -267,12 +270,16 @@ export default {
             }
         },
     },
+    mounted() {
+        this.width = document.getElementById("one").offsetWidth
+    },
     computed: {
         ...mapGetters({
             isFavorites: 'catalog/isFavorites',
             isCompare: 'catalog/isCompare'
         }),
-        
+       
+       
         sortPropsSku() {
             var properties = Object.assign({}, this.item.SKU_PROPS),
                 array = [];
@@ -320,7 +327,6 @@ export default {
 .slider-mobile {
     display: none;
 }
-
 .item {
     padding: 0;
 }
@@ -374,7 +380,7 @@ export default {
         /* margin: 30px 0 5px; */
     }
     .card__img {
-        width: 80% !important;
+        width: 60% !important;
         margin: 0 auto !important;
     }
 }
@@ -398,9 +404,9 @@ export default {
         width: 100%;
     }
     .carousel img {
-        width: 75%;
+        width: 45.5%;
         height: auto;
-        margin: 30px auto 0;
+        margin: 9px auto 0;
     }
     .carousel {
         width: 100%;

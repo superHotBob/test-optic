@@ -9,7 +9,7 @@
             background="#fff"          
         >
             <b-carousel-slide  :key="index" v-for="(img, index) in item.CURRENT.MORE_PHOTO" >           
-                <img class="img_modal"                    
+                <img class="img_modal"    
                    
                     alt="new img"                          
                     :src="'https://home-optic.ru' + img"

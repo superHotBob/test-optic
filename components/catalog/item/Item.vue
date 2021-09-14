@@ -328,7 +328,7 @@ export default {
     height: 280px;
     text-align: center;
     background-position: center 40%;
-    background-size: 80%;
+    background-size: 75%;
     background-repeat: no-repeat;
 }
 .item__preview {
@@ -349,7 +349,7 @@ export default {
 }
 .new__image {
     display: inline-block;
-    width: 15.5%;
+    width: 13.5%;
     margin: 0.5%;    
     height: 200px;
     z-index: 10;
@@ -373,6 +373,10 @@ export default {
         height: auto !important;
         /* margin: 30px 0 5px; */
     }
+    .card__img {
+        width: 80% !important;
+        margin: 0 auto !important;
+    }
 }
 @media(max-width: 600px) {
     .item__add-to-cart:not(:last-of-type),
@@ -394,8 +398,9 @@ export default {
         width: 100%;
     }
     .carousel img {
-        width: 100%;
+        width: 75%;
         height: auto;
+        margin: 30px auto 0;
     }
     .carousel {
         width: 100%;

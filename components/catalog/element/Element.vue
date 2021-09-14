@@ -22,8 +22,9 @@
         </template>
         <div v-else :style="{display:'flex',alignItems:'center',height: '100%'}">
            <img
-              :style="{verticalAlign: 'middle',width: '100%',height:'auto'}"
-              alt="new image"             
+              
+              alt="new image" 
+              class="oneImage"            
               v-b-modal.modal-center           
               :src="'https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0]"
               />                  
@@ -733,11 +734,19 @@ export default {
   border-top: 3px solid #000;
   border-right: 3px solid #000;
 }
-
+.oneImage {
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
+}
 
 @media (max-width: 900px) {
   .card__info {
     margin-top: 50px;     
+  }
+  .card__img {
+    width: 80% !important;
+    margin: 0 auto;
   }
 }
 @media (max-width: 600px) { 
@@ -749,7 +758,7 @@ export default {
   }
   .carousel-indicators li,
   .carousel-indicators .active {
-    width: 16% !important;
+    width: 13% !important;
     height: 0;
     border-bottom: 2px !important;
     border-top: 2px solid transparent !important;
@@ -760,7 +769,9 @@ export default {
     padding: 0;
 
   }
- 
+ .card__img img {
+   width: 83%;
+ }
   .card__info {
     margin-top: 5vw;     
   } 
@@ -772,6 +783,11 @@ export default {
 
 .card__img img {
   margin: 0 auto 0;
+}
+.oneImage {
+  vertical-align: middle;
+  width: 80%;
+  height: auto;
 }
 </style>
 <style lang="scss">

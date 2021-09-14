@@ -745,8 +745,12 @@ export default {
     margin-top: 50px;     
   }
   .card__img {
-    width: 80% !important;
+    width: 100% !important;
     margin: 0 auto;
+  }
+  .carousel-indicators .active {
+    height: 1px !important;
+ 
   }
 }
 @media (max-width: 600px) { 
@@ -770,7 +774,7 @@ export default {
 
   }
  .card__img img {
-   width: 83%;
+   width: 100%;
  }
   .card__info {
     margin-top: 5vw;     

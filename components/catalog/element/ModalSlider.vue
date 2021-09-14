@@ -49,7 +49,7 @@ export default {
     }
     .modal-body {
         padding: 0 !important;
-        width: 80vw;
+       
     }
     .modal-header .close {
         margin: -40px 10px 0;
@@ -57,10 +57,7 @@ export default {
         color: #fff;
         opacity: 1;
     }
-    .modal-content {
-        width: 80vw;
-        margin: 0 auto;
-    }
+   
     .modal-header .close:active {
         outline: none;
     }
@@ -105,3 +102,13 @@ export default {
         }
     }
 </style>
+<style scoped>
+    .modal-content {
+        width: 80vw;
+        margin: 0 auto;
+    }
+    .modal-body {
+        padding: 0 !important;
+    }
+</style>
+

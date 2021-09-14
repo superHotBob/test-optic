@@ -379,8 +379,16 @@ export default {
         width: 60% !important;
         margin: 0 auto !important;
     }
+    #carousel-15 .carousel-indicators {
+        width: 68% !important;
+        padding: 0 ;
+        bottom: -15px !important;
+    }
 }
 @media(max-width: 600px) {
+    .carousel-indicators li {
+        width: 10% !important;
+    }
     .item__add-to-cart:not(:last-of-type),
     .item__favorite:not(:last-of-type) {
         margin-right: 3px;
@@ -407,13 +415,9 @@ export default {
     .carousel {
         width: 100%;
     }
-    .carousel-indicators {
-        width: 68% !important;
-        padding: 0 ;
-        bottom: -15px !important;
-    }
+   
     .catalog__items .item__flags {
-        max-width: 255px !important;
+        max-width: 275px !important;
        
     }    
 };    

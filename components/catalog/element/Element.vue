@@ -768,9 +768,9 @@ export default {
     border-radius: 0;
   }
   .carousel-indicators {
-    width: 100% !important;
+    width: 100% ;
     padding: 0;
-    bottom: 0 ;
+    bottom: -5px ;
   }
  .card__img img {
    width: 100%;

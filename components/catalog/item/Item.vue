@@ -7,16 +7,17 @@
 >   
     <div class="item__wide-left" >
         <div class="item_img" v-bind:style="{backgroundImage:
-            'url(https://home-optic.ru' + item.CURRENT.MORE_PHOTO[0] + ')'}" 
+            'url(https://home-optic.ru' + item.CURRENT.MORE_PHOTO[newIndex] + ')'}" 
                              
         >           
             <div class="new__image"
                 v-show="item.CURRENT.MORE_PHOTO.length>1"                         
                 v-for="(img, index) in item.CURRENT.MORE_PHOTO" :key="index"
-                v-on:mouseover.prevent="showNew(img)"                           
+                v-on:mouseover.prevent="showNew(index)"                           
             />                      
         </div>      
         <b-carousel 
+
           id="carousel-15"           
           :interval="40000"
           :indicators="item.CURRENT.MORE_PHOTO.length>1"         
@@ -160,7 +161,7 @@ export default {
     },
     data() {
         return {     
-           
+            newIndex: 0,
             timer: null,
             id: this.item.ID,
             itemAmount: 1,
@@ -182,7 +183,7 @@ export default {
         //     return false;
         // },
         showNew(a) {
-            this.new_image = a;
+            this.newIndex = a;
         },
         getDiscount() {
           let discount = false
